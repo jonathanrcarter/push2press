@@ -413,6 +413,7 @@ if ($step == "2") {
 		if (getConfiguration("setup",null) == null) {
 			mysql_query("insert ignore into cats (ID,Pagename,Caption,img,Volgorde) values (1,'Home','Home','',0)");
 			mysql_query("insert ignore into pages (ID,Pagename,Caption,img,bodytext,CatID,template,Volgorde,type,extraData) values (1,'Home','Home','','<p>Welcome to your push2press app</p>',1,'',0,'','{ \"navBar\" : \"y\" }')");
+			mysql_query("insert ignore into groups (gid,gname) values (1,'General messages')");
 			mysql_query("insert into domain (Pagename,Caption) values('setup','installed')");
 		}
 		
