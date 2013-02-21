@@ -8,5 +8,6 @@ To Install
 1. download p2p
 2. copy the p2p folder to your webspace
 3. run http://(yourdomain)/p2p/api.php
-
+4. a
+5. b
 
