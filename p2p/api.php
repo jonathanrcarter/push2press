@@ -3337,14 +3337,14 @@ echo "<!--\n\n $query; \n\n-->";
         echo $hbot;
 
 } else if( $action == "wp" ){
-
+/*
 	require_once('ripcord-1.1/ripcord.php');
     $client = ripcord::client( 'http://www.parkshark.eu/xmlrpc.php' );
     $score = $client->wp->getPosts();
     var_dump($score);
-
+*/
 } else if( $action == "wp2" ){
-
+/*
 class atompub
     {
 
@@ -3436,7 +3436,7 @@ return;
 curl_close($handle);
 
 
-
+*/
 } else if( $action == "cron" ){
 
 	
@@ -3444,6 +3444,17 @@ curl_close($handle);
 } else {
 
 		require_once './local_functions.php';
+		
+
+		$h = "";
+		$emaillinkto = $_GET["emaillinkto"];
+		
+		if ($emaillinkto != "") {
+			$message = sprintf("Link to push2press page is <a href='push2press://?url=%s'>%s</a> ",getConfiguration("url",""),getConfiguration("sitename",""));
+			$msuccess = mail($emaillinkto, 'Push2press Email Link', $message);
+			$h = sprintf("<div> Email sent to %s %s </div>",$emaillinkto,$msuccess);
+		}
+		
 		
 		$c1 = sqlcount("select count(*) as c from message");
 
@@ -3460,10 +3471,14 @@ curl_close($handle);
         echo "			<img src='images/MainImage.jpg'>";
         echo "			</div>";
         echo '			<div class="span8">';
+		echo $h;
         echo "<h3> Welcome to your push2press site</h3>";
         echo sprintf("		<a href='api.php?action=list-draft-mes'>Edit push messages</a>(%s)",$c1);
         echo sprintf("		<a href='api.php?action=wp'>Edit push messages wp</a>(%s)",$c1);
         echo sprintf("		<a href='api.php?action=wp2'>Edit push messages wp2</a>(%s)",$c1);
+		
+		echo "				<br>";
+		echo "				Send yourself the link by email <form action='api.php'><input type='text' name='emaillinkto'><input type='submit'></form><br>";
         echo "			</div>";
         echo "		</div>";
         echo "</div>";
