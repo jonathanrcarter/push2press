@@ -102,17 +102,20 @@ function table_exists($tablename) {
 }
 function getConfiguration($VAL,$DEFAULT_VAL) {
 	global $username,$password,$database,$dbhost;
-
-	$db = mysql_connect($dbhost,$username,$password);
-	mysql_select_db($database) or die("Unable to select database");
-	mysql_query("SET NAMES utf8", $db);
-	mysql_query( "SET CHARACTER SET utf8", $db );
-	$query="select * from domain where Pagename = '".$VAL."'";
-	$result=mysql_query($query);
+	try {
+		$db = mysql_connect($dbhost,$username,$password);
+		mysql_select_db($database);
+		mysql_query("SET NAMES utf8", $db);
+		mysql_query( "SET CHARACTER SET utf8", $db );
+		$query="select * from domain where Pagename = '".$VAL."'";
+		$result=mysql_query($query);
 	
-	if (mysql_numrows($result) > 0) {
-		return mysql_result($result,0,"Caption");
-	} else {
+		if (mysql_numrows($result) > 0) {
+			return mysql_result($result,0,"Caption");
+		} else {
+			return $DEFAULT_VAL;
+		}
+	} catch (Exception $e) {
 		return $DEFAULT_VAL;
 	}
 }
@@ -378,26 +381,33 @@ if ($step == "2") {
 		}
 
 
+	$dbhost = ($_POST["dbhost"] != "") ? $_POST["dbhost"] : $dbhost;
+		
+		
 		
 		if (getConfiguration("bgc1",null) == null) {
-			mysql_query("insert into domain (Pagename,Caption) values('bgc1','#000000')");
+			mysql_query("insert into domain (Pagename,Caption) values('bgc1','".$_POST["bgc1"]."')");
 			$setuperror = $setuperror . "added bgc1 to setup<br>";
 		}
 		if (getConfiguration("bgc2",null) == null) {
-			mysql_query("insert into domain (Pagename,Caption) values('bgc2','#ffffff')");
+			mysql_query("insert into domain (Pagename,Caption) values('bgc2','".$_POST["bgc2"]."')");
 			$setuperror = $setuperror . "added bgc2 to setup<br>";
 		}
 		if (getConfiguration("sitename",null) == null) {
-			mysql_query("insert into domain (Pagename,Caption) values('sitename','push2press site')");
+			mysql_query("insert into domain (Pagename,Caption) values('sitename','".$_POST["sitename"]."')");
 			$setuperror = $setuperror . "added sitename to setup<br>";
 		}
 		if (getConfiguration("url",null) == null) {
-			mysql_query("insert into domain (Pagename,Caption) values('url','http://app.push2press.com/')");
+			mysql_query("insert into domain (Pagename,Caption) values('url','".$_POST["url"]."')");
 			$setuperror = $setuperror . "added url to setup<br>";
 		}
 		if (getConfiguration("appid",null) == null) {
-			mysql_query("insert into domain (Pagename,Caption) values('appid','com')");
-			$setuperror = $setuperror . "added url to appid<br>";
+			mysql_query("insert into domain (Pagename,Caption) values('appid','".$_POST["appid"]."')");
+			$setuperror = $setuperror . "added appid<br>";
+		}
+		if (getConfiguration("adminemail",null) == null) {
+			mysql_query("insert into domain (Pagename,Caption) values('adminemail','".$_POST["adminemail"]."')");
+			$setuperror = $setuperror . "added adminemail to adminemail<br>";
 		}
 		
 	}
@@ -414,7 +424,7 @@ if ($setupstep == 2) {
 	echo "<br>";
 	echo "<br>";
 	echo "<br>";
-	echo "<h1>Step 2</h1>";
+	echo "<h1>Setup - Step 2 of 2</h1>";
 	echo "<br>";
 	echo "<div>$setuperror</div>";
 	echo "<br>";
@@ -429,11 +439,37 @@ if ($setupstep == 2) {
 }
 
 
+if ($dbhost == "") $dbhost = "localhost";
+if ($database == "") $database = "push2press";
+if ($images_folder == "") $images_folder = "/client_images/";
+if ($BASEPATH == "") $BASEPATH = "/";
+if ($MASTER_PASSWORD == "") $MASTER_PASSWORD = "push2press";
+
+$sitename = getConfiguration("sitename","My push2press app");
+$url = getConfiguration("url","http://".$_SERVER['HTTP_HOST'].$_SERVER['SCRIPT_NAME']);
+$url = str_replace("setup.php", "", $url);
+
+
+$bgc1 = getConfiguration("bgc1","#000000");
+$bgc2 = getConfiguration("bgc2","#ffffff");
+$adminemail = getConfiguration("adminemail","");
+
 	echo $htop;
+	
 	echo "<br>";
 	echo "<br>";
+	echo "<style>
+	legend, h1 {
+		padding-top:10px;
+		padding-left:180px;
+	}
+	input, textarea {
+	  width: 280px;
+	}
+	</style>";
+	
 	echo "<br>";
-	echo "<h1>Step 1</h1>";
+	echo "<h1>Setup - Step 1 of 2</h1>";
 	echo "<br>";
 	echo "<div>$setuperror</div>";
 	echo "<br>";
@@ -441,13 +477,25 @@ if ($setupstep == 2) {
 	echo "<input type='hidden' name='action' value='setup'>";
 	echo "<input type='hidden' name='step' value='2'>";
 	echo "<table>";
+	echo "<tr><td>Site Name</td><td><input name='sitename' value='$sitename'></td></tr>";
+
+	echo "<tr><td colspan='3'><legend>Colours</legend></td></tr>";
+	echo "<tr><td width='180'>Header Background</td><td><input name='bgc1' value='$bgc1'></td></tr>";
+	echo "<tr><td>Page Background</td><td><input name='bgc2' value='$bgc2'></td></tr>";
+
+	echo "<tr><td colspan='3'><legend>Database & server</legend></td></tr>";
 	echo "<tr><td>Hostname</td><td><input name='dbhost' value='$dbhost'></td></tr>";
 	echo "<tr><td>username</td><td><input name='username' value='$username'></td></tr>";
 	echo "<tr><td>password</td><td><input name='password' value='$password'></td></tr>";
 	echo "<tr><td>database</td><td><input name='database' value='$database'></td></tr>";
 	echo "<tr><td>images_folder</td><td><input name='images_folder' value='$images_folder'></td></tr>";
 	echo "<tr><td>BASEPATH</td><td><input name='BASEPATH' value='$BASEPATH'></td></tr>";
-	echo "<tr><td>MASTER_PASSWORD</td><td><input name='MASTER_PASSWORD' value='$MASTER_PASSWORD'></td></tr>";
+
+
+	echo "<tr><td colspan='3'><legend>Administration</legend></td></tr>";
+	echo "<tr><td>Admin Email address</td><td><input name='adminemail' value='$adminemail'></td></tr>";
+	echo "<tr><td>Admin Password</td><td><input name='MASTER_PASSWORD' value='$MASTER_PASSWORD'></td></tr>";
+	echo "<tr><td>url</td><td><input name='url' value='$url'></td></tr>";
 
 	echo "<tr><td> </td><td><input type='submit'></td></tr>";
 	echo "</table>";

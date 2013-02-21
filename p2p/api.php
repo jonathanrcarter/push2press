@@ -99,6 +99,15 @@ function table_exists($tablename) {
     ");
     return mysql_result($res, 0) == 1;
 }
+function sqlcount($sql) {
+	global $username,$password,$database,$dbhost;
+	$db = mysql_connect($dbhost,$username,$password);
+	mysql_select_db($database);
+	mysql_query("SET NAMES utf8", $db);
+	mysql_query( "SET CHARACTER SET utf8", $db );
+	$result = mysql_query($sql);
+	return mysql_result($result,0,"c");
+}
 /*
 cats
 domain
@@ -257,6 +266,7 @@ $htop = $htop .' </script>';
 $htop = $htop . "\n";
 
 $htop = $htop .'              <li><a href="api.php?action=logout">Logout</a></li>';
+$htop = $htop .'              <li><div style="padding-left:20px;padding-top: 9px;"><span class="label xlabel-inverse">push2press v1.1 BETA</span></div></li>';
 $htop = $htop .'            </ul>';
 $htop = $htop .'          </div><!--/.nav-collapse -->';
 $htop = $htop .'        </div>';
@@ -1496,19 +1506,8 @@ if ($act ==""){
 
         $query="select * from groups order by gid desc limit 50";
         $result=mysql_query($query);
-        $h = $h . "<legend>".L('groupz')."</legend>";
-        $h = $h . "<div class='btn-toolbar'>";
-    	
-    	$h = $h . "<div class='btn-group'  data-toggle='buttons-radio'>";
-        $h = $h . "  <button onClick='javascript:' class='btn $f1active' style='visibility:hidden;'>".L("Check_groups")."</button>";
+        $h = $h . "<legend>".L('groupz')." <a class='btn btn-mini btn-success' style='margin-left:48px;' href='api.php?action=list-group&action2=add'> <i class='icon-plus icon-white'></i> ADD</a></legend>";
 
-        $h = $h . "</div>";		// end buttongroup
-    
-        $h = $h . "<div class='btn-group pull-right'>";
-        $h = $h . "<a class='btn btn-success' href='api.php?action=list-group&action2=add'> <i class='icon-plus icon-white'></i> ADD</a>";
-        $h = $h . "</div>";		// end buttongroup
-        
-        $h = $h . "</div>";		// end toolbar
         $h = $h . "<table class='table table-striped table-bordered table-condensed'>";
         $h = $h . "<tr>";
         $h = $h . "<th>group-id</th>";
@@ -2034,38 +2033,82 @@ else if ( $action == "list-dom" ) {
 
         $query="select * from domain";
         $result=mysql_query($query);
+        
+        
+		/* filters */
+		$filter2 = $_POST["filter2"];
+		if ($filter2 && $filter2 != "") {
+			$_SESSION['filter2'] = $filter2;
+		} else {
+			$filter2 = $_SESSION['filter2'];
+		}
+		if (!$filter2 || $filter2 == "") {
+			$filter2 = "general";
+		}
+		
+		require_once("etc/settings.php");
+		$types = $settings->types;
 
         $h = "";
-        
-    	$h = $h . "<legend>".L('List_conf')."</legend>";
+    	$h = $h . "<legend>".L('List_conf')." <a class='btn btn-mini btn-success' style='margin-left:40px;' href='api.php?action=list-dom&action2=add&filter2=other'> <i class='icon-plus icon-white'></i> ADD</a> </legend>";
         $h = $h . "<div class='btn-toolbar'>";
-    	$h = $h . "<div class='btn-group'  data-toggle='buttons-radio'>";
-        $h = $h . "  <button onClick='javascript:' class='btn $f1active' style='visibility:hidden;'>".L("List_conf")."</button>";
-    
+        $h = $h . "<div class='btn-group'  data-toggle='buttons-radio-1'>";
+        
+        foreach ($types as $type) {
+        	$f2active = ($type == $filter2) ? "active" : "";
+	        $h = $h . "  <button onClick='javascript:\$push2press.go(\"?action=list-dom&filter2=$type\")' class='btn $f2active'>$type ".L($type)."</button>";
+	    }
         $h = $h . "</div>";		// end buttongroup
+        
+        $sdata = array();
+        /* convert sql to Key/Val pairs */
+        for ($r=0; $r < mysql_numrows($result); $r++) {
+        	$sdata[mysql_result($result,$r,"Pagename")] = array(mysql_result($result,$r,"Caption"),mysql_result($result,$r,"id"));
+        }
+
     
-        $h = $h . "<div class='btn-group pull-right'>";
-        $h = $h . "<a class='btn btn-success' href='api.php?action=list-dom&action2=add'> <i class='icon-plus icon-white'></i> ADD</a>";
-        $h = $h . "</div>";		// end buttongroup
         
         $h = $h . "</div>";		// end toolbar
         $h = $h . "<table class='table table-striped table-bordered table-condensed'>";
         $h = $h . "<tr>";
         $h = $h . "<th>".L('Title')."</th>";
-        $h = $h . "<th>Caption</th>";
+        $h = $h . "<th>Value</th>";
         $h = $h . "<th>&nbsp;</th>";
         $h = $h . "</tr>";
+        
+        if ($filter2 == "other") {
+			foreach (array_keys($sdata) as $skey) {
+				if (is_in_settings($skey) == false) {
+	                $h = $h . sprintf("<tr><td>%s</td><td>%s</td>",$skey,$sdata[$skey][0]);
+	                $h = $h . "<td><a class='btn btn-mini btn-info' href='api.php?action=show-dom&id=" . $sdata[$skey][1] . "'>EDIT</a></td>";
+	                $h = $h . "</tr>";
+	             }
+			}
+        } else {
+			foreach ($settings->table as $soption) {
+				if ($soption[0] == $filter2) {
+	                $h = $h . sprintf("<tr><td>%s<div>%s</div></td><td>%s</td>",$soption[1],$soption[2],$sdata[$soption[1]][0]);
+	                $h = $h . "<td><a class='btn btn-mini btn-info' href='api.php?action=show-dom-key&key=" . $soption[1] . "'>EDIT</a></td>";
+	                $h = $h . "</tr>";
 
+
+				}
+			}
+        
+        }
+        $h = $h . "</table>";
+/*
         for ($r=0; $r < mysql_numrows($result); $r++) {
                 $h = $h . "<tr>";
                 $h = $h . "<td>" . mysql_result($result,$r,"Pagename") . "</td>";
                 $h = $h . "<td>" . mysql_result($result,$r,"Caption") . "</td>";
-                $h = $h . "<td><a class='btn btn-info' href='api.php?action=show-dom&id=" . mysql_result($result,$r,"id") . "'>EDIT</a></td>";
+                $h = $h . "<td><a class='btn btn-mini btn-info' href='api.php?action=show-dom&id=" . mysql_result($result,$r,"id") . "'>EDIT</a></td>";
                 $h = $h . "</tr>";
 
         }
-        $h = $h . "</table>";
         
+        $h = $h . "</table>";
+*/        
         echo $htop;
         echo '<div class="plain-hero-unit">';
         echo $h;
@@ -2103,7 +2146,7 @@ else if ( $action == "list-dom" ) {
         }
 
         if ($action2 == "delete") {
-                $query="delete ignore from domain  where id=" . $id;
+                $query="delete ignore from domain  where id='" . $id;
                 $result=mysql_query($query);
                 $h = "DELETED";
                 $h = $h . "<a class='btn' href='api.php?action=list-dom'>OK <i class='icon-check'></i></a>";
@@ -2115,7 +2158,7 @@ else if ( $action == "list-dom" ) {
 //              echo $query;
                 $result=mysql_query($query);
                 $h = "UPDATED";
-                $h = $h . "<a class='btn' href='api.php?action=show-dom&id=" . $id . "'>OK <i class='icon-check'></i></a>";
+                $h = $h . "<a class='btn' href='api.php?action=list-dom>OK <i class='icon-check'></i></a>";
         } else {
 
         $query="select * from domain where id=" . $id;
@@ -2145,6 +2188,55 @@ else if ( $action == "list-dom" ) {
                 $h = $h . "<input class='btn btn-danger btn-large' type='submit' value='delete'>";
                 $h = $h . "</form>";
 
+       		}
+        }
+
+        echo $htop;
+        echo '<div class="plain-hero-unit">';
+        echo $h;
+        echo "</div>";
+        echo $hbot;
+
+}
+
+ else if ( $action == "show-dom-key" ) {
+
+        $db = mysql_connect($dbhost,$username,$password);
+        mysql_select_db($database) or die("Unable to select database");
+        mysql_query("SET NAMES utf8", $db);
+        mysql_query( "SET CHARACTER SET utf8", $db );
+
+        $key = $_POST["key"];
+        $action2 = $_POST["action2"];
+        $h = "";
+
+        if ($action2 == "update") {
+                $Caption = $_POST["Caption"];
+                $query="update ignore domain set  Caption='".$Caption."' where Pagename='".$key."'";
+                $result=mysql_query($query);
+                $h = "UPDATED";
+                $h = $h . "<a class='btn' href='api.php?action=list-dom'>OK <i class='icon-check'></i></a>";
+        } else {
+
+	        $query="select * from domain where Pagename='" . $key . "'";
+	        $result=mysql_query($query);
+
+	        $h = "";
+	        $h = $h . "<h2>Showing domain #".$key."</h2>";
+
+	        if (mysql_numrows($result) > 0) {
+                $r=0;
+
+                $h = $h . "<form action='api.php'>";
+                $h = $h . "<input type='hidden' name='action' value='show-dom-key'>";
+                $h = $h . "<input type='hidden' name='action2' value='update'>";
+                $h = $h . "<input type='hidden' name='id' value='".$id."'>";
+                $h = $h . "<input type='hidden' name='key' value='".$key."'>";
+                $h = $h . "<table class='table table-striped table-bordered table-condensed'>";
+                $h = $h . "<tr><td>Caption</td><td><input type='text' name='Caption' value='" . mysql_result($result,$r,"Caption") . "'></td></tr>";
+                $h = $h . "<tr><td>&nbsp;</td><td><input class='btn btn-success' type='submit'></td></tr>";
+                $h = $h . "</table>";
+                $h = $h . "</form>";
        		}
         }
 
@@ -2228,9 +2320,6 @@ else if ( $action == "list-draft-mes" ) {
 
         $h = $h . "</div>";		// end buttongroup
         
-        $h = $h . "<div class='btn-group pull-right'>";
-        $h = $h . "<a class='btn btn-success' href='api.php?action=list-draft-mes&filter1=draft&action2=add'> <i class='icon-plus icon-white'></i> ADD</a>";
-        $h = $h . "</div>";		// end buttongroup
         
         
         $h = $h . "</div>";		// end toolbar
@@ -3247,6 +3336,107 @@ echo "<!--\n\n $query; \n\n-->";
         echo "</div>";
         echo $hbot;
 
+} else if( $action == "wp" ){
+
+	require_once('ripcord-1.1/ripcord.php');
+    $client = ripcord::client( 'http://www.parkshark.eu/xmlrpc.php' );
+    $score = $client->wp->getPosts();
+    var_dump($score);
+
+} else if( $action == "wp2" ){
+
+class atompub
+    {
+
+    //public $parae = '';
+
+    function __construct($one, $two, $three, $four)
+        {
+        $this->author=$one;
+        $this->title=$two;
+        $this->categories=$three;
+        $this->body=$four;
+        }
+
+    function create_post() 
+        {
+        $xmlwriter = new XMLWriter();
+        $xmlwriter->openMemory();
+        $xmlwriter->startDocument("1.0", "UTF-8");
+            $xmlwriter->startElement('entry');
+                $xmlwriter->writeAttribute('xmlns', 'http://www.w3.org/2005/Atom');
+                $xmlwriter->startElement('author');
+                    $xmlwriter->writeElement('name', $this->author);
+                $xmlwriter->endElement();
+                $xmlwriter->writeElement('title', $this->title);
+                $xmlwriter->startElement('content');
+                    $xmlwriter->writeAttribute('type', 'html');
+                    $xmlwriter->text($this->body);
+                $xmlwriter->endElement();
+                $xmlwriter->startElement('category');
+                    $xmlwriter->writeAttribute('term', $this->categories);
+                $xmlwriter->endElement();
+            $xmlwriter->endElement();
+        $xmlwriter->endDocument();
+
+        return $xmlwriter->outputMemory();
+        }
+
+    function __destruct()
+        {
+        }
+    }
+
+
+$target = "http://www.parkshark.eu/wp-app.php/posts";  
+// Note that the directory "posts" are used for posting (POST method)
+// "service" is used to pull info via the GET method (not shown here)
+
+$user = "XXX";  // Substitue XXX with your WordPress username
+$passwd = "YYY";   // Substitue XXX with your WordPress password
+
+$author='Your Name';
+$title='The title of your choice for your new entry';
+$array_of_categories='Category';
+$body='This is the main body. All the text goes in here';
+
+$xml_post = new atompub($author,$title,$array_of_categories,$body);
+$post = $xml_post->create_post();
+
+$headers = array("Content-Type: application/atom+xml ");
+$handle = curl_init($target);
+$curlopt_array = array(
+CURLOPT_HTTPHEADER => $headers,
+CURLOPT_POST => true,
+CURLOPT_POSTFIELDS => $post,
+CURLOPT_SSL_VERIFYPEER => false,
+CURLOPT_USERPWD => $user.':'.$passwd,
+CURLOPT_FOLLOWLOCATION => true,
+CURLINFO_HEADER_OUT => true);
+curl_setopt_array($handle, $curlopt_array);
+
+$result = curl_exec($handle);
+//var_dump($result);
+$header_sent=curl_getinfo($handle);
+//var_dump($header_sent);
+
+if ($result === false) {
+print "Got " . curl_errno($handle) . " : " . curl_error($handle) . "\n";
+curl_close ($handle);
+return;
+}
+
+$response_http_code = curl_getinfo ($handle, CURLINFO_HTTP_CODE);
+if ($response_http_code != 201) {
+print("HTTP status code: $response_http_code \n");
+curl_close($handle);
+return;
+}
+
+curl_close($handle);
+
+
+
 } else if( $action == "cron" ){
 
 	
@@ -3254,11 +3444,28 @@ echo "<!--\n\n $query; \n\n-->";
 } else {
 
 		require_once './local_functions.php';
+		
+		$c1 = sqlcount("select count(*) as c from message");
 
         echo $htop;
-        echo '<div class="hero-unit">';
-        echo "<h1>push2press by Glimworm</h1>";
-        echo "<h3> Mobile Control Pannel for ".getConfiguration("sitename","")."</h3>";
+        echo '<link href="github/ribbons.css" rel="stylesheet" type="text/css" />';
+        echo "<br>";
+        echo "<br>";
+        echo "<br>";
+        echo "<br>";
+        echo '<div class="container">';
+        echo '      <div class="row-fluid">';
+        echo '			<div class="span4">';
+        echo "			<div class='ribbon left red'><a href='#'>Fork me on GitHub</a></div>";
+        echo "			<img src='images/MainImage.jpg'>";
+        echo "			</div>";
+        echo '			<div class="span8">';
+        echo "<h3> Welcome to your push2press site</h3>";
+        echo sprintf("		<a href='api.php?action=list-draft-mes'>Edit push messages</a>(%s)",$c1);
+        echo sprintf("		<a href='api.php?action=wp'>Edit push messages wp</a>(%s)",$c1);
+        echo sprintf("		<a href='api.php?action=wp2'>Edit push messages wp2</a>(%s)",$c1);
+        echo "			</div>";
+        echo "		</div>";
         echo "</div>";
         echo $hbot;
         
