@@ -266,7 +266,7 @@ $htop = $htop .' </script>';
 $htop = $htop . "\n";
 
 $htop = $htop .'              <li><a href="api.php?action=logout">Logout</a></li>';
-$htop = $htop .'              <li><div style="padding-left:20px;padding-top: 9px;"><span class="label xlabel-inverse">push2press v1.1 BETA</span></div></li>';
+$htop = $htop .'              <li><div style="padding-left:20px;padding-top: 9px;"><span class="label xlabel-inverse">push2press v1.1 ALPHA</span></div></li>';
 $htop = $htop .'            </ul>';
 $htop = $htop .'          </div><!--/.nav-collapse -->';
 $htop = $htop .'        </div>';
