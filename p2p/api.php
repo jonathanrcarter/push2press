@@ -3476,6 +3476,8 @@ curl_close($handle);
         echo sprintf("		<a href='api.php?action=list-draft-mes'>Edit push messages</a>(%s)",$c1);
         echo sprintf("		<a href='api.php?action=wp'>Edit push messages wp</a>(%s)",$c1);
         echo sprintf("		<a href='api.php?action=wp2'>Edit push messages wp2</a>(%s)",$c1);
+        echo sprintf("		<a href='setup.php'>Re enter setup</a>(%s)",$c1);
+        echo sprintf("		<a href='upgrade.php'>Upgrade</a>(%s)",$c1);
 		
 		echo "				<br>";
 		echo "				Send yourself the link by email <form action='api.php'><input type='text' name='emaillinkto'><input type='submit'></form><br>";
