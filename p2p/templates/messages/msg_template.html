@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+	<meta charset="utf-8">
+	<meta name="description" content="{vars.description}">
+	<meta http-equiv="cleartype" content="on">
+	<meta name="HandheldFriendly" content="True">
+	<meta name="MobileOptimized" content="320">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<title>ROC Van Amsterdam</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
+   <script type="text/javascript"
+      src="http://maps.googleapis.com/maps/api/js?sensor=false">
+    </script>
+    <script type="text/javascript">
+      function initialize() {
+        var mapOptions = {
+          center: new google.maps.LatLng({latitude}, {longitude}),
+          zoom: 15,
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+        var map = new google.maps.Map(document.getElementById("map_canvas"),mapOptions);
+		var marker = new google.maps.Marker({
+        position: new google.maps.LatLng({latitude}, {longitude}),
+        animation: google.maps.Animation.DROP,
+        map: map,
+        title:"Le Zinc"
+		}); 
+		
+      }
+	</script>
+	<script type="text/javascript">
+	function scroller(){
+		document.getElementById('sitemap').scrollIntoView();
+	}
+	function scroller(){
+		var links = $("#sitemap li");
+		var h = "<select style='position:absolute;top:-50px;display:block;' id='autositemap'>";
+		for (var i=0; i < links.length; i++) {
+			var lnk = links[i];
+			var typ = lnk.class;
+			var a = $(lnk).find("a");
+			var A = a[0];
+			h += "<option value='"+A.href+"'>" + A.innerHTML + "</option>";
+		}
+		h += "</select>";
+		$('body').prepend(h);
+		$('#autositemap').bind('blur',function(e) {
+			document.location.href = this.value;
+		});
+		$('#autositemap').focus();
+	}
+	
+	function changetxt(){
+		$('#textboxinner').val("");
+	}
+    </script>
+	<style type="text/css">
+		body * {
+			font-family:Helvetica, Arial, sans-serif;
+		}
+		body{
+			margin:0;
+			background-color:white;
+			height:100%;
+		}
+		
+		#top{
+			width:100%;
+			background-color:#FE0033;
+		}
+		
+		@font-face {    
+		font-family: 'din_medium';    
+		src: url('fonts/din_medium.eot');    
+		src: 
+			url('fonts/din_medium.eot?#iefix') format('embedded-opentype'),         
+			url('fonts/din_medium.woff') format('woff'),         
+			url('fonts/din_medium.ttf') format('truetype'),         
+			url('fonts/din_medium.svg#shelley_allegroregular') format('svg');    
+		font-weight: normal;    
+		font-style: normal;}
+		
+		#topinner{
+			width:80%;
+			margin-left:auto;
+			margin-right:auto;
+			position:relative;
+		}
+		
+		#tomenu * {
+			color : white;
+			font-size: 14px;
+			text-decoration:none;
+			font-weight:bold;
+			font-family:'din_medium';
+			position:absolute;
+			top:15px;
+			right:0;
+		}
+		
+		#pagename{
+			margin:0;
+			font-size: 32px;
+			color:#ffffff;
+			font-family:'din_medium';
+			padding-top:14px;
+			padding-bottom:15px;
+		}
+		
+		#main{
+			width:80%;
+			height:100%;
+			margin-left:auto;
+			margin-right:auto;
+		}
+		
+		#content{
+			margin-top:15px;
+		}
+		
+		#content p{
+			color:#333333;
+			font-family:Arial;
+			font-family:Helvetica, Arial, sans-serif;
+			font-size:13px;
+			text-align: justify;
+			line-height:1.5em;
+			margin:0;
+			padding-bottom: 20px;
+		}
+		
+		#map_canvas{
+			width:100%;
+			height:200px;
+			color:transparent;
+		}
+		
+		img {
+			max-width:260px;
+			min-width:0px;
+		}
+		
+		a{
+			color:#FE0033;
+			text-decoration:none;
+		}
+		
+		a:hover{
+			color:#FE0033;
+			text-decoration:underline;
+		}
+		
+		.catsMenu, .rest_title, .rest_caption, .pagename{
+			color:#333333;
+		}
+		
+		.rest_title{
+			font-family:24px !important;
+			font-weight:bold;
+			margin:0;
+		}
+		
+		h4{
+			margin:0;
+			font-family:24px !important;
+		}
+		
+		#textbox{
+			width:100%;
+			height:33px;
+			background-color:#E4EBEB;
+		}
+		
+		#textboxinner{
+			width:90%;
+			height:20px;
+			margin-top:4px;
+			margin-left:3%;
+			margin-right:3%;
+			border:none;
+			color:#4F5050;
+			font-family:Arial;
+			font-style:italic;
+			padding-left:5px;
+			border-radius:0px;
+		}
+		
+	</style>
+</head>
+<body onload="initialize()">
+	<div id="main">
+		<div id="content">
+			{content}
+		</div>
+	</div>
+</body>
+</html>

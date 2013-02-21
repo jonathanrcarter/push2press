@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml">
+		<head>
+			<!-- template designed by Marco Von Ballmoos -->
+			<title>Docs for page ripcord.php</title>
+			<link rel="stylesheet" href="../media/stylesheet.css" />
+			<meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1'/>
+		</head>
+		<body>
+			<div class="page-body">			
+<h2 class="file-name">/ripcord.php</h2>
+
+<a name="sec-description"></a>
+<div class="info-box">
+	<div class="info-box-title">Description</div>
+	<div class="nav-bar">
+					<span class="disabled">Description</span> |
+							<a href="#sec-classes">Classes</a>
+														</div>
+	<div class="info-box-body">	
+		<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Ripcord is an easy to use XML-RPC library for PHP.</p>
+	<ul class="tags">
+				<li><span class="field">author:</span> Auke van Slooten &lt;<a href="mailto:auke@muze.nl">auke@muze.nl</a>&gt;</li>
+				<li><span class="field">version:</span> Ripcord 0.9 - PHP 5</li>
+				<li><span class="field">copyright:</span> Copyright (C) 2010, Muze &lt;www.muze.nl&gt;</li>
+				<li><span class="field">license:</span> <a href="http://opensource.org/licenses/gpl-3.0.html">GNU Public License</a></li>
+			</ul>
+		
+			</div>
+</div>
+		
+	<a name="sec-classes"></a>	
+	<div class="info-box">
+		<div class="info-box-title">Classes</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+			<span class="disabled">Classes</span>
+																	</div>
+		<div class="info-box-body">	
+			<table cellpadding="2" cellspacing="0" class="class-table">
+				<tr>
+					<th class="class-table-header">Class</th>
+					<th class="class-table-header">Description</th>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em; vertical-align: top">
+						<a href="../Ripcord/ripcord.html">ripcord</a>
+					</td>
+					<td>
+											The ripcord class contains a number of useful static methods. This makes it a bit easier to create a server or client, convert types  and check for errors.
+										</td>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em; vertical-align: top">
+						<a href="../Ripcord/Ripcord_Exception.html">Ripcord_Exception</a>
+					</td>
+					<td>
+											This interface is implemented by all exceptions thrown by Ripcord.
+										</td>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em; vertical-align: top">
+						<a href="../Ripcord/Ripcord_BadMethodCallException.html">Ripcord_BadMethodCallException</a>
+					</td>
+					<td>
+											This class is used whenever an when a method passed to the server is invalid.
+										</td>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em; vertical-align: top">
+						<a href="../Ripcord/Ripcord_ConfigurationException.html">Ripcord_ConfigurationException</a>
+					</td>
+					<td>
+											This class is used whenever prerequisite requirements are not met.
+										</td>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em; vertical-align: top">
+						<a href="../Ripcord/Ripcord_InvalidArgumentException.html">Ripcord_InvalidArgumentException</a>
+					</td>
+					<td>
+											This class is used whenever an argument passed to a Ripcord method is invalid for any reason. Possible exceptions thrown are: <ul><li>ripcord::notRipcordCall (-2) Argument {index} is not a valid Ripcord call - Thrown by the client when passing incorrect arguments to system.multiCall.</li></ul>
+										</td>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em; vertical-align: top">
+						<a href="../Ripcord/Ripcord_TransportException.html">Ripcord_TransportException</a>
+					</td>
+					<td>
+											This class is used whenever something goes wrong in sending / receiving data. Possible exceptions thrown are: <ul><li>ripcord::cannotAccessURL (-4) Could not access {url} - Thrown by the transport object when unable to access the given url.</li></ul>
+										</td>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em; vertical-align: top">
+						<a href="../Ripcord/Ripcord_RemoteException.html">Ripcord_RemoteException</a>
+					</td>
+					<td>
+											This class is used for exceptions generated from xmlrpc faults returned by the server. The code and message correspond  to the code and message from the xmlrpc fault.
+										</td>
+				</tr>
+							</table>
+		</div>
+	</div>
+
+	
+	
+	
+	
+	<p class="notes" id="credit">
+		Documentation generated on Tue, 16 Nov 2010 16:20:15 +0100 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+	</p>
+	</div></body>
+</html>

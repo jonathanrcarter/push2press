@@ -1,0 +1,137 @@
+K 25
+svn:wc:ra_dav:version-url
+V 35
+/svn/!svn/ver/56/trunk/docs/Ripcord
+END
+_ripcord_server.php.html
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/!svn/ver/56/trunk/docs/Ripcord/_ripcord_server.php.html
+END
+Ripcord_Documentor_Parser.html
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/!svn/ver/56/trunk/docs/Ripcord/Ripcord_Documentor_Parser.html
+END
+Ripcord_Transport.html
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/!svn/ver/56/trunk/docs/Ripcord/Ripcord_Transport.html
+END
+Ripcord_Exception.html
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/!svn/ver/56/trunk/docs/Ripcord/Ripcord_Exception.html
+END
+Ripcord_Documentor_Interface.html
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/!svn/ver/56/trunk/docs/Ripcord/Ripcord_Documentor_Interface.html
+END
+Ripcord_BadMethodCallException.html
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/!svn/ver/56/trunk/docs/Ripcord/Ripcord_BadMethodCallException.html
+END
+_ripcord_client.php.html
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/!svn/ver/56/trunk/docs/Ripcord/_ripcord_client.php.html
+END
+_ripcord_documentor.php.html
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/!svn/ver/56/trunk/docs/Ripcord/_ripcord_documentor.php.html
+END
+_ripcord.php.html
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/!svn/ver/56/trunk/docs/Ripcord/_ripcord.php.html
+END
+Ripcord_Server.html
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/!svn/ver/56/trunk/docs/Ripcord/Ripcord_Server.html
+END
+Ripcord_Transport_Stream.html
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/!svn/ver/56/trunk/docs/Ripcord/Ripcord_Transport_Stream.html
+END
+Ripcord_InvalidArgumentException.html
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/!svn/ver/56/trunk/docs/Ripcord/Ripcord_InvalidArgumentException.html
+END
+Ripcord_Client_Call.html
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/!svn/ver/56/trunk/docs/Ripcord/Ripcord_Client_Call.html
+END
+Ripcord_RemoteException.html
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/!svn/ver/56/trunk/docs/Ripcord/Ripcord_RemoteException.html
+END
+Ripcord_TransportException.html
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/!svn/ver/56/trunk/docs/Ripcord/Ripcord_TransportException.html
+END
+Ripcord_Client.html
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/!svn/ver/56/trunk/docs/Ripcord/Ripcord_Client.html
+END
+Ripcord_Documentor.html
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/!svn/ver/56/trunk/docs/Ripcord/Ripcord_Documentor.html
+END
+ripcord.html
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svn/!svn/ver/56/trunk/docs/Ripcord/ripcord.html
+END
+Ripcord_Transport_CURL.html
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/!svn/ver/56/trunk/docs/Ripcord/Ripcord_Transport_CURL.html
+END
+Ripcord_Client_MultiCall.html
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/!svn/ver/56/trunk/docs/Ripcord/Ripcord_Client_MultiCall.html
+END
+Ripcord_ConfigurationException.html
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/!svn/ver/56/trunk/docs/Ripcord/Ripcord_ConfigurationException.html
+END
+Ripcord_Documentor_Parser_phpdoc.html
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/!svn/ver/56/trunk/docs/Ripcord/Ripcord_Documentor_Parser_phpdoc.html
+END
