@@ -188,7 +188,7 @@ $htop = $htop . "			$('#main_img_fld').val(url);";
 $htop = $htop . "            }";
 $htop = $htop . "        }";
 $htop = $htop . "    };";
-$htop = $htop . "    window.open('/kcfinder/browse.php?type=images','kcfinder_image', 'status=0, toolbar=0, location=0, menubar=0, directories=0, resizable=1, scrollbars=0, width=800, height=600');";
+$htop = $htop . "    window.open('kcfinder/browse.php?type=images','kcfinder_image', 'status=0, toolbar=0, location=0, menubar=0, directories=0, resizable=1, scrollbars=0, width=800, height=600');";
 $htop = $htop . "}";
 
 
@@ -202,7 +202,7 @@ $htop = $htop . "\n";
 
 $htop = $htop .'<script type="text/javascript">';
 $htop = $htop .'function kcnew(){';
-$htop = $htop ."window.open('/kcfinder/browse.php?type=images','kcfinder_image', 'status=0, toolbar=0, location=0, menubar=0, directories=0, resizable=1, scrollbars=0, width=800, height=600');";
+$htop = $htop ."window.open('kcfinder/browse.php?type=images','kcfinder_image', 'status=0, toolbar=0, location=0, menubar=0, directories=0, resizable=1, scrollbars=0, width=800, height=600');";
 $htop = $htop .'}';
 $htop = $htop .'</script>';
 $htop = $htop . "\n";
@@ -3033,12 +3033,12 @@ else if ( $action == "pushwindow") {
 				$h = $h ."	skin : 'BootstrapCK-Skin',";
 
 //config.skin = 'moono';
-				$h = $h ."	filebrowserBrowseUrl : '/kcfinder/browse.php?type=files',";
-				$h = $h ."	filebrowserImageBrowseUrl : '/kcfinder/browse.php?type=images',";
-				$h = $h ."	filebrowserFlashBrowseUrl : '/kcfinder/browse.php?type=flash',";
-				$h = $h ."	filebrowserUploadUrl : '/kcfinder/upload.php?type=files',";
-				$h = $h ."	filebrowserImageUploadUrl : '/kcfinder/upload.php?type=images',";
-				$h = $h ."	filebrowserFlashUploadUrl : '/kcfinder/upload.php?type=flash'";
+				$h = $h ."	filebrowserBrowseUrl : 'kcfinder/browse.php?type=files',";
+				$h = $h ."	filebrowserImageBrowseUrl : 'kcfinder/browse.php?type=images',";
+				$h = $h ."	filebrowserFlashBrowseUrl : 'kcfinder/browse.php?type=flash',";
+				$h = $h ."	filebrowserUploadUrl : 'kcfinder/upload.php?type=files',";
+				$h = $h ."	filebrowserImageUploadUrl : 'kcfinder/upload.php?type=images',";
+				$h = $h ."	filebrowserFlashUploadUrl : 'kcfinder/upload.php?type=flash'";
 				$h = $h ."});";
 				$h = $h .'</script>';
                 $h = $h . "</div>";
@@ -3326,12 +3326,12 @@ echo "<!--\n\n $query; \n\n-->";
 				$h = $h ." CKEDITOR.replace( 'elm12',";
 				$h = $h ."{";
 				$h = $h ."	skin : 'BootstrapCK-Skin',";
-				$h = $h ."	filebrowserBrowseUrl : '/kcfinder/browse.php?type=files',";
-				$h = $h ."	filebrowserImageBrowseUrl : '/kcfinder/browse.php?type=images',";
-				$h = $h ."	filebrowserFlashBrowseUrl : '/kcfinder/browse.php?type=flash',";
-				$h = $h ."	filebrowserUploadUrl : '/kcfinder/upload.php?type=files',";
-				$h = $h ."	filebrowserImageUploadUrl : '/kcfinder/upload.php?type=images',";
-				$h = $h ."	filebrowserFlashUploadUrl : '/kcfinder/upload.php?type=flash'";
+				$h = $h ."	filebrowserBrowseUrl : 'kcfinder/browse.php?type=files',";
+				$h = $h ."	filebrowserImageBrowseUrl : 'kcfinder/browse.php?type=images',";
+				$h = $h ."	filebrowserFlashBrowseUrl : 'kcfinder/browse.php?type=flash',";
+				$h = $h ."	filebrowserUploadUrl : 'kcfinder/upload.php?type=files',";
+				$h = $h ."	filebrowserImageUploadUrl : 'kcfinder/upload.php?type=images',";
+				$h = $h ."	filebrowserFlashUploadUrl : 'kcfinder/upload.php?type=flash'";
 				$h = $h ."});";
 				$h = $h .'</script>';
                 $h = $h . "<tr><td>&nbsp;</td><td><input class='btn btn-success' type='submit'></td></tr>";
