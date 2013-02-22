@@ -2741,7 +2741,7 @@ else if ( $action == "pushwindow") {
       	
       	} else if( $device == "" && $gid != "") {
       		
-      		$query2="select * from log_phone where uid != '' and uid != 'null' and ( groups = '$gid' or groups like ('$gid,%') or groups like (',$gid') or groups like ('%,$gid,%')";
+      		$query2="select * from log_phone where uid != '' and uid != 'null' and ( groups = '$gid' or groups like '$gid,%' or groups like ',$gid' or groups like '%,$gid,%')";
       		$result2=mysql_query($query2);
       		
       		for ($r=0; $r < mysql_numrows($result2); $r++) {
