@@ -25,8 +25,10 @@ $_CONFIG = array(
 
     'theme' => "oxygen",
 
-    'uploadURL' => "/client_images",
-    'uploadDir' => "/home/s88005cp/public_html/client_images",
+//    'uploadURL' => "/client_images",
+//    'uploadDir' => "/home/s88005cp/public_html/client_images",
+    'uploadURL' => str_replace("/kcfinder", "/", substr(dirname(__FILE__),strlen($_SERVER["DOCUMENT_ROOT"])))."/client_images",
+    'uploadDir' => dirname(__FILE__)."/../client_images",
 
     'dirPerms' => 0777,
     'filePerms' => 0644,
@@ -95,9 +97,9 @@ $_CONFIG = array(
 
     '_sessionVar' => &$_SESSION['KCFINDER'],
     '_sessionLifetime' => 30,
-    '_sessionDir' => "/home/s88005cp/public_html/sessions/",
+    '_sessionDir' => dirname(__FILE__)."/../sessions/",
 
-    '_sessionDomain' => "site88005.cp1.glimworm.net",
+    '_sessionDomain' => $_SERVER['HTTP_HOST'],
     '_sessionPath' => "/",
     
 );
