@@ -2,8 +2,8 @@ $push2press = {};
 $push2press.preview = function(URL,A,B,C) {
 	var h = "";
 	h += "<div style='position:relative;width:1000px;height:500px;'>";
-	h += "<image src='/images/iphone-preview.png' border='0' class='scaleOn' style='width:390px;position:absolute;top:-160px;left:20px;'>";
-	h += "<image src='/images/iphone-preview.png' border='0' class='scaleOn' style='width:390px;position:absolute;top:-160px;right:20px;'>";
+	h += "<image src='images/iphone-preview.png' border='0' class='scaleOn' style='width:390px;position:absolute;top:-160px;left:20px;'>";
+	h += "<image src='images/iphone-preview.png' border='0' class='scaleOn' style='width:390px;position:absolute;top:-160px;right:20px;'>";
 	h += "<iframe frameborder='0' src='"+URL+"' class='scaleOn' style='position:absolute;top:20px;right:60px;width:320px;height:400px;'></iframe>";
 	h += "<p class='scaleOn' style='position:absolute;top:40px;left:150px;width:200px;height:50px;font-size:14px;line-height:14px;'><b>"+A+"</b><br>"+B+"</p>";
 	h += "<image class='scaleOn' src='"+C+"' border='0' style='position:absolute;top:40px;left:100px;width:55px;height:55px;'>";
@@ -18,7 +18,7 @@ $push2press.preview = function(URL,A,B,C) {
 $push2press.previewpage = function(URL,A,B,C) {
 	var h = "";
 	h += "<div style='position:relative;width:500px;height:500px;'>";
-	h += "<image src='/images/iphone-preview.png' border='0' class='scaleOn' style='width:390px;position:absolute;top:-160px;right:24px;'>";
+	h += "<image src='images/iphone-preview.png' border='0' class='scaleOn' style='width:390px;position:absolute;top:-160px;right:24px;'>";
 	h += "<iframe frameborder='0' src='"+URL+"' class='scaleOn' style='position:absolute;top:20px;right:60px;width:320px;height:400px;'></iframe>";
 
 //	h += "<p style='position:absolute;top:130px;left:180px;width:200px;height:50px;font-size:14px;line-height:14px;'><b>"+A+"</b><br>"+B+"</p>";
