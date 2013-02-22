@@ -2700,7 +2700,7 @@ else if ( $action == "pushwindow") {
 	echo "</div>";
 	
 
-}else if ( $action == "push-prep") {
+} else if ( $action == "push-prep") {
 
 		$id = $_POST["id"];
 		$gid = $_POST["gid"];
@@ -2741,15 +2741,15 @@ else if ( $action == "pushwindow") {
       	
       	} else if( $device == "" && $gid != "") {
       		
-      		$query2="select * from log_phone where gid='$gid'";
+      		$query2="select * from log_phone where uid != '' and uid != 'null' and ( groups = '$gid' or groups like ('$gid,%') or groups like (',$gid') or groups like ('%,$gid,%')";
       		$result2=mysql_query($query2);
       		
       		for ($r=0; $r < mysql_numrows($result2); $r++) {
       		
-      			$device1 = mysql_result($result2,0,"uid");
+      			$device1 = mysql_result($result2,$r,"uid");
       			$REALDEVICE = $device1;
       			echo $REALDEVICE;
-      			$osn1 = mysql_result($result2,0,"osn");
+      			$osn1 = mysql_result($result2,$r,"osn");
       			
       			$query1="insert into recipient (rid, mid, devID, osn, date, status) values ('$id',0,'$device1','$osn1', now(),'ready_to_send')";
       			$result1=mysql_query($query1);
@@ -2792,7 +2792,7 @@ else if ( $action == "pushwindow") {
 				$msgid = "17";
 				$msgdesc = "";*/
 				
-				echo "OSN1 $osn1";
+				// echo "OSN1 $osn1";
 				
 			
 				//$h = $h . "a".$notification."<br> query:".$query3;
@@ -2829,34 +2829,28 @@ else if ( $action == "pushwindow") {
 		      		}
 		      		$PEMFILENAME = sprintf("./pushnotes/%s_%s.pem", $APNS_PEMFILE, $APNS_PEMFILE_TYPE); 
 		      		
-					echo "PEMFILENAME $PEMFILENAME";
+					// echo "PEMFILENAME $PEMFILENAME";
 
 			
 
 					// Instanciate a new ApnsPHP_Push object
 //					$push = new ApnsPHP_Push($APNS_ENVIRONMENT,'./pushnotes/server_cerificates_bundle_sandbox.pem');
 					$push = new ApnsPHP_Push($APNS_ENVIRONMENT,$PEMFILENAME);
-					echo "A";
 
 
 					// Set the Root Certificate Autority to verify the Apple remote peer
 					$push->setRootCertificationAuthority('./pushnotes/entrust_root_certification_authority.pem');
-					echo "A";
 	
 					// Connect to the Apple Push Notification Service
 					$push->connect();
-					echo "A";
 
 					// Instantiate a new Message with a single recipient
 					$message = new ApnsPHP_Message($msgpusht);
-					echo "A";
 
 					// Set a custom identifier. To get back this identifier use the getCustomIdentifier() method
 					// over a ApnsPHP_Message object retrieved with the getErrors() message.
 					$message->setCustomIdentifier("Message-Badge-3");
 					
-					echo "A";
-
 					// Set badge icon to "3"
 					$message->setBadge(1);
 
@@ -2881,15 +2875,12 @@ else if ( $action == "pushwindow") {
 
 					// Set another custom property
 					$message->setCustomProperty('appid', getConfiguration("appid","") );
-					echo "B";
- 					
 
 					// Set the expiry value to 30 seconds
 					$message->setExpiry(30);
 
 					// Add the message to the message queue
 					$push->add($message);
-					echo "C";
 
 					// Send all messages in the message queue
 					$push->send();
@@ -2903,7 +2894,7 @@ else if ( $action == "pushwindow") {
             
 			$query6="update ignore recipient set  status='send' where devID='" .$msgpusht. "' and rid=".$RIDZ;
         	$result6=mysql_query($query6);
-        	echo $query6;
+        	//echo $query6;
         	$r++;
       	}
       	
@@ -2916,6 +2907,7 @@ else if ( $action == "pushwindow") {
 		echo $h;
 		echo '</div>';
 		echo $hbot;
+		exit;
 
 }else if ( $action == "show-mes" ) {
 
