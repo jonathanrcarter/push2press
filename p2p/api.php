@@ -26,6 +26,7 @@ if ($browser && $browser != "") {
 }
 
 require_once './lang/en.php';
+require_once 'version.php';
 
 function getConfiguration($VAL,$DEFAULT_VAL) {
 	global $username,$password,$database,$dbhost;
@@ -266,7 +267,7 @@ $htop = $htop .' </script>';
 $htop = $htop . "\n";
 
 $htop = $htop .'              <li><a href="api.php?action=logout">Logout</a></li>';
-$htop = $htop .'              <li><div style="padding-left:20px;padding-top: 9px;"><span class="label xlabel-inverse">push2press v1.1 ALPHA</span></div></li>';
+$htop = $htop .'              <li><div style="padding-left:20px;padding-top: 9px;"><span class="label xlabel-inverse">push2press v'.$push2version["major"].' '.$push2version["type"].'</span></div></li>';
 $htop = $htop .'            </ul>';
 $htop = $htop .'          </div><!--/.nav-collapse -->';
 $htop = $htop .'        </div>';
