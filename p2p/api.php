@@ -666,7 +666,7 @@ if ( $action == "get-page-raw" ) {
 		
 		if (startsWith($caption, "atom:")) {
 			$testXmlFile = "atom_cat_".$cat->id.".xml";
-	    	$captionParts = explode(":", $caption);
+	    	$captionParts = explode(":", $caption,2);
 			
 //			$download = file_put_contents($testXmlFile, file_get_contents("http://www.parkshark.eu/feed/atom/"));
 			$download = file_put_contents($testXmlFile, file_get_contents($captionParts[1]));
