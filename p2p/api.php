@@ -132,7 +132,7 @@ $htop = $htop .'<!DOCTYPE html>';
 $htop = $htop .'<html lang="en">';
 $htop = $htop .'  <head>';
 $htop = $htop .'    <meta charset="utf-8">';
-$htop = $htop .'    <title>Push 2 Press</title>';
+$htop = $htop .'    <title>Push 2 Press App CMS - '.getConfiguration("sitename","").'</title>';
 $htop = $htop .'    <meta name="viewport" content="width=device-width, initial-scale=1.0">';
 $htop = $htop .'    <meta name="description" content="">';
 $htop = $htop .'    <meta name="author" content="">';
@@ -3432,12 +3432,12 @@ echo "<!--\n\n $query; \n\n-->";
 		echo "<p>You are using : Version : " . $push2version["major"] . " " . $push2version["type"] . ", build : " . $push2version["build"] . ", <a href='upgrade.php'>Check for updates</a></p>";
 
 
-        echo sprintf("		<a href='api.php?action=list-draft-mes'>Edit push messages</a>(%s)",$c1);
-        echo sprintf("		<a href='api.php?action=wp'>Edit push messages wp</a>(%s)",$c1);
-        echo sprintf("		<a href='api.php?action=wp2'>Edit push messages wp2</a>(%s)",$c1);
-        echo sprintf("		<a href='setup.php'>Re enter setup</a>(%s)",$c1);
-        echo sprintf("		<a href='upgrade.php'>Upgrade</a>(%s)",$c1);
+        echo sprintf("		<p><a href='api.php?action=list-draft-mes'>Edit push messages</a>(%s)</p>",$c1);
+        echo sprintf("		<p><a href='api.php?action=wp'>Edit push messages wp</a>(%s)</p>",$c1);
+        echo sprintf("		<p><a href='api.php?action=wp2'>Edit push messages wp2</a>(%s)</p>",$c1);
+        echo sprintf("		<p><a href='setup.php'>Re enter setup</a>(%s)</p>",$c1);
 		
+		echo sprintf("		<p><a href='https://itunes.apple.com/us/app/push2press/id603889484?ls=1&mt=8'>Download the push2press app from the appstore</a></p>");
 		echo "				<br>";
 		echo "				Send yourself the link by email <form action='api.php'><input type='text' name='emaillinkto'><input type='submit'></form><br>";
         echo "			</div>";
