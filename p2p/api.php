@@ -1634,8 +1634,8 @@ if ($act ==""){
                 $gname = $_POST["gname"];
                 $query="update ignore groups set  gname='".$gname."' where gid=" . $id;
                 $result=mysql_query($query);
-                $h = "UPDATED";
-                $h = $h . "<a class='btn' href='api.php?action=show-group&id=" . $id . "'>OK <i class='icon-check'></i></a>";
+                $h = "<div class='alert'>UPDATED</div>";
+                $h = $h . "<a class='btn' href='api.php?action=list-groups'>OK <i class='icon-check'></i></a>";
         } else {
 
         $query="select * from groups where gid=" . $id;
