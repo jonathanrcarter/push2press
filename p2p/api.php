@@ -662,16 +662,21 @@ if ( $action == "get-page-raw" ) {
 		$cat->pages = array();
 
 		$caption = mysql_result($result,$r,"Caption");
+
+		
 		if (startsWith($caption, "atom:")) {
 			$testXmlFile = "atom_cat_".$cat->id.".xml";
-			$download = file_put_contents($testXmlFile, file_get_contents("http://www.parkshark.eu/feed/atom/"));
+	    	$captionParts = explode(":", $caption);
+			
+//			$download = file_put_contents($testXmlFile, file_get_contents("http://www.parkshark.eu/feed/atom/"));
+			$download = file_put_contents($testXmlFile, file_get_contents($captionParts[1]));
 			$xml2 = simplexml_load_file($testXmlFile,'SimpleXMLElement', LIBXML_NOCDATA);
 			for ($i=0; $i < count($xml2->entry); $i++) {
 				$page = new obj();
-				$page->id = 1000;
+				$page->id = (1000*$cat->id)+$i;
 				$page->Pagename = substr(sprintf("%s",$xml2->entry[$i]->title),0,30);
-				$page->type = "ATOM:".$testXmlFile.":".$i;
-				$page->extraData = "";
+				$page->type = "atom:".$testXmlFile.":".$i;
+				$page->extraData = '{ "navBar" : "y" }';
 				array_push($cat->pages,$page);
 			}
 		} else {
@@ -803,7 +808,28 @@ else if ( $action == "get-page" ) {
 	
 	$type = mysql_result($result,$r,"type");
 	
-	if ($type == "leraar") {
+	$atomindex = 0;
+	$atomcat = 0;
+	
+	if ($id > 999) {
+		$type = sprintf("atom:atom_cat_%s.xml:%s",floor($id/1000),($id%1000));
+		$atomcat = floor($id/1000);
+		$atomindex = ($id%1000);
+	}	
+	
+	
+	if (startswith($type, "atom:")) {
+
+    	$types = explode(":", $type);
+		$testXmlFile = $types[1];
+		$i = $atomindex;
+		$xml2 = simplexml_load_file($testXmlFile,'SimpleXMLElement', LIBXML_NOCDATA);
+		$content =  str_replace("{content}", sprintf("%s",$xml2->entry[$i]->content), $content);
+		$content =  str_replace("{pagename}", sprintf("%s",$xml2->entry[$i]->title), $content);
+	
+	
+	} else if ($type == "leraar") {
+
 		$h = "";
 		$srch = $_POST['srch'];
 
