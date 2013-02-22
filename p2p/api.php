@@ -967,7 +967,9 @@ if ( $action == "ping" ) {
 		$h = "";
         $h = $h . "<div class='plain-hero-unit'>";
 		$h = $h . "<legend>".L('Instructions')."</legend>";
+		$h = $h . "<p>You are using : Version : " . $push2version["major"] . " " . $push2version["type"] . ", build : " . $push2version["build"] . "</p>";
 		$h = $h . "</div>";
+
         echo $htop;
         echo $h;
         echo $hbot;
