@@ -1,16 +1,17 @@
 $push2press = {};
 $push2press.preview = function(URL,A,B,C) {
 	var h = "";
-	h += "<div style='position:relative;width:1000px;height:500px;'>";
-	h += "<image src='images/iphone-preview.png' border='0' class='scaleOn' style='width:390px;position:absolute;top:-160px;left:20px;'>";
-	h += "<image src='images/iphone-preview.png' border='0' class='scaleOn' style='width:390px;position:absolute;top:-160px;right:20px;'>";
-	h += "<iframe frameborder='0' src='"+URL+"' class='scaleOn' style='position:absolute;top:20px;right:60px;width:320px;height:400px;'></iframe>";
-	h += "<p class='scaleOn' style='position:absolute;top:40px;left:150px;width:200px;height:50px;font-size:14px;line-height:14px;'><b>"+A+"</b><br>"+B+"</p>";
-	h += "<image class='scaleOn' src='"+C+"' border='0' style='position:absolute;top:40px;left:100px;width:55px;height:55px;'>";
+	h += "<div style='position:relative;width:1000px;height:600px;'>";
+	h += "<image src='images/iphone-preview.png' border='0' class='scaleOn' style='width:390px;position:absolute;top:-60px;left:20px;'>";
+	h += "<image src='images/iphone-preview.png' border='0' class='scaleOn' style='width:390px;position:absolute;top:-60px;right:20px;'>";
+	h += "<iframe frameborder='0' src='"+URL+"' class='scaleOn' style='position:absolute;top:120px;right:60px;width:320px;height:400px;'></iframe>";
+	h += "<p class='scaleOn' style='position:absolute;top:140px;left:150px;width:200px;height:50px;font-size:14px;line-height:14px;'><b>"+A+"</b><br>"+B+"</p>";
+	h += "<image class='scaleOn' src='"+C+"' border='0' style='position:absolute;top:140px;left:100px;width:55px;height:55px;'>";
 	h += '<a href=""><button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="position:absolute;top:0;right:10px;">&times;</button></a>';
 	h += "</div>";
 	
 	$("#modal-window2").addClass("modalpreview");
+	$("#modal-window2").addClass("modalpreview600");
 	$("#modal-window2").html(h);
 	$("#modal-window2").modal('show');
 // 	alert(A+"-"+B+"-"+C);
@@ -27,6 +28,7 @@ $push2press.previewpage = function(URL,A,B,C) {
 	h += "</div>";
 	
 	$("#modal-window2").removeClass("modalpreview");
+	$("#modal-window2").removeClass("modalpreview600");
 	$("#modal-window2").html(h);
 	$("#modal-window2").modal('show');
 // 	alert(A+"-"+B+"-"+C);

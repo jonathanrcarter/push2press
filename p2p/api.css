@@ -111,6 +111,10 @@ h3 {
 .modal {
   height:500px;
 }
+.modalpreview600 {
+  top : 40%;
+  height:600px;
+}
 
 .scaleOn {
 	/*General*/
