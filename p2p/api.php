@@ -3476,6 +3476,10 @@ curl_close($handle);
         echo '			<div class="span8">';
 		echo $h;
         echo "<h3> Welcome to your push2press site</h3>";
+
+		echo "<p>You are using : Version : " . $push2version["major"] . " " . $push2version["type"] . ", build : " . $push2version["build"] . ", <a href='upgrade.php'>Check for updates</a></p>";
+
+
         echo sprintf("		<a href='api.php?action=list-draft-mes'>Edit push messages</a>(%s)",$c1);
         echo sprintf("		<a href='api.php?action=wp'>Edit push messages wp</a>(%s)",$c1);
         echo sprintf("		<a href='api.php?action=wp2'>Edit push messages wp2</a>(%s)",$c1);
