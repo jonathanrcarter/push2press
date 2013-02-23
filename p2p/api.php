@@ -2887,14 +2887,11 @@ else if ( $action == "pushwindow") {
 					// Add the message to the message queue
 					$push->add($message);
 
-					echo "<hr>";
 					// Send all messages in the message queue
 					$push->send();
-					echo "<hr>";
 						
 					// Disconnect from the Apple Push Notification Service
 					$push->disconnect();
-	
 				}
                 
             $h = $h . sprintf("<div class='alert'>Push notification sent [%s] [%s] [%s] [%s] [%s]</div>",$APNS_ENVIRONMENT,$APNS_PEMFILE,$APNS_PEMFILE_TYPE,$apn_aid,$sql4);
