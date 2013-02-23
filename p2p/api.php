@@ -2724,8 +2724,13 @@ else if ( $action == "pushwindow") {
         mysql_query("SET NAMES utf8", $db);
         mysql_query( "SET CHARACTER SET utf8", $db );
 
-        $query="insert into sending (id,date,eid,notification,msgDesc,status) values (0,now(),'$id','$cap','$desc','Setting-up') ON DUPLICATE KEY UPDATE notification='$cap', msgDesc='$desc'";
+        $query="insert into sending (id,date,eid,notification,msgDesc,status) values (0,now(),'$id','$cap','$desc','Setting-up')";
         $result=mysql_query($query);
+        $_sendingid = mysql_insert_id();
+
+
+
+
       	//echo $query;
       	$READY = "N";
       	$REALDEVICE = "";
@@ -2733,7 +2738,7 @@ else if ( $action == "pushwindow") {
       		
       		$REALDEVICE = $device;
       		//echo $REALDEVICE;
-      		$query1="insert into recipient (rid, mid, devID, osn, date, status) values ('$id',0,'$device','$osn', now(),'ready_to_send')";
+      		$query1="insert into recipient (rid, mid, devID, osn, date, status) values ('$_sendingid',0,'$device','$osn', now(),'ready_to_send')";
       		$result1=mysql_query($query1);
       		
       		$h = $h . "Being sent!!!!!";
@@ -2741,7 +2746,7 @@ else if ( $action == "pushwindow") {
       	
       	} else if( $device == "" && $gid != "") {
       		
-      		$query2="select * from log_phone where uid != '' and uid != 'null' and ( groups = '$gid' or groups like '$gid,%' or groups like ',$gid' or groups like '%,$gid,%')";
+      		$query2="select * from log_phone where uid != '' and uid != 'null' and ( groups = '$gid' or groups like '$gid,%' or groups like '%,$gid' or groups like '%,$gid,%')";
       		$result2=mysql_query($query2);
       		
       		for ($r=0; $r < mysql_numrows($result2); $r++) {
@@ -2751,7 +2756,7 @@ else if ( $action == "pushwindow") {
       			echo $REALDEVICE;
       			$osn1 = mysql_result($result2,$r,"osn");
       			
-      			$query1="insert into recipient (rid, mid, devID, osn, date, status) values ('$id',0,'$device1','$osn1', now(),'ready_to_send')";
+      			$query1="insert into recipient (rid, mid, devID, osn, date, status) values ('$_sendingid',0,'$device1','$osn1', now(),'ready_to_send')";
       			$result1=mysql_query($query1);
       		
       		}
@@ -2802,7 +2807,7 @@ else if ( $action == "pushwindow") {
 					date_default_timezone_set('Europe/Rome');
 	
 					// Report all PHP errors
-					error_reporting(0);
+					//error_reporting(0);
 	
 					// Using Autoload all classes are loaded on-demand
 					require_once './pushnotes/ApnsPHP/Autoload.php';
@@ -2882,9 +2887,11 @@ else if ( $action == "pushwindow") {
 					// Add the message to the message queue
 					$push->add($message);
 
+					echo "<hr>";
 					// Send all messages in the message queue
 					$push->send();
-	
+					echo "<hr>";
+						
 					// Disconnect from the Apple Push Notification Service
 					$push->disconnect();
 	
