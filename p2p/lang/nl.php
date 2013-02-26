@@ -4,7 +4,7 @@
 function L($phrase) {
 	static $lang = array(
 		"runsetup" => "<div>%s</div>Please run <a href='setup.php'>Setup</a>",
-		"ADD" => "ADD",
+		"ADD" => "TOEVOEGEN",
 		"Title" => "Title",
 		"Pagename" => "Pagename",
 		"Caption" => "Caption",
