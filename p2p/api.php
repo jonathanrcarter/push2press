@@ -925,7 +925,7 @@ else if ( $action == "list-log" ) {
 		
 		$PAGER = $PAGE-1;
 		$LIM1= $PAGER*20;
-		$query="select * from log_phone order by id limit ".$LIM1.",20";
+		$query="select * from log_phone order by id desc limit ".$LIM1.",20";
 		$result=mysql_query($query);
 		
         $query1="select * from log_phone order by id";
