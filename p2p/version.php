@@ -3,7 +3,7 @@
 $push2version = array(
 	"major" => 1.1,
 	"type" => "ALPHA",
-	"build" => 101
+	"build" => 20130228.01
 );
 
 ?>
