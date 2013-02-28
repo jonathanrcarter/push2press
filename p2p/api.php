@@ -344,136 +344,6 @@ function B($TYPE, $LINK) {
 
 }
 
-/*
-CREATE TABLE IF NOT EXISTS `cats` (
-  `ID` int(6) NOT NULL AUTO_INCREMENT,
-  `Pagename` varchar(255) NOT NULL DEFAULT '',
-  `Caption` varchar(255) NOT NULL DEFAULT '',
-  `img` varchar(255) NOT NULL DEFAULT '',
-  PRIMARY KEY (`ID`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
-
-CREATE TABLE IF NOT EXISTS `domain` (
-  `ID` int(6) NOT NULL AUTO_INCREMENT,
-  `Pagename` varchar(255) NOT NULL DEFAULT '',
-  `Caption` varchar(255) NOT NULL DEFAULT '',
-  `img` varchar(255) NOT NULL DEFAULT '',
-  PRIMARY KEY (`ID`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
-
-CREATE TABLE IF NOT EXISTS `groups` (
-  `gid` int(2) NOT NULL AUTO_INCREMENT,
-  `gname` varchar(250) NOT NULL,
-  PRIMARY KEY (`gid`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
-
-CREATE TABLE IF NOT EXISTS `gwSEO` (
-  `id` int(3) NOT NULL AUTO_INCREMENT,
-  `pid` int(3) NOT NULL,
-  `shtml` varchar(255) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
-
-CREATE TABLE IF NOT EXISTS `log` (
-  `id` int(6) NOT NULL AUTO_INCREMENT,
-  `ts` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `data` text NOT NULL,
-  `status` varchar(255) NOT NULL DEFAULT '',
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=158 ;
-
-CREATE TABLE IF NOT EXISTS `log_phone` (
-  `id` int(6) NOT NULL AUTO_INCREMENT,
-  `uid` varchar(250) NOT NULL,
-  `gid` int(2) NOT NULL,
-  `dtype` varchar(10) NOT NULL DEFAULT '',
-  `osn` varchar(25) NOT NULL DEFAULT '',
-  `aid` varchar(25) NOT NULL DEFAULT '',
-  `un` varchar(100) NOT NULL DEFAULT '',
-  `fb` varchar(100) NOT NULL DEFAULT '',
-  `en` varchar(100) NOT NULL DEFAULT '',
-  `twit` varchar(100) NOT NULL DEFAULT '',
-  `ts` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `log_phone_uid` (`uid`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=158 ;
-
-CREATE TABLE IF NOT EXISTS `menu` (
-  `ID` int(6) NOT NULL AUTO_INCREMENT,
-  `Pagename` varchar(255) NOT NULL DEFAULT '',
-  `Caption` varchar(255) NOT NULL DEFAULT '',
-  `img` varchar(255) NOT NULL DEFAULT '',
-  `text` text NOT NULL,
-  `menuCat` varchar(225) NOT NULL DEFAULT '''''',
-  PRIMARY KEY (`ID`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
-
-CREATE TABLE IF NOT EXISTS `message` (
-  `ID` int(6) NOT NULL AUTO_INCREMENT,
-  `Pagename` varchar(255) NOT NULL DEFAULT '',
-  `Caption` varchar(255) NOT NULL DEFAULT '',
-  `img` varchar(255) NOT NULL DEFAULT '',
-  `bodytext` text NOT NULL,
-  `Volgorde` varchar(255) NOT NULL DEFAULT '',
-  `CatID` varchar(255) NOT NULL DEFAULT '',
-  `ts_added` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `ts_last_edited` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `status` varchar(20) NOT NULL,
-  PRIMARY KEY (`ID`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
-
-CREATE TABLE IF NOT EXISTS `pages` (
-  `ID` int(6) NOT NULL AUTO_INCREMENT,
-  `Pagename` varchar(255) NOT NULL DEFAULT '',
-  `Caption` varchar(255) NOT NULL DEFAULT '',
-  `img` varchar(255) NOT NULL DEFAULT '',
-  `bodytext` text NOT NULL,
-  `Volgorde` int(6) NOT NULL,
-  `CatID` varchar(255) NOT NULL DEFAULT '',
-  `template` varchar(50) NOT NULL,
-  `type` varchar(50) NOT NULL,
-  `extraData` varchar(250) NOT NULL,
-  PRIMARY KEY (`ID`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
-
-CREATE TABLE IF NOT EXISTS `pushmessages` (
-  `id` int(6) NOT NULL AUTO_INCREMENT,
-  `ts` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `data` text NOT NULL,
-  `status` varchar(255) NOT NULL DEFAULT '',
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
-
-CREATE TABLE IF NOT EXISTS `recipient` (
-  `rid` int(6) NOT NULL,
-  `mid` int(6) NOT NULL AUTO_INCREMENT,
-  `devID` varchar(512) NOT NULL,
-  `osn` varchar(512) NOT NULL,
-  `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `status` varchar(255) NOT NULL,
-  PRIMARY KEY (`mid`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
-
-CREATE TABLE IF NOT EXISTS `sending` (
-  `id` int(6) NOT NULL AUTO_INCREMENT,
-  `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `eid` int(6) NOT NULL,
-  `notification` varchar(512) NOT NULL,
-  `msgDesc` varchar(512) NOT NULL,
-  `status` varchar(255) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=36 ;
-
-CREATE TABLE IF NOT EXISTS `timetable` (
-  `id` int(3) NOT NULL AUTO_INCREMENT,
-  `schoolName` varchar(255) NOT NULL,
-  `className` varchar(255) NOT NULL,
-  `fileLocation` varchar(512) NOT NULL,
-  `volgorde` int(6) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
-
-*/
 
 function startsWith($haystack, $needle) {
     $length = strlen($needle);
@@ -498,25 +368,27 @@ function log3($osn, $pusht, $dtype, $aid, $gid) {
 	global $username,$password,$database,$dbhost;
 	
 	$db = mysql_connect($dbhost,$username,$password);
-       	mysql_select_db($database) or die("Unable to select database");
-       	mysql_query("SET NAMES utf8", $db);
-       	mysql_query( "SET CHARACTER SET utf8", $db );
-       	$query="insert into log_phone (id,uid,gid,dtype,osn,aid,ts) values (0,'$pusht','$gid','$dtype','$osn','$aid',now()) on duplicate  key update dtype='$dtype', aid='$aid', osn='$osn', ts=now()";
-       	$result=mysql_query($query);
+   	mysql_select_db($database) or die("Unable to select database");
+   	mysql_query("SET NAMES utf8", $db);
+   	mysql_query( "SET CHARACTER SET utf8", $db );
+   	$query="insert into log_phone (id,uid,gid,dtype,osn,aid,ts) values (0,'$pusht','$gid','$dtype','$osn','$aid',now()) on duplicate  key update dtype='$dtype', aid='$aid', osn='$osn', ts=now()";
+   	$result=mysql_query($query);
 	
 }
 
 function log4($pusht, $name, $groups) {
 	global $username,$password,$database,$dbhost;
 	
+	if ($name == "" && $groups == "") return;
+	
 	$db = mysql_connect($dbhost,$username,$password);
-       	mysql_select_db($database) or die("Unable to select database");
-       	mysql_query("SET NAMES utf8", $db);
-       	mysql_query( "SET CHARACTER SET utf8", $db );
-       	$query="update ignore log_phone set name='".mysql_escape_string($name)."',groups='".$groups."' where uid='".$pusht."'";
-       	$result=mysql_query($query);
+   	mysql_select_db($database) or die("Unable to select database");
+   	mysql_query("SET NAMES utf8", $db);
+   	mysql_query( "SET CHARACTER SET utf8", $db );
+   	$query="update ignore log_phone set name='".mysql_escape_string($name)."',groups='".$groups."' where uid='".$pusht."'";
+   	$result=mysql_query($query);
        	
-       	return $query;
+	return $query;
 	
 }
 
@@ -1045,10 +917,6 @@ else if ( $action == "list-log" ) {
 		$osn = $_POST["osn"];
 
 		$action2 = $_POST["action2"];
-        if ($action2 == "add") {
-                $query="insert ignore into log_phone (id, uid, gid, dtype, osn, aid, un, fb, en, twit, ts) values (0,'',0,'','','','','','','',now())";
-                $result=mysql_query($query);
-        }
 		$PAGE = $_POST['p'];
 		
 		if ($PAGE == "" || $PAGE == "0"){
