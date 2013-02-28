@@ -83,8 +83,6 @@ function L($phrase) {
 		"pagz" => "List of all pages",
 		"menz" => "List of all roosters",
 		"tecz" => "List of all teachers",
-		"Check_groups" => "Check groups",
-		"Check_devices" => "Check devices",
 		"List_cats" => "List all categories",
 		"List_pages" => "List all pages",
 		"STATS" => "Show statistics",
