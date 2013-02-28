@@ -1126,12 +1126,15 @@ else if ( $action == "list-log" ) {
  
          $h = $h . '<div class="pagination pagination-small pagination-centered">';
  		 $h = $h . '	<ul>';
+ 		 $h = $h . ' 		<li><a href="api.php?action=list-log&p='.$NP.'">&laquo;</a></li>';
 
 		$numpages = floor(mysql_numrows($result1)/20)+1;
 		
 		for ($pages = 0; $pages < $numpages; $pages++) {
 	 		 $h = $h . '		<li><a href="api.php?action=list-log&p='.$pages.'">'.$pages.'</a></li>';
 		}
+ 		
+ 		 $h = $h . ' 		<li><a href="api.php?action=list-log&p='.$NP1.'">&raquo;</a></li>';
  		 $h = $h . '	</ul>';
  		 $h = $h . '</div>';
         
