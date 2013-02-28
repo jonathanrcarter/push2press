@@ -244,14 +244,14 @@ $htop = $htop .'              	<ul class="dropdown-menu">';
 $htop = $htop .'              		<li><a href="api.php?action=list-cats"><i class="icon-list-alt"></i> Categories</a></li>';
 $htop = $htop .'              		<li><a href="api.php?action=list-pages"><i class="icon-file"></i> Pages</a></li>';
 $htop = $htop .'    		          <li><a href="javascript:kcnew();"><i class="icon-picture"></i> Media</a></li>';
-$htop = $htop .'    		          <li><a href="api.php?action=list-dom"><i class="icon-wrench"></i> Config</a></li>';
+//$htop = $htop .'    		          <li><a href="api.php?action=list-dom"><i class="icon-wrench"></i> Config</a></li>';
 $htop = $htop .'        		      <li><a href="api.php?action=instruct"><i class="icon-question-sign"></i> Instructions</a></li>';
 $htop = $htop .'              	</ul>';
 $htop = $htop .'              </li>';
 
 require_once './local_menu.php';
 
-$htop = $htop .'              <li><a href="api.php?action=setup&selected=">Setup</a></li>';
+$htop = $htop .'              <li><a href="api.php?action=list-dom&selected=">Config</a></li>';
 $htop = $htop .'              <li <li class="dropdown" id="menu4"><a class="dropdown-toggle" data-toggle="dropdown" href="#menu4">Stats</a>';// <b class="caret"></b></a>';
 $htop = $htop .'              	<ul class="dropdown-menu">';
 $htop = $htop .'              		<li><a href="api.php?action=list-stats-srch"><i class="icon-list-alt"></i> Search</a></li>';
