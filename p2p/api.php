@@ -1057,12 +1057,12 @@ else if ( $action == "list-log" ) {
 		
 		$PAGER = $PAGE-1;
 		$LIM1= $PAGER*20;
-		$LIM2= $LIM1+20;
-		$query="select * from log_phone order by id limit ".$LIM1.",".$LIM2;
+		$query="select * from log_phone order by id limit ".$LIM1.",20";
 		$result=mysql_query($query);
 		
         $query1="select * from log_phone order by id";
         $result1=mysql_query($query1);
+		
         
         
         
@@ -1126,75 +1126,12 @@ else if ( $action == "list-log" ) {
  
          $h = $h . '<div class="pagination pagination-small pagination-centered">';
  		 $h = $h . '	<ul>';
-  		 $h = $h . '		<li><a href="api.php?action=list-log&p='.$NP.'">«</a></li>';
- 		 $h = $h . '		<li><a href="api.php?action=list-log&p=1">1</a></li>';
- 		
- 		if ( mysql_numrows($result1) < 20 &&  mysql_numrows($result1) > 10 ){
-    				$h = $h . '		<li><a href="api.php?action=list-log&p=2">2</a></li>';
-    			} else if ( mysql_numrows($result1) < 30 &&  mysql_numrows($result1) > 10 ){
-    				$h = $h . '		<li><a href="api.php?action=list-log&p=2">2</a></li>';
-    				$h = $h . '		<li><a href="api.php?action=list-log&p=3">3</a></li>';
-    			} else if ( mysql_numrows($result1) < 40 &&  mysql_numrows($result1) > 10 ){
-    				$h = $h . '		<li><a href="api.php?action=list-log&p=2">2</a></li>';
-    				$h = $h . '		<li><a href="api.php?action=list-log&p=3">3</a></li>';
-    				$h = $h . '		<li><a href="api.php?action=list-log&p=4">4</a></li>';
-    			} else if ( mysql_numrows($result1) < 50 &&  mysql_numrows($result1) > 10 ){
-    				$h = $h . '		<li><a href="api.php?action=list-log&p=2">2</a></li>';
-    				$h = $h . '		<li><a href="api.php?action=list-log&p=3">3</a></li>';
-    				$h = $h . '		<li><a href="api.php?action=list-log&p=4">4</a></li>';
-    				$h = $h . '		<li><a href="api.php?action=list-log&p=5">5</a></li>';
-    			} else if ( mysql_numrows($result1) < 60 &&  mysql_numrows($result1) > 10 ){
-    				$h = $h . '		<li><a href="api.php?action=list-log&p=2">2</a></li>';
-    				$h = $h . '		<li><a href="api.php?action=list-log&p=3">3</a></li>';
-    				$h = $h . '		<li><a href="api.php?action=list-log&p=4">4</a></li>';
-    				$h = $h . '		<li><a href="api.php?action=list-log&p=5">5</a></li>';
-    				$h = $h . '		<li><a href="api.php?action=list-log&p=6">6</a></li>';
-    			} else if ( mysql_numrows($result1) < 70 &&  mysql_numrows($result1) > 10 ){
-    				$h = $h . '		<li><a href="api.php?action=list-log&p=2">2</a></li>';
-    				$h = $h . '		<li><a href="api.php?action=list-log&p=3">3</a></li>';
-    				$h = $h . '		<li><a href="api.php?action=list-log&p=4">4</a></li>';
-    				$h = $h . '		<li><a href="api.php?action=list-log&p=5">5</a></li>';
-    				$h = $h . '		<li><a href="api.php?action=list-log&p=6">6</a></li>';
-    				$h = $h . '		<li><a href="api.php?action=list-log&p=7">7</a></li>';
-    			} else if ( mysql_numrows($result1) < 80 &&  mysql_numrows($result1) > 10 ){
-    				$h = $h . '		<li><a href="api.php?action=list-log&p=2">2</a></li>';
-    				$h = $h . '		<li><a href="api.php?action=list-log&p=3">3</a></li>';
-    				$h = $h . '		<li><a href="api.php?action=list-log&p=4">4</a></li>';
-    				$h = $h . '		<li><a href="api.php?action=list-log&p=5">5</a></li>';
-    				$h = $h . '		<li><a href="api.php?action=list-log&p=6">6</a></li>';
-    				$h = $h . '		<li><a href="api.php?action=list-log&p=7">7</a></li>';
-    				$h = $h . '		<li><a href="api.php?action=list-log&p=8">8</a></li>';
-    			} else if ( mysql_numrows($result1) < 90 &&  mysql_numrows($result1) > 10 ){
-    				$h = $h . '		<li><a href="api.php?action=list-log&p=2">2</a></li>';
-    				$h = $h . '		<li><a href="api.php?action=list-log&p=3">3</a></li>';
-    				$h = $h . '		<li><a href="api.php?action=list-log&p=4">4</a></li>';
-    				$h = $h . '		<li><a href="api.php?action=list-log&p=5">5</a></li>';
-    				$h = $h . '		<li><a href="api.php?action=list-log&p=6">6</a></li>';
-    				$h = $h . '		<li><a href="api.php?action=list-log&p=7">7</a></li>';
-    				$h = $h . '		<li><a href="api.php?action=list-log&p=8">8</a></li>';
-    				$h = $h . '		<li><a href="api.php?action=list-log&p=9">9</a></li>';
-    			} else if ( mysql_numrows($result1) < 100 &&  mysql_numrows($result1) > 10 ){
-    				$h = $h . '		<li><a href="api.php?action=list-log&p=2">2</a></li>';
-    				$h = $h . '		<li><a href="api.php?action=list-log&p=3">3</a></li>';
-    				$h = $h . '		<li><a href="api.php?action=list-log&p=4">4</a></li>';
-    				$h = $h . '		<li><a href="api.php?action=list-log&p=5">5</a></li>';
-    				$h = $h . '		<li><a href="api.php?action=list-log&p=6">6</a></li>';
-    				$h = $h . '		<li><a href="api.php?action=list-log&p=7">7</a></li>';
-    				$h = $h . '		<li><a href="api.php?action=list-log&p=8">8</a></li>';
-    				$h = $h . '		<li><a href="api.php?action=list-log&p=9">9</a></li>';
-    				$h = $h . '		<li><a href="api.php?action=list-log&p=10">10</a></li>';
-    			} else if ( mysql_numrows($result1) < 110 &&  mysql_numrows($result1) > 10 ){
-    				$h = $h . '		<li><a href="api.php?action=list-log&p=2">2</a></li>';
-    				$h = $h . '		<li><a href="api.php?action=list-log&p=3">3</a></li>';
-    				$h = $h . '		<li><a href="api.php?action=list-log&p=4">4</a></li>';
-    				$h = $h . '		<li><a href="api.php?action=list-log&p=5">5</a></li>';
-    				$h = $h . '		<li><a href="api.php?action=list-log&p=6">6</a></li>';
-    				$h = $h . '		<li><a href="api.php?action=list-log&p=7">7</a></li>';
-    				$h = $h . '		<li><a href="api.php?action=list-log&p=8">8</a></li>';
-    				$h = $h . '		<li><a href="api.php?action=list-log&p=9">9</a></li>';
-    				$h = $h . '		<li><a href="api.php?action=list-log&p=10">10</a></li>';
-    				$h = $h . '		<li><a href="api.php?action=list-log&p=11">11</a></li>';
-    			}
+
+		$numpages = floor(mysql_numrows($result1)/20)+1;
+		
+		for ($pages = 0; $pages < $numpages; $pages++) {
+	 		 $h = $h . '		<li><a href="api.php?action=list-log&p=$pages">$pages</a></li>';
+		}
  		
  		 $h = $h . ' 		<li><a href="api.php?action=list-log&p='.$NP1.'">»</a></li>';
  		 $h = $h . '	</ul>';
