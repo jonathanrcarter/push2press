@@ -1,5 +1,17 @@
 <?php
 
+/** This file is part of push2press
+  *
+  *      @desc Main admin code
+  *   @package push2press
+  *    @author Jonathan Carter <jc@glimworm.com>
+  * @copyright 2013 glimworm IT BV
+  *   @license http://www.opensource.org/licenses/gpl-2.0.php GPLv2
+  *   @license http://www.opensource.org/licenses/lgpl-2.1.php LGPLv2
+  *      @link http://www.push2press.com
+  */
+
+  
 session_start();
 
 if ($_GET["action"] != "") $_POST = $_GET;
@@ -941,7 +953,9 @@ else if ( $action == "get-page" ) {
 	$content =  str_replace("{latitude}", getConfiguration("latitude","") , $content);
 	$content =  str_replace("{email}", getConfiguration("email","") , $content);
 	$content =  str_replace("{twit}", getConfiguration("twitterAccount","") , $content);
-	
+	$content =  str_replace("{bgc1}", getConfiguration("bgc1","#000000") , $content);
+	$content =  str_replace("{bgc2}", getConfiguration("bgc2","#ffffff") , $content);
+		
 	
 	$CatID = mysql_result($result,$r,"CatID");
 	
