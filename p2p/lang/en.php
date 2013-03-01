@@ -21,7 +21,7 @@ function L($phrase) {
 		"Instructions" => "Instructions",
 		"All devices registered for push notes" => "All devices registered for push notes",
 		"timestamp" => "Last changed on:",
-		"osn" => "OS name",
+		"osn" => "OS name",	/* values will be : android , iphone, ios, ipad */
 		"username" => "username",
 		"un" => "username",
 		"uid" => "Unique ID",
