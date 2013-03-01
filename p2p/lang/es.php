@@ -29,7 +29,7 @@ function L($phrase) {
 "group-id" => "Miembro del:",
 "group-name" => "nombre-grupo",
 "gname" => "gnombre",
-"Send Push Notification" => "Enviar Push Notification",
+"Send Push Notification" => "Enviar Push Notificación",
 "Device" => "Device",
 "Name of os" => "Nombre del os",
 "Notification" => "Notificación",
