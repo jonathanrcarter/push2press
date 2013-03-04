@@ -141,6 +141,7 @@ if ($step == "2") {
 	$images_folder = ($_POST["images_folder"] != "") ? $_POST["images_folder"] : $images_folder;
 	$BASEPATH = ($_POST["BASEPATH"] != "") ? $_POST["BASEPATH"] : $BASEPATH;
 	$MASTER_PASSWORD = ($_POST["MASTER_PASSWORD"] != "" ) ? $_POST["MASTER_PASSWORD"] : $MASTER_PASSWORD;
+	$lang = ($_POST["lang"] != "") ? $_POST["lang"] : $lang;
 
 	$h = "";
 	$h = $h . "<?php\n";
@@ -148,6 +149,7 @@ if ($step == "2") {
 	$h = $h . $D . "username='$username';\n";
 	$h = $h . $D . "password='$password';\n";
 	$h = $h . $D . "database='$database';\n";
+	$h = $h . $D . "lang='$lang';\n";
 	$h = $h . $D . "images_folder='$images_folder';\n";
 	$h = $h . $D . "BASEPATH='$BASEPATH';\n";
 	$h = $h . $D . "MASTER_PASSWORD='$MASTER_PASSWORD';\n";
@@ -461,6 +463,7 @@ if ($database == "") $database = "push2press";
 if ($images_folder == "") $images_folder = "/client_images/";
 if ($BASEPATH == "") $BASEPATH = "/";
 if ($MASTER_PASSWORD == "") $MASTER_PASSWORD = "push2press";
+if ($lang == "") $lang = "en";
 
 $sitename = getConfiguration("sitename", ($_POST["sitename"] != "") ? ($_POST["sitename"]) : "My push2press app");
 $url = getConfiguration("url","http://".$_SERVER['HTTP_HOST'].$_SERVER['SCRIPT_NAME']);
@@ -507,7 +510,8 @@ $adminemail = getConfiguration("adminemail",($_POST["adminemail"] != "") ? ($_PO
 	echo "<tr><td>database</td><td><input name='database' value='$database'></td></tr>";
 	echo "<tr><td>images_folder</td><td><input name='images_folder' value='$images_folder'></td></tr>";
 	echo "<tr><td>BASEPATH</td><td><input name='BASEPATH' value='$BASEPATH'></td></tr>";
-
+	echo "<tr><td>Language</td><td><input name='lang' value='$lang'></td></tr>";
+	
 
 	echo "<tr><td colspan='3'><legend>Administration</legend></td></tr>";
 	echo "<tr><td>Admin Email address</td><td><input name='adminemail' value='$adminemail'></td></tr>";
