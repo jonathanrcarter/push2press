@@ -462,14 +462,14 @@ if ($images_folder == "") $images_folder = "/client_images/";
 if ($BASEPATH == "") $BASEPATH = "/";
 if ($MASTER_PASSWORD == "") $MASTER_PASSWORD = "push2press";
 
-$sitename = getConfiguration("sitename", ($_POST["sitename"] != "") ? ($_POST["sitename"] != "") : "My push2press app");
+$sitename = getConfiguration("sitename", ($_POST["sitename"] != "") ? ($_POST["sitename"]) : "My push2press app");
 $url = getConfiguration("url","http://".$_SERVER['HTTP_HOST'].$_SERVER['SCRIPT_NAME']);
 $url = str_replace("setup.php", "", $url);
 
 
-$bgc1 = getConfiguration("bgc1",($_POST["bgc1"] != "") ? ($_POST["bgc1"] != "") :"#000000");
-$bgc2 = getConfiguration("bgc2",($_POST["bgc2"] != "") ? ($_POST["bgc2"] != "") :"#ffffff");
-$adminemail = getConfiguration("adminemail",($_POST["adminemail"] != "") ? ($_POST["adminemail"] != ""):"");
+$bgc1 = getConfiguration("bgc1",($_POST["bgc1"] != "") ? ($_POST["bgc1"]) :"#000000");
+$bgc2 = getConfiguration("bgc2",($_POST["bgc2"] != "") ? ($_POST["bgc2"]) :"#ffffff");
+$adminemail = getConfiguration("adminemail",($_POST["adminemail"] != "") ? ($_POST["adminemail"]):"");
 
 	echo $htop;
 	
