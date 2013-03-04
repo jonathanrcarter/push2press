@@ -37,7 +37,7 @@ if ($browser && $browser != "") {
 	$_SESSION['browser'] = $browser;
 }
 
-require_once './lang/en.php';
+//require_once './lang/en.php';
 require_once 'version.php';
 
 function getConfiguration($VAL,$DEFAULT_VAL) {
@@ -70,6 +70,7 @@ $database = "";
 $images_folder = "/client_images/";
 $BASEPATH = "/";
 $MASTER_PASSWORD="";
+$lang = "en";
 
 
 if (file_exists("./local_config.php") == false) {
@@ -83,6 +84,9 @@ if (file_exists("./local_functions.php") == false) {
 }
 
 require './local_config.php';
+
+require_once './lang/'.$lang.'.php';
+
 
 if ($database == "") {
 	echo sprintf(L("runsetup"),"");
