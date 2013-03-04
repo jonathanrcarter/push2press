@@ -85,7 +85,17 @@ function L($phrase) {
 		"COMPOSE" => "Composer",
 		"SS" => "Sauvegarder et envoyer",
 		"Browse" => "Parcourir",
-		"EDIT" => "Editer"
+		"EDIT" => "Editer",
+		/* new */
+		"Push_Marketing" => "Push Marketing",
+		"Devices" => "Devices",
+		"CMS" => "CMS",
+		"Config" => "Config",
+		"Stats" => "Stats",
+		"Media" => "Media",
+		"Search" => "Search",
+		"Graph" => "Graph",
+		"Groups" => "Groups"
 	);
 	return $lang[$phrase];
 }

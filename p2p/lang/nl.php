@@ -86,8 +86,18 @@ function L($phrase) {
 		"SS" => "Opslaan & versturen",
 		/* to here */
 		"Browse" => "Bladeren",
-		"EDIT" => "BEWERKEN"
-	);
+		"EDIT" => "BEWERKEN",
+		/* new */
+		"Push_Marketing" => "Push Marketing",
+		"Devices" => "Devices",
+		"CMS" => "CMS",
+		"Config" => "Config",
+		"Stats" => "Stats",
+		"Media" => "Media",
+		"Search" => "Search",
+		"Graph" => "Graph",
+		"Groups" => "Groups"
+		);
 	return $lang[$phrase];
 }
 ?>
