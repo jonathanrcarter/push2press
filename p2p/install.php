@@ -1,9 +1,9 @@
 <?php
 
 
-echo dirname(__FILE__);
+//echo dirname(__FILE__);
 
-echo "downloading version from github to ". dirname(__FILE__);
+echo "<p>downloading version from github ... success</p>";
 
 $download = file_put_contents("upgrade.zip", file_get_contents("https://github.com/jonathanrcarter/push2press/archive/master.zip"));
 
@@ -27,13 +27,12 @@ $archive = new PclZip('upgrade.zip');
 //var_dump($list);
 
 if ($archive->extract(PCLZIP_OPT_REMOVE_PATH, "push2press-master/p2p",PCLZIP_OPT_REPLACE_NEWER) == 0) {
-  echo 'doh!';
-} else {
-  echo 'AAAAH!';
+	echo "exiting, error downloading code";
+	exit;
 }
 
 
-echo "<div><a href='api.php'>You can proceed to your site</a></div>";
+echo "<div><a href='api.php'>You can proceed to set up your site by clicking this link</a></div>";
 
 
 

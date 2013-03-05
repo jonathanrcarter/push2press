@@ -90,15 +90,21 @@ require_once './lang/'.$lang.'.php';
 
 if ($database == "") {
 	echo sprintf(L("runsetup"),"");
+	header("HTTP/1.1 301 Moved Permanently");
+	header("Location: setup.php"); 
 	exit;
 }
 $db = mysql_connect($dbhost,$username,$password);
 if (!$db) {
 	echo sprintf(L("runsetup"),"Could not connect to MySql , try a different login");
+	header("HTTP/1.1 301 Moved Permanently");
+	header("Location: setup.php"); 
 	exit;
 }
 if (!mysql_select_db($database)) {
 	echo sprintf(L("runsetup"),"Could not connect to Database");
+	header("HTTP/1.1 301 Moved Permanently");
+	header("Location: setup.php"); 
 	exit;
 }
 
@@ -138,6 +144,8 @@ pushmessages
 */
 if (!table_exists("log_phone")) {
 	echo sprintf(L("runsetup"),"Could not find the database tables");
+	header("HTTP/1.1 301 Moved Permanently");
+	header("Location: setup.php"); 
 	exit;
 }
 

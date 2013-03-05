@@ -12,8 +12,7 @@
   */
 
 $_message_templates = array(
-	"normal" => "standard HTML",
-	"TI" => "standard HTML"
+	"msg_template" => "standard template"
 	);
 
 
