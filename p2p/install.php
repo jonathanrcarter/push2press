@@ -19,6 +19,7 @@ $htop = $htop .'    <!--[if lt IE 9]>';
 $htop = $htop .'      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>';
 $htop = $htop .'    <![endif]-->';
 $htop = $htop .'    <!-- Le fav and touch icons -->';
+$htop = $htop .'    <link href="http://www.push2press.com/p2p/api.css" rel="stylesheet">';
 $htop = $htop .'  </head>';
 $htop = $htop .'  <body>';
 $htop = $htop .'    <div class="navbar navbar-fixed-top">';
@@ -45,6 +46,13 @@ $hbot = $hbot .'  </body>';
 $hbot = $hbot .'</html>';
 
 echo $htop;
+echo "<br>";
+echo "<br>";
+echo "<br>";
+echo "<br>";
+echo "<br>";
+echo "<br>";
+echo "<br>";
 
 echo "<img src='http://www.push2press.com/p2p/images/application-logo.png'></p>";
 //echo dirname(__FILE__);
