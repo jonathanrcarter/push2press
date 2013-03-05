@@ -94,6 +94,9 @@ function L($phrase) {
 		"Config" => "Config",
 		"Stats" => "Stats",
 		"Media" => "Media",
+		"Logout" => "Logout",
+		"Login" => "Login",
+		"Password" => "Password",
 		"Search" => "Search",
 		"Graph" => "Graph",
 		"Groups" => "Groups"

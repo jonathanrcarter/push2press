@@ -282,7 +282,7 @@ $htop = $htop .'	$'.'(window).bind("resize", WidthChange(mq));';
 $htop = $htop .' </script>';
 $htop = $htop . "\n";
 
-$htop = $htop .'              <li><a href="api.php?action=logout">Logout</a></li>';
+$htop = $htop .'              <li><a href="api.php?action=logout">'.L("Logout").'</a></li>';
 $htop = $htop .'              <li><div style="padding-left:20px;padding-top: 9px;"><span class="label xlabel-inverse">push2press v'.$push2version["major"].' '.$push2version["type"].'</span></div></li>';
 $htop = $htop .'            </ul>';
 $htop = $htop .'          </div><!--/.nav-collapse -->';
@@ -875,8 +875,8 @@ if ($_SESSION['password'] != $MASTER_PASSWORD) {
         $h = "";
         $h = $h . "<form action='api.php' class='form-inline'>";
         $h = $h . "<input type='hidden' name='action' value='login'>";
-		$h = $h . "<legend>Login</legend>";
-        $h = $h . "<input type='password' name='pwd' placeholder='password'><button class='btn' type='submit'>Login</button>";
+		$h = $h . "<legend>".L("Login")."</legend>";
+        $h = $h . "<input type='password' name='pwd' placeholder='".L("Password")."'><button class='btn' type='submit'>".L("Login")."</button>";
         $h = $h . "</form>";
         echo $htop;
         echo '<div class="plain-hero-unit">';
@@ -3127,21 +3127,21 @@ echo "<!--\n\n $query; \n\n-->";
                 $h = $h . "<input type='hidden' name='id' value='".$id."'>";
                 $h = $h . "<table class='table table-striped table-bordered table-condensed'>";
                // $h = $h . "<tr><td>image</td><td><img src='images/" . mysql_result($result,$r,"img") . "' height=80 width=80></td></tr>";
-                $h = $h . "<tr><td>Pagename</td><td><input name='Pagename' type='text' value='" . mysql_result($result,$r,"Pagename") . "'></td></tr>";
+                $h = $h . "<tr><td>".L("Pagename")."</td><td><input name='Pagename' type='text' value='" . mysql_result($result,$r,"Pagename") . "'></td></tr>";
 
                 //$h = $h . "<tr><td>Caption</td><td><input type='text' name='Caption' value='" . mysql_result($result,$r,"Caption") . "'></td></tr>";
                 //$h = $h . "<tr><td>Volgorde</td><td><input name='Volgorde' type='text' value='" . mysql_result($result,$r,"Volgorde") . "'></td></tr>";
-				$h = $h . "<tr><td>template</td><td><input name='template' type='text' value='" . mysql_result($result,$r,"template") . "'></td></tr>";
-				$h = $h . "<tr><td>type</td><td><input name='type' type='text' value='" . mysql_result($result,$r,"type") . "'></td></tr>";
-				$h = $h . "<tr><td>extraData</td><td><textarea name='extraData'>" . mysql_result($result,$r,"extraData") . "</textarea></td></tr>";
-				$h = $h . "<tr><td>bodytext</td><td>";
+				$h = $h . "<tr><td>".L("template")."</td><td><input name='template' type='text' value='" . mysql_result($result,$r,"template") . "'></td></tr>";
+				$h = $h . "<tr><td>".L("type")."</td><td><input name='type' type='text' value='" . mysql_result($result,$r,"type") . "'></td></tr>";
+				$h = $h . "<tr><td>".L("extraData")."</td><td><textarea name='extraData'>" . mysql_result($result,$r,"extraData") . "</textarea></td></tr>";
+				$h = $h . "<tr><td>".L("bodytext")."</td><td>";
 				
                 $h = $h . "	<div style='width:400px;'>";
 
 				$h = $h . "<textarea class='xckeditor' id='elm12' name='elm1' rows='15' cols='80' style='width: 80%' class='tinymce'>". textareaSafe(mysql_result($result,$r,'bodytext')) ."</textarea class='ckeditor'>";
 				
 				
-                $h = $h . "<tr><td>CatID</td><td>" . $sel . "</td></tr>";
+                $h = $h . "<tr><td>".L("CatID")."</td><td>" . $sel . "</td></tr>";
 				$h = $h .'<script type="text/javascript">';
 				$h = $h ." CKEDITOR.replace( 'elm12',";
 				$h = $h ."{";
