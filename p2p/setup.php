@@ -513,7 +513,7 @@ $adminemail = getConfiguration("adminemail",($_POST["adminemail"] != "") ? ($_PO
 	echo "<tr><td>database</td><td><input name='database' value='$database'></td></tr>";
 	echo "<tr><td>images_folder</td><td><input name='images_folder' value='$images_folder'></td></tr>";
 	echo "<tr><td>BASEPATH</td><td><input name='BASEPATH' value='$BASEPATH'></td></tr>";
-	echo "<tr><td>Language</td><td><select name='lang'>";
+	echo "<tr><td>Language</td><td><select class='span4' name='lang'>";
 	require ("lang/_languages.php");
 	foreach ($_languages as $key=>$data) {
 		$selected = ($lang == $key) ? "selected" : "";
