@@ -537,7 +537,7 @@ $adminemail = getConfiguration("adminemail",($_POST["adminemail"] != "") ? ($_PO
 	}
 	echo "</select></td></tr>";
 
-	echo "<tr><td> </td><td><input type='submit' value='Create my push2press APP'></td></tr>";
+	echo "<tr><td> </td><td><input type='submit' style='width:100%;' class='btn btn-success' value='Create my push2press APP'></td></tr>";
 	echo "</table>";
 	echo "</form>";
 	echo "<script> $D(function() { $D('#_bgc1').colorpicker({format: 'hex'}); });</script>";
