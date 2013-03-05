@@ -3131,7 +3131,18 @@ echo "<!--\n\n $query; \n\n-->";
 
                 //$h = $h . "<tr><td>Caption</td><td><input type='text' name='Caption' value='" . mysql_result($result,$r,"Caption") . "'></td></tr>";
                 //$h = $h . "<tr><td>Volgorde</td><td><input name='Volgorde' type='text' value='" . mysql_result($result,$r,"Volgorde") . "'></td></tr>";
-				$h = $h . "<tr><td>".L("template")."</td><td><input name='template' type='text' value='" . mysql_result($result,$r,"template") . "'></td></tr>";
+				$h = $h . "<tr><td>".L("template")."</td><td>";
+				
+				require ("templates/pages/_languages.php");
+				$h = $h . "<select name='template'>";
+				foreach ($_page_templates as $key=>$data) {
+					$selected = (mysql_result($result,$r,"template") == $key) ? "selected" : "";
+					echo sprintf("<option value='%s' %s>%s</option>",$key,$selected,$data);
+				}
+				$h = $h . "</select>";
+				$h = $h . "</td></tr>";
+				//"<input name='template' type='text' value='" . mysql_result($result,$r,"template") . "'></td></tr>";
+				
 				$h = $h . "<tr><td>".L("type")."</td><td><input name='type' type='text' value='" . mysql_result($result,$r,"type") . "'></td></tr>";
 				$h = $h . "<tr><td>".L("extraData")."</td><td><textarea name='extraData'>" . mysql_result($result,$r,"extraData") . "</textarea></td></tr>";
 				$h = $h . "<tr><td>".L("bodytext")."</td><td>";
