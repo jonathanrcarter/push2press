@@ -1856,7 +1856,7 @@ if ($osn == "iphone"){
                 $h = $h . "<input type='hidden' name='action2' value='update'>";
                 $h = $h . "<input type='hidden' name='id' value='".$id."'>";
                 $h = $h . "<table class='table table-striped table-bordered table-condensed'>";
-                $h = $h . "<tr><td>image</td><td id='test'><input name='img' id='main_img_fld' type='hidden' value='" . mysql_result($result,$r,"img") . "'><img id='main_img' src='" . mysql_result($result,$r,"img") . "' height=80 width=80>&nbsp;&nbsp;&nbsp;<a class='btn btn-warning btn-large' href='javascript:troller();'>".L("Browse")."</a></td></tr>";
+                $h = $h . "<tr><td>image</td><td id='test'><input name='img' id='main_img_fld' type='hidden' value='" . mysql_result($result,$r,"img") . "'><img id='main_img' src='" . mysql_result($result,$r,"img") . "' height=80 width=80>&nbsp;&nbsp;&nbsp;<a class='btn' href='javascript:troller();'>".L("Browse")."</a></td></tr>";
 				$h = $h ."<script type='text/javascript'>";
 				$h = $h ."var finder = new CKFinder();";
 				$h = $h ."finder.basePath = '".$BASEPATH."ckfinder/';";
