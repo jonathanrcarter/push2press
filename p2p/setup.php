@@ -503,8 +503,8 @@ $adminemail = getConfiguration("adminemail",($_POST["adminemail"] != "") ? ($_PO
 	echo "<tr><td>Site Name</td><td><input name='sitename' value='$sitename'></td></tr>";
 
 	echo "<tr><td colspan='3'><legend>Colours</legend></td></tr>";
-	echo "<tr><td width='180'>Header Background</td><td><input class='colorpicker' name='bgc1' value='$bgc1'></td></tr>";
-	echo "<tr><td>Page Background</td><td><input name='bgc2' class='colorpicker' value='$bgc2'></td></tr>";
+	echo "<tr><td width='180'>Header Background</td><td><input class='colorpicker' id='_bgc1' name='bgc1' value='$bgc1'></td></tr>";
+	echo "<tr><td>Page Background</td><td><input name='bgc2' class='colorpicker' id='_bgc2' value='$bgc2'></td></tr>";
 
 	echo "<tr><td colspan='3'><legend>Database & server</legend></td></tr>";
 	echo "<tr><td>Hostname</td><td><input name='dbhost' value='$dbhost'></td></tr>";
@@ -524,8 +524,9 @@ $adminemail = getConfiguration("adminemail",($_POST["adminemail"] != "") ? ($_PO
 	echo "<tr><td> </td><td><input type='submit'></td></tr>";
 	echo "</table>";
 	echo "</form>";
-	echo "<script> $D(function() { $D('.colorpicker').colorpicker(); });</script>";
-	echo $hbot;
+	echo "<script> $D(function() { $D('#_bgc1').colorpicker({format: 'hex'}); });</script>";
+	echo "<script> $D(function() { $D('#_bgc2').colorpicker({format: 'hex'}); });</script>";
+		echo $hbot;
 
 
 ?>
