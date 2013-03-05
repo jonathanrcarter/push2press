@@ -150,6 +150,10 @@ if ($step == "2") {
 	$MASTER_PASSWORD = ($_POST["MASTER_PASSWORD"] != "" ) ? $_POST["MASTER_PASSWORD"] : $MASTER_PASSWORD;
 	$lang = ($_POST["lang"] != "") ? $_POST["lang"] : $lang;
 
+	if ($images_folder == "") $images_folder = "/client_images/";
+	if ($BASEPATH == "") $BASEPATH = "/";
+
+
 	$h = "";
 	$h = $h . "<?php\n";
 	$h = $h . $D . "dbhost='$dbhost';\n";
@@ -510,14 +514,15 @@ $adminemail = getConfiguration("adminemail",($_POST["adminemail"] != "") ? ($_PO
 	echo "<tr><td width='180'>Header Background</td><td><input class='colorpicker' id='_bgc1' name='bgc1' value='$bgc1'></td></tr>";
 	echo "<tr><td>Page Background</td><td><input name='bgc2' class='colorpicker' id='_bgc2' value='$bgc2'></td></tr>";
 
-	echo "<tr><td colspan='3'><legend>Database & server</legend></td></tr>";
-	echo "<tr><td>Hostname</td><td><input name='dbhost' value='$dbhost'></td></tr>";
-	echo "<tr><td>username</td><td><input name='username' value='$username'></td></tr>";
-	echo "<tr><td>password</td><td><input name='password' value='$password'></td></tr>";
-	echo "<tr><td>database</td><td><input name='database' value='$database'></td></tr>";
-	echo "<tr><td>images_folder</td><td><input name='images_folder' value='$images_folder'></td></tr>";
-	echo "<tr><td>BASEPATH</td><td><input name='BASEPATH' value='$BASEPATH'></td></tr>";
-//	"<input name='lang' value='$lang'></td></tr>";
+	if (!$hosted || $hosted != 'y') {
+		echo "<tr><td colspan='3'><legend>Database & server</legend></td></tr>";
+		echo "<tr><td>Hostname</td><td><input name='dbhost' value='$dbhost'></td></tr>";
+		echo "<tr><td>username</td><td><input name='username' value='$username'></td></tr>";
+		echo "<tr><td>password</td><td><input name='password' value='$password'></td></tr>";
+		echo "<tr><td>database</td><td><input name='database' value='$database'></td></tr>";
+		echo "<tr><td>images_folder</td><td><input name='images_folder' value='$images_folder'></td></tr>";
+		echo "<tr><td>BASEPATH</td><td><input name='BASEPATH' value='$BASEPATH'></td></tr>";
+	}
 	
 
 	echo "<tr><td colspan='3'><legend>Administration</legend></td></tr>";
