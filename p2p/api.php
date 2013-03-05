@@ -3133,7 +3133,7 @@ echo "<!--\n\n $query; \n\n-->";
                 //$h = $h . "<tr><td>Volgorde</td><td><input name='Volgorde' type='text' value='" . mysql_result($result,$r,"Volgorde") . "'></td></tr>";
 				$h = $h . "<tr><td>".L("template")."</td><td>";
 				
-				require ("templates/pages/_languages.php");
+				require ("templates/pages/_templates.php");
 				$h = $h . "<select name='template'>";
 				foreach ($_page_templates as $key=>$data) {
 					$selected = (mysql_result($result,$r,"template") == $key) ? "selected" : "";
