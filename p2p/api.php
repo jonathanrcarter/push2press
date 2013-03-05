@@ -2853,7 +2853,7 @@ else if ( $action == "pushwindow") {
                 $h = $h . "</div>";
 				$h = $h . "<div class='control-group'><label class='control-label' for='Caption'>ts_sent</label>";
                 $h = $h . "	<div class='controls'>";
-				$h = $h . "<input id='_ts_sent' name='ts_sent' type='text' value='" . mysql_result($result,$r,"ts_sent") . "'>";
+				$h = $h . "<input id='_ts_sent' data-date-format='yyyy-mm-dd' name='ts_sent' type='text' value='" . mysql_result($result,$r,"ts_sent") . "'>";
                 $h = $h . "</div>";
                 $h = $h . "</div>";
                 
