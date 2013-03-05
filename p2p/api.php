@@ -1862,8 +1862,8 @@ if ($osn == "iphone"){
 				$h = $h ."finder.popup();";
 				$h = $h ."}";
 				$h = $h ."</script>";                
-				$h = $h . "<tr><td>Pagename</td><td><input name='Pagename' type='text' value='" . mysql_result($result,$r,"Pagename") . "'></td></tr>";
-                $h = $h . "<tr><td>Caption</td><td><input type='text' name='Caption' value='" . mysql_result($result,$r,"Caption") . "'></td></tr>";
+				$h = $h . "<tr><td>".L("Pagename")."</td><td><input name='Pagename' type='text' value='" . mysql_result($result,$r,"Pagename") . "'></td></tr>";
+                $h = $h . "<tr><td>".L("Caption")."</td><td><input type='text' name='Caption' value='" . mysql_result($result,$r,"Caption") . "'></td></tr>";
                 $h = $h . "<tr><td>&nbsp;</td><td><input class='btn btn-success' type='submit'></td></tr>";
                 $h = $h . "</table>";
                 $h = $h . "</form>";
@@ -2755,7 +2755,7 @@ else if ( $action == "pushwindow") {
                 $h = "DELETED";
                 $h = $h . "<a class='btn' href='api.php?action=list-draft-mes'>OK <i class='icon-check'></i></a>";
 
-        }else if ($action2 == "update") {
+        } else if ($action2 == "update") {
                 $Pagename = $_POST["Pagename"];
                 $Caption = $_POST["Caption"];
                 $bodytext = $_POST["editor1"];
@@ -2816,20 +2816,20 @@ else if ( $action == "pushwindow") {
                 $h = $h . "</div>";
                 $h = $h . "</div>";
                 
-                $h = $h . "<div class='control-group'><label class='control-label' for='Pagename'>Pagename</label>";
+                $h = $h . "<div class='control-group'><label class='control-label' for='Pagename'>".L("Pagename")."</label>";
                 $h = $h . "	<div class='controls'>";
 				$h = $h . "<input name='Pagename' type='text' value='" . mysql_result($result,$r,"Pagename") . "'>";
                 $h = $h . "</div>";
                 $h = $h . "</div>";
 
-				$h = $h . "<div class='control-group'><label class='control-label' for='Caption'>Caption</label>";
+				$h = $h . "<div class='control-group'><label class='control-label' for='Caption'>".L("Caption")."</label>";
                 $h = $h . "	<div class='controls'>";
 				$h = $h . "<input name='Caption' type='text' value='" . mysql_result($result,$r,"Caption") . "'>";
                 $h = $h . "</div>";
                 $h = $h . "</div>";
                 
                 
-				$h = $h . "<div class='control-group'><label class='control-label' for='Caption'>status</label>";
+				$h = $h . "<div class='control-group'><label class='control-label' for='Caption'>".L("Status")."</label>";
                 $h = $h . "	<div class='controls'>";
 				$h = $h . "<input name='status' type='text' value='" . mysql_result($result,$r,"status") . "'>";
                 $h = $h . "</div>";
@@ -2841,7 +2841,7 @@ else if ( $action == "pushwindow") {
                 $h = $h . "</div>";
                 
 
-				$h = $h . "<div class='control-group'><label class='control-label' for=''>Body</label>";
+				$h = $h . "<div class='control-group'><label class='control-label' for=''>".L("bodytext")."</label>";
                 $h = $h . "	<div class='controls'>";
                 $h = $h . "	<div style='width:400px;'>";
 				$h = $h . "<textarea class='xckeditor' id='test123' style='width:300px;' id='editor1' name='editor1' rows='10' style='visibility: hidden; display: none;'>". mysql_result($result,$r,'bodytext') ."</textarea class='ckeditor'>";
