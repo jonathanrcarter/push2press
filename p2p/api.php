@@ -334,7 +334,8 @@ function B($TYPE, $LINK) {
 	    	return 	"<a class='btn btn-mini btn-xsuccess' href='" . $LINK . "'><i class='icon-edit icon-black'></i> ".L("SEND")."</a>";
 	        break;
 	    case "edit":
-	    	return 	"<a class='btn btn-mini xbtn-info' href='" . $LINK . "'><i class='icon-edit icon-white'></i> ".L("EDIT")."</a>";
+	    	return 	"<a class='btn btn-mini xbtn-info' href='" . $LINK . "'><i class='icon-edit icon-black'></i> ".L("EDIT")."</a>";
+//	       	return 	"<a class='btn btn-mini btn-info' href='" . $LINK . "'><i class='icon-edit icon-white'></i> ".L("EDIT")."</a>";
 //	    	return 	"<a class='btn btn-mini btn-xsuccess' href='" . $LINK . "'><i class='icon-edit icon-black'></i> ".L("EDIT")."</a>";
 	        break;
 	    case "preview":
@@ -350,7 +351,8 @@ function B($TYPE, $LINK) {
 	    	return 	"<input type='submit' class='btn btn-mini btn-danger' value='delete'>";
 	        break;
 	    case "delete":
-	    	return 	"<a class='btn btn-mini xbtn-danger' href='" . $LINK . "'><i class='icon-trash icon-white'></i> ".L("DELETE")."</a>";
+	    	return 	"<a class='btn btn-mini xbtn-danger' href='" . $LINK . "'><i class='icon-trash icon-black'></i> ".L("DELETE")."</a>";
+//	    	return 	"<a class='btn btn-mini btn-danger' href='" . $LINK . "'><i class='icon-trash icon-white'></i> ".L("DELETE")."</a>";
 	        break;
 	        	    	
 	}
@@ -1784,7 +1786,7 @@ if ($osn == "iphone"){
                 $h = $h . "<td>" . mysql_result($result,$r,"Pagename") . "</td>";
                 $h = $h . "<td>" . mysql_result($result,$r,"Caption") . "</td>";
                 $h = $h . "<td><img src='" . mysql_result($result,$r,"img") . "' width=32 height=32></td>";
-                $h = $h . "<td><a class='btn btn-mini btn-success' href='api.php?action=show-cat&id=" . mysql_result($result,$r,"id") . "'><i class='icon-edit icon-white'></i> ".L("EDIT")."</a></td>";        
+                $h = $h . "<td><a class='btn btn-mini xbtn-success' href='api.php?action=show-cat&id=" . mysql_result($result,$r,"id") . "'><i class='icon-edit icon-black'></i> ".L("EDIT")."</a></td>";        
                 $h = $h . "</tr>";
 
         }
@@ -1958,7 +1960,7 @@ else if ( $action == "list-dom" ) {
 			foreach (array_keys($sdata) as $skey) {
 				if (is_in_settings($skey) == false) {
 	                $h = $h . sprintf("<tr><td>%s</td><td>%s</td>",$skey,$sdata[$skey][0]);
-	                $h = $h . "<td><a class='btn btn-mini btn-info' href='api.php?action=show-dom&id=" . $sdata[$skey][1] . "'>EDIT</a></td>";
+	                $h = $h . "<td><a class='btn btn-mini xbtn-info' href='api.php?action=show-dom&id=" . $sdata[$skey][1] . "'>EDIT</a></td>";
 	                $h = $h . "</tr>";
 	             }
 			}
@@ -1966,7 +1968,7 @@ else if ( $action == "list-dom" ) {
 			foreach ($settings->table as $soption) {
 				if ($soption[0] == $filter2) {
 	                $h = $h . sprintf("<tr><td>%s<div>%s</div></td><td>%s</td>",$soption[1],$soption[2],$sdata[$soption[1]][0]);
-	                $h = $h . "<td><a class='btn btn-mini btn-info' href='api.php?action=show-dom-key&key=" . $soption[1] . "'>EDIT</a></td>";
+	                $h = $h . "<td><a class='btn btn-mini xbtn-info' href='api.php?action=show-dom-key&key=" . $soption[1] . "'>EDIT</a></td>";
 	                $h = $h . "</tr>";
 
 
