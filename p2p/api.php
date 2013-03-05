@@ -3137,7 +3137,7 @@ echo "<!--\n\n $query; \n\n-->";
 				$h = $h . "<select name='template'>";
 				foreach ($_page_templates as $key=>$data) {
 					$selected = (mysql_result($result,$r,"template") == $key) ? "selected" : "";
-					echo sprintf("<option value='%s' %s>%s</option>",$key,$selected,$data);
+					$h = $h . sprintf("<option value='%s' %s>%s</option>",$key,$selected,$data);
 				}
 				$h = $h . "</select>";
 				$h = $h . "</td></tr>";
