@@ -53,7 +53,7 @@ $htop = $htop .'            <span class="icon-bar"></span>';
 $htop = $htop .'            <span class="icon-bar"></span>';
 $htop = $htop .'            <span class="icon-bar"></span>';
 $htop = $htop .'          </a>';
-$htop = $htop .'          <img src="images/application-logo.png">';
+$htop = $htop .'          <img class="brand" src="images/application-logo.png">';
 $htop = $htop .'          <div class="nav-collapse">';
 $htop = $htop .'            <ul class="nav">';
 $htop = $htop .'              <li><div style="padding-left:20px;padding-top: 9px;"><span class="label xlabel-inverse">push2press v1.1 ALPHA</span></div></li>';
