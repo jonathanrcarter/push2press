@@ -2864,7 +2864,7 @@ else if ( $action == "pushwindow") {
 				$h = $h . "<textarea class='xckeditor' id='test123' style='width:300px;' id='editor1' name='editor1' rows='10' style='visibility: hidden; display: none;'>". mysql_result($result,$r,'bodytext') ."</textarea class='ckeditor'>";
                 $h = $h .'</div>';
                 $h = $h .'<script type="text/javascript">';
-				$h = $h . '$D("#_ts_sent").datepicker();';
+				$h = $h . '$(function(){ $("#_ts_sent").datepicker(); });';
 				$h = $h ." CKEDITOR.replace( 'test123',";
 				$h = $h ."{";
 
