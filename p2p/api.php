@@ -26,7 +26,7 @@ $av = $_POST["__av"];				// 1.0
 $aiid = $_POST["__aiid"];			// xxx-xxx-xxx-xxx
 $a__name = $_POST["__name"];		// j carter
 $a__groups = $_POST["__groups"];	// 1,2,3
-
+$D = "$";
 
 
 $gid = "1";
@@ -324,6 +324,12 @@ $hbot = $hbot .'    <script src="http://www.glimworm.com/_assets/moock/bootstrap
 $hbot = $hbot .'    <script src="http://www.glimworm.com/_assets/moock/bootstrap/js/bootstrap-collapse.js"></script>';
 $hbot = $hbot .'    <script src="http://www.glimworm.com/_assets/moock/bootstrap/js/bootstrap-carousel.js"></script>';
 $hbot = $hbot .'    <script src="http://www.glimworm.com/_assets/moock/bootstrap/js/bootstrap-typeahead.js"></script>';
+$hbot = $hbot .'    <!-- http://www.eyecon.ro/bootstrap-datepicker/ -->';
+$hbot = $hbot .'    <link rel="stylesheet" href="http://www.glimworm.com/_assets/moock/bootstrap/extras/datepicker/css/datepicker.css" />';
+$hbot = $hbot .'    <script src="http://www.glimworm.com/_assets/moock/bootstrap/extras/datepicker/js/bootstrap-datepicker.js"></script>';
+$hbot = $hbot .'    <!-- http://jdewit.github.com/bootstrap-timepicker/ -->';
+$hbot = $hbot .'    <link rel="stylesheet" href="http://www.glimworm.com/_assets/moock/bootstrap/extras/bootstrap-timepicker-master/css/bootstrap-timepicker.css" />';
+$hbot = $hbot .'    <script src="http://www.glimworm.com/_assets/moock/bootstrap/extras/bootstrap-timepicker-master/js/bootstrap-timepicker.js"></script>';
 $hbot = $hbot .'  </body>';
 $hbot = $hbot .'</html>';
 
@@ -2847,7 +2853,7 @@ else if ( $action == "pushwindow") {
                 $h = $h . "</div>";
 				$h = $h . "<div class='control-group'><label class='control-label' for='Caption'>ts_sent</label>";
                 $h = $h . "	<div class='controls'>";
-				$h = $h . "<input name='ts_sent' type='text' value='" . mysql_result($result,$r,"ts_sent") . "'>";
+				$h = $h . "<input id='_ts_sent' name='ts_sent' type='text' value='" . mysql_result($result,$r,"ts_sent") . "'>";
                 $h = $h . "</div>";
                 $h = $h . "</div>";
                 
@@ -2858,6 +2864,7 @@ else if ( $action == "pushwindow") {
 				$h = $h . "<textarea class='xckeditor' id='test123' style='width:300px;' id='editor1' name='editor1' rows='10' style='visibility: hidden; display: none;'>". mysql_result($result,$r,'bodytext') ."</textarea class='ckeditor'>";
                 $h = $h .'</div>';
                 $h = $h .'<script type="text/javascript">';
+				$h = $h . '$D("#_ts_sent").datepicker();';
 				$h = $h ." CKEDITOR.replace( 'test123',";
 				$h = $h ."{";
 
@@ -2967,7 +2974,7 @@ else if ( $action == "list-pages" ) {
 
         }
         $h = $h . "</table>";
-        $h = $h . "<a class='btn btn-info' href='javascript:\$push2press.preview2(\"api.php?action=do-volgorde\");'> <i class='icon-resize-vertical icon-white'></i> Change Volgorde</a><br><br>";
+        $h = $h . "<a class='btn xbtn-info' href='javascript:\$push2press.preview2(\"api.php?action=do-volgorde\");'> <i class='icon-resize-vertical icon-black'></i> Change Volgorde</a><br><br>";
 
         echo $htop;
         echo '<div class="plain-hero-unit">';
