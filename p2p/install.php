@@ -1,6 +1,7 @@
 <?php
 
 
+echo "<img src='http://www.push2press.com/p2p/images/application-logo.png'></p>";
 //echo dirname(__FILE__);
 
 echo "<p>downloading version from github ... success</p>";
