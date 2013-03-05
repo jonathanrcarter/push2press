@@ -3244,7 +3244,7 @@ echo "<!--\n\n $query; \n\n-->";
 		$emaillinkto = $_GET["emaillinkto"];
 		
 		if ($emaillinkto != "") {
-			$message = sprintf("Link to push2press page is <a href='push2press://?url=%s'>%s</a> ",getConfiguration("url",""),getConfiguration("sitename",""));
+			$message = sprintf("Link to push2press page is <a href=\"push2press://?url=%s\">%s</a> ",getConfiguration("url",""),getConfiguration("sitename",""));
 			$msuccess = mail($emaillinkto, 'Push2press Email Link', $message);
 			$h = sprintf("<div> Email sent to %s %s </div>",$emaillinkto,$msuccess);
 		}
@@ -3274,9 +3274,9 @@ echo "<!--\n\n $query; \n\n-->";
 //        echo sprintf("		<p><a href='api.php?action=list-draft-mes'>Edit push messages</a>(%s)</p>",$c1);
 //        echo sprintf("		<p><a href='api.php?action=wp'>Edit push messages wp</a>(%s)</p>",$c1);
 //        echo sprintf("		<p><a href='api.php?action=wp2'>Edit push messages wp2</a>(%s)</p>",$c1);
-        echo sprintf("		<p><a href='setup.php'>Re enter setup</a>(%s)</p>",$c1);
+        echo sprintf("		<p><a class='btn' href='setup.php'>Re enter setup</a>(%s)</p>",$c1);
 		
-		echo sprintf("		<p><a href='https://itunes.apple.com/us/app/push2press/id603889484?ls=1&mt=8'>Download the push2press app from the appstore</a></p>");
+		echo sprintf("		<p><a class='btn' href='https://itunes.apple.com/us/app/push2press/id603889484?ls=1&mt=8'>Download the push2press app from the appstore</a></p>");
 		echo "				<br>";
 		echo "				Send yourself the link by email <form action='api.php'><input type='text' name='emaillinkto'><input type='submit'></form><br>";
         echo "			</div>";

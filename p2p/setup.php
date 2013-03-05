@@ -458,7 +458,7 @@ if ($setupstep == 2) {
 	echo "<br>";
 	echo "<div>$setuperror</div>";
 	echo "<br>";
-	echo "<div><a href='api.php'>You can proceed to your site</a></div>";
+	echo "<div><a class='btn btn-success' href='api.php'>You can proceed to your site</a></div>";
 	echo "<br>";
 	echo "<br>";
 	echo $hbot;
