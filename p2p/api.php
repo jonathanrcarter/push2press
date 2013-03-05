@@ -334,7 +334,7 @@ function B($TYPE, $LINK) {
 	    	return 	"<a class='btn btn-mini btn-xsuccess' href='" . $LINK . "'><i class='icon-edit icon-black'></i> ".L("SEND")."</a>";
 	        break;
 	    case "edit":
-	    	return 	"<a class='btn btn-mini btn-info' href='" . $LINK . "'><i class='icon-edit icon-white'></i> ".L("EDIT")."</a>";
+	    	return 	"<a class='btn btn-mini xbtn-info' href='" . $LINK . "'><i class='icon-edit icon-white'></i> ".L("EDIT")."</a>";
 //	    	return 	"<a class='btn btn-mini btn-xsuccess' href='" . $LINK . "'><i class='icon-edit icon-black'></i> ".L("EDIT")."</a>";
 	        break;
 	    case "preview":
@@ -350,7 +350,7 @@ function B($TYPE, $LINK) {
 	    	return 	"<input type='submit' class='btn btn-mini btn-danger' value='delete'>";
 	        break;
 	    case "delete":
-	    	return 	"<a class='btn btn-mini btn-danger' href='" . $LINK . "'><i class='icon-trash icon-white'></i> ".L("DELETE")."</a>";
+	    	return 	"<a class='btn btn-mini xbtn-danger' href='" . $LINK . "'><i class='icon-trash icon-white'></i> ".L("DELETE")."</a>";
 	        break;
 	        	    	
 	}
