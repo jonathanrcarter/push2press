@@ -73,7 +73,7 @@ if ($archive->extract(PCLZIP_OPT_REMOVE_PATH, "push2press-master/p2p",PCLZIP_OPT
 }
 
 
-echo "<div><a href='api.php'>You can proceed to set up your site by clicking this link</a></div>";
+echo "<div><a class='btn btn-success' href='api.php'>You can proceed to set up your site by clicking here</a></div>";
 
 echo $hbot;
 
