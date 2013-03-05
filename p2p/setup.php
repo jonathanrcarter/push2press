@@ -513,13 +513,6 @@ $adminemail = getConfiguration("adminemail",($_POST["adminemail"] != "") ? ($_PO
 	echo "<tr><td>database</td><td><input name='database' value='$database'></td></tr>";
 	echo "<tr><td>images_folder</td><td><input name='images_folder' value='$images_folder'></td></tr>";
 	echo "<tr><td>BASEPATH</td><td><input name='BASEPATH' value='$BASEPATH'></td></tr>";
-	echo "<tr><td>Language</td><td><select class='span4' name='lang'>";
-	require ("lang/_languages.php");
-	foreach ($_languages as $key=>$data) {
-		$selected = ($lang == $key) ? "selected" : "";
-		echo sprintf("<option value='%s' %s>%s</option>",$key,$selected,$data);
-	}
-	echo "</select>";
 //	"<input name='lang' value='$lang'></td></tr>";
 	
 
@@ -527,6 +520,13 @@ $adminemail = getConfiguration("adminemail",($_POST["adminemail"] != "") ? ($_PO
 	echo "<tr><td>Admin Email address</td><td><input name='adminemail' value='$adminemail'></td></tr>";
 	echo "<tr><td>Admin Password</td><td><input name='MASTER_PASSWORD' value='$MASTER_PASSWORD'></td></tr>";
 	echo "<tr><td>url</td><td><input name='url' value='$url'></td></tr>";
+	echo "<tr><td>Language</td><td><select class='span4' name='lang'>";
+	require ("lang/_languages.php");
+	foreach ($_languages as $key=>$data) {
+		$selected = ($lang == $key) ? "selected" : "";
+		echo sprintf("<option value='%s' %s>%s</option>",$key,$selected,$data);
+	}
+	echo "</select></td></tr>";
 
 	echo "<tr><td> </td><td><input type='submit'></td></tr>";
 	echo "</table>";
