@@ -34,10 +34,13 @@ $htop = $htop .'    <link rel="apple-touch-icon-precomposed" sizes="144x144" hre
 $htop = $htop .'    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="http://www.glimworm.com/_assets/moock/bootstrap/ico/apple-touch-icon-114-precomposed.png">';
 $htop = $htop .'    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="http://www.glimworm.com/_assets/moock/bootstrap/ico/apple-touch-icon-72-precomposed.png">';
 $htop = $htop .'    <link rel="apple-touch-icon-precomposed" href="http://www.glimworm.com/_assets/moock/bootstrap/ico/apple-touch-icon-57-precomposed.png">';
-
 $htop = $htop .'    <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.0/themes/base/jquery-ui.css" />';
 $htop = $htop .'    <script src="http://code.jquery.com/jquery-1.8.3.js"></script>';
 $htop = $htop .'    <script src="http://code.jquery.com/ui/1.10.0/jquery-ui.js"></script>';
+$htop = $htop .'    <link href="http://www.glimworm.com/_assets/moock/bootstrap/extras/colorpicker/css/colorpicker.css" rel="stylesheet">';
+$htop = $htop .'    <script src="http://www.glimworm.com/_assets/moock/bootstrap/extras/colorpicker/js/bootstrap-colorpicker.js"></script>';
+
+
 $htop = $htop .'<link href="api.css" rel="stylesheet">';
 $htop = $htop .'<script src="api.js"></script>';
 $htop = $htop .'  </head>';
