@@ -3249,12 +3249,12 @@ echo "<!--\n\n $query; \n\n-->";
 		echo $h;
         echo "<h3> Welcome to your push2press site</h3>";
 
-		echo "<p>You are using : Version : " . $push2version["major"] . " " . $push2version["type"] . ", build : " . $push2version["build"] . ", <a href='upgrade.php'>Check for updates</a></p>";
+		echo "<p>You are using : Version : " . $push2version["major"] . " " . $push2version["type"] . ", build : " . $push2version["build"] . ", <a href='upgrade.php'>UPDATE TO LATEST VERSION</a></p>";
 
 
-        echo sprintf("		<p><a href='api.php?action=list-draft-mes'>Edit push messages</a>(%s)</p>",$c1);
-        echo sprintf("		<p><a href='api.php?action=wp'>Edit push messages wp</a>(%s)</p>",$c1);
-        echo sprintf("		<p><a href='api.php?action=wp2'>Edit push messages wp2</a>(%s)</p>",$c1);
+//        echo sprintf("		<p><a href='api.php?action=list-draft-mes'>Edit push messages</a>(%s)</p>",$c1);
+//        echo sprintf("		<p><a href='api.php?action=wp'>Edit push messages wp</a>(%s)</p>",$c1);
+//        echo sprintf("		<p><a href='api.php?action=wp2'>Edit push messages wp2</a>(%s)</p>",$c1);
         echo sprintf("		<p><a href='setup.php'>Re enter setup</a>(%s)</p>",$c1);
 		
 		echo sprintf("		<p><a href='https://itunes.apple.com/us/app/push2press/id603889484?ls=1&mt=8'>Download the push2press app from the appstore</a></p>");
