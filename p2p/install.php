@@ -75,6 +75,8 @@ if ($archive->extract(PCLZIP_OPT_PATH, dirname(__FILE__)."", PCLZIP_OPT_REMOVE_P
 require(dirname(__FILE__).'/local_config.php');
 $_frame = $_GET["_frame"];
 
+echo "frame :". $_frame;
+
 if ($hosted && $hosted == "wordpress" && $frame != "y") {
 	echo "<div><a class='btn btn-success' href='/wp-admin/admin.php?page=push2press/admin.php'>You can proceed to set up your site by clicking here</a></div>";
 } else if ($_frame == "y") {
