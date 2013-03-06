@@ -72,6 +72,8 @@ if ($archive->extract(PCLZIP_OPT_PATH, dirname(__FILE__)."", PCLZIP_OPT_REMOVE_P
 	exit;
 }
 
+require_once('./local_config.php');
+
 if ($hosted && $hosted == "wordpress") {
 	echo "<div><a class='btn btn-success' href='/wp-admin/admin.php?page=push2press/admin.php'>You can proceed to set up your site by clicking here</a></div>";
 } else {
