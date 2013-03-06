@@ -3291,7 +3291,7 @@ echo "<!--\n\n $query; \n\n-->";
 //        echo sprintf("		<p><a class='btn' href='setup.php'>Re enter setup</a></p>",$c1);
 		
 		echo "				<br>";
-		echo sprintf("		<p>Number of registered phones : %s </p>",$c1);
+		echo sprintf("		<p>Number of registered phones : %s </p>",$c2);
 		echo "				<br>";
 		echo sprintf("		<p><a class='btn' href='https://itunes.apple.com/us/app/push2press/id603889484?ls=1&mt=8'>Download the push2press app from the appstore</a></p>");
 		echo "				<br>";
