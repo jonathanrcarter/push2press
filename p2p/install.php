@@ -61,7 +61,7 @@ if ($download == false) {
 }
 
 
-require_once('pclzip.lib.php');
+require_once(dirname(__FILE__).'/pclzip.lib.php');
 $archive = new PclZip(dirname(__FILE__).'/upgrade.zip');
 
 //$list = $archive->listContent();
@@ -72,7 +72,7 @@ if ($archive->extract(PCLZIP_OPT_PATH, dirname(__FILE__)."", PCLZIP_OPT_REMOVE_P
 	exit;
 }
 
-require_once('./local_config.php');
+require(dirname(__FILE__).'/local_config.php');
 
 if ($hosted && $hosted == "wordpress") {
 	echo "<div><a class='btn btn-success' href='/wp-admin/admin.php?page=push2press/admin.php'>You can proceed to set up your site by clicking here</a></div>";
