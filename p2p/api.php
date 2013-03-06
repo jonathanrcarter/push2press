@@ -946,10 +946,10 @@ else if ( $action == "list-log" ) {
 		
 		$PAGER = $PAGE-1;
 		$LIM1= $PAGER*20;
-		$query="select * from log_phone order by id desc limit ".$LIM1.",20";
+		$query="select * from log_phone where uid != '' order by id desc limit ".$LIM1.",20";
 		$result=mysql_query($query);
 		
-        $query1="select * from log_phone order by id";
+        $query1="select * from log_phone where uid != '' order by id";
         $result1=mysql_query($query1);
 		
         
@@ -3262,6 +3262,9 @@ echo "<!--\n\n $query; \n\n-->";
 		
 		$c1 = sqlcount("select count(*) as c from message");
 
+        $c2 = sqlcount("select count(*) as c from log_phone where uid != ''");
+ 
+
         echo $htop;
         echo '<link href="github/ribbons.css" rel="stylesheet" type="text/css" />';
         echo "<br>";
@@ -3288,7 +3291,9 @@ echo "<!--\n\n $query; \n\n-->";
 //        echo sprintf("		<p><a class='btn' href='setup.php'>Re enter setup</a></p>",$c1);
 		
 		echo "				<br>";
-				echo sprintf("		<p><a class='btn' href='https://itunes.apple.com/us/app/push2press/id603889484?ls=1&mt=8'>Download the push2press app from the appstore</a></p>");
+		echo sprintf("		<p>Number of registered phones : %s </p>",$c1);
+		echo "				<br>";
+		echo sprintf("		<p><a class='btn' href='https://itunes.apple.com/us/app/push2press/id603889484?ls=1&mt=8'>Download the push2press app from the appstore</a></p>");
 		echo "				<br>";
 		echo "				Send yourself the link by email <form action='api.php'><input type='text' name='emaillinkto'><input type='submit'></form><br>";
 		echo "				<br>";
