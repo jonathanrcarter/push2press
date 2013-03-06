@@ -3295,7 +3295,7 @@ echo "<!--\n\n $query; \n\n-->";
 		echo "				<br>";
 		echo sprintf("		<p><a class='btn' href='https://itunes.apple.com/us/app/push2press/id603889484?ls=1&mt=8'>Download the push2press app from the appstore</a></p>");
 		echo "				<br>";
-		echo "				Send yourself the link by email <form action='api.php'><input type='text' name='emaillinkto'><input type='submit'></form><br>";
+		echo "				Send yourself the link by email <form action='api.php'><input type='text' name='emaillinkto'><input class='btn' type='submit'></form><br>";
 		echo "				<br>";
         echo "			</div>";
         echo "		</div>";
