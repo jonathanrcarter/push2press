@@ -77,7 +77,7 @@ $_frame = $_GET["_frame"];
 
 if ($hosted && $hosted == "wordpress" && $frame != "y") {
 	echo "<div><a class='btn btn-success' href='/wp-admin/admin.php?page=push2press/admin.php'>You can proceed to set up your site by clicking here</a></div>";
-} else if ($frame == "y") {
+} else if ($_frame == "y") {
 	echo "<script>parent.p2p_admin();</script>";
 	echo "<div><a class='btn btn-success' href='javascript:parent.p2p_admin();'>You can proceed to set up your site by clicking here</a></div>";
 } else {
