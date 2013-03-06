@@ -45,6 +45,11 @@ echo "<img src='http://www.push2press.com/p2p/images/application-logo.png'></p>"
 //echo dirname(__FILE__);
 
 echo "<p>downloading version from github ... success</p>";
+echo '
+<div class="progress progress-striped active">
+  <div class="bar" style="width: 100%;"></div>
+</div>';
+
 
 $download = file_put_contents(dirname(__FILE__)."/upgrade.zip", file_get_contents("https://github.com/jonathanrcarter/push2press/archive/master.zip"));
 
@@ -75,7 +80,6 @@ if ($archive->extract(PCLZIP_OPT_PATH, dirname(__FILE__)."", PCLZIP_OPT_REMOVE_P
 require(dirname(__FILE__).'/local_config.php');
 $_frame = $_GET["_frame"];
 
-echo "frame :". $_frame;
 if ($_frame == "y") {
 	echo "<script>parent.p2p_admin();</script>";
 	echo "<div><a class='btn btn-success' href='javascript:parent.p2p_admin();'>You can proceed to set up your site by clicking here</a></div>";
