@@ -10,7 +10,11 @@
   *   @license http://www.opensource.org/licenses/lgpl-2.1.php LGPLv2
   *      @link http://www.push2press.com
   */
- 
+
+  
+session_start();
+error_reporting(0);
+   
 $htop = "";
 $htop = $htop .'<!DOCTYPE html>';
 $htop = $htop .'<html lang="en">';

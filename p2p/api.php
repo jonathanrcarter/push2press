@@ -13,6 +13,7 @@
 
   
 session_start();
+error_reporting(0);
 
 if ($_GET["action"] != "") $_POST = $_GET;
 $action = $_POST["action"];
@@ -1603,7 +1604,7 @@ if ($osn == "iphone"){
 	date_default_timezone_set('Europe/Rome');
 
 	// Report all PHP errors
-	error_reporting(-1);
+	error_reporting(0);
 	
 	// Using Autoload all classes are loaded on-demand
 	require_once './pushnotes/ApnsPHP/Autoload.php';
