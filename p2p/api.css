@@ -117,6 +117,12 @@ h3 {
   height:600px;
 }
 
+.modalpreview200 {
+  top : 35%;
+  height:200px;
+}
+
+
 .scaleOn {
 	/*General*/
 	transform: scale(0.8, 0.8);

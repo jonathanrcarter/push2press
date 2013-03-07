@@ -1,12 +1,14 @@
 $push2press = {};
 $push2press.loading = function() {
-	var h = '<br><legend>Upgrading</legend><br><br><div id="p2p_download_bar">'+
+	var h = '<div style="padding:16px;"><br><legend>Upgrading</legend><br><br><div id="p2p_download_bar">'+
 	'<div class="progress progress-striped active">'+
   	'	<div class="bar" style="width: 100%;"></div>'+
+	'</div>'+
 	'</div>'+
 	'</div>';
 	$("#modal-window2").removeClass("modalpreview");
 	$("#modal-window2").removeClass("modalpreview600");
+	$("#modal-window2").addClass("modalpreview200");
 	$("#modal-window2").html(h);
 	$("#modal-window2").modal('show');
 	setTimeout(function() {
