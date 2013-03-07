@@ -3282,7 +3282,7 @@ echo "<!--\n\n $query; \n\n-->";
         echo "<h3> Welcome to your push2press site</h3>";
 
 		echo "				<br>";
-		echo "<p>You are using : Version : " . $push2version["major"] . " " . $push2version["type"] . ", build : " . $push2version["build"] . ", <a href='upgrade.php'>UPDATE TO LATEST VERSION</a></p>";
+		echo "<p>You are using : Version : " . $push2version["major"] . " " . $push2version["type"] . ", build : " . $push2version["build"] . ", <a href='javascript:\$push2press.loading();'>UPDATE TO LATEST VERSION</a></p>";
 
 
 //        echo sprintf("		<p><a href='api.php?action=list-draft-mes'>Edit push messages</a>(%s)</p>",$c1);
