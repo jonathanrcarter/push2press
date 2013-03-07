@@ -2741,7 +2741,6 @@ else if ( $action == "pushwindow") {
 			$query6="update ignore recipient set  status='send' where devID='" .$msgpusht. "' and rid=".$RIDZ;
         	$result6=mysql_query($query6);
         	//echo $query6;
-        	$r++;
       	}
       	
       	}else{
