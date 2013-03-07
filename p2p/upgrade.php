@@ -86,6 +86,10 @@ echo "<br>";
 //echo dirname(__FILE__);
 
 echo "<p>downloading version from github ... success</p>";
+echo '
+<div id="p2p_download_bar" class="progress progress-striped active">
+  <div class="bar" style="width: 100%;"></div>
+</div>';
 
 $download = file_put_contents(dirname(__FILE__)."/upgrade.zip", file_get_contents("https://github.com/jonathanrcarter/push2press/archive/master.zip"));
 
@@ -105,6 +109,12 @@ if ($archive->extract(PCLZIP_OPT_PATH, dirname(__FILE__) ,PCLZIP_OPT_REMOVE_PATH
 	exit;
 }
 
+echo "
+<script>
+try {
+	document.getElementById('p2p_download_bar').innerHTML='';
+} catch (e) { }
+</script>";
 
 echo "<div><a href='api.php'>You can proceed to back to your upgraded site by clicking this link</a></div>";
 
