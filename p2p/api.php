@@ -3255,8 +3255,10 @@ echo "<!--\n\n $query; \n\n-->";
 		$emaillinkto = $_GET["emaillinkto"];
 		
 		if ($emaillinkto != "") {
+			$headers = 'From: automailer@push2press.com' . "\r\n" .
+        	'Reply-To: automailer@push2press.com' . "\r\n" ; 						
 			$message = sprintf("Link to push2press page is <a href=\"push2press://?url=%s\">%s</a> ",getConfiguration("url",""),getConfiguration("sitename",""));
-			$msuccess = mail($emaillinkto, 'Push2press Email Link', $message);
+			$msuccess = mail($emaillinkto, 'Push2press Email Link', $message,$headers);
 			$h = sprintf("<div> Email sent to %s %s </div>",$emaillinkto,$msuccess);
 		}
 		
