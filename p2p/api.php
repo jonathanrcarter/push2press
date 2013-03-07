@@ -2615,8 +2615,9 @@ else if ( $action == "pushwindow") {
       	if( $READY == "Y" ){
       		
       		//$query3="select * from recipient left join sending on id=rid where recipient.status='ready_to_send'";
-      		$query3="select * from recipient left join sending on rid=eid where recipient.status='ready_to_send'";
-      		$result3=mysql_query($query3);
+      		//$query3="select * from recipient left join sending on rid=eid where recipient.status='ready_to_send'";
+      		$query3="select * from recipient left join sending on rid=id where recipient.status='ready_to_send'";
+     		$result3=mysql_query($query3);
       		echo $query3;
       		
       		
