@@ -2861,8 +2861,11 @@ else if ( $action == "pushwindow") {
 
 				$h = $h . "<div class='control-group'><label class='control-label' for=''>".L("bodytext")."</label>";
                 $h = $h . "	<div class='controls'>";
-                $h = $h . "	<div style='width:400px;'>";
+                $h = $h . "	<div id='topSpace-wrapper'>";
+                $h = $h . "	<div id='topSpace'></div>";
+                $h = $h . "	<div style='width:400px;' id='bottomSpace'>";
 				$h = $h . "<textarea class='xckeditor' id='test123' style='width:300px;' id='editor1' name='editor1' rows='10' style='visibility: hidden; display: none;'>". mysql_result($result,$r,'bodytext') ."</textarea class='ckeditor'>";
+                $h = $h .'</div>';
                 $h = $h .'</div>';
                 $h = $h .'<script type="text/javascript">';
 				$h = $h . '$(function(){ $("#_ts_sent").datepicker(); });';
@@ -2870,6 +2873,12 @@ else if ( $action == "pushwindow") {
 				$h = $h ."{";
 
 				$h = $h ."	skin : 'BootstrapCK-Skin',";
+				$h = $h ."	sharedSpaces : {top : 'topSpace',bottom : 'bottomSpace'},";
+				$h = $h ."	toolbar : 'mytoolbar',";
+				$h = $h ."	width : 300,";
+				$h = $h ."	height : 360,";
+				$h = $h ."	removePlugins : 'maximize,resize',";
+				$h = $h ."	toolbar_mytoolbar : push2press.getEditorToolbar(),";
 
 //config.skin = 'moono';
 				$h = $h ."	filebrowserBrowseUrl : 'kcfinder/browse.php?type=files',";
@@ -3144,7 +3153,7 @@ echo "<!--\n\n $query; \n\n-->";
                 $h = $h . "<input type='hidden' name='action' value='show-page'>";
                 $h = $h . "<input type='hidden' name='action2' value='update'>";
                 $h = $h . "<input type='hidden' name='id' value='".$id."'>";
-                $h = $h . "<table class='table table-striped table-bordered table-condensed'>";
+                $h = $h . "<table class='table xtable-striped table-bordered table-condensed'>";
                // $h = $h . "<tr><td>image</td><td><img src='images/" . mysql_result($result,$r,"img") . "' height=80 width=80></td></tr>";
                 $h = $h . "<tr><td>".L("Pagename")."</td><td><input name='Pagename' type='text' value='" . mysql_result($result,$r,"Pagename") . "'></td></tr>";
 
@@ -3166,11 +3175,16 @@ echo "<!--\n\n $query; \n\n-->";
 				$h = $h . "<tr><td>".L("extraData")."</td><td><textarea name='extraData'>" . mysql_result($result,$r,"extraData") . "</textarea></td></tr>";
 				$h = $h . "<tr><td>".L("bodytext")."</td><td>";
 				
+                $h = $h . "	<div id='topSpace-wrapper'>";
                 $h = $h . "	<div id='topSpace'></div>";
                 $h = $h . "	<div style='width:400px;' id='bottomSpace'>";
 
 				$h = $h . "<textarea class='xckeditor' id='elm12' name='elm1' rows='15' cols='80' style='width: 80%' class='tinymce'>". textareaSafe(mysql_result($result,$r,'bodytext')) ."</textarea class='ckeditor'>";
 				
+				$h = $h . "</div>";
+				$h = $h . "</div>";
+				$h = $h . "</td></tr>";
+								
 				
                 $h = $h . "<tr><td>".L("CatID")."</td><td>" . $sel . "</td></tr>";
 				$h = $h .'<script type="text/javascript">';
@@ -3179,6 +3193,7 @@ echo "<!--\n\n $query; \n\n-->";
 				$h = $h ."	skin : 'BootstrapCK-Skin',";
 				$h = $h ."	sharedSpaces : {top : 'topSpace',bottom : 'bottomSpace'},";
 				$h = $h ."	toolbar : 'mytoolbar',";
+				$h = $h ."	removePlugins : 'maximize,resize',";
 				$h = $h ."	width : 300,";
 				$h = $h ."	height : 360,";
 				$h = $h ."	toolbar_mytoolbar : push2press.getEditorToolbar(),";

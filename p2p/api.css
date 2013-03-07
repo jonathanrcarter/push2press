@@ -122,7 +122,13 @@ h3 {
   height:200px;
 }
 
-
+span.cke_skin_BootstrapCK-Skin, span.cke_skin_BootstrapCK-Skin:focus{
+	padding : 0 !important;
+	border : 0 !important;
+}
+#topSpace-wrapper {
+	background-color: #f5f5f5;
+}
 .scaleOn {
 	/*General*/
 	transform: scale(0.8, 0.8);
