@@ -87,8 +87,10 @@ echo "<br>";
 
 echo "<p>downloading version from github ... success</p>";
 echo '
-<div id="p2p_download_bar" class="progress progress-striped active">
-  <div class="bar" style="width: 100%;"></div>
+<div id="p2p_download_bar">
+	<div class="progress progress-striped active">
+  		<div class="bar" style="width: 100%;"></div>
+	</div>
 </div>';
 
 $download = file_put_contents(dirname(__FILE__)."/upgrade.zip", file_get_contents("https://github.com/jonathanrcarter/push2press/archive/master.zip"));
