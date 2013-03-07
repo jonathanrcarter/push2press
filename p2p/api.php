@@ -3166,7 +3166,8 @@ echo "<!--\n\n $query; \n\n-->";
 				$h = $h . "<tr><td>".L("extraData")."</td><td><textarea name='extraData'>" . mysql_result($result,$r,"extraData") . "</textarea></td></tr>";
 				$h = $h . "<tr><td>".L("bodytext")."</td><td>";
 				
-                $h = $h . "	<div style='width:400px;'>";
+                $h = $h . "	<div id='topSpace'></div>";
+                $h = $h . "	<div style='width:400px;' id='bottomSpace'>";
 
 				$h = $h . "<textarea class='xckeditor' id='elm12' name='elm1' rows='15' cols='80' style='width: 80%' class='tinymce'>". textareaSafe(mysql_result($result,$r,'bodytext')) ."</textarea class='ckeditor'>";
 				
@@ -3176,6 +3177,11 @@ echo "<!--\n\n $query; \n\n-->";
 				$h = $h ." CKEDITOR.replace( 'elm12',";
 				$h = $h ."{";
 				$h = $h ."	skin : 'BootstrapCK-Skin',";
+				$h = $h ."	sharedSpaces : {top : 'topSpace',bottom : 'bottomSpace'},";
+				$h = $h ."	toolbar : 'mytoolbar',";
+				$h = $h ."	width : 300,";
+				$h = $h ."	height : 360,";
+				$h = $h ."	toolbar_mytoolbar : push2press.getEditorToolbar(),";
 				$h = $h ."	filebrowserBrowseUrl : 'kcfinder/browse.php?type=files',";
 				$h = $h ."	filebrowserImageBrowseUrl : 'kcfinder/browse.php?type=images',";
 				$h = $h ."	filebrowserFlashBrowseUrl : 'kcfinder/browse.php?type=flash',";
