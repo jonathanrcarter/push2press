@@ -30,7 +30,7 @@ function L($phrase) {
 		"group-name" => "nombre-grupo",
 		"gname" => "gnombre",
 		"Send Push Notification" => "Enviar Push Notificación",
-		"Device" => "Device",
+		"Device" => "Aparato",
 		"Name of os" => "Nombre del os",
 		"Notification" => "Notificación",
 		"Mesage Description" => "Descripción mensaje",
@@ -89,17 +89,17 @@ function L($phrase) {
 		"EDIT" => "EDITAR",
 		/* new */
 		"Push_Marketing" => "Push Marketing",
-		"Devices" => "Devices",
+		"Devices" => "Dispositivos",
 		"CMS" => "CMS",
-		"Config" => "Config",
-		"Stats" => "Stats",
-		"Media" => "Media",
-		"Search" => "Search",
-		"Logout" => "Logout",
-		"Login" => "Login",
-		"Password" => "Password",
-		"Graph" => "Graph",
-		"Groups" => "Groups"
+		"Config" => "Configuración",
+		"Stats" => "Estadística",
+		"Media" => "Medios",
+		"Search" => "Buscar",
+		"Logout" => "Terminar la sesión ",
+		"Login" => "Entrada",
+		"Password" => "Contraseña",
+		"Graph" => "Gráfico",
+		"Groups" => "Grupos"
 	);
 	return $lang[$phrase];
 }
