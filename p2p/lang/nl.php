@@ -89,17 +89,17 @@ function L($phrase) {
 		"EDIT" => "BEWERKEN",
 		/* new */
 		"Push_Marketing" => "Push Marketing",
-		"Devices" => "Devices",
+		"Devices" => "Apparaten",
 		"CMS" => "CMS",
-		"Config" => "Config",
-		"Stats" => "Stats",
+		"Config" => "Configuratie",
+		"Stats" => "Statistiek",
 		"Media" => "Media",
-		"Logout" => "Logout",
-		"Login" => "Login",
-		"Password" => "Password",
-		"Search" => "Search",
-		"Graph" => "Graph",
-		"Groups" => "Groups"
+		"Logout" => "Uitloggen",
+		"Login" => "Aanmelden",
+		"Password" => "Wachtwoord",
+		"Search" => "Zoeken",
+		"Graph" => "Diagram",
+		"Groups" => "Groepen"
 		);
 	return $lang[$phrase];
 }
