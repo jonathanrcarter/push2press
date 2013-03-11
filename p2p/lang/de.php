@@ -87,17 +87,17 @@ function L($phrase) {
 		"EDIT" => "BEARBEIT",
 		/* new */
 		"Push_Marketing" => "Push Marketing",
-		"Devices" => "Devices",
+		"Devices" => "Geräte",
 		"CMS" => "CMS",
-		"Config" => "Config",
-		"Stats" => "Stats",
-		"Media" => "Media",
-		"Search" => "Search",
-		"Logout" => "Logout",
-		"Login" => "Login",
-		"Password" => "Password",
+		"Config" => "Konfiguration",
+		"Stats" => "Statistiken",
+		"Media" => "Medien",
+		"Search" => "Suchen",
+		"Logout" => "Ausloggen",
+		"Login" => "Einloggen",
+		"Password" => "Kennwort",
 		"Graph" => "Graph",
-		"Groups" => "Groups"
+		"Groups" => "Gruppen"
 	);
 	return $lang[$phrase];
 }
