@@ -3375,6 +3375,8 @@ echo "<!--\n\n $query; \n\n-->";
 
 		if ($c2 > 0) {
 	        echo "<h3> Welcome back to push2press</h3>";
+			echo "				<br>";
+			echo "<p>You are using : Version : " . $push2version["major"] . " " . $push2version["type"] . ", build : " . $push2version["build"] . ", <a href='javascript:\$push2press.loading();'>UPDATE TO LATEST VERSION</a></p>";
 			echo sprintf("		<p>Number of registered phones : %s </p>",$c2);
 	        echo sprintf("		<p><a href='api.php?action=list-draft-mes'>Edit push messages</a>(%s)</p>",$c1);
 	        echo sprintf("		<p><a href='api.php?action=show-page&id=1'>Edit homepage</a></p>");
