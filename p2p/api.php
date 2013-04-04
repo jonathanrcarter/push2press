@@ -3107,6 +3107,11 @@ echo "<!--\n\n $query; \n\n-->";
                 
                 $result=mysql_query($query);
                 $h = "UPDATED";
+                
+                $h = $h . "<h2>In order to update your app 'pull to refresh' the side menu down</h2>";
+                $h = $h . "<img src='images/reload-push2press-diagram.jpg' width='900'><br>";
+				
+				
                 $h = $h . "<a class='btn' href='api.php?action=show-page&id=" . $id . "'>OK <i class='icon-check'></i></a>";
         } else if ($action2 == "update"){
         
@@ -3171,6 +3176,43 @@ echo "<!--\n\n $query; \n\n-->";
 				$h = $h . "</td></tr>";
 				//"<input name='template' type='text' value='" . mysql_result($result,$r,"template") . "'></td></tr>";
 				
+				
+				
+				/*	working on page types
+
+				$pagetypes = array(
+					array("value"=>"","displayname"=>"normal","editor"=>"wysiwyg"),
+					array("value"=>"TI","displayname"=>"Titanium Development PAGE","editor"=>"code")
+				);
+				$pagetype_from_db = mysql_result($result,$r,"type");
+				$pagetype0 = "";
+				$pagetype1 = "";
+				
+				if ($pagetype_from_db != "") {
+					if (strpos($pagetype_from_db,":")) {
+						$pagetype_from_db_parts = explode(":",$pagetype_from_db,2);
+						$pagetype0 = $pagetype_from_db_parts[0].":";
+						if (count($pagetype_from_db_parts) > 1) {
+							$pagetype1 = $pagetype_from_db_parts[1];
+						}
+					} else {
+						$pagetype0 = $pagetype_from_db;
+					}
+				}
+				
+				$pagetypes_select = "<select onChange='change_page_type();' name='pagetype0' id='pagetype0'>";
+				foreach ($pagetypes as $pagetype) {
+					$selected = ($pagetype0 == $pagetype["value"]) ? "selected" : "";
+					$pagetypes_select = $pagetypes_select . sprintf("<option value='%s' %s>%s</option>",$pagetype["value"],$selected,$pagetype["displayname"]);
+				}
+				$pagetypes_select = $pagetypes_select . "</select>";
+				$pagetypes_select = $pagetypes_select . "<script>var pagenames=".json_encode($pagetypes).";</script>";
+				
+				$h = $h . "<tr><td>".L("type")."</td><td>".$pagetypes_select."</td></tr>";
+				*/				
+				
+				
+				
 				$h = $h . "<tr><td>".L("type")."</td><td><input name='type' type='text' value='" . mysql_result($result,$r,"type") . "'></td></tr>";
 				$h = $h . "<tr><td>".L("extraData")."</td><td><textarea name='extraData'>" . mysql_result($result,$r,"extraData") . "</textarea></td></tr>";
 				$h = $h . "<tr><td>".L("bodytext")."</td><td>";
@@ -3188,23 +3230,47 @@ echo "<!--\n\n $query; \n\n-->";
 				
                 $h = $h . "<tr><td>".L("CatID")."</td><td>" . $sel . "</td></tr>";
 				$h = $h .'<script type="text/javascript">';
-				$h = $h ." CKEDITOR.replace( 'elm12',";
-				$h = $h ."{";
-				$h = $h ."	skin : 'BootstrapCK-Skin',";
-				$h = $h ."	sharedSpaces : {top : 'topSpace',bottom : 'bottomSpace'},";
-				$h = $h ."	toolbar : 'mytoolbar',";
-				$h = $h ."	removePlugins : 'maximize,resize',";
-				$h = $h ."	width : 300,";
-				$h = $h ."	height : 360,";
-				$h = $h ."	toolbar_mytoolbar : push2press.getEditorToolbar(),";
-				$h = $h ."	filebrowserBrowseUrl : 'kcfinder/browse.php?type=files',";
-				$h = $h ."	filebrowserImageBrowseUrl : 'kcfinder/browse.php?type=images',";
-				$h = $h ."	filebrowserFlashBrowseUrl : 'kcfinder/browse.php?type=flash',";
-				$h = $h ."	filebrowserUploadUrl : 'kcfinder/upload.php?type=files',";
-				$h = $h ."	filebrowserImageUploadUrl : 'kcfinder/upload.php?type=images',";
-				$h = $h ."	filebrowserFlashUploadUrl : 'kcfinder/upload.php?type=flash'";
-				$h = $h ."});";
+
+				$h = $h . "function change_page_type() {";
+				$h = $h . "	var opt = jq('#pagetype0').val();";
+				$h = $h . " if (opt && opt != '') {";
+				$h = $h . "		console.log(pagenames);";
+				$h = $h . " 	var pgtype = pagenames[opt];";
+				$h = $h . "		console.log(pgtype);";
+				$h = $h . "	}";
+				$h = $h . "	console.log(opt);";
+				$h = $h . "}";
+				
+				$h = $h . "function edit_with_code() {";
+				$h = $h . "	console.log(CKEDITOR.instances);";
+				$h = $h . "	console.log(CKEDITOR.instances.elm12);";
+				$h = $h . "	if (!CKEDITOR.instances.elm12) return;";
+				$h = $h . "	CKEDITOR.instances.elm12.destroy();";
+				$h = $h . "";
+				$h = $h . "";
+				$h = $h . "}";
+				$h = $h . "function edit_with_wysiwyg() {";
+				$h = $h . "	if (CKEDITOR.instances.elm12) return;";
+				$h = $h ." 	CKEDITOR.replace( 'elm12',";
+				$h = $h ."	{";
+				$h = $h ."		skin : 'BootstrapCK-Skin',";
+				$h = $h ."		sharedSpaces : {top : 'topSpace',bottom : 'bottomSpace'},";
+				$h = $h ."		toolbar : 'mytoolbar',";
+				$h = $h ."		removePlugins : 'maximize,resize',";
+				$h = $h ."		width : 300,";
+				$h = $h ."		height : 360,";
+				$h = $h ."		toolbar_mytoolbar : push2press.getEditorToolbar(),";
+				$h = $h ."		filebrowserBrowseUrl : 'kcfinder/browse.php?type=files',";
+				$h = $h ."		filebrowserImageBrowseUrl : 'kcfinder/browse.php?type=images',";
+				$h = $h ."		filebrowserFlashBrowseUrl : 'kcfinder/browse.php?type=flash',";
+				$h = $h ."		filebrowserUploadUrl : 'kcfinder/upload.php?type=files',";
+				$h = $h ."		filebrowserImageUploadUrl : 'kcfinder/upload.php?type=images',";
+				$h = $h ."		filebrowserFlashUploadUrl : 'kcfinder/upload.php?type=flash'";
+				$h = $h ."	});";
+				$h = $h ."}";
+				$h = $h ."edit_with_wysiwyg();";
 				$h = $h .'</script>';
+
                 $h = $h . "<tr><td>&nbsp;</td><td><input class='btn btn-success' type='submit'></td></tr>";
                 $h = $h . "</table>";
                 $h = $h . "</form>";
@@ -3306,24 +3372,36 @@ echo "<!--\n\n $query; \n\n-->";
         echo "			</div>";
         echo '			<div class="span8">';
 		echo $h;
-        echo "<h3> Welcome to your push2press site</h3>";
 
-		echo "				<br>";
-		echo "<p>You are using : Version : " . $push2version["major"] . " " . $push2version["type"] . ", build : " . $push2version["build"] . ", <a href='javascript:\$push2press.loading();'>UPDATE TO LATEST VERSION</a></p>";
+		if ($c2 > 0) {
+	        echo "<h3> Welcome back to push2press</h3>";
+			echo sprintf("		<p>Number of registered phones : %s </p>",$c2);
+	        echo sprintf("		<p><a href='api.php?action=list-draft-mes'>Edit push messages</a>(%s)</p>",$c1);
+	        echo sprintf("		<p><a href='api.php?action=show-page&id=1'>Edit homepage</a></p>");
+	        
+	        
+	        
 
+		} else {
+	        echo "<h3> Welcome to your push2press site</h3>";
 
-//        echo sprintf("		<p><a href='api.php?action=list-draft-mes'>Edit push messages</a>(%s)</p>",$c1);
+			echo "				<br>";
+			echo "<p>You are using : Version : " . $push2version["major"] . " " . $push2version["type"] . ", build : " . $push2version["build"] . ", <a href='javascript:\$push2press.loading();'>UPDATE TO LATEST VERSION</a></p>";
+
+//	        echo sprintf("		<p><a href='api.php?action=list-draft-mes'>Edit push messages</a>(%s)</p>",$c1);
 //        echo sprintf("		<p><a href='api.php?action=wp'>Edit push messages wp</a>(%s)</p>",$c1);
 //        echo sprintf("		<p><a href='api.php?action=wp2'>Edit push messages wp2</a>(%s)</p>",$c1);
 //        echo sprintf("		<p><a class='btn' href='setup.php'>Re enter setup</a></p>",$c1);
 		
-		echo "				<br>";
-		echo sprintf("		<p>Number of registered phones : %s </p>",$c2);
-		echo "				<br>";
-		echo sprintf("		<p><a class='btn' href='https://itunes.apple.com/us/app/push2press/id603889484?ls=1&mt=8'>Download the push2press app from the appstore</a></p>");
-		echo "				<br>";
-		echo "				Send yourself the link by email <form action='api.php'><input type='text' name='emaillinkto'><input class='btn' type='submit'></form><br>";
-		echo "				<br>";
+			echo "				<br>";
+			echo sprintf("		<p>Number of registered phones : %s </p>",$c2);
+			echo "				<br>";
+			echo sprintf("		<p><a class='btn' href='https://itunes.apple.com/us/app/push2press/id603889484?ls=1&mt=8'>Download the push2press app from the appstore</a></p>");
+			echo "				<br>";
+			echo "				Send yourself the link by email <form action='api.php'><input type='text' name='emaillinkto'><input class='btn' type='submit'></form><br>";
+			echo "				<br>";
+		}
+
         echo "			</div>";
         echo "		</div>";
         echo "</div>";
