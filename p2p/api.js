@@ -25,9 +25,6 @@ push2press.qrcode = function() {
 	$("#modal-window2").addClass("modalpreview200");
 	$("#modal-window2").html(h);
 	$("#modal-window2").modal('show');
-	setTimeout(function() {
-		document.location.href='upgrade.php';
-	},500);
 };
 
 $push2press.preview = function(URL,A,B,C) {
