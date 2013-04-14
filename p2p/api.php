@@ -3387,7 +3387,8 @@ echo "<!--\n\n $query; \n\n-->";
         echo '			<div class="span8">';
 		echo $h;
 
-		if ($c2 > 0) {
+//		if ($c2 > 0) {
+		if ($c2 > -1) {
 	        echo "<h3> Welcome back to push2press</h3>";
 			echo "				<br>";
 			echo "<p>You are using : Version : " . $push2version["major"] . " " . $push2version["type"] . ", build : " . $push2version["build"] . ", <a href='javascript:\$push2press.loading();'>UPDATE TO LATEST VERSION</a></p>";
@@ -3411,9 +3412,9 @@ echo "<!--\n\n $query; \n\n-->";
 		
 			echo "				<br>";
 			echo sprintf("		<p>Number of registered phones : %s </p>",$c2);
-			echo "				<br>";
-			echo "				Send yourself the link by email <form action='api.php'><input type='text' name='emaillinkto'><input class='btn' type='submit'></form><br>";
-			echo "				<br>";
+//			echo "				<br>";
+//			echo "				Send yourself the link by email <form action='api.php'><input type='text' name='emaillinkto'><input class='btn' type='submit'></form><br>";
+//			echo "				<br>";
 		}
 
         echo "			</div>";

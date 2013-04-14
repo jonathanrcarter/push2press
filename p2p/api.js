@@ -19,6 +19,8 @@ $push2press.loading = function() {
 
 push2press.qrcode = function() {
 	var h = '<div style="padding:16px;"><br><legend>QR Code</legend><br><br>'+$("#qrcodesmall").html()+'</div>';
+	h += "Send yourself the link by email";
+	h+= '<form action="api.php"><input type="text" name="emaillinkto"><input class="btn" type="submit"></form>';
 
 	$("#modal-window2").removeClass("modalpreview");
 	$("#modal-window2").removeClass("modalpreview600");
