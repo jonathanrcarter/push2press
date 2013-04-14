@@ -169,7 +169,6 @@ var uvOptions = {};
 })();
 
 
-var push2press = {};
 push2press.getEditorToolbar = function() {
 
 	var retval  =
