@@ -448,7 +448,7 @@ if ($step == "2") {
 	}
 	
 	if (!$err) {
-        $_SESSION['password'] = $password;
+        $_SESSION['password'] = $MASTER_PASSWORD;
 		$setupstep = 2;
 	}
 }
