@@ -145,3 +145,6 @@ span.cke_skin_BootstrapCK-Skin, span.cke_skin_BootstrapCK-Skin:focus{
 .plain-table tr {
 	height : 50px;
 }
+#qrcodesmall img {
+	width:50px;
+}

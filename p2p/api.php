@@ -3382,7 +3382,7 @@ echo "<!--\n\n $query; \n\n-->";
         echo "			<div class='ribbon left red'><a href='#'>Fork me on GitHub</a></div>";
         echo "			<img src='images/MainImage.jpg'>";
 		echo '			<a href="https://itunes.apple.com/us/app/push2press/id603889484?mt=8"><img src="http://blog.eventphant.com/wp-content/uploads/2012/07/Apple-App-Store.jpg" height="50"></a>';
-		echo "			<img src='http://api.qrserver.com/v1/create-qr-code/?data=".urlencode("push2press://?url=".getConfiguration("url",""))."&size=250x250'>";
+		echo "			<span id='qrcodesmall'><a href='javascript:push2press.qrcode();'><img src='http://api.qrserver.com/v1/create-qr-code/?data=".urlencode("push2press://?url=".getConfiguration("url",""))."&size=250x250'></a></span>";
         echo "			</div>";
         echo '			<div class="span8">';
 		echo $h;
