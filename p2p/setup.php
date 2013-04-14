@@ -143,6 +143,8 @@ function getConfiguration($VAL,$DEFAULT_VAL) {
 }
 
 
+$ADMINEMAIL = "";
+
 if ($step == "2") {
 
 	$dbhost = ($_POST["dbhost"] != "") ? $_POST["dbhost"] : $dbhost;
@@ -437,6 +439,9 @@ if ($step == "2") {
 		if (getConfiguration("adminemail",null) == null) {
 			mysql_query("insert into domain (Pagename,Caption) values('adminemail','".$_POST["adminemail"]."')");
 			$setuperror = $setuperror . "added adminemail to adminemail<br>";
+			$ADMINEMAIL = $_POST["adminemail"];
+		} else {
+			$ADMINEMAIL = getConfiguration("adminemail","");
 		}
 		if (getConfiguration("setup",null) == null) {
 			mysql_query("insert ignore into cats (ID,Pagename,Caption,img,Volgorde) values (1,'Home','Home','',0)");
@@ -459,11 +464,11 @@ if ($setupstep == 2) {
 	
         
 		header("HTTP/1.1 301 Moved Permanently");
-		header("Location: api.php"); 
+		header("Location: api.php?emailadminlinkto=$ADMINEMAIL"); 
 		echo $htop;
 		echo "<br>";
 		echo "<br>";
-		echo "<div><a class='btn btn-success' href='api.php'>You can proceed to your site</a></div>";
+		echo "<div><a class='btn btn-success' href='api.php?emailadminlinkto=$ADMINEMAIL'>You can proceed to your site</a></div>";
 		echo "<br>";
 		echo "<br>";
 		echo $hbot;

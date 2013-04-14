@@ -3340,6 +3340,7 @@ echo "<!--\n\n $query; \n\n-->";
 
 		$h = "";
 		$emaillinkto = $_GET["emaillinkto"];
+		$emailadminlinkto = $_GET["emailadminlinkto"];
 		
 		if ($emaillinkto != "") {
 			$message = sprintf("Link to push2press page is <a href=\"push2press://?url=%s\">%s</a> ",getConfiguration("url",""),getConfiguration("sitename",""));
@@ -3347,9 +3348,20 @@ echo "<!--\n\n $query; \n\n-->";
 //			$messageplain = sprintf("Link to push2press page is push2press://?url=%s ",getConfiguration("url",""),getConfiguration("sitename",""));
 			$msuccess = mail($emaillinkto, 'Push2press Email Link', $message,$headers);
 			$h = sprintf("<div> Email sent to %s %s </div>",$emaillinkto,$msuccess);
-			if ($msuccess) {
+			if ($msuccess === false) {
 				$h = sprintf("<div> There was a sending error to %s - send yourself this link <pre>%s</pre></div>",$emaillinkto,$messageplain);
 			}
+		}
+		if ($emailadminlinkto != "") {
+			$message = sprintf("Link to push2press page is <a href=\"push2press://?url=%s\">%s</a> ",getConfiguration("url",""),getConfiguration("sitename",""));
+			$messageplain = sprintf("Link to push2press page is &lt;a href=\"push2press://?url=%s\"&gt;%s&lt;/a&gt; ",getConfiguration("url",""),getConfiguration("sitename",""));
+//			$messageplain = sprintf("Link to push2press page is push2press://?url=%s ",getConfiguration("url",""),getConfiguration("sitename",""));
+			$msuccess = mail($emaillinkto, 'Push2press Email Link', $message,$headers);
+			$h = sprintf("<div> Email sent to %s %s </div>",$emaillinkto,$msuccess);
+			if ($msuccess === false) {
+				$h = sprintf("<div> There was a sending error to %s - send yourself this link <pre>%s</pre></div>",$emaillinkto,$messageplain);
+			}
+			
 		}
 		
 		
