@@ -3381,6 +3381,7 @@ echo "<!--\n\n $query; \n\n-->";
         echo '			<div class="span4">';
         echo "			<div class='ribbon left red'><a href='#'>Fork me on GitHub</a></div>";
         echo "			<img src='images/MainImage.jpg'>";
+		echo '			<a href="https://itunes.apple.com/us/app/push2press/id603889484?mt=8"><img src="http://blog.eventphant.com/wp-content/uploads/2012/07/Apple-App-Store.jpg" height="50"></a>';
         echo "			</div>";
         echo '			<div class="span8">';
 		echo $h;
