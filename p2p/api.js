@@ -22,7 +22,7 @@ push2press.qrcode = function() {
 
 	$("#modal-window2").removeClass("modalpreview");
 	$("#modal-window2").removeClass("modalpreview600");
-	$("#modal-window2").addClass("modalpreview200");
+	$("#modal-window2").addClass("modalpreview200qrcode");
 	$("#modal-window2").html(h);
 	$("#modal-window2").modal('show');
 };

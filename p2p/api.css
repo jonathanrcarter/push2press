@@ -121,6 +121,12 @@ h3 {
   top : 35%;
   height:200px;
 }
+.modalpreview200qrcode {
+  top : 10%;
+  height:500px;
+	
+}
+
 
 span.cke_skin_BootstrapCK-Skin, span.cke_skin_BootstrapCK-Skin:focus{
 	padding : 0 !important;
