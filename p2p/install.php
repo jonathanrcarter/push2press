@@ -112,6 +112,10 @@ if ($_frame == "y") {
 
 } else if ($hosted && $hosted == "wordpress") {
 	echo "<div><a class='btn btn-success' href='/wp-admin/admin.php?page=push2press/admin.php'>You can proceed to set up your site by clicking here</a></div>";
+} else if ($hosted && $hosted == "y") {
+	header("HTTP/1.1 301 Moved Permanently");
+	header("Location: api.php"); 
+	echo "<div><a class='btn btn-success' href='api.php'>You can proceed to set up your site by clicking here</a></div>";
 } else {
 	echo "<div><a class='btn btn-success' href='api.php'>You can proceed to set up your site by clicking here</a></div>";
 }
