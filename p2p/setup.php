@@ -168,6 +168,7 @@ if ($step == "2") {
 	$h = $h . $D . "images_folder='$images_folder';\n";
 	$h = $h . $D . "BASEPATH='$BASEPATH';\n";
 	$h = $h . $D . "MASTER_PASSWORD='$MASTER_PASSWORD';\n";
+	$h = $h . $D . "hosted='$hosted';\n";
 	$h = $h . "?>\n";
 	file_put_contents("./local_config.php", $h);
 	$setupstep = 1;
@@ -447,25 +448,41 @@ if ($step == "2") {
 	}
 	
 	if (!$err) {
+        $_SESSION['password'] = $password;
 		$setupstep = 2;
 	}
-	
 }
 
 if ($setupstep == 2) {
 
-	echo $htop;
-	echo "<br>";
-	echo "<br>";
-	echo "<br>";
-	echo "<h1>Setup - Step 2 of 2</h1>";
-	echo "<br>";
-	echo "<div>$setuperror</div>";
-	echo "<br>";
-	echo "<div><a class='btn btn-success' href='api.php'>You can proceed to your site</a></div>";
-	echo "<br>";
-	echo "<br>";
-	echo $hbot;
+	if ($hosted && $hosted == "y") {
+	
+        
+		header("HTTP/1.1 301 Moved Permanently");
+		header("Location: api.php"); 
+		echo $htop;
+		echo "<br>";
+		echo "<br>";
+		echo "<div><a class='btn btn-success' href='api.php'>You can proceed to your site</a></div>";
+		echo "<br>";
+		echo "<br>";
+		echo $hbot;
+		
+	} else {
+
+		echo $htop;
+		echo "<br>";
+		echo "<br>";
+		echo "<br>";
+		echo "<h1>Setup - Step 2 of 2</h1>";
+		echo "<br>";
+		echo "<div>$setuperror</div>";
+		echo "<br>";
+		echo "<div><a class='btn btn-success' href='api.php'>You can proceed to your site</a></div>";
+		echo "<br>";
+		echo "<br>";
+		echo $hbot;
+	}
 	
 	exit;
 
@@ -502,37 +519,65 @@ $adminemail = getConfiguration("adminemail",($_POST["adminemail"] != "") ? ($_PO
 	  width: 280px;
 	}
 	</style>";
+
+	echo "<div class='continer'>
+	<div class='row-fluid'>
+		<div class='span4'>
+			<br>
+			<h1>&nbsp;</h1>
+			<br>
+			<img src='http://www.push2press.com/p2p/images/MainImage.jpg'>
+		</div>
+		<div class='span8'>";
+
+
 	
 	echo "<br>";
-	echo "<h1>Setup - Step 1 of 2</h1>";
+
+	if ($hosted == "y") {
+		echo "<h1>Setup - Step 2 of 2</h1>";
+	} else {
+		echo "<h1>Setup - Step 1 of 2s</h1>";
+	}
 	echo "<br>";
 	echo "<div>$setuperror</div>";
 	echo "<br>";
 	echo "<form action='setup.php' method='POST'>";
 	echo "<input type='hidden' name='action' value='setup'>";
 	echo "<input type='hidden' name='step' value='2'>";
-	echo "<table>";
-	echo "<tr><td>Site Name</td><td><input name='sitename' value='$sitename'></td></tr>";
+	echo "<table class='plain-table' width='70%'>";
+	echo "<tr><td width='40%'>Site Title</td><td width='60%'><input name='sitename' value='$sitename'></td></tr>";
 
-	echo "<tr><td colspan='3'><legend>Colours</legend></td></tr>";
-	echo "<tr><td width='180'>Header Background</td><td><input class='colorpicker' id='_bgc1' name='bgc1' value='$bgc1'></td></tr>";
-	echo "<tr><td>Page Background</td><td><input name='bgc2' class='colorpicker' id='_bgc2' value='$bgc2'></td></tr>";
 
 	if (!$hosted || $hosted != 'y') {
+		echo "<tr><td colspan='3'><legend>Colours</legend></td></tr>";
+		echo "<tr><td width='180'>Header Background</td><td><input class='colorpicker' id='_bgc1' name='bgc1' value='$bgc1'></td></tr>";
+		echo "<tr><td>Page Background</td><td><input name='bgc2' class='colorpicker' id='_bgc2' value='$bgc2'></td></tr>";
 		echo "<tr><td colspan='3'><legend>Database & server</legend></td></tr>";
+		
 		echo "<tr><td>Hostname</td><td><input name='dbhost' value='$dbhost'></td></tr>";
 		echo "<tr><td>username</td><td><input name='username' value='$username'></td></tr>";
 		echo "<tr><td>password</td><td><input name='password' value='$password'></td></tr>";
 		echo "<tr><td>database</td><td><input name='database' value='$database'></td></tr>";
 		echo "<tr><td>images_folder</td><td><input name='images_folder' value='$images_folder'></td></tr>";
 		echo "<tr><td>BASEPATH</td><td><input name='BASEPATH' value='$BASEPATH'></td></tr>";
+		echo "<tr><td colspan='3'><legend>Administration</legend></td></tr>";
+		echo "<tr><td>Admin Email address</td><td><input name='adminemail' value='$adminemail'></td></tr>";
+		echo "<tr><td>Admin Password</td><td><input name='MASTER_PASSWORD' value='$MASTER_PASSWORD'></td></tr>";
+		echo "<tr><td>url</td><td><input name='url' value='$url'></td></tr>";
+
+	} else {
+
+		echo "<input type='hidden' name='bgc1' value='$bgc1'>";
+		echo "<input type='hidden' name='bgc2' value='$bgc2'>";
+		echo "<input type='hidden' name='url' value='$url'>";
+		echo "<tr><td>Admin Email address</td><td><input name='adminemail' value='$adminemail'></td></tr>";
+		echo "<tr><td>Admin Password</td><td><input name='MASTER_PASSWORD' value='$MASTER_PASSWORD'></td></tr>";
+
 	}
 	
 
-	echo "<tr><td colspan='3'><legend>Administration</legend></td></tr>";
-	echo "<tr><td>Admin Email address</td><td><input name='adminemail' value='$adminemail'></td></tr>";
-	echo "<tr><td>Admin Password</td><td><input name='MASTER_PASSWORD' value='$MASTER_PASSWORD'></td></tr>";
-	echo "<tr><td>url</td><td><input name='url' value='$url'></td></tr>";
+
 	echo "<tr><td>Language</td><td><select class='span4' name='lang'>";
 	require ("lang/_languages.php");
 	foreach ($_languages as $key=>$data) {
@@ -546,7 +591,8 @@ $adminemail = getConfiguration("adminemail",($_POST["adminemail"] != "") ? ($_PO
 	echo "</form>";
 	echo "<script> $D(function() { $D('#_bgc1').colorpicker({format: 'hex'}); });</script>";
 	echo "<script> $D(function() { $D('#_bgc2').colorpicker({format: 'hex'}); });</script>";
-		echo $hbot;
+	echo "</div></div>";
+	echo $hbot;
 
 
 ?>

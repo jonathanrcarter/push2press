@@ -141,3 +141,7 @@ span.cke_skin_BootstrapCK-Skin, span.cke_skin_BootstrapCK-Skin:focus{
 	/*Opera*/
 	-o-transform: scale(0.8, 0.8);
 }
+
+.plain-table tr {
+	height : 50px;
+}
