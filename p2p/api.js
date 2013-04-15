@@ -19,17 +19,34 @@ $push2press.loading = function() {
 };
 
 push2press.qrcode = function() {
-	var h = '<div style="padding:16px;"><br><legend>QR Code</legend><br><br>'+$("#qrcodesmall").html()+'</div>';
-	h += "Send yourself the link by email";
-	h+= '<form action="api.php"><input type="text" name="emaillinkto"><input class="btn" type="submit"></form>';
+	var h = '<div style="padding:16px;"><br><legend>QR Code</legend>';
+	h += '<table width="600"><tr>';
+	h += '<td valign="top" width="300">'+$("#qrcodesmall").html();
+	h += "<br>Send yourself the link by email";
+	h += '<form action="api.php"><input type="text" name="emaillinkto"><input class="btn" type="submit"></form>';
+	h += "</td><td valign='top'>";
+	
+	h += '<div id="myCarousel" class="carousel slide">';
+	h += "<div class='carousel-inner'>";
+	h += "<div class='item'>1.scan the code<div class='qrcode-instructions qrcode1'></div></div>";
+	h += "<div class='item'>2.press the searchbar<div class='qrcode-instructions qrcode2'></div></div>";
+	h += "<div class='item'>3.press OK<div class='qrcode-instructions qrcode3'></div></div>";
+	h += "<div class='item'>4.Open the app<div class='qrcode-instructions qrcode4'></div></div>";
+	h += "</div>";
+	h += "</div>";
+	
+	h += "</td></tr></table>";
 
 	$("#modal-window2").removeClass("modalpreview");
 	$("#modal-window2").removeClass("modalpreview600");
 	$("#modal-window2").addClass("modalpreview200qrcode");
 	$("#modal-window2").html(h);
 	$("#modal-window2").modal('show');
+	setTimeout(function() {
+		$('.carousel').carousel()
+	},500);
+	
 };
-
 $push2press.preview = function(URL,A,B,C) {
 	var h = "";
 	h += "<div style='position:relative;width:1000px;height:600px;'>";

@@ -123,9 +123,20 @@ h3 {
 }
 .modalpreview200qrcode {
   top : 10%;
+  left: 30%;
+  width: 640px;
   height:500px;
 	
 }
+.qrcode-instructions{
+	background:url(images/qrcode-push2press-diagram.jpg) 0 0 no-repeat transparent;
+	width : 235px;
+	height : 400px;
+}
+.qrcode1 {	background-position: 0 0;	}
+.qrcode2 {	background-position: -240px 0;	}
+.qrcode3 {	background-position: -480px 0;	}
+.qrcode4 {	background-position: -720px 0;	}
 
 
 span.cke_skin_BootstrapCK-Skin, span.cke_skin_BootstrapCK-Skin:focus{
