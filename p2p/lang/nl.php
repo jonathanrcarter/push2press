@@ -99,8 +99,9 @@ function L($phrase) {
 		"Password" => "Wachtwoord",
 		"Search" => "Zoeken",
 		"Graph" => "Diagram",
-		"Groups" => "Groepen"
-		);
+		"Groups" => "Groepen",
+		"templates" => "templates"
+	);
 	return $lang[$phrase];
 }
 ?>

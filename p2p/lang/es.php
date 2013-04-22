@@ -99,7 +99,8 @@ function L($phrase) {
 		"Login" => "Entrada",
 		"Password" => "Contraseña",
 		"Graph" => "Gráfico",
-		"Groups" => "Grupos"
+		"Groups" => "Grupos",
+		"templates" => "templates"
 	);
 	return $lang[$phrase];
 }
