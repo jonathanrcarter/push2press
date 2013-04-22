@@ -256,6 +256,7 @@ $htop = $htop .'              <li <li class="dropdown" id="menu1"><a class="drop
 $htop = $htop .'              	<ul class="dropdown-menu">';
 $htop = $htop .'              		<li><a href="api.php?action=list-cats"><i class="icon-list-alt"></i> '.L('catz').'</a></li>';
 $htop = $htop .'              		<li><a href="api.php?action=list-pages"><i class="icon-file"></i> '.L('pagz').'</a></li>';
+$htop = $htop .'              		<li><a href="api.php?action=list-templates"><i class="icon-file"></i> '.L('templates').'</a></li>';
 $htop = $htop .'    		          <li><a href="javascript:kcnew();"><i class="icon-picture"></i> '.L('Media').'</a></li>';
 $htop = $htop .'    		          <li><a href="api.php?action=list-dom"><i class="icon-wrench"></i> '.L('Config').'</a></li>';
 $htop = $htop .'        		      <li><a href="api.php?action=instruct"><i class="icon-question-sign"></i> '.L('Instructions').'</a></li>';
@@ -2926,9 +2927,7 @@ else if ( $action == "pushwindow") {
         echo "</div>";
         echo $hbot;
 
-}
-
-else if ( $action == "list-pages" ) {
+} else if ( $action == "list-pages" ) {
 
         $db = mysql_connect($dbhost,$username,$password);
         mysql_select_db($database) or die("Unable to select database");
@@ -2991,6 +2990,75 @@ else if ( $action == "list-pages" ) {
         echo $h;
         echo "</div>";
         echo $hbot;
+		
+} else if ( $action == "show-template" ) {
+	
+		$template = $_POST["id"];
+
+        $action2 = $_POST["action2"];
+        if ($action2 == "save") {
+			$content = $_POST["content"];
+			file_put_contents("templates/pages/".$template. ".html",$content);
+        }
+
+		$content = file_get_contents("templates/pages/".$template. ".html");
+        $h = "";
+        $h = $h . "<form action='api.php' method='post'>";
+        $h = $h . "<input type='hidden' name='action' value='show-template'>";
+        $h = $h . "<input type='hidden' name='action2' value='save'>";
+        $h = $h . "<input type='hidden' name='id' value='$template'>";
+        $h = $h . "<div><textarea name='content' style='width:600px;height:500px;'>".htmlspecialchars($content)."</textarea></div>";
+        $h = $h . "<input class='btn btn-success btn-large' type='submit' value='submit'>";
+        $h = $h . "</form>";
+
+
+        echo $htop;
+        echo '<div class="plain-hero-unit">';
+        echo $h;
+        echo "</div>";
+        echo $hbot;
+        exit;
+
+        
+        
+} else if ( $action == "list-templates" ) {
+
+		
+        $action2 = $_POST["action2"];
+        if ($action2 == "add") {
+        	$query="insert ignore into pages (ID) values (0)";
+        	$result=mysql_query($query);
+        }
+
+        $h = "";
+        $h = $h . "<legend>".L('pagz')." <a class='btn btn-mini btn-success' style='margin-left:40px;' href='api.php?action=list-templates&action2=add'> <i class='icon-plus icon-white'></i> ADD</a></legend>";
+        $h = $h . "<div class='btn-toolbar'>";
+    	
+        $h = $h . "</div>";		// end toolbar
+        $h = $h . "<table class='table table-striped table-bordered table-condensed'>";
+        $h = $h . "<tr>";
+        $h = $h . "<th>".L('Title')."</th>";
+        $h = $h . "<th>".L('options')."</th>";
+        $h = $h . "</tr>";
+		
+		require ("templates/pages/_templates.php");
+		foreach ($_page_templates as $key=>$data) {
+               $h = $h . "<tr>";
+                $h = $h . "<td>" . $key . "</td>";
+                $h = $h . "<td>" .B("edit","api.php?action=show-template&id=" . $key . ""). "</td>";
+                $h = $h . "</tr>";
+                
+		}
+
+        $h = $h . "</table>";
+        echo $htop;
+        echo '<div class="plain-hero-unit">';
+        echo $h;
+        echo "</div>";
+        echo $hbot;
+        exit;		
+		
+		
 } else if ( $action == "do-volgorde" ){
 	
 	$db = mysql_connect($dbhost,$username,$password);
