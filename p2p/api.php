@@ -2992,16 +2992,15 @@ else if ( $action == "pushwindow") {
         echo $hbot;
 		
 } else if ( $action == "show-template" ) {
-	
 		$template = $_POST["id"];
 
         $action2 = $_POST["action2"];
         if ($action2 == "save") {
 			$content = $_POST["content"];
-			file_put_contents("templates/pages/".$template. ".html",$content);
+			file_put_contents($template,$content);
         }
 
-		$content = file_get_contents("templates/pages/".$template. ".html");
+		$content = file_get_contents($template);
         $h = "";
         $h = $h . "<form action='api.php' method='post'>";
         $h = $h . "<input type='hidden' name='action' value='show-template'>";
@@ -3040,14 +3039,18 @@ else if ( $action == "pushwindow") {
         $h = $h . "<th>".L('Title')."</th>";
         $h = $h . "<th>".L('options')."</th>";
         $h = $h . "</tr>";
+
+
+		$dirs = array("templates/pages/","templates/messages/");
 		
-		require ("templates/pages/_templates.php");
-		foreach ($_page_templates as $key=>$data) {
-               $h = $h . "<tr>";
-                $h = $h . "<td>" . $key . "</td>";
-                $h = $h . "<td>" .B("edit","api.php?action=show-template&id=" . $key . ""). "</td>";
-                $h = $h . "</tr>";
-                
+		foreach ($dirs as $dir) {
+			$h = $h . sprintf("<tr><td colspan='3'>%s</td></tr>",$dir);
+			$files = scandir($dir);
+			foreach ($files as $file) {
+				if (strpos($file,".html") || strpos($file,".css")) {
+					$h = $h . sprintf("<tr><td> --> %s</td><td>".B("edit","api.php?action=show-template&id=%s")."</td></tr>",$file,$dir.$file);
+				}
+			}
 		}
 
         $h = $h . "</table>";
@@ -3056,8 +3059,8 @@ else if ( $action == "pushwindow") {
         echo $h;
         echo "</div>";
         echo $hbot;
-        exit;		
-		
+        exit;
+
 		
 } else if ( $action == "do-volgorde" ){
 	
