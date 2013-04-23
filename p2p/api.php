@@ -738,7 +738,7 @@ else if ( $action == "get-page" ) {
 
     	$types = explode(":", $type);
 		$wpId = $types[1];
-        $h = "";
+        $h = "<h1>wordpress id ". $wpId . "</h1>";
 
         // $wpId = mysql_result($result,$r,"bodytext");
         // $wpId = str_replace('[wp:', '', $wpId);
