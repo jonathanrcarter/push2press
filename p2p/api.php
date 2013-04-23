@@ -734,7 +734,30 @@ else if ( $action == "get-page" ) {
 		$content =  str_replace("{content}", sprintf("%s",$xml2->entry[$i]->content), $content);
 		$content =  str_replace("{pagename}", sprintf("%s",$xml2->entry[$i]->title), $content);
 	
-	
+	} else if (startswith($type, "wp:")) {
+
+    	$types = explode(":", $type);
+		$wpId = $types[1];
+        $h = "";
+
+        // $wpId = mysql_result($result,$r,"bodytext");
+        // $wpId = str_replace('[wp:', '', $wpId);
+        // $wpId = str_replace(']', '', $wpId);
+        // $wpId = str_replace('<p>', '', $wpId);
+        // $wpId = str_replace('</p>', '', $wpId);
+        // $wpId = preg_replace("/[^0-9]/", "", $wpId);
+        $query666 = "select * from wp_posts where ID='".$wpId."'";
+        $result666 = mysql_query($query666, $db);
+		
+       
+        if (mysql_numrows($result666) > 0) {
+            $thing = mysql_result($result666,0,"post_content");
+            $h = $h ."<p>".$thing."</p>";
+        }
+		
+        $content =  str_replace("{content}", $h, $content);
+        $content =  str_replace("{pagename}", mysql_result($result,$r,"Pagename"), $content);
+		
 	} else if ($type == "leraar") {
 
 		$h = "";
