@@ -3290,6 +3290,25 @@ echo "<!--\n\n $query; \n\n-->";
 				
 				
 				$h = $h . "<tr><td>".L("type")."</td><td><input name='type' type='text' value='" . mysql_result($result,$r,"type") . "'></td></tr>";
+
+
+				/* wordpress link - lists all the available pages */				
+				if ($hosted && $hosted == "wordpress") {
+
+					$query1 = "select * from wp_posts where post_status='publish'";
+					$result1 = mysql_query($query1);
+					$h = $h . "<tr><td>wordpress</td><td>";
+					$h = $h . "<select name='wp-id' id='act'>";
+    				for ($i=0; $i < mysql_numrows($result1); $i++){
+        				$h = $h . "<option value='".mysql_result($result1,$i,"ID")."'>".mysql_result($result1,$i,"post_title")."</option>";
+    				}
+					$h = $h . "</select>";					
+					$h = $h . "</td></tr>";
+				}
+
+
+
+
 				$h = $h . "<tr><td>".L("extraData")."</td><td><textarea name='extraData'>" . mysql_result($result,$r,"extraData") . "</textarea></td></tr>";
 				$h = $h . "<tr><td>".L("bodytext")."</td><td>";
 				
