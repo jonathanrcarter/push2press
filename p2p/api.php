@@ -773,7 +773,7 @@ else if ( $action == "get-page" ) {
         $h = $h . "</div>";
         $h = $h . "</form>";
 		
-		if ( $srch == "" || $srch == " "){
+		if ( $srch == "" || $srch == " ") {
 			$query4 = "select * from menu order by id";
 		} else{
 			$query4 = "select * from menu where Pagename like '%".$srch."%' OR menuCat like '%".$srch."%' OR Caption like '%".$srch."%' order by id";
