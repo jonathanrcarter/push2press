@@ -767,11 +767,15 @@ else if ( $action == "get-page" ) {
 		
        
         if (mysql_numrows($result666) > 0) {
-            $thing = mysql_result($result666,0,"post_content");
-            $h = $h ."<p>".$thing."</p>";
+        	$cols = array("ID","post_author","post_date","post_date_gmt","post_content","post_title","post_excerpt","post_status","comment_status","ping_status","post_password","post_name","to_ping","pinged","post_modified","post_modified_gmt","post_content_filtered","post_parent","guid","menu_order","post_type","post_mime_type","comment_count");
+			foreach ($cols as $col) {
+		        $content =  str_replace("{".$col."}", mysql_result($result666,0,$col), $content);
+			}
+//            $thing = mysql_result($result666,0,"post_content");
+//            $h = $h ."<p>".$thing."</p>";
         }
 		
-        $content =  str_replace("{content}", $h, $content);
+//        $content =  str_replace("{content}", $h, $content);
         $content =  str_replace("{pagename}", mysql_result($result,$r,"Pagename"), $content);
 		
 	} else if ($type == "leraar") {
