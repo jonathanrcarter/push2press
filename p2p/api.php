@@ -3017,8 +3017,6 @@ else if ( $action == "pushwindow") {
         echo "</div>";
         echo $hbot;
         exit;
-
-        
         
 } else if ( $action == "list-templates" ) {
 
@@ -3030,7 +3028,7 @@ else if ( $action == "pushwindow") {
         }
 
         $h = "";
-        $h = $h . "<legend>".L('pagz')." <a class='btn btn-mini btn-success' style='margin-left:40px;' href='api.php?action=list-templates&action2=add'> <i class='icon-plus icon-white'></i> ADD</a></legend>";
+        $h = $h . "<legend>".L('pagz')."</legend>";
         $h = $h . "<div class='btn-toolbar'>";
     	
         $h = $h . "</div>";		// end toolbar
@@ -3044,7 +3042,7 @@ else if ( $action == "pushwindow") {
 		$dirs = array("templates/pages/","templates/messages/");
 		
 		foreach ($dirs as $dir) {
-			$h = $h . sprintf("<tr><td colspan='3'>%s</td></tr>",$dir);
+			$h = $h . sprintf("<tr><td colspan='3'>%s  <a class='btn btn-mini btn-success' style='margin-left:40px;' href='api.php?action=list-templates&action2=add'> <i class='icon-plus icon-white'></i> ADD</a></td></tr>",$dir);
 			$files = scandir($dir);
 			foreach ($files as $file) {
 				if (strpos($file,".html") || strpos($file,".css")) {
