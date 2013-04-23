@@ -3328,23 +3328,23 @@ echo "<!--\n\n $query; \n\n-->";
 				
 				
 				
-				$h = $h . "<tr><td>".L("type")."</td><td><input name='type' type='text' value='" . mysql_result($result,$r,"type") . "'></td></tr>";
+				$h = $h . "<tr><td>".L("type")."</td><td><input id='page_type' name='type' type='text' value='" . mysql_result($result,$r,"type") . "'></td></tr>";
 
-
+				$h = $h . "<tr><td>type selection</td><td>";
+				$h = $h . "<select name='wp-id' id='act' onChange=\"document.getElementById('page_type').value = this.value;\">";
+				$h = $h . "<option value=''>WYSIWYG page</option>";
+				$h = $h . "<option value='TI'>Titanium programming page</option>";
 				/* wordpress link - lists all the available pages */				
 				if ($hosted && $hosted == "wordpress") {
-
 					$query1 = "select * from wp_posts where post_status='publish'";
 					$result1 = mysql_query($query1);
-					$h = $h . "<tr><td>wordpress</td><td>";
-					$h = $h . "<select name='wp-id' id='act'>";
     				for ($i=0; $i < mysql_numrows($result1); $i++){
-        				$h = $h . "<option value='".mysql_result($result1,$i,"ID")."'>".mysql_result($result1,$i,"post_title")."</option>";
+        				$h = $h . "<option value='wp:".mysql_result($result1,$i,"ID")."'>".mysql_result($result1,$i,"post_title")."</option>";
     				}
-					$h = $h . "</select>";					
-					$h = $h . "</td></tr>";
 				}
-
+				$h = $h . "</select>";					
+				$h = $h . "</td></tr>";
+				
 
 
 
