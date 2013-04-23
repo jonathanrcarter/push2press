@@ -3328,15 +3328,15 @@ echo "<!--\n\n $query; \n\n-->";
 				
 				
 				
-				$h = $h . "<tr><td>".L("type")."</td><td><input id='page_type' name='type' type='text' value='" . mysql_result($result,$r,"type") . "'></td></tr>";
+				$h = $h . "<tr><td>".L("type")."</td><td><input id='page_type' name='type' type='text' value='" . mysql_result($result,$r,"type") . "'>";
 
-				$h = $h . "<tr><td>type selection</td><td>";
+				$h = $h . " change to:";
 				$h = $h . "<select name='wp-id' id='act' onChange=\"document.getElementById('page_type').value = this.value;\">";
 				$h = $h . "<option value=''>WYSIWYG page</option>";
 				$h = $h . "<option value='TI'>Titanium programming page</option>";
 				/* wordpress link - lists all the available pages */				
 				if ($hosted && $hosted == "wordpress") {
-					$query1 = "select * from wp_posts where post_status='publish'";
+					$query1 = "select * from wp_posts where post_status='publish' and post_title!=''";
 					$result1 = mysql_query($query1);
     				for ($i=0; $i < mysql_numrows($result1); $i++){
         				$h = $h . "<option value='wp:".mysql_result($result1,$i,"ID")."'>".mysql_result($result1,$i,"post_title")."</option>";
