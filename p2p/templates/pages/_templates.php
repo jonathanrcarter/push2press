@@ -17,4 +17,15 @@ $_page_templates = array(
 	);
 
 
+$dir = "templates/pages/";
+$files = scandir($dir);
+foreach ($files as $file) {
+	if (strpos($file,".html")) {
+		$fls = explode(".", $file,2);
+		if ($_page_templates[$fls[0]] == false) {
+			$_page_templates[$fls[0]] = $fls[0];
+		}
+	}
+}
+
 ?>
