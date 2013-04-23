@@ -3023,8 +3023,11 @@ else if ( $action == "pushwindow") {
 		
         $action2 = $_POST["action2"];
         if ($action2 == "add") {
-        	$query="insert ignore into pages (ID) values (0)";
-        	$result=mysql_query($query);
+	        $DIR = $_POST["dir"];
+	        $FILENAME = $_POST["filename"];
+	        if ($FILENAME != "") {
+				file_put_contents($DIR.$FILENAME,"");
+	        }
         }
 
         $h = "";
@@ -3040,15 +3043,18 @@ else if ( $action == "pushwindow") {
 
 
 		$dirs = array("templates/pages/","templates/messages/");
+		//  <a class='btn btn-mini btn-success' style='margin-left:40px;' href='api.php?action=list-templates&action2=add'> <i class='icon-plus icon-white'></i> ADD</a>
 		
 		foreach ($dirs as $dir) {
-			$h = $h . sprintf("<tr><td colspan='3'>%s  <a class='btn btn-mini btn-success' style='margin-left:40px;' href='api.php?action=list-templates&action2=add'> <i class='icon-plus icon-white'></i> ADD</a></td></tr>",$dir);
+			$h = $h . sprintf("<tr><td colspan='2'>Folder: %s</td></td></tr>",$dir);
 			$files = scandir($dir);
 			foreach ($files as $file) {
 				if (strpos($file,".html") || strpos($file,".css")) {
 					$h = $h . sprintf("<tr><td> --> %s</td><td>".B("edit","api.php?action=show-template&id=%s")."</td></tr>",$file,$dir.$file);
 				}
 			}
+			$h = $h . sprintf("<tr><td colspan='2'><form action='api.php'><input type='hidden' name='action' value='list-templates'><input type='hidden' name='action2' value='add'><input type='hidden' name='dir' value='$dir'><input type='text' name='filename'><input type='submit' class='btn btn-success btn-mini value='add'></form></td></tr>",$dir);
+
 		}
 
         $h = $h . "</table>";
@@ -3058,6 +3064,7 @@ else if ( $action == "pushwindow") {
         echo "</div>";
         echo $hbot;
         exit;
+
 
 		
 } else if ( $action == "do-volgorde" ){
