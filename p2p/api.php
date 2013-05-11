@@ -1643,7 +1643,7 @@ if ($act ==""){
                 $query="insert ignore into pushmessages values(0,now(),'".$Notification."','ok!')";
                 $result=mysql_query($query);
 
-if ($osn == "iphone"){
+if ($osn == "iphone" || $osn == "ipad"){
 
 	date_default_timezone_set('Europe/Rome');
 
@@ -2689,7 +2689,7 @@ else if ( $action == "pushwindow") {
 			
 				//$h = $h . "a".$notification."<br> query:".$query3;
 				//start of pusher
-				if ($osn1 == "iphone"){
+				if ($osn1 == "iphone" || $osn1 == "ipad"){
 
 					date_default_timezone_set('Europe/Rome');
 	
