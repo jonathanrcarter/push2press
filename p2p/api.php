@@ -3331,13 +3331,18 @@ echo "<!--\n\n $query; \n\n-->";
 				*/				
 				
 				
+				$PAGETYPE = mysql_result($result,$r,"type");
 				
-				$h = $h . "<tr><td>".L("type")."</td><td><input id='page_type' name='type' type='text' value='" . mysql_result($result,$r,"type") . "'>";
+				$h = $h . "<tr><td>".L("type")."</td><td><input id='page_type' name='type' type='text' value='" . $PAGETYPE . "'>";
+
 
 				$h = $h . " change to:";
-				$h = $h . "<select name='wp-id' id='act' onChange=\"document.getElementById('page_type').value = this.value;\">";
+//				$h = $h . "<select name='wp-id' id='act' onChange=\"document.getElementById('page_type').value = this.value;\">";
+				$h = $h . "<select name='wp-id' id='act' onChange=\"push2press.changePageType.call(this);\">";
+				$h = $h . "<option value=''> -- page type -- </option>";
 				$h = $h . "<option value=''>WYSIWYG page</option>";
 				$h = $h . "<option value='TI'>Titanium programming page</option>";
+
 				/* wordpress link - lists all the available pages */				
 				if ($hosted && $hosted == "wordpress") {
 					$query1 = "select * from wp_posts where post_status='publish' and post_title!=''";
@@ -3367,8 +3372,10 @@ echo "<!--\n\n $query; \n\n-->";
 								
 				
                 $h = $h . "<tr><td>".L("CatID")."</td><td>" . $sel . "</td></tr>";
-				$h = $h .'<script type="text/javascript">';
 
+
+				$h = $h .'<script type="text/javascript">';
+/*
 				$h = $h . "function change_page_type() {";
 				$h = $h . "	var opt = jq('#pagetype0').val();";
 				$h = $h . " if (opt && opt != '') {";
@@ -3378,35 +3385,9 @@ echo "<!--\n\n $query; \n\n-->";
 				$h = $h . "	}";
 				$h = $h . "	console.log(opt);";
 				$h = $h . "}";
-				
-				$h = $h . "function edit_with_code() {";
-				$h = $h . "	console.log(CKEDITOR.instances);";
-				$h = $h . "	console.log(CKEDITOR.instances.elm12);";
-				$h = $h . "	if (!CKEDITOR.instances.elm12) return;";
-				$h = $h . "	CKEDITOR.instances.elm12.destroy();";
-				$h = $h . "";
-				$h = $h . "";
-				$h = $h . "}";
-				$h = $h . "function edit_with_wysiwyg() {";
-				$h = $h . "	if (CKEDITOR.instances.elm12) return;";
-				$h = $h ." 	CKEDITOR.replace( 'elm12',";
-				$h = $h ."	{";
-				$h = $h ."		skin : 'BootstrapCK-Skin',";
-				$h = $h ."		sharedSpaces : {top : 'topSpace',bottom : 'bottomSpace'},";
-				$h = $h ."		toolbar : 'mytoolbar',";
-				$h = $h ."		removePlugins : 'maximize,resize',";
-				$h = $h ."		width : 300,";
-				$h = $h ."		height : 360,";
-				$h = $h ."		toolbar_mytoolbar : push2press.getEditorToolbar(),";
-				$h = $h ."		filebrowserBrowseUrl : 'kcfinder/browse.php?type=files',";
-				$h = $h ."		filebrowserImageBrowseUrl : 'kcfinder/browse.php?type=images',";
-				$h = $h ."		filebrowserFlashBrowseUrl : 'kcfinder/browse.php?type=flash',";
-				$h = $h ."		filebrowserUploadUrl : 'kcfinder/upload.php?type=files',";
-				$h = $h ."		filebrowserImageUploadUrl : 'kcfinder/upload.php?type=images',";
-				$h = $h ."		filebrowserFlashUploadUrl : 'kcfinder/upload.php?type=flash'";
-				$h = $h ."	});";
-				$h = $h ."}";
-				$h = $h ."edit_with_wysiwyg();";
+*/				
+				//$h = $h . "$"."(function() { push2press.selectAppropriateEditor('".$PAGETYPE."'); });";
+				$h = $h ."push2press.edit_with_wysiwyg();";
 				$h = $h .'</script>';
 
                 $h = $h . "<tr><td>&nbsp;</td><td><input class='btn btn-success' type='submit'></td></tr>";
