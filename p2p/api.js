@@ -214,3 +214,57 @@ push2press.getEditorToolbar = function() {
 
 }
 
+
+push2press.changePageType = function() {
+	document.getElementById('page_type').value = this.value;
+	push2press.selectAppropriateEditor(this.value);
+}
+
+push2press.edit_with_code = function() {
+	console.log(CKEDITOR.instances);
+	console.log(CKEDITOR.instances.elm12);
+	if (!CKEDITOR.instances.elm12) return;
+	CKEDITOR.instances.elm12.destroy();
+
+	var bottomSpace = document.getElementById("bottomSpace");
+	if (bottomSpace) bottomSpace.style.width = "100%";
+
+	var elm12 = document.getElementById("elm12");
+	if (elm12) elm12.style.width = "99%";
+
+}
+push2press.edit_with_wysiwyg = function() {
+	if (CKEDITOR.instances.elm12) return;
+	
+	var bottomSpace = document.getElementById("bottomSpace");
+	if (bottomSpace) bottomSpace.style.width = "400px";
+
+	var elm12 = document.getElementById("elm12");
+	if (elm12) elm12.style.width = "80%";
+	
+	CKEDITOR.replace( 'elm12', {
+		skin : 'BootstrapCK-Skin',
+		sharedSpaces : {top : 'topSpace',bottom : 'bottomSpace'},
+		toolbar : 'mytoolbar',
+		emovePlugins : 'maximize,resize',
+		width : 300,
+		height : 360,
+		toolbar_mytoolbar : push2press.getEditorToolbar(),
+		filebrowserBrowseUrl : 'kcfinder/browse.php?type=files',
+		filebrowserImageBrowseUrl : 'kcfinder/browse.php?type=images',
+		filebrowserFlashBrowseUrl : 'kcfinder/browse.php?type=flash',
+		filebrowserUploadUrl : 'kcfinder/upload.php?type=files',
+		filebrowserImageUploadUrl : 'kcfinder/upload.php?type=images',
+		filebrowserFlashUploadUrl : 'kcfinder/upload.php?type=flash'
+	});
+}
+push2press.selectAppropriateEditor = function(TYPE) {
+
+	if (TYPE == "TI") {
+		push2press.edit_with_code();
+	} else {
+		push2press.edit_with_wysiwyg();
+	}
+}
+
+
