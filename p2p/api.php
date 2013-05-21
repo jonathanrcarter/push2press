@@ -555,7 +555,7 @@ if ( $action == "get-page-raw" ) {
 	exit;
 
 
-}else if ( $action == "get-struct" ) {
+} else if ( $action == "get-struct" ) {
 
 	log2("get-struct osn=$osn pusht=$pusht dtype=$dtype aid=$aid","");
 	log3($osn, $pusht, $dtype, $aid, $gid);
@@ -3500,7 +3500,10 @@ echo "<!--\n\n $query; \n\n-->";
         echo '			<div class="span4">';
         echo "			<div class='ribbon left red'><a href='#'>Fork me on GitHub</a></div>";
         echo "			<img src='images/MainImage.jpg'>";
-		echo '			<a href="https://itunes.apple.com/us/app/push2press/id603889484?mt=8"><img src="http://blog.eventphant.com/wp-content/uploads/2012/07/Apple-App-Store.jpg" height="50"></a>';
+//		echo '			<a href="https://itunes.apple.com/us/app/push2press/id603889484?mt=8"><img src="http://blog.eventphant.com/wp-content/uploads/2012/07/Apple-App-Store.jpg" height="50"></a>';
+		echo '			<a href="push2press://?url='.getConfiguration("url","").'"><img src="http://blog.eventphant.com/wp-content/uploads/2012/07/Apple-App-Store.jpg" height="50"></a>';
+		
+
 		echo "			<span id='qrcodesmall'><a href='javascript:push2press.qrcode();'><img src='http://api.qrserver.com/v1/create-qr-code/?data=".urlencode("push2press://?url=".getConfiguration("url",""))."&size=250x250'></a></span>";
         echo "			</div>";
         echo '			<div class="span8">';
