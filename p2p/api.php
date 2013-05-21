@@ -2603,7 +2603,9 @@ else if ( $action == "pushwindow") {
 		$cap = $_POST["cap"];
 		$desc = $_POST["desc"];
 		$mid = $id;
+
 		
+				
 		$h = "";
 		$db = mysql_connect($dbhost,$username,$password);
         mysql_select_db($database) or die("Unable to select database");
@@ -2614,8 +2616,9 @@ else if ( $action == "pushwindow") {
         $result=mysql_query($query);
         $_sendingid = mysql_insert_id();
 
-
-
+		$updatemessagequery=sprintf("update message set status='sent' where id='%s'",$id);
+		mysql_query($updatemessagequery);
+		
 
       	//echo $query;
       	$READY = "N";
