@@ -555,10 +555,16 @@ if ( $action == "get-page-raw" ) {
 	exit;
 
 
-} else if ( $action == "get-struct" ) {
+}else if ( $action == "get-struct" ) {
 
 	log2("get-struct osn=$osn pusht=$pusht dtype=$dtype aid=$aid","");
 	log3($osn, $pusht, $dtype, $aid, $gid);
+
+
+	$timthumb = getConfiguration("url","http://".$_SERVER['HTTP_HOST'].$_SERVER['SCRIPT_NAME']);
+	$timthumb = str_replace("api.php", "", $timthumb);
+
+
 	
 	$db = mysql_connect($dbhost,$username,$password);
 	mysql_select_db($database) or die("Unable to select database");
@@ -577,11 +583,16 @@ if ( $action == "get-page-raw" ) {
 	$retval->user = array();
 	
 	for ($r=0; $r < mysql_numrows($result); $r++) {
+
+		$img = mysql_result($result,$r,"img");
+		$img_size = ($img && $img != "") ? sprintf($timthumb."/timthumb.php?h=32&w=32&src=%s",$img) : "";
+		if (strpos($img_size,"client_images/images/icons/glyphicons")) $img_size = $img_size . "&zc=2&f=5,238,238,238,1";
 		
 		$cat = new obj();
 		$cat->id = mysql_result($result,$r,"id");
 		$cat->Pagename = mysql_result($result,$r,"Pagename");
-		$cat->img = mysql_result($result,$r,"img");
+		$cat->img = $img_size;
+		$cat->imgv2 = $img_size;
 		$cat->pages = array();
 
 		$caption = mysql_result($result,$r,"Caption");
@@ -607,15 +618,66 @@ if ( $action == "get-page-raw" ) {
 			$query2="select * from pages where CatID = " . $cat->id ." order by Volgorde";
 			$result2=mysql_query($query2);
 			for ($r2=0; $r2 < mysql_numrows($result2); $r2++) {
+			
+				$img = mysql_result($result2,$r2,"img");
+				$img_size = ($img && $img != "") ? sprintf($timthumb."/timthumb.php?h=32&w=32&src=%s",$img) : "";
+				if (strpos($img_size,"client_images/images/icons/glyphicons")) $img_size = $img_size . "&zc=2&f=5,238,238,238,1";
+			
 				$page = new obj();
 				$page->id = mysql_result($result2,$r2,"id");
 				$page->Pagename = mysql_result($result2,$r2,"Pagename");
 				$page->type = mysql_result($result2,$r2,"Type");
 				$page->extraData = mysql_result($result2,$r2,"extraData");
+				$page->img = $img_size;
+				$bt = null;
+				
+				if ($page->type && $page->type == "QC") {
+					if ($bt == null) $bt = mysql_result($result2,$r2,"bodytext");
+					
+					$bt2 = "";
+					$bt2 = $bt2. "<!--|\n";
+					$bt2 = $bt2 . "var getlines = function() {\n";
+					$bt2 = $bt2 . " var lines = [];\n";
+					
+					$btlines = explode("\n",$bt);
+					foreach ($btlines as $btline) {
+						$bt2 = $bt2 . sprintf('lines.push("%s");',substr($btline,0,-1)). "\n";
+					}
+					$bt2 = $bt2 . " return lines;\n";
+					$bt2 = $bt2 . "}\n";
+					$bt2 = $bt2 . file_get_contents("plugins/ticode/quickcontent.js");
+					$bt2 = $bt2. "|--> \n";
+					
+					$page->type = "TI";
+					$bt = $bt2;
+				
+				}
+				
 				if ($page->type && $page->type == "TI") {
-					$bt = explode("|",mysql_result($result2,$r2,"bodytext"));
+					if ($bt == null) $bt = mysql_result($result2,$r2,"bodytext");
+					$bt = explode("|",$bt);
 					if (count($bt) > 1) {
-						$page->bt = $bt[1];
+						$bt1 = $bt[1];
+						while (strpos($bt1,"@include(")) {
+							$bt2 = explode("\n",$bt1);
+							$bt1 = "";
+							foreach ($bt2 as $btline) {
+								$start = strpos($btline,"@include(");
+								if ($start > -1) {
+									$end = strpos($btline,")");
+									if ($end > $start) {
+										$script = substr($btline,$start+10,($end - ($start+11)));
+										$btline = 
+										$btline = "/* included(".$script.") */\n" . file_get_contents("plugins/ticode/".$script);
+									} else {
+										$btline = "";
+									}
+								}
+								$bt1 = $bt1 . $btline . "\n";
+							}
+						
+						}
+						$page->bt = $bt1;
 					}
 				}
 				array_push($cat->pages,$page);
@@ -1903,13 +1965,18 @@ if ($osn == "iphone" || $osn == "ipad"){
 
         if (mysql_numrows($result) > 0) {
                 $r=0;
+                
+                $img = mysql_result($result,$r,"img");
+                $img_size = sprintf("timthumb.php?h=32&w=32&src=%s",$img);
+				if (strpos($img_size,"client_images/images/icons/glyphicons")) $img_size = $img_size . "&zc=2&f=5,238,238,238,1";
+
 
                 $h = $h . "<form action='api.php'>";
                 $h = $h . "<input type='hidden' name='action' value='show-cat'>";
                 $h = $h . "<input type='hidden' name='action2' value='update'>";
                 $h = $h . "<input type='hidden' name='id' value='".$id."'>";
                 $h = $h . "<table class='table table-striped table-bordered table-condensed'>";
-                $h = $h . "<tr><td>image</td><td id='test'><input name='img' id='main_img_fld' type='hidden' value='" . mysql_result($result,$r,"img") . "'><img id='main_img' src='" . mysql_result($result,$r,"img") . "' height=80 width=80>&nbsp;&nbsp;&nbsp;<a class='btn' href='javascript:troller();'>".L("Browse")."</a></td></tr>";
+                $h = $h . "<tr><td>image</td><td id='test' class='previewimage'><input name='img' id='main_img_fld' type='hidden' value='" . mysql_result($result,$r,"img") . "'><img id='main_img' src='" . $img_size . "' height=32 width=32>&nbsp;&nbsp;&nbsp;<a class='btn' href='javascript:troller();'>".L("Browse")."</a></td></tr>";
 				$h = $h ."<script type='text/javascript'>";
 				$h = $h ."var finder = new CKFinder();";
 				$h = $h ."finder.basePath = '".$BASEPATH."ckfinder/';";
@@ -2603,9 +2670,7 @@ else if ( $action == "pushwindow") {
 		$cap = $_POST["cap"];
 		$desc = $_POST["desc"];
 		$mid = $id;
-
 		
-				
 		$h = "";
 		$db = mysql_connect($dbhost,$username,$password);
         mysql_select_db($database) or die("Unable to select database");
@@ -2616,9 +2681,11 @@ else if ( $action == "pushwindow") {
         $result=mysql_query($query);
         $_sendingid = mysql_insert_id();
 
+
 		$updatemessagequery=sprintf("update message set status='sent' where id='%s'",$id);
 		mysql_query($updatemessagequery);
-		
+
+
 
       	//echo $query;
       	$READY = "N";
@@ -3220,10 +3287,11 @@ else if ( $action == "pushwindow") {
                 $CatID = $_POST["CatID"];
                 $bodytext = $_POST["elm1"];
 				$temp = $_POST["template"];
+				$img = $_POST["img"];
 				$type = $_POST["type"];
 				$eData = $_POST["extraData"];
 
-                $query="update ignore pages set Caption='".esc($Caption)."', Pagename='".esc($Pagename)."', Volgorde='".$Volgorde."', CatID='".$CatID."', bodytext='".esc($bodytext)."', template='".$temp."', type='".$type."', extraData='".esc($eData)."' where id=" . $id;
+                $query="update ignore pages set Caption='".esc($Caption)."', Pagename='".esc($Pagename)."', Volgorde='".$Volgorde."', CatID='".$CatID."', bodytext='".esc($bodytext)."', template='".$temp."', img='".$img."', type='".$type."', extraData='".esc($eData)."' where id=" . $id;
                 
 echo "<!--\n\n $query; \n\n-->";
                 
@@ -3243,10 +3311,11 @@ echo "<!--\n\n $query; \n\n-->";
         	$CatID = $_POST["CatID"];
         	$bodytext = $_POST["elm1"];
         	$temp = $_POST["template"];
+        	$img = $_POST["img"];
         	$type = $_POST["type"];
         	$eData = $_POST["extraData"];
         	
-        	$query="update ignore pages set Caption='".esc($Caption)."', Pagename='".esc($Pagename)."', Volgorde='".$Volgorde."', CatID='".$CatID."', bodytext='".esc($bodytext)."', template='".$temp."', type='".$type."', extraData='".esc($eData)."' where id=" . $id;
+        	$query="update ignore pages set Caption='".esc($Caption)."', Pagename='".esc($Pagename)."', Volgorde='".$Volgorde."', CatID='".$CatID."', bodytext='".esc($bodytext)."', template='".$temp."', type='".$type."', img='".$img."', extraData='".esc($eData)."' where id=" . $id;
             $result=mysql_query($query);
             $h = "Updated!";
             $h = $h . "<a class='btn' href='api.php?action=show=page&id=".$id."'>OK <i class='icon-check'></i>";    
@@ -3281,6 +3350,15 @@ echo "<!--\n\n $query; \n\n-->";
                 $h = $h . "<input type='hidden' name='action2' value='update'>";
                 $h = $h . "<input type='hidden' name='id' value='".$id."'>";
                 $h = $h . "<table class='table xtable-striped table-bordered table-condensed'>";
+
+
+                $img = mysql_result($result,$r,"img");
+                $img_size = sprintf("timthumb.php?h=32&w=32&src=%s",$img);
+				if (strpos($img_size,"client_images/images/icons/glyphicons")) $img_size = $img_size . "&zc=2&f=5,238,238,238,1";
+
+                $h = $h . "<tr><td>image</td><td id='test' class='previewimage'><input name='img' id='main_img_fld' type='hidden' value='" . $img . "'><img id='main_img' src='" . $img_size . "' height=32 width=32>&nbsp;&nbsp;&nbsp;<a class='btn' href='javascript:troller();'>".L("Browse")."</a></td></tr>";
+
+
                // $h = $h . "<tr><td>image</td><td><img src='images/" . mysql_result($result,$r,"img") . "' height=80 width=80></td></tr>";
                 $h = $h . "<tr><td>".L("Pagename")."</td><td><input name='Pagename' type='text' value='" . mysql_result($result,$r,"Pagename") . "'></td></tr>";
 
@@ -3346,6 +3424,23 @@ echo "<!--\n\n $query; \n\n-->";
 				$h = $h . "<option value=''>WYSIWYG page</option>";
 				$h = $h . "<option value='TI'>Titanium programming page</option>";
 
+
+				$dirs = array("plugins/connectors/","templates/messages/");
+		//  <a class='btn btn-mini btn-success' style='margin-left:40px;' href='api.php?action=list-templates&action2=add'> <i class='icon-plus icon-white'></i> ADD</a>
+		
+				$DIR = "plugins/connectors/";
+				$dirs = scandir($DIR);
+				foreach ($dirs as $dir) {
+//       				$h = $h . "<option value='ti|".($DIR.$dir)."'>".($DIR.$dir)."</option>";
+
+					$files = scandir($DIR.$dir."/");
+					foreach ($files as $file) {
+						if (strpos($file,".js")) {
+	        				$h = $h . "<option value='ti|".($DIR.$dir."/".$file)."'>".($dir.$file)."</option>";
+						}
+					}
+				}
+
 				/* wordpress link - lists all the available pages */				
 				if ($hosted && $hosted == "wordpress") {
 					$query1 = "select * from wp_posts where post_status='publish' and post_title!=''";
@@ -3354,7 +3449,8 @@ echo "<!--\n\n $query; \n\n-->";
         				$h = $h . "<option value='wp:".mysql_result($result1,$i,"ID")."'>".mysql_result($result1,$i,"post_title")."</option>";
     				}
 				}
-				$h = $h . "</select>";					
+				$h = $h . "</select>";
+				$h = $h . "<script>push2press.setInitialPage_type('".$PAGETYPE."');</script>";
 				$h = $h . "</td></tr>";
 				
 
@@ -3505,8 +3601,7 @@ echo "<!--\n\n $query; \n\n-->";
         echo "			<img src='images/MainImage.jpg'>";
 //		echo '			<a href="https://itunes.apple.com/us/app/push2press/id603889484?mt=8"><img src="http://blog.eventphant.com/wp-content/uploads/2012/07/Apple-App-Store.jpg" height="50"></a>';
 		echo '			<a href="push2press://?url='.getConfiguration("url","").'"><img src="http://blog.eventphant.com/wp-content/uploads/2012/07/Apple-App-Store.jpg" height="50"></a>';
-		
-
+        
 		echo "			<span id='qrcodesmall'><a href='javascript:push2press.qrcode();'><img src='http://api.qrserver.com/v1/create-qr-code/?data=".urlencode("push2press://?url=".getConfiguration("url",""))."&size=250x250'></a></span>";
         echo "			</div>";
         echo '			<div class="span8">';
