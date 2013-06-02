@@ -165,3 +165,6 @@ span.cke_skin_BootstrapCK-Skin, span.cke_skin_BootstrapCK-Skin:focus{
 #qrcodesmall img {
 	width:50px;
 }
+.previewimage {
+	background-image: url(images/sidebar_bg.png) !important;
+}
