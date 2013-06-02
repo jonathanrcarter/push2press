@@ -3436,7 +3436,18 @@ echo "<!--\n\n $query; \n\n-->";
 					$files = scandir($DIR.$dir."/");
 					foreach ($files as $file) {
 						if (strpos($file,".js")) {
-	        				$h = $h . "<option value='ti|".($DIR.$dir."/".$file)."'>".($dir.$file)."</option>";
+							$meta = new obj();
+							$meta->name = ($dir.$file);
+							$meta->path = ($DIR.$dir."/".$file);
+							
+							$js_file_contents = file_get_contents($meta->path);
+							foreach (explode("\n",$js_file_contents,20) as $js_file_contents_line) {
+								if (strpos($js_file_contents_line,"wiz:#name:") === 0) {
+									$meta->name = substr($js_file_contents_line,10);
+								}
+							}
+							
+	        				$h = $h . "<option value='ti|".$meta->path."'>".$meta->name."</option>";
 						}
 					}
 				}

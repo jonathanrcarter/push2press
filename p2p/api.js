@@ -214,7 +214,6 @@ push2press.getEditorToolbar = function() {
 
 }
 
-
 push2press.wizard_add_titanium_tags = function(TXT) {
 	if (TXT.indexOf("<!--|") < 0) {
 		return "<!--|\n"+ TXT + "\n-->"
@@ -229,7 +228,10 @@ push2press.wizard = function(TXT) {
 	
 	for (var i=0; i < lines.length; i++) {
 		var line = lines[i];
-		if (line.indexOf("wiz:") == 0) {
+		if (line.indexOf("wiz:#") == 0) {
+			// do nothing - this is a name or meta data about the plugin
+			
+		} else if (line.indexOf("wiz:") == 0) {
 			var line_parts = line.split(":");
 			wiz += "<td>"+line_parts[1]+"</td>";
 			wiz += "<td> : </td>";
@@ -343,7 +345,5 @@ push2press.selectAppropriateEditor = function(TYPE) {
 		push2press.edit_with_wysiwyg();
 	}
 }
-
-
 
 
