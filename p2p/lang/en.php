@@ -52,7 +52,7 @@ function L($phrase) {
 		"image" => "image",
 		"bodytext" => "bodytext",
 		"List of Pages" => "List of Pages",
-		"Volgorde" => "Volgorde",
+		"Volgorde" => "Order",
 		"Cat" => "Cat",
 		"New page" => "New page",
 		"Showing Page #" => "Showing Page #",

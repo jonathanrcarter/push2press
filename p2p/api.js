@@ -215,22 +215,99 @@ push2press.getEditorToolbar = function() {
 }
 
 
-push2press.changePageType = function() {
-	document.getElementById('page_type').value = this.value;
-	push2press.selectAppropriateEditor(this.value);
+push2press.wizard_add_titanium_tags = function(TXT) {
+	if (TXT.indexOf("<!--|") < 0) {
+		return "<!--|\n"+ TXT + "\n-->"
+	}
+	return TXT
+}
+push2press.wizard = function(TXT) {
+	var lines = TXT.split("\n");
+	var S = "";
+	var wiz = "";
+	var wizzard_array = [];
+	
+	for (var i=0; i < lines.length; i++) {
+		var line = lines[i];
+		if (line.indexOf("wiz:") == 0) {
+			var line_parts = line.split(":");
+			wiz += "<td>"+line_parts[1]+"</td>";
+			wiz += "<td> : </td>";
+			wiz += "<td><input id='wiz-field-"+i+"' type='text' value='"+line_parts[3]+"'></td></tr>";
+			wizzard_array.push(line_parts[2]);
+		
+		} else {
+			S += (line+"\n") ;
+		}
+	}
+	if (wiz != "") {
+		push2press.wizzardsubmit = function() {
+			var wizzardvars = "";
+			var Q = '"';
+			for (var i=0; i < wizzard_array.length; i++) {
+				wizzardvars += "var "+wizzard_array[i]+" = " + Q + $("#wiz-field-"+i).val() + Q + ";\n";
+			}
+			document.getElementById('page_type').value = "TI";
+			push2press.edit_with_code(push2press.wizard_add_titanium_tags(wizzardvars + S));
+			$("#modal-window").modal('hide');
+			
+		}
+
+
+		wiz += "<tr><td>&nbsp;</td><td>&nbsp;</td><td><a href='javascript:push2press.wizzardsubmit();'>OK</a></td></tr>";
+		wiz = "<h1>Wizzard</h1><table>"+wiz+"</table>";
+		$("#modal-window").html(wiz);
+		$("#modal-window").modal({
+			show : true
+		});
+	} else {
+		document.getElementById('page_type').value = "TI";
+		document.getElementById('elm12').value = push2press.wizard_add_titanium_tags(S);
+		push2press.selectAppropriateEditor("TI");
+	}
 }
 
-push2press.edit_with_code = function() {
+push2press.changePageType = function() {
+	var new_value = this.value;
+	if (new_value.indexOf("ti|") == 0) {
+		/* if it starts with ti| then it means it is a template from the plugins folder */
+		var new_value_split = new_value.split("|");
+		$.ajax({
+			url : new_value_split[1], 
+			success : function(data) {
+				push2press.wizard.call(this,data);
+			},
+			cache: false
+		});
+		return;
+	}
+
+
+	document.getElementById('page_type').value = new_value;
+	push2press.selectAppropriateEditor(new_value);
+}
+push2press.setInitialPage_type = function(TYPE) {
+	$(function() {
+		push2press.selectAppropriateEditor(TYPE);
+	})
+}
+
+push2press.edit_with_code = function(NEW_CONTENT) {
 	console.log(CKEDITOR.instances);
 	console.log(CKEDITOR.instances.elm12);
-	if (!CKEDITOR.instances.elm12) return;
-	CKEDITOR.instances.elm12.destroy();
+	if (!CKEDITOR.instances.elm12) {
+		var elm12 = document.getElementById("elm12");
+		if (NEW_CONTENT) elm12.value = NEW_CONTENT;
+		return;
+	}
 
+	CKEDITOR.instances.elm12.destroy();
 	var bottomSpace = document.getElementById("bottomSpace");
 	if (bottomSpace) bottomSpace.style.width = "100%";
 
 	var elm12 = document.getElementById("elm12");
 	if (elm12) elm12.style.width = "99%";
+	if (NEW_CONTENT) elm12.value = NEW_CONTENT;
 
 }
 push2press.edit_with_wysiwyg = function() {
@@ -266,5 +343,7 @@ push2press.selectAppropriateEditor = function(TYPE) {
 		push2press.edit_with_wysiwyg();
 	}
 }
+
+
 
 
