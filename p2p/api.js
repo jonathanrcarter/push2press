@@ -247,6 +247,7 @@ push2press.wizard = function(TXT) {
 			var wizzardvars = "";
 			var Q = '"';
 			for (var i=0; i < wizzard_array.length; i++) {
+				console.log($("#wiz-field-"+i));
 				wizzardvars += "var "+wizzard_array[i]+" = " + Q + $("#wiz-field-"+i).val() + Q + ";\n";
 			}
 			document.getElementById('page_type').value = "TI";
