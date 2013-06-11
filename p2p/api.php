@@ -139,6 +139,23 @@ function table_exists($tablename) {
     ");
     return mysql_result($res, 0) == 1;
 }
+function column_exists($tablename, $columnname, $createsql) {
+	global $username,$password,$database,$dbhost;
+	$db = mysql_connect($dbhost,$username,$password);
+	mysql_select_db($database);
+	mysql_query("SET NAMES utf8", $db);
+	mysql_query( "SET CHARACTER SET utf8", $db );
+    $res = mysql_query("
+    	select count(*) AS count 
+    	from information_schema.columns 
+        WHERE table_schema = '$database' 
+        AND table_name = '$tablename' 
+        AND column_name = '$columnname'
+     ");
+    if (mysql_result($res, 0) == 0) {
+    	mysql_query($createsql);
+    }
+}
 function sqlcount($sql) {
 	global $username,$password,$database,$dbhost;
 	$db = mysql_connect($dbhost,$username,$password);
@@ -166,6 +183,8 @@ if (!table_exists("log_phone")) {
 	exit;
 }
 
+/* auto add column if not exists */
+column_exists("cats", "collapse", "alter table cats add column collapse varchar(4) not null default 'n'");
 
 
 $htop = "";
@@ -445,13 +464,13 @@ if ( $action == "info" ) {
 }
 
 if ( $action == "logout" ) {
-        $_SESSION['password'] = "";
+        $_SESSION['p2p_password'] = "";
         $action = "";
 }
 
 if ( $action == "login" ) {
         $pwd = $_POST["pwd"];
-        $_SESSION['password'] = $pwd;
+        $_SESSION['p2p_password'] = $pwd;
         $action = "";
 }
 
@@ -591,6 +610,7 @@ if ( $action == "get-page-raw" ) {
 		$cat = new obj();
 		$cat->id = mysql_result($result,$r,"id");
 		$cat->Pagename = mysql_result($result,$r,"Pagename");
+		$cat->collapse = mysql_result($result,$r,"collapse");
 		$cat->img = $img_size;
 		$cat->imgv2 = $img_size;
 		$cat->pages = array();
@@ -995,7 +1015,7 @@ else if ( $action == "get-page" ) {
 
 }
 
-if ($_SESSION['password'] != $MASTER_PASSWORD) {
+if ($_SESSION['p2p_password'] != $MASTER_PASSWORD) {
         $h = "";
         $h = $h . "<form action='api.php' class='form-inline'>";
         $h = $h . "<input type='hidden' name='action' value='login'>";
@@ -1951,7 +1971,8 @@ if ($osn == "iphone" || $osn == "ipad"){
                 $Pagename = $_POST["Pagename"];
                 $Caption = $_POST["Caption"];
                 $img = $_POST["img"];
-                $query="update ignore cats set  img='".$img."', Caption='".$Caption."', Pagename='".$Pagename."' where id=" . $id;
+                $collapse = $_POST["collapse"];
+                $query="update ignore cats set  img='".$img."', Caption='".$Caption."', Pagename='".$Pagename."', collapse='".$collapse."' where id=" . $id;
                 $result=mysql_query($query);
                 $h = "UPDATED";
                 $h = $h . "<a class='btn' href='api.php?action=show-cat&id=" . $id . "'>OK <i class='icon-check'></i></a>";
@@ -1993,6 +2014,7 @@ if ($osn == "iphone" || $osn == "ipad"){
 				$h = $h ."</script>";                
 				$h = $h . "<tr><td>".L("Pagename")."</td><td><input name='Pagename' type='text' value='" . mysql_result($result,$r,"Pagename") . "'></td></tr>";
                 $h = $h . "<tr><td>".L("Caption")."</td><td><input type='text' name='Caption' value='" . mysql_result($result,$r,"Caption") . "'></td></tr>";
+                $h = $h . "<tr><td>".L("collapse")."</td><td><input type='text' name='collapse' value='" . mysql_result($result,$r,"collapse") . "'></td></tr>";
                 $h = $h . "<tr><td>&nbsp;</td><td><input class='btn btn-success' type='submit'></td></tr>";
                 $h = $h . "</table>";
                 $h = $h . "</form>";
