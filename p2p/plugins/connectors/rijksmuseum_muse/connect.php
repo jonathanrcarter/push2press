@@ -79,10 +79,10 @@ if ( !class_exists('rijksmuseum_muse') ) {
 //			$this->request("search", array("srch" => $text));
 			return $this->parsed_response ? $this->parsed_response : false;
 		}
-		function getgame () {
+		function getgame ($type = "") {
 			// http://jon651.glimworm.com/europeana/rijksmuseum.php?action=json-get-game
 			$this->request();
-			$this->request("json-get-game", array());
+			$this->request("json-get-game", array("type" => $type));
 			return $this->parsed_response ? $this->parsed_response : false;
 		}
 		

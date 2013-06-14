@@ -3,8 +3,11 @@
 include_once("../include.php");
 require_once("connect.php");
 
+
 $f = new rijksmuseum_muse("");
-$res = $f->getgame();
+
+$typ = $_GET['type'];
+$res = $f->getgame($typ);
 
 $retval = new obj();
 $retval->status = 0;
