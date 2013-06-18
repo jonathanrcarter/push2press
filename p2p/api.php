@@ -3076,6 +3076,12 @@ else if ( $action == "pushwindow") {
                 $result=mysql_query($query);
         		echo "<br><br><br><br><pre>result::\n";
 				var_dump($result);
+
+                $result=mysql_query("show tables");
+		        for ($r=0; $r < mysql_numrows($result); $r++) {
+		        	echo mysql_result($result,$r,0) . "\n";
+				}
+				
 				echo "</pre><br><br>";
         }
 
