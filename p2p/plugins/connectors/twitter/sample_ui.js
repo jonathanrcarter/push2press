@@ -11,10 +11,11 @@ var fn = function(win,view) {
 	
 	
 	var rowData = new Array();
-	var twitterAPIrequest = "http://api.twitter.com/1/statuses/user_timeline.json?screen_name="+twitterUser;
+	var twitterAPIrequest = "https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name="+twitterUser;
 	var loader = Ti.Network.createHTTPClient();
 	
 	loader.open("GET",twitterAPIrequest);
+	loader.setRequestHeader("Authorization","Bearer AAAAAAAAAAAAAAAAAAAAAODwRQAAAAAAQei%2BqyASxOmNkesqU26WXXh6l5A%3DMawjJFnPgNxPv7ddhAh5cgOeCseGbLSmT3aK9CSvCo");
 	
 	loader.onload = function() {
 		var tweets = eval('('+this.responseText+')');
