@@ -13,7 +13,7 @@
 
   
 session_start();
-error_reporting(0);
+error_reporting(-1);
 
 if (get_magic_quotes_gpc()) {
     $process = array(&$_GET, &$_POST, &$_COOKIE, &$_REQUEST);
