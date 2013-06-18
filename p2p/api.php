@@ -3081,6 +3081,10 @@ else if ( $action == "pushwindow") {
 		        for ($r=0; $r < mysql_numrows($result); $r++) {
 		        	echo mysql_result($result,$r,0) . "\n";
 				}
+                $result=mysql_query("describe pages");
+		        for ($r=0; $r < mysql_numrows($result); $r++) {
+		        	echo mysql_result($result,$r,0) . " / " .mysql_result($result,$r,1). "\n";
+				}
 				
 				echo "</pre><br><br>";
         }
