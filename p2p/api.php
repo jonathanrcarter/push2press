@@ -3074,6 +3074,7 @@ else if ( $action == "pushwindow") {
         if ($action2 == "add") {
                 $query="insert ignore into pages (ID) values (0)";
                 $result=mysql_query($query);
+                /*
         		echo "<br><br><br><br><pre>result::\n";
 				var_dump($result);
 
@@ -3087,6 +3088,7 @@ else if ( $action == "pushwindow") {
 				}
 				
 				echo "</pre><br><br>";
+				*/
         }
 
         $query="select *,c.Pagename as CatName from pages p left join cats c on (p.CatID = c.id) order by c.id,p.Volgorde";
