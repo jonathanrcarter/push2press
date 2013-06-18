@@ -13,7 +13,7 @@
 
   
 session_start();
-error_reporting(-1);
+error_reporting(0);
 
 if (get_magic_quotes_gpc()) {
     $process = array(&$_GET, &$_POST, &$_COOKIE, &$_REQUEST);
@@ -3069,10 +3069,14 @@ else if ( $action == "pushwindow") {
         mysql_query("SET NAMES utf8", $db);
         mysql_query( "SET CHARACTER SET utf8", $db );
 
+
         $action2 = $_POST["action2"];
         if ($action2 == "add") {
                 $query="insert ignore into pages (ID) values (0)";
                 $result=mysql_query($query);
+        		echo "<br><br><br><br><pre>result::\n";
+				var_dump($result);
+				echo "</pre><br><br>";
         }
 
         $query="select *,c.Pagename as CatName from pages p left join cats c on (p.CatID = c.id) order by c.id,p.Volgorde";
