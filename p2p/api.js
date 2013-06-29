@@ -235,7 +235,7 @@ push2press.wizard = function(TXT) {
 			var line_parts = line.split(":");
 			wiz += "<td>"+line_parts[1]+"</td>";
 			wiz += "<td> : </td>";
-			wiz += "<td><input id='wiz-field-"+i+"' type='text' value='"+line_parts[3]+"'></td></tr>";
+			wiz += "<td><input id='wiz-field-"+wizzard_array.length+"' type='text' value='"+line_parts[3]+"'></td></tr>";
 			wizzard_array.push(line_parts[2]);
 		
 		} else {

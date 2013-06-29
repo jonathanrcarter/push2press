@@ -3075,6 +3075,8 @@ else if ( $action == "pushwindow") {
                 $query="insert ignore into pages (ID) values (0)";
                 $result=mysql_query($query);
                 /*
+				 * this was added for debugging and can be removed 
+				
         		echo "<br><br><br><br><pre>result::\n";
 				var_dump($result);
 
