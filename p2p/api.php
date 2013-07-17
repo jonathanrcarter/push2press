@@ -2012,9 +2012,9 @@ if ($osn == "iphone" || $osn == "ipad"){
 //				$h = $h ."finder.popup();";
 //				$h = $h ."}";
 				$h = $h ."</script>";                
-				$h = $h . "<tr><td>".L("Pagename")."</td><td><input name='Pagename' type='text' value='" . mysql_result($result,$r,"Pagename") . "'></td></tr>";
-                $h = $h . "<tr><td>".L("Caption")."</td><td><input type='text' name='Caption' value='" . mysql_result($result,$r,"Caption") . "'></td></tr>";
-                $h = $h . "<tr><td>".L("collapse")."</td><td><input type='text' name='collapse' value='" . mysql_result($result,$r,"collapse") . "'></td></tr>";
+				$h = $h . "<tr><td>".L("Pagename")."</td><td><input name='Pagename' type='text' value='" . htmlspecialchars(mysql_result($result,$r,"Pagename"),ENT_QUOTES) . "'></td></tr>";
+                $h = $h . "<tr><td>".L("Caption")."</td><td><input type='text' name='Caption' value='" . htmlspecialchars(mysql_result($result,$r,"Caption"),ENT_QUOTES) . "'></td></tr>";
+                $h = $h . "<tr><td>".L("collapse")."</td><td><input type='text' name='collapse' value='" . htmlspecialchars(mysql_result($result,$r,"collapse"),ENT_QUOTES) . "'></td></tr>";
                 $h = $h . "<tr><td>&nbsp;</td><td><input class='btn btn-success' type='submit'></td></tr>";
                 $h = $h . "</table>";
                 $h = $h . "</form>";
@@ -2195,8 +2195,8 @@ else if ( $action == "list-dom" ) {
                 $h = $h . "<input type='hidden' name='action2' value='update'>";
                 $h = $h . "<input type='hidden' name='id' value='".$id."'>";
                 $h = $h . "<table class='table table-striped table-bordered table-condensed'>";
-                $h = $h . "<tr><td>Pagename</td><td><input name='Pagename' type='text' value='" . mysql_result($result,$r,"Pagename") . "'></td></tr>";
-                $h = $h . "<tr><td>Caption</td><td><input type='text' name='Caption' value='" . mysql_result($result,$r,"Caption") . "'></td></tr>";
+                $h = $h . "<tr><td>Pagename</td><td><input name='Pagename' type='text' value='" . htmlspecialchars(mysql_result($result,$r,"Pagename"),ENT_QUOTES) . "'></td></tr>";
+                $h = $h . "<tr><td>Caption</td><td><input type='text' name='Caption' value='" . htmlspecialchars(mysql_result($result,$r,"Caption"),ENT_QUOTES) . "'></td></tr>";
                 $h = $h . "<tr><td>&nbsp;</td><td><input class='btn btn-success' type='submit'></td></tr>";
                 $h = $h . "</table>";
                 $h = $h . "</form>";
@@ -2253,7 +2253,7 @@ else if ( $action == "list-dom" ) {
                 $h = $h . "<input type='hidden' name='id' value='".$id."'>";
                 $h = $h . "<input type='hidden' name='key' value='".$key."'>";
                 $h = $h . "<table class='table table-striped table-bordered table-condensed'>";
-                $h = $h . "<tr><td>Caption</td><td><input type='text' name='Caption' value='" . mysql_result($result,$r,"Caption") . "'></td></tr>";
+                $h = $h . "<tr><td>Caption</td><td><input type='text' name='Caption' value='" . htmlspecialchars(mysql_result($result,$r,"Caption"),ENT_QUOTES) . "'></td></tr>";
                 $h = $h . "<tr><td>&nbsp;</td><td><input class='btn btn-success' type='submit'></td></tr>";
                 $h = $h . "</table>";
                 $h = $h . "</form>";
@@ -2972,13 +2972,13 @@ else if ( $action == "pushwindow") {
                 
                 $h = $h . "<div class='control-group'><label class='control-label' for='Pagename'>".L("Pagename")."</label>";
                 $h = $h . "	<div class='controls'>";
-				$h = $h . "<input name='Pagename' type='text' value='" . mysql_result($result,$r,"Pagename") . "'>";
+				$h = $h . "<input name='Pagename' type='text' value='" . htmlspecialchars(mysql_result($result,$r,"Pagename"),ENT_QUOTES) . "'>";
                 $h = $h . "</div>";
                 $h = $h . "</div>";
 
 				$h = $h . "<div class='control-group'><label class='control-label' for='Caption'>".L("Caption")."</label>";
                 $h = $h . "	<div class='controls'>";
-				$h = $h . "<input name='Caption' type='text' value='" . mysql_result($result,$r,"Caption") . "'>";
+				$h = $h . "<input name='Caption' type='text' value='" . htmlspecialchars(mysql_result($result,$r,"Caption"),ENT_QUOTES) . "'>";
                 $h = $h . "</div>";
                 $h = $h . "</div>";
                 
@@ -3000,7 +3000,7 @@ else if ( $action == "pushwindow") {
                 $h = $h . "	<div id='topSpace-wrapper'>";
                 $h = $h . "	<div id='topSpace'></div>";
                 $h = $h . "	<div style='width:400px;' id='bottomSpace'>";
-				$h = $h . "<textarea class='xckeditor' id='test123' style='width:300px;' id='editor1' name='editor1' rows='10' style='visibility: hidden; display: none;'>". mysql_result($result,$r,'bodytext') ."</textarea class='ckeditor'>";
+				$h = $h . "<textarea class='xckeditor' id='test123' style='width:300px;' id='editor1' name='editor1' rows='10' style='visibility: hidden; display: none;'>". htmlspecialchars(mysql_result($result,$r,'bodytext'),ENT_QUOTES) ."</textarea class='ckeditor'>";
                 $h = $h .'</div>';
                 $h = $h .'</div>';
                 $h = $h .'<script type="text/javascript">';
@@ -3075,8 +3075,6 @@ else if ( $action == "pushwindow") {
                 $query="insert ignore into pages (ID) values (0)";
                 $result=mysql_query($query);
                 /*
-				 * this was added for debugging and can be removed 
-				
         		echo "<br><br><br><br><pre>result::\n";
 				var_dump($result);
 
@@ -3159,7 +3157,7 @@ else if ( $action == "pushwindow") {
         $h = $h . "<input type='hidden' name='action' value='show-template'>";
         $h = $h . "<input type='hidden' name='action2' value='save'>";
         $h = $h . "<input type='hidden' name='id' value='$template'>";
-        $h = $h . "<div><textarea name='content' style='width:600px;height:500px;'>".htmlspecialchars($content)."</textarea></div>";
+        $h = $h . "<div><textarea name='content' style='width:600px;height:500px;'>".htmlspecialchars($content,ENT_QUOTES)."</textarea></div>";
         $h = $h . "<input class='btn btn-success btn-large' type='submit' value='submit'>";
         $h = $h . "</form>";
 
@@ -3400,7 +3398,7 @@ echo "<!--\n\n $query; \n\n-->";
 
 
                // $h = $h . "<tr><td>image</td><td><img src='images/" . mysql_result($result,$r,"img") . "' height=80 width=80></td></tr>";
-                $h = $h . "<tr><td>".L("Pagename")."</td><td><input name='Pagename' type='text' value='" . mysql_result($result,$r,"Pagename") . "'></td></tr>";
+                $h = $h . "<tr><td>".L("Pagename")."</td><td>X<input name='Pagename' type='text' value='" . htmlspecialchars(mysql_result($result,$r,"Pagename"),ENT_QUOTES) . "'></td></tr>";
 
                 //$h = $h . "<tr><td>Caption</td><td><input type='text' name='Caption' value='" . mysql_result($result,$r,"Caption") . "'></td></tr>";
                 //$h = $h . "<tr><td>Volgorde</td><td><input name='Volgorde' type='text' value='" . mysql_result($result,$r,"Volgorde") . "'></td></tr>";
