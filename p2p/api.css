@@ -168,3 +168,12 @@ span.cke_skin_BootstrapCK-Skin, span.cke_skin_BootstrapCK-Skin:focus{
 .previewimage {
 	background-image: url(images/sidebar_bg.png) !important;
 }
+
+.content-border {
+    box-shadow: 0 0px 10px 5px rgba(0, 0, 0, 0.1);
+	border: 1px solid #cdc6c6;
+	border-radius: 3px;
+	overflow: auto;
+	background: #fff;
+}
+

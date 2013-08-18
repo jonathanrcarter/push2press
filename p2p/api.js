@@ -155,7 +155,8 @@ $push2press.push3 = function(ID,TO,MESSID,MESS) {
     h += ID;
     h += "</div>";
     
-	$("#modal-window").load("api.php?action=pushwindow3&id="+ID);
+//	$("#modal-window").load("api.php?action=pushwindow3&id="+ID);
+	$("#modal-window").html("<iframe style='width:90%; height:90%' src='api.php?action=pushwindow3&id="+ID+"'></iframe>");
 	$("#modal-window").modal({
 		show : true
 	});
@@ -172,11 +173,132 @@ $push2press.getlist = function(catid) {
 
 $(function() {
 	$("#sortable").sortable({
-		placeholder: "ui-state-highlight"
+		group: 'nested',
+//		nested : true,
+		placeholder: "ui-state-highlight",
+		afterMove : function ($placeholder, container) {
+			console.log("After Move");
+		},
+		onDrop : function ($item, container, _super) {
+			console.log("drop");
+		}
 	});
-//	$("#sortable").sortable({
-//		placeholder : "ui-state-highlight"
-//	});
+	
+	
+	var oldContainer;
+	
+	push2press.group = $("ol.nested_with_switch").sortable({
+	  group: 'nested',
+//	  handle: 'i.icon-move',
+	  exclude: 'x-nodrag',
+	  containerSelector : "ol, ul",
+//	  placeholder : "<li class='ui-state-highlight ui-nonumber'>&nbsp;</li>",
+	  placeholder : "<div class='ui-state-highlight ui-nonumber'>&nbsp;</div>",
+	  afterMove: function (placeholder, container) {
+	    if(oldContainer != container){
+	      if(oldContainer)
+	        oldContainer.el.removeClass("active")
+	      container.el.addClass("active")
+	      
+	      oldContainer = container
+	    }
+	  },
+	  onDrop: function (item, container, _super) {
+	    container.el.removeClass("active");
+
+
+	  	var _item = $(item[0]);
+	  	var _container = $(container.el[0]);
+		if(_item.hasClass("x-page") && _container.hasClass('x-category')) {
+			var _children = container.el.find(".x-page");
+			var changeString = "";
+		    for (var i=0; i < _children.length; i++) {
+		    	if (i > 0) changeString += ",";
+		    	changeString += _children[i].id.substring(21);
+		    }
+			console.log("This is a page move of ", _item.attr("id"), "children", _container.children.length, " find ", _children,changeString);
+			
+			var catid = _container.attr("id").substring(23);
+			var lnk = "api.php?action=do-reorder-pages&catid="+catid+"&order="+changeString;
+			console.log(lnk);
+			$.ajax({
+				url : lnk,
+				success : function() {
+				},
+				fail : function() {
+				}
+			}); 
+			
+//			document.location.href=lnk;
+			
+			
+			
+			
+		}
+	 	if(_item.hasClass("x-category") && _container.hasClass('x-root')) {
+			var _children = container.el.find(".x-category.sort-item");
+			var changeString = "";
+		    for (var i=0; i < _children.length; i++) {
+		    	if (i > 0) changeString += ",";
+		    	changeString += _children[i].id.substring(20);
+		    }
+			console.log("This is a category move of ", _item.attr("id"), "children" ,  _container.children.length, " find ", _children,changeString);
+			var lnk = "api.php?action=do-reorder-cats&order="+changeString;
+			console.log(lnk);
+			$.ajax({
+				url : lnk,
+				success : function() {
+				},
+				fail : function() {
+				}
+			}); 
+			
+			
+	 	}
+
+
+	    /*
+	    var items = container.el.find(".sort-item");
+	    console.log(items);
+	    for (var i=0; i < items.length; i++) {
+		    console.log(i+" ) "+$(items[i]).attr("data_p2p_type"));
+		    console.log(i+" ) "+$(items[i]).attr("data_p2p_id"));
+		}
+	    
+	    console.log(push2press.group.sortable("serialize").get().join("\n"));
+	    console.log(push2press.group.sortable("serialize").get());
+	    console.log(push2press.group.sortable("serialize"));
+	    var items = push2press.group.sortable("serialize");
+	    for (var i=0; i < items.length; i++) {
+		    console.log(i+" ) ",items[i]);
+		    console.log(i+" ) ",$(items[i]));
+		    console.log(i+" ) "+$(items[i]).attr("data_p2p_type"));
+		    console.log(i+" ) "+$(items[i]).attr("data_p2p_id"));
+		    console.log(i+" ) "+items[i].children.length);
+	    }
+	    */
+	    _super(item)
+	  },
+	  /*
+	  serialize: function (parent, children, isContainer) {
+	  	console.log(parent);
+	  	console.log(children);
+	  	console.log(isContainer);
+	  	return isContainer ? children.join() : parent.text()
+	  },
+	  */
+	  isValidTarget : function (item, container) {
+
+	  	var _item = $(item[0]);
+	  	var _container = $(container.el[0]);
+
+		/* if item is page and container is category then it is ok .. also if item is category and container is root */
+	 	if(_item.hasClass("x-page") && _container.hasClass('x-category')) return true; 
+	 	if(_item.hasClass("x-category") && _container.hasClass('x-root')) return true; 
+	  	return false;
+		}
+	});
+	
 	$("#sortable").disableSelection();
 });
 
@@ -258,7 +380,7 @@ push2press.wizard = function(TXT) {
 
 
 		wiz += "<tr><td>&nbsp;</td><td>&nbsp;</td><td><a href='javascript:push2press.wizzardsubmit();'>OK</a></td></tr>";
-		wiz = "<h1>Wizzard</h1><table>"+wiz+"</table>";
+		wiz = "<h1>Wizzard</h1><table class='table'>"+wiz+"</table>";
 		$("#modal-window").html(wiz);
 		$("#modal-window").modal({
 			show : true
@@ -345,6 +467,41 @@ push2press.selectAppropriateEditor = function(TYPE) {
 	} else {
 		push2press.edit_with_wysiwyg();
 	}
+}
+
+push2press.choosePageType = function() {
+	var h = "";
+	push2press.gotopage = function(n) {
+		$("#modal-window2").modal('hide');
+		var fn = function() {
+			ths = {};
+			ths.value = _pagetypes[n].p;
+			push2press.changePageType.call(ths);
+		};
+		setTimeout(fn,1000); 
+	}
+	h += "<div class='modal-head'>";
+	h += "<h1>Choose from these pre made templates</h1>";
+	h += "</div>";
+	h += "<div class='modal-body'>";
+	h += "<table class='table table-condensed' width='95%'>";
+	for (var i=0; i < _pagetypes.length; i++) {
+		h += "<tr><td valign='top'>";
+		h += "<div><img height='40' src='"+_pagetypes[i].i+"'></div>";
+		h += "<div>&nbsp;</div>";
+		h += "</td><td valign='top'>";
+		h += "&nbsp;";
+		h += "</td><td>";
+		h += "<div><h2>"+_pagetypes[i].n+"</h2></div>";
+		h += "</td><td>";
+		h += "<div><a class='btn' href='javascript:push2press.gotopage("+i+");'>Add</a></div>";
+		h += "</td></tr>";
+	}
+	h += "</table>";
+	h += "</div>";
+	$("#modal-window2").html(h);
+	$("#modal-window2").modal('show').css("width","800px");
+
 }
 
 

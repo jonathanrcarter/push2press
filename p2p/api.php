@@ -44,7 +44,7 @@ $aiid = $_POST["__aiid"];			// xxx-xxx-xxx-xxx
 $a__name = $_POST["__name"];		// j carter
 $a__groups = $_POST["__groups"];	// 1,2,3
 $D = "$";
-
+$MSG = "";
 
 $gid = "1";
 $_SESSION['KCFINDER'] = array();
@@ -185,6 +185,57 @@ if (!table_exists("log_phone")) {
 
 /* auto add column if not exists */
 column_exists("cats", "collapse", "alter table cats add column collapse varchar(4) not null default 'n'");
+column_exists("cats", "Volgorde", "alter table pages add column Volgorde int(4) not null default 0");
+
+
+$htoppopup = "";
+$htoppopup = $htoppopup .'<!DOCTYPE html>';
+$htoppopup = $htoppopup .'<html lang="en">';
+$htoppopup = $htoppopup .'  <head>';
+$htoppopup = $htoppopup .'    <meta charset="utf-8">';
+$htoppopup = $htoppopup .'    <title>Push 2 Press App CMS - '.getConfiguration("sitename","").'</title>';
+$htoppopup = $htoppopup .'    <meta name="viewport" content="width=device-width, initial-scale=1.0">';
+$htoppopup = $htoppopup .'    <meta name="description" content="">';
+$htoppopup = $htoppopup .'    <meta name="author" content="">';
+$htoppopup = $htoppopup .'    <!-- Le styles -->';
+$htoppopup = $htoppopup .'    <link href="http://www.glimworm.com/_assets/moock/bootstrap/css/bootstrap.css" rel="stylesheet">';
+$htoppopup = $htoppopup .'	<link rel="stylesheet" type="text/css" href="lib/css/prettify.css">';
+$htoppopup = $htoppopup .'    <link href="http://www.glimworm.com/_assets/moock/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">';
+$htoppopup = $htoppopup . "\n";
+$htoppopup = $htoppopup .'    <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.0/themes/base/jquery-ui.css" />';
+$htoppopup = $htoppopup .'    <script src="http://code.jquery.com/jquery-1.8.3.js"></script>';
+$htoppopup = $htoppopup .'    <script src="http://code.jquery.com/ui/1.10.0/jquery-ui.js"></script>';
+$htoppopup = $htoppopup .'  </head>';
+$htoppopup = $htoppopup .'  <body>';
+
+$hbotpopup = "";
+$hbotpopup = $hbotpopup .'    <!-- Le javascript';
+$hbotpopup = $hbotpopup .'    ================================================== -->';
+$hbotpopup = $hbotpopup .'    <!-- Placed at the end of the document so the pages load faster -->';
+$hbotpopup = $hbotpopup .'    <script src="http://www.glimworm.com/_assets/moock/bootstrap/js/bootstrap-transition.js"></script>';
+$hbotpopup = $hbotpopup .'    <script src="http://www.glimworm.com/_assets/moock/bootstrap/js/bootstrap-alert.js"></script>';
+$hbotpopup = $hbotpopup .'    <script src="http://www.glimworm.com/_assets/moock/bootstrap/js/bootstrap-modal.js"></script>';
+$hbotpopup = $hbotpopup .'    <script src="http://www.glimworm.com/_assets/moock/bootstrap/js/bootstrap-dropdown.js"></script>';
+$hbotpopup = $hbotpopup .'    <script src="http://www.glimworm.com/_assets/moock/bootstrap/js/bootstrap-scrollspy.js"></script>';
+$hbotpopup = $hbotpopup .'    <script src="http://www.glimworm.com/_assets/moock/bootstrap/js/bootstrap-tab.js"></script>';
+$hbotpopup = $hbotpopup .'    <script src="http://www.glimworm.com/_assets/moock/bootstrap/js/bootstrap-tooltip.js"></script>';
+$hbotpopup = $hbotpopup .'    <script src="http://www.glimworm.com/_assets/moock/bootstrap/js/bootstrap-popover.js"></script>';
+$hbotpopup = $hbotpopup .'    <script src="http://www.glimworm.com/_assets/moock/bootstrap/js/bootstrap-button.js"></script>';
+$hbotpopup = $hbotpopup .'    <script src="http://www.glimworm.com/_assets/moock/bootstrap/js/bootstrap-collapse.js"></script>';
+$hbotpopup = $hbotpopup .'    <script src="http://www.glimworm.com/_assets/moock/bootstrap/js/bootstrap-carousel.js"></script>';
+$hbotpopup = $hbotpopup .'    <script src="http://www.glimworm.com/_assets/moock/bootstrap/js/bootstrap-typeahead.js"></script>';
+$hbotpopup = $hbotpopup .'    <!-- http://www.eyecon.ro/bootstrap-datepicker/ -->';
+$hbotpopup = $hbotpopup .'    <link rel="stylesheet" href="http://www.glimworm.com/_assets/moock/bootstrap/extras/datepicker/css/datepicker.css" />';
+$hbotpopup = $hbotpopup .'    <script src="http://www.glimworm.com/_assets/moock/bootstrap/extras/datepicker/js/bootstrap-datepicker.js"></script>';
+$hbotpopup = $hbotpopup .'    <!-- http://jdewit.github.com/bootstrap-timepicker/ -->';
+$hbotpopup = $hbotpopup .'    <link rel="stylesheet" href="http://www.glimworm.com/_assets/moock/bootstrap/extras/bootstrap-timepicker-master/css/bootstrap-timepicker.css" />';
+$hbotpopup = $hbotpopup .'    <script src="http://www.glimworm.com/_assets/moock/bootstrap/extras/bootstrap-timepicker-master/js/bootstrap-timepicker.js"></script>';
+$hbotpopup = $hbotpopup .'  </body>';
+$hbotpopup = $hbotpopup .'</html>';
+
+
+
+
 
 
 $htop = "";
@@ -289,8 +340,8 @@ $htop = $htop .'              	</ul>';
 $htop = $htop .'              </li>';
 $htop = $htop .'              <li <li class="dropdown" id="menu1"><a class="dropdown-toggle" data-toggle="dropdown" href="#menu2">'.L('CMS').'</a>';// <b class="caret"></b></a>';
 $htop = $htop .'              	<ul class="dropdown-menu">';
-$htop = $htop .'              		<li><a href="api.php?action=list-cats"><i class="icon-list-alt"></i> '.L('catz').'</a></li>';
-$htop = $htop .'              		<li><a href="api.php?action=list-pages"><i class="icon-file"></i> '.L('pagz').'</a></li>';
+//$htop = $htop .'              		<li><a href="api.php?action=list-cats"><i class="icon-list-alt"></i> '.L('catz').'</a></li>';
+//$htop = $htop .'              		<li><a href="api.php?action=list-pages"><i class="icon-file"></i> '.L('pagz').'</a></li>';
 $htop = $htop .'              		<li><a href="api.php?action=list-templates"><i class="icon-file"></i> '.L('templates').'</a></li>';
 $htop = $htop .'    		          <li><a href="javascript:kcnew();"><i class="icon-picture"></i> '.L('Media').'</a></li>';
 $htop = $htop .'    		          <li><a href="api.php?action=list-dom"><i class="icon-wrench"></i> '.L('Config').'</a></li>';
@@ -309,23 +360,21 @@ $htop = $htop .'              		<li><a href="api.php?action=list-stats-graph"><i
 $htop = $htop .'              	</ul>';
 $htop = $htop .'              </li>';
 $htop = $htop . "\n";
-$htop = $htop .' <script type="text/javascript">';
-$htop = $htop .'	var mq = window.matchMedia("(min-width: 500px)");';
+$htop = $htop .' <script type="text/javascript">'."\n";
+$htop = $htop .'	var mq = window.matchMedia("(min-width: 500px)");'."\n";
 $htop = $htop . "\n";
 
-$htop = $htop .'	function WidthChange(mq) {';
-$htop = $htop .'		if (mq.matches) {';
-$htop = $htop .'			// window width is at least 500px';
-$htop = $htop .'			alert("a");';
-$htop = $htop .'		}else {';
-$htop = $htop .'			// window width is less than 500px';
-$htop = $htop .'			alert("b");';
-$htop = $htop .'			$"."("i").addClass("icon-white");';
-$htop = $htop .'		}';
-$htop = $htop .'	}';
+$htop = $htop .'	function WidthChange(mq) {'."\n";
+$htop = $htop .'		if (mq.matches) {'."\n";
+$htop = $htop .'			/* window width is at least 500px */'."\n";
+$htop = $htop .'		}else {'."\n";
+$htop = $htop .'			/* window width is less than 500px */'."\n";
+$htop = $htop .'			$'.'("i").addClass("icon-white");'."\n";
+$htop = $htop .'		}'."\n";
+$htop = $htop .'	}'."\n";
 $htop = $htop . "\n";
-$htop = $htop .'	$'.'(window).bind("resize", WidthChange(mq));';
-$htop = $htop .' </script>';
+$htop = $htop .'	$'.'(window).bind("resize", WidthChange(mq));'."\n";
+$htop = $htop .' </script>'."\n";
 $htop = $htop . "\n";
 
 $htop = $htop .'              <li><a href="api.php?action=logout">'.L("Logout").'</a></li>';
@@ -590,7 +639,7 @@ if ( $action == "get-page-raw" ) {
 	mysql_query("SET NAMES utf8", $db);
 	mysql_query( "SET CHARACTER SET utf8", $db );
 
-	$query="select * from cats";
+	$query="select * from cats order by Volgorde";
 	$result=mysql_query($query);
 	
     $retval = new obj();
@@ -1505,6 +1554,10 @@ if ($act ==""){
 		
 		$h = "";
         $h = $h . "<div class='plain-hero-unit'>";
+        $h = $h . "<div class='span3'>";
+        $h = $h . "Instructions";
+        $h = $h . "</div>";
+        $h = $h . "<div class='span8'>";
 		$h = $h . "";
 		$db = mysql_connect($dbhost,$username,$password);
         mysql_select_db($database) or die("Unable to select database");
@@ -1541,6 +1594,8 @@ if ($act ==""){
 
         }
         $h = $h . "</table>";
+		$h = $h . "</div>";
+		$h = $h . "</div>";
 		$h = $h . "</div>";
 		
         echo $htop;
@@ -1942,6 +1997,16 @@ if ($osn == "iphone" || $osn == "ipad"){
         $action2 = $_POST["action2"];
         $h = "";
 
+
+        $action2 = $_POST["action2"];
+        if ($action2 == "add") {
+                $query="insert ignore into cats (ID) values (0)";
+                $result=mysql_query($query);
+                $newid = mysql_insert_id();
+                $id = $newid;
+                $action2 = "";
+        }
+
         if ($action2 == "upload") {
 
                 $target = $images_folder;
@@ -1966,6 +2031,9 @@ if ($osn == "iphone" || $osn == "ipad"){
                 $result=mysql_query($query);
                 $h = "DELETED";
                 $h = $h . "<a class='btn' href='api.php?action=list-cats'>OK <i class='icon-check'></i></a>";
+                $MSG = "<div class='alert alert-dismissable'><button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>Deleted</div>";
+				$action = "homepage";
+
 
         } else if ($action2 == "update") {
                 $Pagename = $_POST["Pagename"];
@@ -1975,7 +2043,12 @@ if ($osn == "iphone" || $osn == "ipad"){
                 $query="update ignore cats set  img='".$img."', Caption='".$Caption."', Pagename='".$Pagename."', collapse='".$collapse."' where id=" . $id;
                 $result=mysql_query($query);
                 $h = "UPDATED";
-                $h = $h . "<a class='btn' href='api.php?action=show-cat&id=" . $id . "'>OK <i class='icon-check'></i></a>";
+//                $h = $h . "<a class='btn' href='api.php?action=show-cat&id=" . $id . "'>OK <i class='icon-check'></i></a>";
+                $h = $h . "<a class='btn' href='api.php'>OK <i class='icon-check'></i></a>";
+                $MSG = "<div class='alert alert-dismissable'><button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>Updated</div>";
+				$action = "homepage";
+//                continue;
+                
         } else {
 
         $query="select * from cats where id=" . $id;
@@ -1996,7 +2069,9 @@ if ($osn == "iphone" || $osn == "ipad"){
                 $h = $h . "<input type='hidden' name='action' value='show-cat'>";
                 $h = $h . "<input type='hidden' name='action2' value='update'>";
                 $h = $h . "<input type='hidden' name='id' value='".$id."'>";
+                $h = $h . "<input name='img' id='main_img_fld' type='hidden' value='" . mysql_result($result,$r,"img") . "'>";
                 $h = $h . "<table class='table table-striped table-bordered table-condensed'>";
+/*
                 $h = $h . "<tr><td>image</td><td id='test' class='previewimage'><input name='img' id='main_img_fld' type='hidden' value='" . mysql_result($result,$r,"img") . "'><img id='main_img' src='" . $img_size . "' height=32 width=32>&nbsp;&nbsp;&nbsp;<a class='btn' href='javascript:troller();'>".L("Browse")."</a></td></tr>";
 				$h = $h ."<script type='text/javascript'>";
 				$h = $h ."var finder = new CKFinder();";
@@ -2011,7 +2086,8 @@ if ($osn == "iphone" || $osn == "ipad"){
 //				$h = $h ."function troller(){";
 //				$h = $h ."finder.popup();";
 //				$h = $h ."}";
-				$h = $h ."</script>";                
+				$h = $h ."</script>";
+*/     
 				$h = $h . "<tr><td>".L("Pagename")."</td><td><input name='Pagename' type='text' value='" . htmlspecialchars(mysql_result($result,$r,"Pagename"),ENT_QUOTES) . "'></td></tr>";
                 $h = $h . "<tr><td>".L("Caption")."</td><td><input type='text' name='Caption' value='" . htmlspecialchars(mysql_result($result,$r,"Caption"),ENT_QUOTES) . "'></td></tr>";
                 $h = $h . "<tr><td>".L("collapse")."</td><td><input type='text' name='collapse' value='" . htmlspecialchars(mysql_result($result,$r,"collapse"),ENT_QUOTES) . "'></td></tr>";
@@ -2027,13 +2103,14 @@ if ($osn == "iphone" || $osn == "ipad"){
                 $h = $h . "</form>";
 
 	        }
-        }
 
-        echo $htop;
-        echo '<div class="plain-hero-unit">';
-        echo $h;
-        echo "</div>";
-        echo $hbot;
+
+	        echo $htop;
+	        echo '<div class="plain-hero-unit">';
+	        echo $h;
+	        echo "</div>";
+	        echo $hbot;
+        }
 
 } 
 
@@ -2510,6 +2587,68 @@ else if ( $action == "pushwindow") {
     
     $h = $h . "<tr>";
     $h = $h . "<td>Are you sure you want to sent this?</td>";
+    $h = $h . "<td><button type='submit' data-loading-text='Loading…' class='btn btn-mini btn-success'>send</button></td>";
+    $h = $h . "</tr>";
+    $h = $h . "</form>";
+    $h = $h . "</table>";	
+
+
+	echo $htoppopup;
+	echo $h;
+	echo $hbotpopup;
+	exit; 
+
+	
+} else if ( $action == "pushwindow-body") {
+
+		$id = $_POST["id"];
+		$mest = $_POST["mes"];
+	
+		$h = "";
+		$db = mysql_connect($dbhost,$username,$password);
+        mysql_select_db($database) or die("Unable to select database");
+        mysql_query("SET NAMES utf8", $db);
+        mysql_query( "SET CHARACTER SET utf8", $db );
+
+        $query="select * from groups order by gid desc limit 50";
+        $result=mysql_query($query);
+        $h = $h . "<legend>Select groups</legend>";
+        $h = $h . "<form action='api.php'>";
+        $h = $h . "<input type='hidden' name='action' value='push-prep'>";
+        $h = $h . "<input type='hidden' name='id' value='".$id."'>";
+        $h = $h . "<table class='table table-striped table-bordered table-condensed'>";
+        $h = $h . "<tr>";
+        $h = $h . "<th>group-name</th>";
+        $h = $h . "<th>select</th>";
+        $h = $h . "</tr>";
+
+        for ($r=0; $r < mysql_numrows($result); $r++) {
+                $h = $h . "<tr>";
+                $h = $h . "<td>" . mysql_result($result,$r,"gname") . "</td>";
+                $h = $h . "<td><input type='checkbox' value='y' name='gid_".mysql_result($result,$r,"gid")."'></td>";
+                $h = $h . "</tr>";
+
+        }
+        $h = $h . "</table>";
+		
+		$cap = "";
+		if ($id && $id > 0) {
+		
+        	$query="select * from message where id = " . $id;
+        	$result2=mysql_query($query);
+        	if ( mysql_numrows($result2) > 0) {
+        		$cap = mysql_result($result2,0,"Caption");
+        	}
+		}
+		
+    $h = $h . "<legend>Notification</legend>";
+    $h = $h . "<table class='table table-striped table-bordered table-condensed'>";
+    $h = $h . "<tr>";
+    $h = $h . "<td colspan='2'><textarea name='cap'>".$cap."</textarea></td>";
+    $h = $h . "</tr>";
+    
+    $h = $h . "<tr>";
+    $h = $h . "<td>Are you sure you want to sent this?</td>";
     $h = $h . "<td><input type='submit' class='btn btn-mini btn-success' value='send'></td>";
     $h = $h . "</tr>";
     $h = $h . "</form>";
@@ -2519,7 +2658,7 @@ else if ( $action == "pushwindow") {
 	echo $h;
 	echo "</div>";
 
-}else if ( $action == "pushwindow1") {
+} else if ( $action == "pushwindow1") {
 
 		$id = $_POST["id"];
 		$mest = $_POST["mes"];
@@ -2625,6 +2764,65 @@ else if ( $action == "pushwindow") {
 	echo "</div>";
 
 }else if ( $action == "pushwindow3") {
+		$id = $_POST["id"];
+		$mest = $_POST["mes"];
+	
+		$h = "";
+		$db = mysql_connect($dbhost,$username,$password);
+        mysql_select_db($database) or die("Unable to select database");
+        mysql_query("SET NAMES utf8", $db);
+        mysql_query( "SET CHARACTER SET utf8", $db );
+
+        $query="select * from log_phone where id='".$id."' order by gid desc limit 50";
+        $result=mysql_query($query);
+		$UID = "";
+		$OSN = "";
+		for ($r=0; $r < mysql_numrows($result); $r++) {
+			$UID = mysql_result($result,0,"uid");
+			$OSN = mysql_result($result,0,"osn");
+		}
+		$six_digit_random_number = mt_rand(100000, 999999);
+		$h = $h . "
+		<script>
+		function setformloading() {
+			$('#submitformbutton').text('Loading');
+			return true;
+		}
+		</script>";
+        $h = $h . "<form name='form1' action='api.php' onsubmit=setformloading()'>";
+        $h = $h . "<input type='hidden' name='action' value='push-prep'>";
+        $h = $h . "<input type='hidden' name='id' value='".$six_digit_random_number."'>";
+        $h = $h . "<input type='hidden' name='device' value='".$UID."'>";
+        $h = $h . "<input type='hidden' name='osn' value='".$OSN."'>";
+        		
+		$cap = "";
+		
+		$h = $h . "<legend>Notification</legend>";
+    	$h = $h . "<table class='table table-striped table-bordered table-condensed'>";
+    	$h = $h . "<tr>";
+    	$h = $h . "<td colspan='2'><textarea name='cap'>".$cap."</textarea></td>";
+    	$h = $h . "</tr>";
+    
+    	$h = $h . "<tr>";
+    	$h = $h . "<td colspan='2'><textarea name='desc'>Typ hier nog een korte beschrijving.</textarea></td>";
+    	$h = $h . "</tr>";
+    	
+    	$h = $h . "<tr>";
+    	$h = $h . "<td>Are you sure you want to sent this?</td>";
+	    $h = $h . "<td><button id='submitformbutton' type='submit' data-loading-text='Loading…' class='btn btn-mini btn-success'>send</button></td>";
+    	$h = $h . "</tr>";
+    	$h = $h . "</form>";
+    	$h = $h . "</table>";
+		
+
+	echo $htoppopup;
+	echo "<div id='pushwindow' style='padding:10px;'>";
+	echo $h;
+	echo "</div>";
+	echo $hbotpopup;
+	exit; 
+
+}else if ( $action == "pushwindow3-body") {
 
 		$id = $_POST["id"];
 		$mest = $_POST["mes"];
@@ -2672,8 +2870,7 @@ else if ( $action == "pushwindow") {
 
 	echo "<div id='pushwindow' style='padding:10px;'>";
 	echo $h;
-	echo "</div>";
-	
+	echo "</div>";	
 
 } else if ( $action == "push-prep") {
 
@@ -2703,10 +2900,8 @@ else if ( $action == "pushwindow") {
         $result=mysql_query($query);
         $_sendingid = mysql_insert_id();
 
-
 		$updatemessagequery=sprintf("update message set status='sent' where id='%s'",$id);
 		mysql_query($updatemessagequery);
-
 
 
       	//echo $query;
@@ -2719,7 +2914,7 @@ else if ( $action == "pushwindow") {
       		$query1="insert into recipient (rid, mid, devID, osn, date, status) values ('$_sendingid',0,'$device','$osn', now(),'ready_to_send')";
       		$result1=mysql_query($query1);
       		
-      		$h = $h . "Being sent!!!!!";
+      		$h = $h . "<legend>Feedback report . . . . . </legend>";
       		$READY = "Y";
       	
       	} else if( $device == "" && $gid != "") {
@@ -2748,6 +2943,9 @@ else if ( $action == "pushwindow") {
       		
       	}
       	$ERRORZ = "";
+
+		error_log("push-prep - ready [" . $READY . "]");
+		
       	//echo $READY;
       	if( $READY == "Y" ){
       		
@@ -2755,13 +2953,18 @@ else if ( $action == "pushwindow") {
       		//$query3="select * from recipient left join sending on rid=eid where recipient.status='ready_to_send'";
       		$query3="select * from recipient left join sending on rid=id where recipient.status='ready_to_send'";
      		$result3=mysql_query($query3);
-      		echo $query3;
+      		//echo $query3;
       		
       		
       		$msgpusht = "";
       		$RIDZ = "";
+
+			error_log("push-prep - rows result3 [" . mysql_numrows($result3) . "]");
+      		
       		
       		for ($r=0; $r < mysql_numrows($result3); $r++) {
+
+				error_log("push-prep - rows result3  row[" . $r . "]");
       		
       			$msgpusht = mysql_result($result3,$r,"devID");
       			$RIDZ = mysql_result($result3,$r,"rid");
@@ -2777,11 +2980,13 @@ else if ( $action == "pushwindow") {
 				$msgdesc = "";*/
 				
 				// echo "OSN1 $osn1";
+
+				error_log("push-prep - rows result3  row[" . $r . "] osn1 [ $osn1 ]");
 				
-			
+				
 				//$h = $h . "a".$notification."<br> query:".$query3;
 				//start of pusher
-				if ($osn1 == "iphone" || $osn1 == "ipad"){
+				if (($osn1 == "iphone" || $osn1 == "ipad")){
 
 					date_default_timezone_set('Europe/Rome');
 	
@@ -2799,6 +3004,7 @@ else if ( $action == "pushwindow") {
 		      		$APNS_PEMFILE_TYPE = "development";
 		      		$apn_aid = "";
 	      		
+	      		
 		      		if (mysql_numrows($result4) > 0) {
 		      			
 		      			if (mysql_result($result4,0,"dtype") == "production") {
@@ -2813,6 +3019,16 @@ else if ( $action == "pushwindow") {
 		      		}
 		      		$PEMFILENAME = sprintf("./pushnotes/%s_%s.pem", $APNS_PEMFILE, $APNS_PEMFILE_TYPE); 
 		      		
+					error_log("push-prep - rows result3  row[" . $r . "] apn_aid [ $apn_aid ]");
+
+					error_log("push-prep - rows result3  row[" . $r . "] PEMFILENAME [ $PEMFILENAME ]");
+					
+					if (file_exists($PEMFILENAME) == false) {
+						error_log("push-prep - rows result3  row[" . $r . "] PEMFILENAME [ $PEMFILENAME ] does not exist!!");
+						continue;
+					}
+		      		
+		      		
 					// echo "PEMFILENAME $PEMFILENAME";
 
 			
@@ -2824,71 +3040,78 @@ else if ( $action == "pushwindow") {
 
 					// Set the Root Certificate Autority to verify the Apple remote peer
 					$push->setRootCertificationAuthority('./pushnotes/entrust_root_certification_authority.pem');
+
 	
-					// Connect to the Apple Push Notification Service
-					$push->connect();
-
-					// Instantiate a new Message with a single recipient
-					$message = new ApnsPHP_Message($msgpusht);
-
-					// Set a custom identifier. To get back this identifier use the getCustomIdentifier() method
-					// over a ApnsPHP_Message object retrieved with the getErrors() message.
-					$message->setCustomIdentifier("Message-Badge-3");
+					if ($msgpusht && $msgpusht != "" && $msgpusht != "null") {
 					
-					// Set badge icon to "3"
-					$message->setBadge(1);
+						// Connect to the Apple Push Notification Service
+						$push->connect();
 
-					// Set a simple welcome text
-					$message->setText($notification);
-					//$message->setText("test");
+						// Instantiate a new Message with a single recipient
+						$message = new ApnsPHP_Message($msgpusht);
+
+						// Set a custom identifier. To get back this identifier use the getCustomIdentifier() method
+						// over a ApnsPHP_Message object retrieved with the getErrors() message.
+						$message->setCustomIdentifier("Message-Badge-3");
 					
-					// Play the default sound	
-					$message->setSound();
+						// Set badge icon to "3"
+						$message->setBadge(1);
 
-					// Set a custom property
-					$message->setCustomProperty('msgid', $msgid );
-
-					// Set another custom property
-					$message->setCustomProperty('msgdesc', $msgdesc );
+						// Set a simple welcome text
+						$message->setText($notification);
+						//$message->setText("test");
 					
-					// Set another custom property
-					$message->setCustomProperty('sitename', getConfiguration("sitename","") );
+						// Play the default sound	
+						$message->setSound();
 
-					// Set another custom property
-					$message->setCustomProperty('url', getConfiguration("url","") );
+						// Set a custom property
+						$message->setCustomProperty('msgid', $msgid );
 
-					// Set another custom property
-					$message->setCustomProperty('appid', getConfiguration("appid","") );
+						// Set another custom property
+						$message->setCustomProperty('msgdesc', $msgdesc );
+					
+						// Set another custom property
+						$message->setCustomProperty('sitename', getConfiguration("sitename","") );
 
-					// Set the expiry value to 30 seconds
-					$message->setExpiry(30);
+						// Set another custom property
+						$message->setCustomProperty('url', getConfiguration("url","") );
 
-					// Add the message to the message queue
-					$push->add($message);
+						// Set another custom property
+						$message->setCustomProperty('appid', getConfiguration("appid","") );
 
-					// Send all messages in the message queue
-					$push->send();
+						// Set the expiry value to 30 seconds
+						$message->setExpiry(30);
+
+						// Add the message to the message queue
+						$push->add($message);
+
+						// Send all messages in the message queue
+						$push->send();
 						
-					// Disconnect from the Apple Push Notification Service
-					$push->disconnect();
+						// Disconnect from the Apple Push Notification Service
+						$push->disconnect();
+					}
 				}
                 
-            $h = $h . sprintf("<div class='alert'>Push notification sent [%s] [%s] [%s] [%s] [%s]</div>",$APNS_ENVIRONMENT,$APNS_PEMFILE,$APNS_PEMFILE_TYPE,$apn_aid,$sql4);
+            $h = $h . sprintf("<!--div class='alert'>Push notification sent [%s] [%s] [%s] [%s] [%s]</div-->",$APNS_ENVIRONMENT,$APNS_PEMFILE,$APNS_PEMFILE_TYPE,$apn_aid,$sql4);
             
 			$query6="update ignore recipient set  status='send' where devID='" .$msgpusht. "' and rid=".$RIDZ;
         	$result6=mysql_query($query6);
         	//echo $query6;
       	}
+
+      	
+      	$h = $h . "<div><img src='images/mobilesms.png'> Push Messages were sent successfully</div>";
       	
       	}else{
       		$h = $h . "ERROR!!!!!";
       	}
       	
-		echo $htop;
+		echo $htoppopup;
 		echo '<div class="plain-hero-unit">';
 		echo $h;
 		echo '</div>';
-		echo $hbot;
+		echo $hbotpopup;
 		exit;
 
 }else if ( $action == "show-mes" ) {
@@ -3074,6 +3297,16 @@ else if ( $action == "pushwindow") {
         if ($action2 == "add") {
                 $query="insert ignore into pages (ID) values (0)";
                 $result=mysql_query($query);
+                $newid = mysql_insert_id();
+
+
+				$url301 = "api.php?action=show-page&id=$newid";
+				header("HTTP/1.1 301 Moved Permanently");
+				header("Location: $url301"); 
+				exit;
+                
+                
+                
                 /*
         		echo "<br><br><br><br><pre>result::\n";
 				var_dump($result);
@@ -3091,8 +3324,10 @@ else if ( $action == "pushwindow") {
 				*/
         }
 
-        $query="select *,c.Pagename as CatName from pages p left join cats c on (p.CatID = c.id) order by c.id,p.Volgorde";
+        $query="select *,c.Pagename as CatName from pages p left join cats c on (p.CatID = c.id) order by c.Volgorde,p.Volgorde";
         $result=mysql_query($query);
+
+
 
         $h = "";
         $h = $h . "<legend>".L('pagz')." <a class='btn btn-mini btn-success' style='margin-left:40px;' href='api.php?action=list-pages&action2=add'> <i class='icon-plus icon-white'></i> ADD</a></legend>";
@@ -3218,6 +3453,66 @@ else if ( $action == "pushwindow") {
 
 
 		
+} else if ( $action == "do-reorder-pages" ){
+	
+	$db = mysql_connect($dbhost,$username,$password);
+    mysql_select_db($database) or die("Unable to select database");
+    mysql_query("SET NAMES utf8", $db);
+    mysql_query( "SET CHARACTER SET utf8", $db );
+	
+	$h = "";
+	
+	//$CAT = $_POST['cat'];
+	$CATID = $_POST['catid'];
+	$ORDER = $_POST['order'];
+	
+	if ($ORDER && $ORDER != "") {
+		$O = explode(",",$ORDER);
+		$oc = 0;
+		foreach ($O as $o){
+			$sql = sprintf("update pages set CatID=%s, Volgorde=%s where id=%s",$CATID,$oc,$o);
+			mysql_query($sql);
+			$oc++;
+		}
+	}
+
+    $retval = new obj();
+    $retval->status = 0;
+    $retval->statusMsg = sprintf("successfully re-ordered ");
+    echo json_encode($retval);
+	
+	exit;
+
+} else if ( $action == "do-reorder-cats" ){
+	
+	$db = mysql_connect($dbhost,$username,$password);
+    mysql_select_db($database) or die("Unable to select database");
+    mysql_query("SET NAMES utf8", $db);
+    mysql_query( "SET CHARACTER SET utf8", $db );
+	
+	$h = "";
+	
+	$ORDER = $_POST['order'];
+	
+	if ($ORDER && $ORDER != "") {
+		$O = explode(",",$ORDER);
+		$oc = 0;
+		foreach ($O as $o){
+			$sql = sprintf("update ignore cats set Volgorde=%s where id=%s",$oc,$o);
+			mysql_query($sql);
+			$oc++;
+		}
+	}
+
+    $retval = new obj();
+    $retval->status = 0;
+    $retval->statusMsg = sprintf("successfully re-ordered ");
+    echo json_encode($retval);
+	
+	exit;
+
+	
+		
 } else if ( $action == "do-volgorde" ){
 	
 	$db = mysql_connect($dbhost,$username,$password);
@@ -3291,8 +3586,19 @@ else if ( $action == "pushwindow") {
 
         $id = $_POST["id"];
         $action2 = $_POST["action2"];
+        $action3 = $_POST["action3"];
+        $CatId = $_POST["CatId"];
         $h = "";
 
+        $action2 = $_POST["action2"];
+        if ($action2 == "add") {
+                $query="insert ignore into pages (ID,CatID) values (0,'".$CatId."')";
+                $result=mysql_query($query);
+                $newid = mysql_insert_id();
+                $action2 = "";
+                $id = $newid;
+		}
+		
         if ($action2 == "upload") {
 
         		$target = $images_folder;
@@ -3318,6 +3624,10 @@ else if ( $action == "pushwindow") {
                 $h = "DELETED";
                 $h = $h . "<a class='btn' href='api.php?action=list-pages'>OK <i class='icon-check'></i></a>";
 
+                $MSG = "<div class='alert alert-dismissable'><button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>Deleted</div>";
+				$action = "homepage";
+
+
         } else if ($action2 == "update") {
                 $Pagename = $_POST["Pagename"];
                 $Caption = $_POST["Caption"];
@@ -3341,6 +3651,11 @@ echo "<!--\n\n $query; \n\n-->";
 				
 				
                 $h = $h . "<a class='btn' href='api.php?action=show-page&id=" . $id . "'>OK <i class='icon-check'></i></a>";
+                
+                $MSG = "<div class='alert alert-dismissable'><button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button><h2>In order to update your app 'pull to refresh' the side menu down</h2><img src='images/reload-push2press-diagram.jpg' width='600'></div>";
+				$action = "homepage";
+                
+                
         } else if ($action2 == "update"){
         
         	$Pagename = $_POST["Pagename"];
@@ -3358,7 +3673,7 @@ echo "<!--\n\n $query; \n\n-->";
             $h = "Updated!";
             $h = $h . "<a class='btn' href='api.php?action=show=page&id=".$id."'>OK <i class='icon-check'></i>";    
         
-        }else {
+        } else {
 
         	$query="select * from pages where id=" . $id;
         	$result=mysql_query($query);
@@ -3394,11 +3709,11 @@ echo "<!--\n\n $query; \n\n-->";
                 $img_size = sprintf("timthumb.php?h=32&w=32&src=%s",$img);
 				if (strpos($img_size,"client_images/images/icons/glyphicons")) $img_size = $img_size . "&zc=2&f=5,238,238,238,1";
 
-                $h = $h . "<tr><td>image</td><td id='test' class='previewimage'><input name='img' id='main_img_fld' type='hidden' value='" . $img . "'><img id='main_img' src='" . $img_size . "' height=32 width=32>&nbsp;&nbsp;&nbsp;<a class='btn' href='javascript:troller();'>".L("Browse")."</a></td></tr>";
+                $h = $h . "<tr><td>image</td><td id='test' class='previewimage'><input name='img' id='main_img_fld' type='hidden' value='" . $img . "'><img id='main_img' src='" . $img_size . "' height=32 width=32>&nbsp;&nbsp;&nbsp;<a class='btn' href='javascript:troller();'>".L("Browse")."</a> <input name='Pagename' type='text' value='" . htmlspecialchars(mysql_result($result,$r,"Pagename"),ENT_QUOTES) . "'> </td></tr>";
 
 
                // $h = $h . "<tr><td>image</td><td><img src='images/" . mysql_result($result,$r,"img") . "' height=80 width=80></td></tr>";
-                $h = $h . "<tr><td>".L("Pagename")."</td><td>X<input name='Pagename' type='text' value='" . htmlspecialchars(mysql_result($result,$r,"Pagename"),ENT_QUOTES) . "'></td></tr>";
+//                $h = $h . "<tr><td>".L("Pagename")."</td><td>X<input name='Pagename' type='text' value='" . htmlspecialchars(mysql_result($result,$r,"Pagename"),ENT_QUOTES) . "'></td></tr>";
 
                 //$h = $h . "<tr><td>Caption</td><td><input type='text' name='Caption' value='" . mysql_result($result,$r,"Caption") . "'></td></tr>";
                 //$h = $h . "<tr><td>Volgorde</td><td><input name='Volgorde' type='text' value='" . mysql_result($result,$r,"Volgorde") . "'></td></tr>";
@@ -3453,7 +3768,8 @@ echo "<!--\n\n $query; \n\n-->";
 				$PAGETYPE = mysql_result($result,$r,"type");
 				
 				$h = $h . "<tr><td>".L("type")."</td><td><input id='page_type' name='type' type='text' value='" . $PAGETYPE . "'>";
-
+				
+				$h = $h ."<a class='button' href='javascript:push2press.choosePageType();'>select</a>";
 
 				$h = $h . " change to:";
 //				$h = $h . "<select name='wp-id' id='act' onChange=\"document.getElementById('page_type').value = this.value;\">";
@@ -3465,7 +3781,9 @@ echo "<!--\n\n $query; \n\n-->";
 
 				$dirs = array("plugins/connectors/","templates/messages/");
 		//  <a class='btn btn-mini btn-success' style='margin-left:40px;' href='api.php?action=list-templates&action2=add'> <i class='icon-plus icon-white'></i> ADD</a>
-		
+
+				$pagetypes = "var _pagetypes = [];\n";
+
 				$DIR = "plugins/connectors/";
 				$dirs = scandir($DIR);
 				foreach ($dirs as $dir) {
@@ -3486,9 +3804,14 @@ echo "<!--\n\n $query; \n\n-->";
 							}
 							
 	        				$h = $h . "<option value='ti|".$meta->path."'>".$meta->name."</option>";
+	        				
+	        					$TEXT =  str_replace(">", "&gt;" , $TEXT);
+
+	        				$pagetypes = $pagetypes . "_pagetypes.push({'p':'ti|".$meta->path."','i':'".str_replace(".js",".png",$meta->path)."','n':'".$meta->name."'});\n";
 						}
 					}
 				}
+				
 
 				/* wordpress link - lists all the available pages */				
 				if ($hosted && $hosted == "wordpress") {
@@ -3496,10 +3819,13 @@ echo "<!--\n\n $query; \n\n-->";
 					$result1 = mysql_query($query1);
     				for ($i=0; $i < mysql_numrows($result1); $i++){
         				$h = $h . "<option value='wp:".mysql_result($result1,$i,"ID")."'>".mysql_result($result1,$i,"post_title")."</option>";
+        				$pagetypes = $pagetypes . "_pagetypes.push({'p':'wp:".mysql_result($result1,$i,"ID")."','n':'".mysql_result($result1,$i,"post_title")."'});\n";
+
     				}
 				}
 				$h = $h . "</select>";
 				$h = $h . "<script>push2press.setInitialPage_type('".$PAGETYPE."');</script>";
+				$h = $h . "<script>".$pagetypes."</script>";
 				$h = $h . "</td></tr>";
 				
 
@@ -3576,14 +3902,19 @@ echo "<!--\n\n $query; \n\n-->";
 				$h = $h .'		});';
 				$h = $h .'	});';
 				$h = $h .'</script>';
+				
+				if ($action3 && $action3 == "wizard") {
+				$h = $h . "<script>$"."(function() { push2press.choosePageType();});</script>";
+				}
+				
         	}
-        }
 
-        echo $htop;
-        echo '<div class="plain-hero-unit">';
-        echo $h;
-        echo "</div>";
-        echo $hbot;
+	        echo $htop;
+	        echo '<div class="plain-hero-unit content-border">';
+	        echo $h;
+	        echo "</div>";
+	        echo $hbot;
+        }
 
 } else if( $action == "wp" ){
 /*
@@ -3601,6 +3932,9 @@ echo "<!--\n\n $query; \n\n-->";
 	
 
 } else {
+	$action = "homepage";
+}
+if ($action == "homepage") {
 
 		require_once './local_functions.php';
 		
@@ -3652,28 +3986,230 @@ echo "<!--\n\n $query; \n\n-->";
 		echo '			<a href="push2press://?url='.getConfiguration("url","").'"><img src="http://blog.eventphant.com/wp-content/uploads/2012/07/Apple-App-Store.jpg" height="50"></a>';
         
 		echo "			<span id='qrcodesmall'><a href='javascript:push2press.qrcode();'><img src='http://api.qrserver.com/v1/create-qr-code/?data=".urlencode("push2press://?url=".getConfiguration("url",""))."&size=250x250'></a></span>";
+
+		echo "				<br>";
+		echo "<p>You are using : Version : " . $push2version["major"] . " " . $push2version["type"] . ", build : " . $push2version["build"] . ", <a href='javascript:\$push2press.loading();'>UPDATE TO LATEST VERSION</a></p>";
+
         echo "			</div>";
         echo '			<div class="span8">';
 		echo $h;
+		
+		
+		/* make a list of the cats and the pages */
+		
+		
+        $db = mysql_connect($dbhost,$username,$password);
+        mysql_select_db($database) or die("Unable to select database");
+        mysql_query("SET NAMES utf8", $db);
+        mysql_query( "SET CHARACTER SET utf8", $db );
+
+        $query="select *,c.Pagename as CatName, c.img as CatImage, c.Caption as CatCaption from pages p left join cats c on (p.CatID = c.id) order by c.Volgorde,p.Volgorde";
+        $result=mysql_query($query);
+        $h = "";
+        
+$h = $h . "
+<script src='http://johnny.github.io/jquery-sortable/js/jquery-sortable.js'></script>
+<style>
+
+ol.x-category {
+	margin-left : 0;
+}
+li.x-category {
+	margin-left : 0;
+}
+li.x-category .x-div {
+    background-image : url(images/sidebar_cat_bg.png);
+}
+ol.x-category li.x-page {
+    background-image : url(images/sidebar_bg.png);
+	margin-left : 0;
+}
+.x-divider {
+	height : 3px;
+    background-image : url(images/sidebar_cell_bg.png);
+
+}
+
+  ol.vertical li.x-page, ol.vertical div.x-div {
+    display: block;
+    xmargin: 4px;
+	cursor: move;
+    padding: 4px;
+    font-size : 18px;
+    border: 1px solid #cccccc;
+    border:0;
+    color: #eeeeee;
+    xbackground: #eeeeee; } 
+
+
+
+  ol.vertical li.x-category {
+    display: block;
+	cursor: move;
+    xmargin: 4px;
+    padding: 4px;
+    border:0;
+    font-size : 18px;
+    color: #eeeeee;
+    xbackground: #ffffff; } 
+
+
+
+body.dragging, body.dragging * {
+  cursor: move !important;
+}
+
+.dragged {
+  position: absolute;
+  opacity: 0.5;
+  z-index: 2000;
+}
+
+ol.example li.placeholder {
+  position: relative;
+  /** More li styles **/
+}
+ol.example li.placeholder:before {
+  position: absolute;
+  /** Define arrowhead **/
+}
+.ui-nonumber {
+	margin-top : 8px;
+	margin-bottom : 8px;
+	height : 32px;
+}
+.content-tree {
+    box-shadow: 0 0px 10px 5px rgba(0, 0, 0, 0.1);
+	border: 1px solid #cdc6c6;
+	border-radius: 3px;
+	overflow: auto;
+	background: #fff;
+}
+.content-tree .sort-item {
+	background: #fff;
+}	
+.page-title {
+	margin-left : 12px;
+	vertical-align : middle;
+}
+.page-icon {
+	margin-left : 8px;
+}
+
+</style>";        
+        
+        
+		$h = $h . "<div class='content-tree'>\n";
+		
+		if ($c2 > -1) {
+	        $h = $h . "<h3> Welcome back to push2press</h3>";
+	        $h = $h . $MSG;
+	    } else {
+	        $h = $h . "<h3> Welcome to your push2press site</h3>";
+	        $h = $h . $MSG;
+	    }
+		
+		
+		$h = $h . "<div class='modal-header'>Content</div>";
+        $h = $h . "<div class='btn-group'>";
+        $h = $h . "<div class='btn-group pull-right'>";
+        $h = $h . "<a class='btn btn-success' href='api.php?action=show-cat&action2=add'> <i class='icon-plus icon-white'></i> ADD</a>";
+        $h = $h . "</div>";		// end buttongroup
+        $h = $h . "</div>";		// end buttongroup
+        
+		$h = $h . "<ol class='nested_with_switch vertical x-root'>";
+        $CurrentCatID = -1;
+        $CurrentCatEndBlock = "";
+        for ($r=0; $r < mysql_numrows($result); $r++) {
+        		if ($CurrentCatID != mysql_result($result,$r,"CatID")) {
+        			$nodrag = "";
+        			if ( mysql_result($result,$r,"CatID") == "") {
+        				$nodrag = " x-nodrag";
+        			}
+        			$h = $h . $CurrentCatEndBlock;
+        			$h = $h . "<li id='push2press-tree-cat-".mysql_result($result,$r,"CatID")."' class='x-category sort-item".$nodrag."'>\n";
+        			$h = $h . "<div class='x-div' style='height:30px;'>\n";
+    				if ($nodrag == "") {
+    					$h = $h . "<i class='icon-move icon-white' style='font-size:18px;'></i>";
+	                }
+	                
+					$h = $h . "<span>&nbsp;</span>";
+	                $h = $h . "<span>" . mysql_result($result,$r,"CatName") . "</span>\n";
+
+			        $h = $h . "<div class='btn-group pull-right'>\n";
+	                $h = $h . "<span><a class='btn btn-mini xbtn-success' href='api.php?action=show-cat&id=" . mysql_result($result,$r,"CatID") . "'><i class='icon-edit icon-black'></i> ".L("EDIT")."</a></span>\n";
+
+
+        			$h = $h . "<span><a class='btn btn-mini btn-success' href='api.php?action=show-page&action2=add&action3=wizard&CatId=".mysql_result($result,$r,"CatID")."'> <i class='icon-plus icon-white'></i> ADD</a></span>";
+
+
+
+	                $h = $h . "</div>\n";
+
+	                $h = $h . "</div>\n";
+	                $h = $h . "<ol id='push2press-tree-cat-ol-".mysql_result($result,$r,"CatID")."' class='x-category'>\n";
+	                $CurrentCatID = mysql_result($result,$r,"CatID");
+	                $CurrentCatEndBlock = "</ol>\n</li>\n";
+	            }
+                
+                
+				$h = $h . "<li id='push2press-tree-page-".mysql_result($result,$r,"id")."' class='x-page ui-state-default sort-item'>\n";
+       			$h = $h . "<div style='height:40px;'>\n";
+       			$h = $h . "<div class='pull-left'><i class='icon-move icon-white' style='font-size:18px;'></i></div>";
+
+                $img = mysql_result($result,$r,"img");
+                $img_size = sprintf("timthumb.php?h=24&w=24&src=%s",$img);
+				if (strpos($img_size,"client_images/images/icons/glyphicons")) $img_size = $img_size . "&zc=2&f=5,238,238,238,1";
+
+
+                $h = $h . "<div class='pull-left page-icon'  ><img height='32' width='32' src='" . $img_size . "'></div>\n";
+
+				$h = $h . "<span class='page-title'>\n";
+                $h = $h . "<span>" . mysql_result($result,$r,"Pagename") . "</span>\n";
+                $h = $h . "<span>" . mysql_result($result,$r,"Caption") . "</span>\n";
+                $h = $h . "</span>\n";
+
+		        $h = $h . "<div class='btn-group pull-right'>\n";
+                $h = $h . "<span>" .B("edit","api.php?action=show-page&id=" . mysql_result($result,$r,"id") . ""). "";
+                $h = $h . " ";
+                $h = $h . "" .B("preview","javascript:\$push2press.previewpage(\"api.php?action=get-page&id=" . mysql_result($result,$r,"id")."\");"). "</span>\n";
+       			$h = $h . "</div>\n";
+       			
+       			$h = $h . "</div>\n";
+       			$h = $h . "<div class='x-divider'></div>";
+
+				$h = $h . "</li>\n";
+                
+                
+
+        }
+		$h = $h . $CurrentCatEndBlock;
+		$h = $h . "</ol>\n";
+		$h = $h . "</div>\n";
+
+
+
+	
+		
+		
+		
 
 //		if ($c2 > 0) {
 		if ($c2 > -1) {
-	        echo "<h3> Welcome back to push2press</h3>";
-			echo "				<br>";
-			echo "<p>You are using : Version : " . $push2version["major"] . " " . $push2version["type"] . ", build : " . $push2version["build"] . ", <a href='javascript:\$push2press.loading();'>UPDATE TO LATEST VERSION</a></p>";
-			echo sprintf("		<p>Number of registered phones : %s </p>",$c2);
-	        echo sprintf("		<p><a href='api.php?action=list-draft-mes'>Edit push messages</a>(%s)</p>",$c1);
-	        echo sprintf("		<p><a href='api.php?action=show-page&id=1'>Edit homepage</a></p>");
+//	        echo "<h3> Welcome back to push2press</h3>";
+//	        echo $MSG;
+//			echo sprintf("		<p>Number of registered phones : %s </p>",$c2);
+//	        echo sprintf("		<p><a href='api.php?action=list-draft-mes'>Edit push messages</a>(%s)</p>",$c1);
+//	        echo sprintf("		<p><a href='api.php?action=show-page&id=1'>Edit homepage</a></p>");
 	        
+	        
+	        echo $h;
 	        
 	        
 
 		} else {
-	        echo "<h3> Welcome to your push2press site</h3>";
-
-			echo "				<br>";
-			echo "<p>You are using : Version : " . $push2version["major"] . " " . $push2version["type"] . ", build : " . $push2version["build"] . ", <a href='javascript:\$push2press.loading();'>UPDATE TO LATEST VERSION</a></p>";
-
+//	        echo "<h3> Welcome to your push2press site</h3>";
+//	        echo $MSG;
 //	        echo sprintf("		<p><a href='api.php?action=list-draft-mes'>Edit push messages</a>(%s)</p>",$c1);
 //        echo sprintf("		<p><a href='api.php?action=wp'>Edit push messages wp</a>(%s)</p>",$c1);
 //        echo sprintf("		<p><a href='api.php?action=wp2'>Edit push messages wp2</a>(%s)</p>",$c1);
@@ -3684,6 +4220,9 @@ echo "<!--\n\n $query; \n\n-->";
 //			echo "				<br>";
 //			echo "				Send yourself the link by email <form action='api.php'><input type='text' name='emaillinkto'><input class='btn' type='submit'></form><br>";
 //			echo "				<br>";
+	        echo $h;
+
+
 		}
 
         echo "			</div>";
