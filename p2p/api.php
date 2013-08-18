@@ -2785,11 +2785,13 @@ else if ( $action == "pushwindow") {
 		$h = $h . "
 		<script>
 		function setformloading() {
-			$('#submitformbutton').text('Loading');
+			$"."('#submitformbutton').text('Loading');
+			$"."('#form1').hide();
+			$"."('#form1-spinner').show();
 			return true;
 		}
 		</script>";
-        $h = $h . "<form name='form1' action='api.php' onsubmit=setformloading()'>";
+        $h = $h . "<form id='form1' name='form1' action='api.php' onsubmit='setformloading()'>";
         $h = $h . "<input type='hidden' name='action' value='push-prep'>";
         $h = $h . "<input type='hidden' name='id' value='".$six_digit_random_number."'>";
         $h = $h . "<input type='hidden' name='device' value='".$UID."'>";
@@ -2797,7 +2799,7 @@ else if ( $action == "pushwindow") {
         		
 		$cap = "";
 		
-		$h = $h . "<legend>Notification</legend>";
+//		$h = $h . "<legend>Notification</legend>";
     	$h = $h . "<table class='table table-striped table-bordered table-condensed'>";
     	$h = $h . "<tr>";
     	$h = $h . "<td colspan='2'><textarea name='cap'>".$cap."</textarea></td>";
@@ -2811,8 +2813,11 @@ else if ( $action == "pushwindow") {
     	$h = $h . "<td>Are you sure you want to sent this?</td>";
 	    $h = $h . "<td><button id='submitformbutton' type='submit' data-loading-text='Loading…' class='btn btn-mini btn-success'>send</button></td>";
     	$h = $h . "</tr>";
-    	$h = $h . "</form>";
+
+
     	$h = $h . "</table>";
+    	$h = $h . "</form>";
+    	$h = $h . "<img src='images/ajax-spinner.gif' id='form1-spinner' style='display:none;'>";
 		
 
 	echo $htoppopup;
@@ -2914,7 +2919,6 @@ else if ( $action == "pushwindow") {
       		$query1="insert into recipient (rid, mid, devID, osn, date, status) values ('$_sendingid',0,'$device','$osn', now(),'ready_to_send')";
       		$result1=mysql_query($query1);
       		
-      		$h = $h . "<legend>Feedback report . . . . . </legend>";
       		$READY = "Y";
       	
       	} else if( $device == "" && $gid != "") {

@@ -148,18 +148,27 @@ $push2press.push2 = function(ID,TO,MESSID,MESS) {
 	});
 
 }
-
+push2press.rnd = function() {
+	return "&__"+new Date().getTime();
+}
 $push2press.push3 = function(ID,TO,MESSID,MESS) {
 	var h = "";
-    h += "<div class='plain-hero-unit'>";
-    h += ID;
-    h += "</div>";
+//    h += "<div class='content-border'>";
+	h += "<div class='modal-header'>";
+ 	h += "<button type='button' class='close' data-dismiss='modal' aria-hidden='true'>&times;</button>";
+	h += "<h3>Send Push Notification</h3>";
+	h += "</div>";
+	h += "<div class='modal-body'>";
+    h += "<iframe style='width:90%; height:300px;' frameborder='no' src='api.php?action=pushwindow3&id="+ID+push2press.rnd()+"'></iframe>";
+	h += "</div>";
+	h += "<div class='modal-footer'>";
+	h += "</div>";
     
 //	$("#modal-window").load("api.php?action=pushwindow3&id="+ID);
-	$("#modal-window").html("<iframe style='width:90%; height:90%' src='api.php?action=pushwindow3&id="+ID+"'></iframe>");
+	$("#modal-window").html(h);
 	$("#modal-window").modal({
 		show : true
-	});
+	}).css("height","inherit");
 
 }
 
