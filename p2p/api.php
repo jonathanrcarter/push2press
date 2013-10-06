@@ -4380,7 +4380,7 @@ $(function() {
 		
 
         echo '<div class="appicon">
-        <a href="#" xxhref="javascript:\$push2press.loading();">
+        <a href="javascript:\$push2press.loading();">
 		<img src="images/home/glyphicons_201_upload.png" width=80>
 		</a><br>
 		UPDATE TO LATEST VERSION 
