@@ -17,6 +17,16 @@ $push2press.loading = function() {
 		document.location.href='upgrade.php';
 	},500);
 };
+push2press.modal = function(id) {
+	$("#modal-window2").removeClass("modalpreview");
+	$("#modal-window2").removeClass("modalpreview600");
+	$("#modal-window2").removeClass("modalpreview200qrcode");
+	$("#modal-window2").addClass("modalpreview200qrcode");
+//	$("#modal-window2").addClass("modalpreview200");
+	$("#modal-window2").html($(id).html());
+	$("#modal-window2").modal('show');
+
+}
 
 push2press.qrcode = function() {
 	var h = '<div style="padding:16px;"><br><legend>QR Code</legend>';
@@ -112,6 +122,23 @@ $push2press.ckedit = function(S,H,W) {
 
 $push2press.push = function(ID,TO,MESSID,MESS) {
 	var h = "";
+	h += "<div class='modal-header'>";
+ 	h += "<button type='button' class='close' data-dismiss='modal' aria-hidden='true'>&times;</button>";
+	h += "<h3>Send Push Notification</h3>";
+	h += "</div>";
+	h += "<div class='modal-body'>";
+    h += "<iframe style='width:90%; height:300px;' frameborder='no' src='api.php?action=pushwindow&id="+ID+push2press.rnd()+"'></iframe>";
+	h += "</div>";
+	h += "<div class='modal-footer'>";
+	h += "</div>";
+    
+	$("#modal-window").html(h);
+	$("#modal-window").modal({
+		show : true
+	}).css("height","inherit").css("width","500px").css("margin-left","-250px").css("left","50%");
+
+/*
+	var h = "";
     h += "<div class='plain-hero-unit'>";
     h += ID;
     h += "</div>";
@@ -120,7 +147,7 @@ $push2press.push = function(ID,TO,MESSID,MESS) {
 	$("#modal-window").modal({
 		show : true
 	});
-
+*/
 }
 
 $push2press.push1 = function(ID,TO,MESSID,MESS) {
@@ -138,6 +165,24 @@ $push2press.push1 = function(ID,TO,MESSID,MESS) {
 	
 $push2press.push2 = function(ID,TO,MESSID,MESS) {
 	var h = "";
+	h += "<div class='modal-header'>";
+ 	h += "<button type='button' class='close' data-dismiss='modal' aria-hidden='true'>&times;</button>";
+	h += "<h3>Send Push Notification</h3>";
+	h += "</div>";
+	h += "<div class='modal-body'>";
+    h += "<iframe style='width:90%; height:300px;' frameborder='no' src='api.php?action=pushwindow2&id="+ID+push2press.rnd()+"'></iframe>";
+	h += "</div>";
+	h += "<div class='modal-footer'>";
+	h += "</div>";
+    
+	$("#modal-window").html(h);
+	$("#modal-window").modal({
+		show : true
+	}).css("height","inherit").css("width","500px").css("margin-left","-250px").css("left","50%");
+
+
+/*
+	var h = "";
     h += "<div class='plain-hero-unit'>";
     h += ID;
     h += "</div>";
@@ -146,7 +191,7 @@ $push2press.push2 = function(ID,TO,MESSID,MESS) {
 	$("#modal-window").modal({
 		show : true
 	});
-
+*/
 }
 push2press.rnd = function() {
 	return "&__"+new Date().getTime();
@@ -168,9 +213,34 @@ $push2press.push3 = function(ID,TO,MESSID,MESS) {
 	$("#modal-window").html(h);
 	$("#modal-window").modal({
 		show : true
-	}).css("height","inherit");
+	}).css("height","inherit").css("width","500px").css("margin-left","-250px").css("left","50%");
+
+
 
 }
+
+push2press.popupWin = function(URL,NAME) {
+	var _NAME = (NAME && NAME != "") ? "name='"+NAME+"'" : "";
+	var h = "";
+//    h += "<div class='content-border'>";
+	h += "<div class='modal-header'>";
+ 	h += "<button type='button' class='close' data-dismiss='modal' aria-hidden='true'>&times;</button>";
+	h += "</div>";
+	h += "<div class='modal-body'>";
+    h += "<iframe "+_NAME+" frameborder='0' width='90%' height='90%' src='"+URL+push2press.rnd()+"' marginwidth='0' marginheight='0' scrolling='no' />";
+	h += "</div>";
+	h += "<div class='modal-footer'>";
+	h += "</div>";
+    
+//	$("#modal-window").load("api.php?action=pushwindow3&id="+ID);
+	$("#modal-window").html(h);
+	$("#modal-window").modal({
+		show : true
+	}).css("height","inherit").css('width','600px').css("marginLeft","-300px").css('height','500px');
+}
+
+
+
 
 $push2press.getlist = function(catid) {
 	var sortedIDs = $("#sortable").sortable( "toArray" );
@@ -491,10 +561,16 @@ push2press.choosePageType = function() {
 	}
 	h += "<div class='modal-head'>";
 	h += "<h1>Choose from these pre made templates</h1>";
+	h += "<div> &nbsp;</div>"
+	h += "<div> &nbsp;</div>"
 	h += "</div>";
 	h += "<div class='modal-body'>";
-	h += "<table class='table table-condensed' width='95%'>";
+	h += "<form>";
+	h += "<input style='position:absolute; top:32px;' type='text' id='filter'>";
+	h += "<ul>";
 	for (var i=0; i < _pagetypes.length; i++) {
+		h += "<li>";
+		h += "<table class='table table-condensed' width='95%'>";
 		h += "<tr><td valign='top'>";
 		h += "<div><img height='40' src='"+_pagetypes[i].i+"'></div>";
 		h += "<div>&nbsp;</div>";
@@ -505,11 +581,15 @@ push2press.choosePageType = function() {
 		h += "</td><td>";
 		h += "<div><a class='btn' href='javascript:push2press.gotopage("+i+");'>Add</a></div>";
 		h += "</td></tr>";
+		h += "</table>";
+		h += "</li>";
 	}
-	h += "</table>";
+	h += "</ul>";
+	h += "</form>";
 	h += "</div>";
 	$("#modal-window2").html(h);
-	$("#modal-window2").modal('show').css("width","800px");
+	$("#modal-window2").modal('show').css("width","800px").css("margin-left","-400px").css("left","50%");
+	$('#filter').filterList();
 
 }
 

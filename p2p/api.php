@@ -230,6 +230,8 @@ $hbotpopup = $hbotpopup .'    <script src="http://www.glimworm.com/_assets/moock
 $hbotpopup = $hbotpopup .'    <!-- http://jdewit.github.com/bootstrap-timepicker/ -->';
 $hbotpopup = $hbotpopup .'    <link rel="stylesheet" href="http://www.glimworm.com/_assets/moock/bootstrap/extras/bootstrap-timepicker-master/css/bootstrap-timepicker.css" />';
 $hbotpopup = $hbotpopup .'    <script src="http://www.glimworm.com/_assets/moock/bootstrap/extras/bootstrap-timepicker-master/js/bootstrap-timepicker.js"></script>';
+$hbotpopup = $hbotpopup .'    <script src="lib/js/jquery.filterList.min.js"></script>';
+$hbotpopup = $hbotpopup .'    <script src="lib/js/jquery-sortable.js"></script>';
 $hbotpopup = $hbotpopup .'  </body>';
 $hbotpopup = $hbotpopup .'</html>';
 
@@ -299,7 +301,8 @@ $htop = $htop . "			$('#main_img_fld').val(url);";
 $htop = $htop . "            }";
 $htop = $htop . "        }";
 $htop = $htop . "    };";
-$htop = $htop . "    window.open('kcfinder/browse.php?type=images','kcfinder_image', 'status=0, toolbar=0, location=0, menubar=0, directories=0, resizable=1, scrollbars=0, width=800, height=600');";
+$htop = $htop ."push2press.popupWin('kcfinder/browse.php?type=images');";
+//$htop = $htop . "    window.open('kcfinder/browse.php?type=images','kcfinder_image', 'status=0, toolbar=0, location=0, menubar=0, directories=0, resizable=1, scrollbars=0, width=800, height=600');";
 $htop = $htop . "}";
 
 
@@ -313,7 +316,8 @@ $htop = $htop . "\n";
 
 $htop = $htop .'<script type="text/javascript">';
 $htop = $htop .'function kcnew(){';
-$htop = $htop ."window.open('kcfinder/browse.php?type=images','kcfinder_image', 'status=0, toolbar=0, location=0, menubar=0, directories=0, resizable=1, scrollbars=0, width=800, height=600');";
+$htop = $htop ."push2press.popupWin('kcfinder/browse.php?type=images');";
+//$htop = $htop ."window.open('kcfinder/browse.php?type=images','kcfinder_image', 'status=0, toolbar=0, location=0, menubar=0, directories=0, resizable=1, scrollbars=0, width=800, height=600');";
 $htop = $htop .'}';
 $htop = $htop .'</script>';
 $htop = $htop . "\n";
@@ -321,44 +325,95 @@ $htop = $htop . "\n";
 $htop = $htop .'  </head>';
 $htop = $htop .'  <body>';
 $htop = $htop .'    <div class="navbar navbar-fixed-top">';
-$htop = $htop .'      <div class="navbar-inner">';
+$htop = $htop .'      <div class="xnavbar-inner">';
 $htop = $htop .'        <div class="container">';
 $htop = $htop .'          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">';
 $htop = $htop .'            <span class="icon-bar"></span>';
 $htop = $htop .'            <span class="icon-bar"></span>';
 $htop = $htop .'            <span class="icon-bar"></span>';
 $htop = $htop .'          </a>';
-$htop = $htop .'          <a class="brand" href="api.php"><img src="images/application-logo.png"></a>';
 $htop = $htop .'          <div class="nav-collapse">';
+
+$htop = $htop .'            <ul class="nav nav-top-block" style="background-color : #fff;">';
+$htop = $htop .'          	<li class="dropdown" id="menu1"><a class="brand" href="api.php"><img src="images/application-logo.png"></a>';
+
+$htop = $htop .'              	<ul class="dropdown-menu">';
+//$htop = $htop .'              		<li><a href="api.php?action=list-group"><i class="icon-list-alt"></i> '.L('Groups').'</a></li>';
+//$htop = $htop .'              		<li><a href="api.php?action=list-log"><i class="icon-signal"></i> '.L('Devices').'</a></li>';
+
+//$htop = $htop .'              		<li class="p2p-youareusing"> <img src="http://m.push2press.com/jc30/images/application-logo.png"><br><b>By Glimworm IT BV</b><br>Version : ' . $push2version["major"] . ' ' . $push2version["type"]. ' <br> Build : ' . $push2version["build"] . '</li>';
+
+//$htop = $htop .'              		<li><a href="javascript:\$push2press.loading();"><i class="icon-list-alt"></i> UPDATE TO LATEST VERSION</a></li>';
+//$htop = $htop .'        		      <li><a href="api.php?action=instruct"><i class="icon-question-sign"></i> '.L('Instructions').'</a></li>';
+//$htop = $htop .'        		      <li><a href="setup.php"><i class="icon-question-sign"></i> Re enter setup</a></li>';
+
+
+
+$htop = $htop .'              <li><a href="api.php?action=logout">'.L("Logout").'</a></li>';
+
+$htop = $htop .'              	</ul>';
+$htop = $htop .'              </li>';
+
+/*
 $htop = $htop .'            <ul class="nav">';
-$htop = $htop .'              		<li><a href="api.php?action=list-draft-mes">'.L('mesz').'</a></li>';
-$htop = $htop .'              <li <li class="dropdown" id="menu1"><a class="dropdown-toggle" data-toggle="dropdown" href="#menu3">'.L('Push_Marketing').'</a>';// <b class="caret"></b></a>';
+$htop = $htop .'              <li class="dropdown" id="menu1"><a class="xdropdown-toggle" data-toggle="xdropdown" href="#menu3">'.L('Push_Marketing').'</a>';// <b class="caret"></b></a>';
 $htop = $htop .'              	<ul class="dropdown-menu">';
 $htop = $htop .'              		<li><a href="api.php?action=list-group"><i class="icon-list-alt"></i> '.L('Groups').'</a></li>';
 $htop = $htop .'              		<li><a href="api.php?action=list-log"><i class="icon-signal"></i> '.L('Devices').'</a></li>';
 $htop = $htop .'              	</ul>';
 $htop = $htop .'              </li>';
-$htop = $htop .'              <li <li class="dropdown" id="menu1"><a class="dropdown-toggle" data-toggle="dropdown" href="#menu2">'.L('CMS').'</a>';// <b class="caret"></b></a>';
+*/
+
+/*
+$htop = $htop .'              <li class="dropdown" id="menu1"><a class="xdropdown-toggle" data-toggle="xdropdown" href="#menu2">'.L('CMS').'</a>';// <b class="caret"></b></a>';
 $htop = $htop .'              	<ul class="dropdown-menu">';
 //$htop = $htop .'              		<li><a href="api.php?action=list-cats"><i class="icon-list-alt"></i> '.L('catz').'</a></li>';
 //$htop = $htop .'              		<li><a href="api.php?action=list-pages"><i class="icon-file"></i> '.L('pagz').'</a></li>';
 $htop = $htop .'              		<li><a href="api.php?action=list-templates"><i class="icon-file"></i> '.L('templates').'</a></li>';
 $htop = $htop .'    		          <li><a href="javascript:kcnew();"><i class="icon-picture"></i> '.L('Media').'</a></li>';
 $htop = $htop .'    		          <li><a href="api.php?action=list-dom"><i class="icon-wrench"></i> '.L('Config').'</a></li>';
-$htop = $htop .'        		      <li><a href="api.php?action=instruct"><i class="icon-question-sign"></i> '.L('Instructions').'</a></li>';
-$htop = $htop .'        		      <li><a href="setup.php"><i class="icon-question-sign"></i> Re enter setup</a></li>';
 $htop = $htop .'              	</ul>';
 $htop = $htop .'              </li>';
+*/
 
 require_once './local_menu.php';
 
-//$htop = $htop .'              <li><a href="api.php?action=list-dom&selected=">Config</a></li>';
-$htop = $htop .'              <li <li class="dropdown" id="menu4"><a class="dropdown-toggle" data-toggle="dropdown" href="#menu4">'.L('Stats').'</a>';// <b class="caret"></b></a>';
+/* stats */
+/*
+$htop = $htop .'              <li <li class="dropdown" id="menu4"><a class="xdropdown-toggle" data-toggle="xdropdown" href="#menu4">'.L('Stats').'</a>';// <b class="caret"></b></a>';
 $htop = $htop .'              	<ul class="dropdown-menu">';
 $htop = $htop .'              		<li><a href="api.php?action=list-stats-srch"><i class="icon-list-alt"></i> '.L('Search').'</a></li>';
 $htop = $htop .'              		<li><a href="api.php?action=list-stats-graph"><i class="icon-list-alt"></i> '.L('Graph').'</a></li>';
 $htop = $htop .'              	</ul>';
 $htop = $htop .'              </li>';
+*/
+
+
+
+/* the app */
+/*
+$htop = $htop .'              <li <li class="dropdown" id="menu4"><a class="xdropdown-toggle" data-toggle="xdropdown" href="#menu5">Get The App!</a>';// <b class="caret"></b></a>';
+$htop = $htop .'              	<ul class="dropdown-menu">';
+
+$htop = $htop .'              		<li class="p2p-youareusing">
+<table width="350">
+<tr><td colspan="2"><img src="http://m.push2press.com/jc30/images/application-logo.png"></td></tr>
+<tr><td><img src="images/MainImage.jpg" width=150>
+The preview App is available in the App Store
+<a href="push2press://?url='.getConfiguration("url","").'"><img src="http://blog.eventphant.com/wp-content/uploads/2012/07/Apple-App-Store.jpg" height="50"></a></td><td valign="top">
+In order to perform a quick setup click the QR code link below and follow the on screen instructions:
+<span id="qrcodesmall"><a href="javascript:push2press.qrcode();"><img src="http://api.qrserver.com/v1/create-qr-code/?data='.urlencode("push2press://?url=".getConfiguration("url","")).'&size=250x250"></a></span>
+</td></tr>
+<tr><td colspan="2">&nbsp;</td></tr>
+</table>
+</li>';
+
+$htop = $htop .'              	</ul>';
+$htop = $htop .'              </li>';
+*/
+
+/* about */
+
 $htop = $htop . "\n";
 $htop = $htop .' <script type="text/javascript">'."\n";
 $htop = $htop .'	var mq = window.matchMedia("(min-width: 500px)");'."\n";
@@ -377,8 +432,6 @@ $htop = $htop .'	$'.'(window).bind("resize", WidthChange(mq));'."\n";
 $htop = $htop .' </script>'."\n";
 $htop = $htop . "\n";
 
-$htop = $htop .'              <li><a href="api.php?action=logout">'.L("Logout").'</a></li>';
-$htop = $htop .'              <li><div style="padding-left:20px;padding-top: 9px;"><span class="label xlabel-inverse">push2press v'.$push2version["major"].' '.$push2version["type"].'</span></div></li>';
 $htop = $htop .'            </ul>';
 $htop = $htop .'          </div><!--/.nav-collapse -->';
 $htop = $htop .'        </div>';
@@ -416,6 +469,8 @@ $hbot = $hbot .'    <script src="http://www.glimworm.com/_assets/moock/bootstrap
 $hbot = $hbot .'    <!-- http://jdewit.github.com/bootstrap-timepicker/ -->';
 $hbot = $hbot .'    <link rel="stylesheet" href="http://www.glimworm.com/_assets/moock/bootstrap/extras/bootstrap-timepicker-master/css/bootstrap-timepicker.css" />';
 $hbot = $hbot .'    <script src="http://www.glimworm.com/_assets/moock/bootstrap/extras/bootstrap-timepicker-master/js/bootstrap-timepicker.js"></script>';
+$hbot = $hbot .'    <script src="lib/js/jquery.filterList.min.js"></script>';
+$hbot = $hbot .'    <script src="lib/js/jquery-sortable.js"></script>';
 $hbot = $hbot .'  </body>';
 $hbot = $hbot .'</html>';
 
@@ -427,11 +482,15 @@ function B($TYPE, $LINK) {
 	        break;
 	    case "edit":
 	    	return 	"<a class='btn btn-mini xbtn-info' href='" . $LINK . "'><i class='icon-edit icon-black'></i> ".L("EDIT")."</a>";
-//	       	return 	"<a class='btn btn-mini btn-info' href='" . $LINK . "'><i class='icon-edit icon-white'></i> ".L("EDIT")."</a>";
-//	    	return 	"<a class='btn btn-mini btn-xsuccess' href='" . $LINK . "'><i class='icon-edit icon-black'></i> ".L("EDIT")."</a>";
+	        break;
+	    case "edit-txt":
+	    	return 	"<a href='" . $LINK . "'>".L("EDIT")."</a>";
 	        break;
 	    case "preview":
 	    	return 	"<a class='btn btn-mini btn-xinfo' href='" . $LINK . "'><i class='icon-share icon-black'></i> ".L("PREVIEW")."</a>";
+	        break;
+	    case "preview-txt":
+	    	return 	"<a href='" . $LINK . "'> ".L("PREVIEW")."</a>";
 	        break;
 	    case "compose":
 	    	return 	"<a class='btn btn-mini btn-xwarning' href='" . $LINK . "'><i class='icon-comment icon-black'></i> ".L("COMPOSE")."</a>";
@@ -1554,10 +1613,10 @@ if ($act ==""){
 		
 		$h = "";
         $h = $h . "<div class='plain-hero-unit'>";
-        $h = $h . "<div class='span3'>";
-        $h = $h . "Instructions";
-        $h = $h . "</div>";
-        $h = $h . "<div class='span8'>";
+//        $h = $h . "<div class='span3'>";
+//        $h = $h . "Instructions";
+//        $h = $h . "</div>";
+        $h = $h . "<div class='span12'>";
 		$h = $h . "";
 		$db = mysql_connect($dbhost,$username,$password);
         mysql_select_db($database) or die("Unable to select database");
@@ -2550,8 +2609,19 @@ else if ( $action == "pushwindow") {
 
         $query="select * from groups order by gid desc limit 50";
         $result=mysql_query($query);
+        
+		$h = $h . "
+		<script>
+		function setformloading() {
+			$"."('#submitformbutton').text('Loading');
+			$"."('#form1').hide();
+			$"."('#form1-spinner').show();
+			return true;
+		}
+		</script>";
+        
         $h = $h . "<legend>Select groups</legend>";
-        $h = $h . "<form action='api.php'>";
+        $h = $h . "<form id='form1' name='form1' action='api.php' onsubmit='setformloading()'>";
         $h = $h . "<input type='hidden' name='action' value='push-prep'>";
         $h = $h . "<input type='hidden' name='id' value='".$id."'>";
         $h = $h . "<table class='table table-striped table-bordered table-condensed'>";
@@ -2587,10 +2657,12 @@ else if ( $action == "pushwindow") {
     
     $h = $h . "<tr>";
     $h = $h . "<td>Are you sure you want to sent this?</td>";
-    $h = $h . "<td><button type='submit' data-loading-text='Loading…' class='btn btn-mini btn-success'>send</button></td>";
+    $h = $h . "<td><button type='submit' id='submitformbutton' data-loading-text='Loading…' class='btn btn-mini btn-success'>send</button></td>";
     $h = $h . "</tr>";
-    $h = $h . "</form>";
     $h = $h . "</table>";	
+    $h = $h . "</form>";
+
+   	$h = $h . "<img src='images/ajax-spinner.gif' id='form1-spinner' style='display:none;'>";
 
 
 	echo $htoppopup;
@@ -2612,6 +2684,7 @@ else if ( $action == "pushwindow") {
 
         $query="select * from groups order by gid desc limit 50";
         $result=mysql_query($query);
+        
         $h = $h . "<legend>Select groups</legend>";
         $h = $h . "<form action='api.php'>";
         $h = $h . "<input type='hidden' name='action' value='push-prep'>";
@@ -2735,33 +2808,46 @@ else if ( $action == "pushwindow") {
 
         $query="select * from groups order by gid desc limit 50";
         $result=mysql_query($query);
-        $h = $h . "<form action='api.php'>";
+        $h = $h . "<form id='form1' name='form1' action='api.php' onsubmit='setformloading()'>";
         $h = $h . "<input type='hidden' name='action' value='push-prep'>";
         $h = $h . "<input type='hidden' name='id' value='".$id."'>";
         $h = $h . "<input type='hidden' name='gid' value='".$id."'>";
         		
 		$cap = "";
+		$h = $h . "
+		<script>
+		function setformloading() {
+			$"."('#submitformbutton').text('Loading');
+			$"."('#form1').hide();
+			$"."('#form1-spinner').show();
+			return true;
+		}
+		</script>";
 		
 		$h = $h . "<legend>Notification</legend>";
-    $h = $h . "<table class='table table-striped table-bordered table-condensed'>";
-    $h = $h . "<tr>";
-    $h = $h . "<td colspan='2'><textarea name='cap'>".$cap."</textarea></td>";
-    $h = $h . "</tr>";
+	    $h = $h . "<table class='table table-striped table-bordered table-condensed'>";
+	    $h = $h . "<tr>";
+	    $h = $h . "<td colspan='2'><textarea name='cap'>".$cap."</textarea></td>";
+	    $h = $h . "</tr>";
     
-    $h = $h . "<tr>";
-    $h = $h . "<td colspan='2'><textarea name='desc'>Typ hier nog een korte beschrijving.</textarea></td>";
-    $h = $h . "</tr>";
+	    $h = $h . "<tr>";
+	    $h = $h . "<td colspan='2'><textarea name='desc'>Typ hier nog een korte beschrijving.</textarea></td>";
+	    $h = $h . "</tr>";
     
-    $h = $h . "<tr>";
-    $h = $h . "<td>Are you sure you want to sent this?</td>";
-    $h = $h . "<td><input type='submit' class='btn btn-mini btn-success' value='send'></td>";
-    $h = $h . "</tr>";
-    $h = $h . "</form>";
-    $h = $h . "</table>";
+	    $h = $h . "<tr>";
+	    $h = $h . "<td>Are you sure you want to sent this?</td>";
+	    $h = $h . "<td><input type='submit' id='submitformbutton' class='btn btn-mini btn-success' value='send'></td>";
+	    $h = $h . "</tr>";
+	    $h = $h . "</table>";
+	    $h = $h . "</form>";
+    	$h = $h . "<img src='images/ajax-spinner.gif' id='form1-spinner' style='display:none;'>";
 		
+	echo $htoppopup;
 	echo "<div id='pushwindow' style='padding:10px;'>";
 	echo $h;
 	echo "</div>";
+	echo $hbotpopup;
+	exit; 
 
 }else if ( $action == "pushwindow3") {
 		$id = $_POST["id"];
@@ -3936,11 +4022,13 @@ echo "<!--\n\n $query; \n\n-->";
 	
 
 } else {
+	$emenu = "";
+	require_once './local_functions.php';
 	$action = "homepage";
 }
 if ($action == "homepage") {
 
-		require_once './local_functions.php';
+//		require_once './local_functions.php';
 		
 
 		$h = "";
@@ -3983,19 +4071,7 @@ if ($action == "homepage") {
         echo "<br>";
         echo '<div class="container">';
         echo '      <div class="row-fluid">';
-        echo '			<div class="span4">';
-        echo "			<div class='ribbon left red'><a href='#'>Fork me on GitHub</a></div>";
-        echo "			<img src='images/MainImage.jpg'>";
-//		echo '			<a href="https://itunes.apple.com/us/app/push2press/id603889484?mt=8"><img src="http://blog.eventphant.com/wp-content/uploads/2012/07/Apple-App-Store.jpg" height="50"></a>';
-		echo '			<a href="push2press://?url='.getConfiguration("url","").'"><img src="http://blog.eventphant.com/wp-content/uploads/2012/07/Apple-App-Store.jpg" height="50"></a>';
-        
-		echo "			<span id='qrcodesmall'><a href='javascript:push2press.qrcode();'><img src='http://api.qrserver.com/v1/create-qr-code/?data=".urlencode("push2press://?url=".getConfiguration("url",""))."&size=250x250'></a></span>";
-
-		echo "				<br>";
-		echo "<p>You are using : Version : " . $push2version["major"] . " " . $push2version["type"] . ", build : " . $push2version["build"] . ", <a href='javascript:\$push2press.loading();'>UPDATE TO LATEST VERSION</a></p>";
-
-        echo "			</div>";
-        echo '			<div class="span8">';
+        echo '			<div class="span6">';
 		echo $h;
 		
 		
@@ -4011,117 +4087,57 @@ if ($action == "homepage") {
         $result=mysql_query($query);
         $h = "";
         
-$h = $h . "
-<script src='http://johnny.github.io/jquery-sortable/js/jquery-sortable.js'></script>
-<style>
-
-ol.x-category {
-	margin-left : 0;
-}
-li.x-category {
-	margin-left : 0;
-}
-li.x-category .x-div {
-    background-image : url(images/sidebar_cat_bg.png);
-}
-ol.x-category li.x-page {
-    background-image : url(images/sidebar_bg.png);
-	margin-left : 0;
-}
-.x-divider {
-	height : 3px;
-    background-image : url(images/sidebar_cell_bg.png);
-
-}
-
-  ol.vertical li.x-page, ol.vertical div.x-div {
-    display: block;
-    xmargin: 4px;
-	cursor: move;
-    padding: 4px;
-    font-size : 18px;
-    border: 1px solid #cccccc;
-    border:0;
-    color: #eeeeee;
-    xbackground: #eeeeee; } 
-
-
-
-  ol.vertical li.x-category {
-    display: block;
-	cursor: move;
-    xmargin: 4px;
-    padding: 4px;
-    border:0;
-    font-size : 18px;
-    color: #eeeeee;
-    xbackground: #ffffff; } 
-
-
-
-body.dragging, body.dragging * {
-  cursor: move !important;
-}
-
-.dragged {
-  position: absolute;
-  opacity: 0.5;
-  z-index: 2000;
-}
-
-ol.example li.placeholder {
-  position: relative;
-  /** More li styles **/
-}
-ol.example li.placeholder:before {
-  position: absolute;
-  /** Define arrowhead **/
-}
-.ui-nonumber {
-	margin-top : 8px;
-	margin-bottom : 8px;
-	height : 32px;
-}
-.content-tree {
-    box-shadow: 0 0px 10px 5px rgba(0, 0, 0, 0.1);
-	border: 1px solid #cdc6c6;
-	border-radius: 3px;
-	overflow: auto;
-	background: #fff;
-}
-.content-tree .sort-item {
-	background: #fff;
-}	
-.page-title {
-	margin-left : 12px;
-	vertical-align : middle;
-}
-.page-icon {
-	margin-left : 8px;
-}
-
-</style>";        
-        
+		$h .= '<link href="api-menu.css" rel="stylesheet">';
         
 		$h = $h . "<div class='content-tree'>\n";
 		
+		$welcome = "";
 		if ($c2 > -1) {
-	        $h = $h . "<h3> Welcome back to push2press</h3>";
-	        $h = $h . $MSG;
+	        $welcome = $welcome . "<h3> Welcome back to push2press</h3>";
+	        $welcome = $welcome . $MSG;
 	    } else {
-	        $h = $h . "<h3> Welcome to your push2press site</h3>";
-	        $h = $h . $MSG;
+	        $welcome = $welcome . "<h3> Welcome to your push2press site</h3>";
+	        $welcome = $welcome . $MSG;
 	    }
 		
 		
-		$h = $h . "<div class='modal-header'>Content</div>";
+$h = $h . '		
+<div class="xcontainer navbar" style="margin-left:25px;margin-right:25px;">
+<br>
+<br>
+<div class="mic"></div>
+<br>
+<br>
+<img src="images/app-logo-reverse.png">
+<ul class="nav pull-right">
+<!--li>'.$welcome.'</li-->
+  <li class="dropdown">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+    	Edit
+    	<b class="caret"></b>
+    </a>
+    <ul class="dropdown-menu">
+	'."<li><a class='btn btn-success' href='api.php?action=show-cat&action2=add'> <i class='icon-plus icon-white'></i> ADD CATEGORY</a></li>".'
+<li><a href="api.php?action=list-templates"><i class="icon-file"></i> '.L('templates').'</a></li>
+<li><a href="javascript:kcnew();"><i class="icon-picture"></i> '.L('Media').'</a></li>
+<li><a href="api.php?action=list-dom"><i class="icon-wrench"></i> '.L('Config').'</a></li>
+    </ul>
+  </li>
+</ul>
+</div>
+<br>
+';
+		
+		
+/*
         $h = $h . "<div class='btn-group'>";
         $h = $h . "<div class='btn-group pull-right'>";
         $h = $h . "<a class='btn btn-success' href='api.php?action=show-cat&action2=add'> <i class='icon-plus icon-white'></i> ADD</a>";
         $h = $h . "</div>";		// end buttongroup
         $h = $h . "</div>";		// end buttongroup
+*/
         
-		$h = $h . "<ol class='nested_with_switch vertical x-root'>";
+		$h = $h . "<ol class='nested_with_switch vertical x-root' style='margin-right:25px;'>";
         $CurrentCatID = -1;
         $CurrentCatEndBlock = "";
         for ($r=0; $r < mysql_numrows($result); $r++) {
@@ -4140,6 +4156,7 @@ ol.example li.placeholder:before {
 					$h = $h . "<span>&nbsp;</span>";
 	                $h = $h . "<span>" . mysql_result($result,$r,"CatName") . "</span>\n";
 
+					$h = $h . "<span class='xx-edit-over'>";
 			        $h = $h . "<div class='btn-group pull-right'>\n";
 	                $h = $h . "<span><a class='btn btn-mini xbtn-success' href='api.php?action=show-cat&id=" . mysql_result($result,$r,"CatID") . "'><i class='icon-edit icon-black'></i> ".L("EDIT")."</a></span>\n";
 
@@ -4149,6 +4166,7 @@ ol.example li.placeholder:before {
 
 
 	                $h = $h . "</div>\n";
+					$h = $h . "<span/>";
 
 	                $h = $h . "</div>\n";
 	                $h = $h . "<ol id='push2press-tree-cat-ol-".mysql_result($result,$r,"CatID")."' class='x-category'>\n";
@@ -4162,7 +4180,7 @@ ol.example li.placeholder:before {
        			$h = $h . "<div class='pull-left'><i class='icon-move icon-white' style='font-size:18px;'></i></div>";
 
                 $img = mysql_result($result,$r,"img");
-                $img_size = sprintf("timthumb.php?h=24&w=24&src=%s",$img);
+                $img_size = sprintf("timthumb.php?h=32&w=32&src=%s",$img);
 				if (strpos($img_size,"client_images/images/icons/glyphicons")) $img_size = $img_size . "&zc=2&f=5,238,238,238,1";
 
 
@@ -4173,10 +4191,10 @@ ol.example li.placeholder:before {
                 $h = $h . "<span>" . mysql_result($result,$r,"Caption") . "</span>\n";
                 $h = $h . "</span>\n";
 
-		        $h = $h . "<div class='btn-group pull-right'>\n";
-                $h = $h . "<span>" .B("edit","api.php?action=show-page&id=" . mysql_result($result,$r,"id") . ""). "";
+		        $h = $h . "<div class='btn-group pull-right' style='display:none'>\n";
+                $h = $h . "<span class='xx-edit-butts'>" .B("edit-txt","api.php?action=show-page&id=" . mysql_result($result,$r,"id") . ""). "";
                 $h = $h . " ";
-                $h = $h . "" .B("preview","javascript:\$push2press.previewpage(\"api.php?action=get-page&id=" . mysql_result($result,$r,"id")."\");"). "</span>\n";
+                $h = $h . "" .B("preview-txt","javascript:\$push2press.previewpage(\"api.php?action=get-page&id=" . mysql_result($result,$r,"id")."\");"). "</span>\n";
        			$h = $h . "</div>\n";
        			
        			$h = $h . "</div>\n";
@@ -4189,9 +4207,60 @@ ol.example li.placeholder:before {
         }
 		$h = $h . $CurrentCatEndBlock;
 		$h = $h . "</ol>\n";
+		$h = $h . "<div class='x-div x-div-cat' style='height:30px;'>\n";
+		$h = $h . "<img src='images/10x10.gif' width=20 height=8>\n";
+		$h = $h . "<span class='page-title'>\n";
+		$h = $h . "Messages and settings";
+		$h = $h . "</span>\n";
+		$h = $h . "</div>\n";
+
+		$h = $h . "<div class='x-div x-div-page' style='height:30px;'>\n";
+		$h = $h . "<img src='images/10x10.gif' width=20 height=8>\n";
+		$h = $h . "<span class='page-title'>\n";
+		$h = $h . "messages";
+		$h = $h . "</span>\n";
+		$h = $h . "<div class='btn-group pull-right'>\n";
+		$h = $h . "<span>" .B("edit","api.php?action=list-draft-mes"). "";
 		$h = $h . "</div>\n";
 
 
+		$h = $h . "</div>\n";
+
+		$h = $h . "<div class='x-div x-div-page' style='height:30px;'>\n";
+		$h = $h . "<img src='images/10x10.gif' width=20 height=8>\n";
+		$h = $h . "<span class='page-title'>\n";
+		$h = $h . "settings";
+		$h = $h . "</span>\n";
+		$h = $h . "<div class='btn-group pull-right'>\n";
+		$h = $h . "<span>" .B("edit","api.php?action=list-group"). "";
+		$h = $h . "</div>\n";
+		$h = $h . "</div>\n";
+		
+		$h .= "<br>\n";
+		$h .= "<div class='button'><div class='buttonbox'></div></div>\n";
+		$h .= "<br>\n";
+		
+
+		$h = $h . "</div>\n";
+
+?>
+<script>
+$(function() {
+
+	var lines = $(".x-page");
+	for (var i=0; i < lines.length; i++) {
+		$(lines[i]).bind("mouseenter", function() {
+			$(this).find(".btn-group").css("display","block");
+		})
+		$(lines[i]).bind("mouseleave", function() {
+			$(this).find(".btn-group").css("display","none");
+		})
+	}
+})
+</script>
+
+
+<?php
 
 	
 		
@@ -4230,9 +4299,154 @@ ol.example li.placeholder:before {
 		}
 
         echo "			</div>";
+
+        echo '			<div class="span6">';
+        echo "			<div class='ribbon right red'><a href='#'>Fork me on GitHub</a></div>";
+//        echo "			<img src='images/MainImage.jpg'>";
+//		echo '			<a href="https://itunes.apple.com/us/app/push2press/id603889484?mt=8"><img src="http://blog.eventphant.com/wp-content/uploads/2012/07/Apple-App-Store.jpg" height="50"></a>';
+//		echo '			<a href="push2press://?url='.getConfiguration("url","").'"><img src="http://blog.eventphant.com/wp-content/uploads/2012/07/Apple-App-Store.jpg" height="50"></a>';
+        
+//		echo "			<span id='qrcodesmall'><a href='javascript:push2press.qrcode();'><img src='http://api.qrserver.com/v1/create-qr-code/?data=".urlencode("push2press://?url=".getConfiguration("url",""))."&size=250x250'></a></span>";
+		
+		echo "<legend>Dashboard</legend>";
+
+		echo "<div id='p2p-dashboard'>";	// start p2p-dashboard
+
+        echo '<div class="appicon">
+		<a href="javascript:push2press.modal(\'#gettheapp\');">
+		<img src="images/MainImage.jpg" width=100>
+		</a>
+		Get The App! 
+
+
+		<div id="gettheapp" style="display:none;">
+			<div class="p2p-youareusing">
+				<table width="350">
+				<tr><td colspan="2"><img src="http://m.push2press.com/jc30/images/application-logo.png"></td></tr>
+				<tr><td>
+				<img src="images/MainImage.jpg" width=150>
+				The preview App is available in the App Store
+				<a href="push2press://?url='.getConfiguration("url","").'">
+					<img src="http://blog.eventphant.com/wp-content/uploads/2012/07/Apple-App-Store.jpg" height="50">
+				</a>
+				</td><td valign="top">
+				In order to perform a quick setup click the QR code link below and follow the on screen instructions:
+				<span id="qrcodesmall">
+				<a href="javascript:push2press.qrcode();">
+				<img src="http://api.qrserver.com/v1/create-qr-code/?data='.urlencode("push2press://?url=".getConfiguration("url","")).'&size=250x250">
+				</a>
+				</span>
+				</td>
+				</tr>
+				<tr><td colspan="2">&nbsp;</td></tr>
+				</table>
+			</div>
+			</div>
+		</div>';
+
+
+        echo '<div class="appicon">
+		<a href="api.php?action=list-group">
+		<img src="images/home/glyphicons_043_group.png" width=80>
+		</a><br>
+		Groups 
+		</div>';
+
+        echo '<div class="appicon">
+		<a href="api.php?action=list-log">
+		<img src="images/home/glyphicons_139_phone.png" height=80>
+		</a><br>
+		Devices 
+		</div>';
+		
+        echo '<div class="appicon">
+		<a href="javascript:push2press.modal(\'#youareusing\');">
+		<img src="images/home/glyphicons_195_circle_info.png" width=80>
+		</a>
+		About 
+		<div id="youareusing" style="display:none;">
+			<li class="p2p-youareusing"> 
+				<img src="http://m.push2press.com/jc30/images/application-logo.png">
+				<br>
+				<b>By Glimworm IT BV</b>
+				<br>
+				Version : ' . $push2version["major"] . ' ' . $push2version["type"]. ' 
+				<br> 
+				Build : ' . $push2version["build"] . '
+			</li>
+		</div>
+		</div>';
+		
+		
+
+        echo '<div class="appicon">
+        <a href="#" xxhref="javascript:\$push2press.loading();">
+		<img src="images/home/glyphicons_201_upload.png" width=80>
+		</a><br>
+		UPDATE TO LATEST VERSION 
+		</div>';
+
+        echo '<div class="appicon">
+		<a href="api.php?action=instruct">
+		<img src="images/MainImage.jpg" width=80>
+		</a><br>
+		Instructions 
+		</div>';
+
+        echo '<div class="appicon">
+		<a href="setup.php">
+		<img src="images/home/glyphicons_023_cogwheels.png" width=80>
+		</a><br>
+		Re enter setup 
+		</div>';
+
+        echo '<div class="appicon">
+		<a href="javascript:kcnew();">
+		<img src="images/home/glyphicons_159_picture.png" height=80>
+		</a><br>
+		Media 
+		</div>';
+
+        echo '<div class="appicon">
+		<a href="api.php?action=list-templates">
+		<img src="images/home/glyphicons_036_file.png" height=80>
+		</a><br>
+		Templates 
+		</div>';
+
+        echo '<div class="appicon">
+		<a href="api.php?action=list-dom">
+		<img src="images/home/glyphicons_019_cogwheel.png" height=80>
+		</a><br>
+		Configuration 
+		</div>';
+		
+		
+		if ($emenu) echo $emenu;
+
+
+		echo "</div>";	// end of p2p-dashboard
+
+
+
+        echo "			</div>";
+        
+        
+
+
+
         echo "		</div>";
         echo "</div>";
         echo $hbot;
         
 }
+/* thans to
+
+http://travishorn.com/jquery-filterList/
+
+http://johnny.github.io/jquery-sortable/
+
+http://kcfinder.sunhater.com/
+
+*/
 ?>

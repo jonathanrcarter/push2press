@@ -1,0 +1,28 @@
+
+1.3 (20130518.01)
+	CMS : edit page : the type of editor WYSUWYG / CODE has been implemented
+	CMS	: pushmessages : sending push messages to ipad users now works
+	CMS : language : 'volgorder' changed in english to 'order'
+
+1.3	(20130521.01)
+	CMS : when you send the push notification it did not set the massage status to 'sent' , now it does
+
+1.3	(20130521.02)
+	CMS : pushnotification
+	
+1.3	(20130602.01)
+	CMS : selection of plugins
+
+1.4 (20130818.01)
+	CMS : structure is on the front page , category and pages removed from CMS
+	CMS : sending of push notes is done via a popup window
+	CMS : creating and updating of content is in less steps
+	CMS : 
+
+
+APP	
+	PREVIEW-APP-IOS : default toolbar colour is now opaque (black)
+	PREVIEW-APP-IOS : iPhone 5 screen height is now implemented
+	PREVIEW-APP-ANDROID : the side menu now works properly
+	
+
