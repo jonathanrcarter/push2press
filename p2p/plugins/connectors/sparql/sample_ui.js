@@ -1,3 +1,5 @@
+wiz:#name:SPARQL database 
+
 var fn = function(win,view) {
 	win.backgroundColor = "#000";
 
