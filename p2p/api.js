@@ -617,6 +617,21 @@ push2press.choosePageType = function() {
 
 }
 
+push2press.popupWinFinderClose = function() {
+
+	$("#kcfinder_div_iframe").html("");
+	window.KCFinder = null;
+	
+}
+
+push2press.popupWinFinderOpen = function() {
+
+	var URL = "kcfinder/browse.php?type=images";
+	$("#kcfinder_div_iframe").html("<iframe id='kcfinder_iframe' frameborder='0' width='90%' height='90%' src='"+URL+push2press.rnd()+"' marginwidth='0' marginheight='0' scrolling='no' />");
+
+}
+push2press.popupWinFinderOpenFunction = function() {}
+
 push2press.popupWinFinder = function(URL,NAME) {
 	var _NAME = (NAME && NAME != "") ? "name='"+NAME+"'" : "";
 	var URL = "kcfinder/browse.php?type=images";
@@ -626,19 +641,38 @@ push2press.popupWinFinder = function(URL,NAME) {
  	h += "<button type='button' class='close' data-dismiss='modal' aria-hidden='true'>&times;</button>";
 	h += "</div>";
 	h += "<div class='modal-body'>";
-	h += "<div id='kcfinder_div'></div>"
-    h += "<iframe id='kcfinder_iframe' frameborder='0' width='90%' height='90%' src='"+URL+push2press.rnd()+"' marginwidth='0' marginheight='0' scrolling='no' />";
+//	h += "<a href='javascript:push2press.popupWinFinderClose();'>close</a>";
+//	h += "<a href='javascript:push2press.popupWinFinderOpen();'>open</a>";
+//	h += "<div id='kcfinder_div'></div>"
+	h += "<div id='kcfinder_div_iframe'>"
+//    h += "<iframe id='kcfinder_iframe' frameborder='0' width='90%' height='90%' src='"+URL+push2press.rnd()+"' marginwidth='0' marginheight='0' scrolling='no' />";
+	h += "</div>";
+
 	h += "</div>";
 	h += "<div class='modal-footer'>";
 	h += "</div>";
     
 	$("#modal-window").html(h);
+	
+	$('#modal-window').on('shown', function () {
+		push2press.popupWinFinderOpen();
+		$('#modal-window').on('shown',function() {});
+		// do something…
+	});
+	$('#modal-window').on('hide', function () {
+		push2press.popupWinFinderClose();
+		$('#modal-window').on('hide',function() {});
+		// do something…
+	});
+	
+	
+	
 	$("#modal-window").modal({
 		show : true
 	}).css("height","inherit").css('width','600px').css("marginLeft","-300px").css('height','500px');
 
 
-    var div = document.getElementById('kcfinder_div');
+//    var div = document.getElementById('kcfinder_div');
 /*
     if (div.style.display == "block") {
         div.style.display = 'none';
@@ -646,6 +680,7 @@ push2press.popupWinFinder = function(URL,NAME) {
         return;
     }
 */
+/*
     window.KCFinder = {
         callBack: function(url) {
             window.KCFinder = null;
@@ -654,6 +689,7 @@ push2press.popupWinFinder = function(URL,NAME) {
             div.innerHTML = '';
         }
     };
+*/
 //    div.innerHTML = '<iframe name="kcfinder_iframe" src="kcfinder/browse.php?type=files'+push2press.rnd()+'" ' + 
 //        'frameborder="0" width="90%" height="90%" marginwidth="0" marginheight="0" scrolling="no" />';
 //    div.style.display = 'block';

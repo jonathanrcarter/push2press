@@ -441,7 +441,9 @@ $htop = $htop .'    <div class="container">';
 
 $hbot = "";
 $hbot = $hbot .'      <footer>';
-$hbot = $hbot .'        <p>&copy; Glimworm IT BV 2013</p>';
+$hbot .= '        <p>&copy; Glimworm IT BV 2013 -  Version : ' . $push2version["major"] . ' ' . $push2version["type"]. ' , Build : ' . $push2version["build"] . '</p>';
+
+
 $hbot = $hbot .'      </footer>';
 $hbot = $hbot .'      </div>';
 $hbot = $hbot . '<div class="modal hide fade" id="modal-window"></div>';
