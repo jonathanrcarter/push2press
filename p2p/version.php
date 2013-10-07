@@ -1,9 +1,9 @@
 <?php
 
 $push2version = array(
-	"major" => 1.4,
+	"major" => 1.5,
 	"type" => "ALPHA",
-	"build" => 20130903.01
+	"build" => 20131007.02
 );
 
 ?>
