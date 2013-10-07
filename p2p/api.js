@@ -550,6 +550,28 @@ push2press.selectAppropriateEditor = function(TYPE) {
 	}
 }
 
+push2press.editwithace = function() {
+	var txt = $("#elm12").val();
+	
+
+    var editor = ace.edit("editor");
+    editor.setTheme("ace/theme/twilight");
+    editor.getSession().setMode("ace/mode/javascript");
+    return;
+
+
+    var editor2 = ace.edit("ace_editor");
+    editor2.setTheme("ace/theme/twilight");
+    editor2.getSession().setMode("ace/mode/javascript");
+
+    return;
+
+
+	var txt = $("#elm12").val();
+	console.log(txt)
+	$("#ace_editor").html(txt);
+	var editor = ace.edit("ace_editor");
+}
 push2press.choosePageType = function() {
 	var h = "";
 	push2press.gotopage = function(n) {
@@ -593,6 +615,56 @@ push2press.choosePageType = function() {
 	$("#modal-window2").modal('show').css("width","800px").css("margin-left","-400px").css("left","50%");
 	$('#filter').filterList();
 
+}
+
+push2press.popupWinFinder = function(URL,NAME) {
+	var _NAME = (NAME && NAME != "") ? "name='"+NAME+"'" : "";
+	var URL = "kcfinder/browse.php?type=images";
+	
+	var h = "";
+	h += "<div class='modal-header'>";
+ 	h += "<button type='button' class='close' data-dismiss='modal' aria-hidden='true'>&times;</button>";
+	h += "</div>";
+	h += "<div class='modal-body'>";
+	h += "<div id='kcfinder_div'></div>"
+    h += "<iframe id='kcfinder_iframe' frameborder='0' width='90%' height='90%' src='"+URL+push2press.rnd()+"' marginwidth='0' marginheight='0' scrolling='no' />";
+	h += "</div>";
+	h += "<div class='modal-footer'>";
+	h += "</div>";
+    
+	$("#modal-window").html(h);
+	$("#modal-window").modal({
+		show : true
+	}).css("height","inherit").css('width','600px').css("marginLeft","-300px").css('height','500px');
+
+
+    var div = document.getElementById('kcfinder_div');
+/*
+    if (div.style.display == "block") {
+        div.style.display = 'none';
+        div.innerHTML = '';
+        return;
+    }
+*/
+    window.KCFinder = {
+        callBack: function(url) {
+            window.KCFinder = null;
+            field.value = url;
+            div.style.display = 'none';
+            div.innerHTML = '';
+        }
+    };
+//    div.innerHTML = '<iframe name="kcfinder_iframe" src="kcfinder/browse.php?type=files'+push2press.rnd()+'" ' + 
+//        'frameborder="0" width="90%" height="90%" marginwidth="0" marginheight="0" scrolling="no" />';
+//    div.style.display = 'block';
+	
+	
+	
+}
+
+
+function kcnew() {
+	push2press.popupWinFinder();	// 'kcfinder/browse.php?type=images');
 }
 
 

@@ -250,7 +250,7 @@ $htop = $htop .'    <meta name="viewport" content="width=device-width, initial-s
 $htop = $htop .'    <meta name="description" content="">';
 $htop = $htop .'    <meta name="author" content="">';
 $htop = $htop . "<script type='text/javascript' src='ckeditor/ckeditor.js'></script>";
-$htop = $htop .'<script type="text/javascript" src="ckfinder/ckfinder.js"></script>';
+//$htop = $htop .'<script type="text/javascript" src="ckfinder/ckfinder.js"></script>';
 
 $htop = $htop .'    <!-- Le styles -->';
 $htop = $htop .'    <link href="http://www.glimworm.com/_assets/moock/bootstrap/css/bootstrap.css" rel="stylesheet">';
@@ -314,17 +314,17 @@ $htop = $htop . "\n";
 $htop = $htop .'<script src="api.js"></script>';
 $htop = $htop . "\n";
 
-$htop = $htop .'<script type="text/javascript">';
-$htop = $htop .'function kcnew(){';
-$htop = $htop ."push2press.popupWin('kcfinder/browse.php?type=images');";
+//$htop = $htop .'<script type="text/javascript">';
+//$htop = $htop .'function kcnew(){';
+//$htop = $htop ."push2press.popupWin('kcfinder/browse.php?type=images');";
 //$htop = $htop ."window.open('kcfinder/browse.php?type=images','kcfinder_image', 'status=0, toolbar=0, location=0, menubar=0, directories=0, resizable=1, scrollbars=0, width=800, height=600');";
-$htop = $htop .'}';
-$htop = $htop .'</script>';
+//$htop = $htop .'}';
+//$htop = $htop .'</script>';
 $htop = $htop . "\n";
 
 $htop = $htop .'  </head>';
 $htop = $htop .'  <body>';
-$htop = $htop .'    <div class="navbar navbar-fixed-top">';
+$htop = $htop .'    <div id="xx-p2p-topnavbar" class="navbar navbar-fixed-top">';
 $htop = $htop .'      <div class="xnavbar-inner">';
 $htop = $htop .'        <div class="container">';
 $htop = $htop .'          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">';
@@ -337,7 +337,7 @@ $htop = $htop .'          <div class="nav-collapse">';
 $htop = $htop .'            <ul class="nav nav-top-block" style="background-color : #fff;">';
 $htop = $htop .'          	<li class="dropdown" id="menu1"><a class="brand" href="api.php"><img src="images/application-logo.png"></a>';
 
-$htop = $htop .'              	<ul class="dropdown-menu">';
+//$htop = $htop .'              	<ul class="dropdown-menu">';
 //$htop = $htop .'              		<li><a href="api.php?action=list-group"><i class="icon-list-alt"></i> '.L('Groups').'</a></li>';
 //$htop = $htop .'              		<li><a href="api.php?action=list-log"><i class="icon-signal"></i> '.L('Devices').'</a></li>';
 
@@ -349,9 +349,9 @@ $htop = $htop .'              	<ul class="dropdown-menu">';
 
 
 
-$htop = $htop .'              <li><a href="api.php?action=logout">'.L("Logout").'</a></li>';
+//$htop = $htop .'              <li><a href="api.php?action=logout">'.L("Logout").'</a></li>';
 
-$htop = $htop .'              	</ul>';
+//$htop = $htop .'              	</ul>';
 $htop = $htop .'              </li>';
 
 /*
@@ -2120,7 +2120,7 @@ if ($osn == "iphone" || $osn == "ipad"){
                 $r=0;
                 
                 $img = mysql_result($result,$r,"img");
-                $img_size = sprintf("timthumb.php?h=32&w=32&src=%s",$img);
+                $img_size = ($img && $img != "") ? sprintf("timthumb.php?h=32&w=32&src=%s",$img) : "";
 				if (strpos($img_size,"client_images/images/icons/glyphicons")) $img_size = $img_size . "&zc=2&f=5,238,238,238,1";
 
 
@@ -3796,7 +3796,7 @@ echo "<!--\n\n $query; \n\n-->";
 
 
                 $img = mysql_result($result,$r,"img");
-                $img_size = sprintf("timthumb.php?h=32&w=32&src=%s",$img);
+                $img_size = ($img && $img != "") ? sprintf("timthumb.php?h=32&w=32&src=%s",$img) : "";
 				if (strpos($img_size,"client_images/images/icons/glyphicons")) $img_size = $img_size . "&zc=2&f=5,238,238,238,1";
 
                 $h = $h . "<tr><td>image</td><td id='test' class='previewimage'><input name='img' id='main_img_fld' type='hidden' value='" . $img . "'><img id='main_img' src='" . $img_size . "' height=32 width=32>&nbsp;&nbsp;&nbsp;<a class='btn' href='javascript:troller();'>".L("Browse")."</a> <input name='Pagename' type='text' value='" . htmlspecialchars(mysql_result($result,$r,"Pagename"),ENT_QUOTES) . "'> </td></tr>";
@@ -3860,6 +3860,11 @@ echo "<!--\n\n $query; \n\n-->";
 				$h = $h . "<tr><td>".L("type")."</td><td><input id='page_type' name='type' type='text' value='" . $PAGETYPE . "'>";
 				
 				$h = $h ."<a class='button' href='javascript:push2press.choosePageType();'>select</a>";
+				$h = $h ."<a class='button' href='javascript:push2press.editwithace();'>ace</a>";
+
+				$h .= "<script src='lib/cloud9/ace/src/ace.js' type='text/javascript' charset='utf-8'></script>";
+				$h .= "<script src='lib/cloud9/ace/src/mode-javascript.js' type='text/javascript' charset='utf-8'></script>";
+				
 
 				$h = $h . " change to:";
 //				$h = $h . "<select name='wp-id' id='act' onChange=\"document.getElementById('page_type').value = this.value;\">";
@@ -3930,10 +3935,20 @@ echo "<!--\n\n $query; \n\n-->";
 
 				$h = $h . "<textarea class='xckeditor' id='elm12' name='elm1' rows='15' cols='80' style='width: 80%' class='tinymce'>". textareaSafe(mysql_result($result,$r,'bodytext')) ."</textarea class='ckeditor'>";
 				
+
 				$h = $h . "</div>";
 				$h = $h . "</div>";
 				$h = $h . "</td></tr>";
+
+				
+				$h .= '<tr><td></td><td><pre id="editor">function foo(items) {
+    var i;
+    for (i = 0; i &lt; items.length; i++) {
+        alert("Ace Rocks " + items[i]);
+    }
+}</pre></td></tr>';
 								
+				$h = $h . "<tr><td></td><td><pre id='ace_editor'></pre></td></tr>";
 				
                 $h = $h . "<tr><td>".L("CatID")."</td><td>" . $sel . "</td></tr>";
 
@@ -4118,9 +4133,11 @@ $h = $h . '
     </a>
     <ul class="dropdown-menu">
 	'."<li><a class='btn btn-success' href='api.php?action=show-cat&action2=add'> <i class='icon-plus icon-white'></i> ADD CATEGORY</a></li>".'
+<!--
 <li><a href="api.php?action=list-templates"><i class="icon-file"></i> '.L('templates').'</a></li>
 <li><a href="javascript:kcnew();"><i class="icon-picture"></i> '.L('Media').'</a></li>
 <li><a href="api.php?action=list-dom"><i class="icon-wrench"></i> '.L('Config').'</a></li>
+-->
     </ul>
   </li>
 </ul>
@@ -4180,7 +4197,7 @@ $h = $h . '
        			$h = $h . "<div class='pull-left'><i class='icon-move icon-white' style='font-size:18px;'></i></div>";
 
                 $img = mysql_result($result,$r,"img");
-                $img_size = sprintf("timthumb.php?h=32&w=32&src=%s",$img);
+                $img_size = ($img && $img != "") ? sprintf("timthumb.php?h=32&w=32&src=%s",$img) : "";
 				if (strpos($img_size,"client_images/images/icons/glyphicons")) $img_size = $img_size . "&zc=2&f=5,238,238,238,1";
 
 
@@ -4314,7 +4331,7 @@ $(function() {
 
         echo '<div class="appicon">
 		<a href="javascript:push2press.modal(\'#gettheapp\');">
-		<img src="images/MainImage.jpg" width=100>
+		<img src="images/MainImage.jpg" width=80>
 		</a>
 		Get The App! 
 
@@ -4347,21 +4364,21 @@ $(function() {
 
         echo '<div class="appicon">
 		<a href="api.php?action=list-group">
-		<img src="images/home/glyphicons_043_group.png" width=80>
-		</a><br>
-		Groups 
+		<img src="images/home/dark_chat@2x.png" width=80>
+		</a>
+		Push2Group 
 		</div>';
 
         echo '<div class="appicon">
 		<a href="api.php?action=list-log">
-		<img src="images/home/glyphicons_139_phone.png" height=80>
-		</a><br>
-		Devices 
+		<img src="images/home/dark_comment@2x.png" height=80>
+		</a>
+		Push2Phone 
 		</div>';
 		
         echo '<div class="appicon">
 		<a href="javascript:push2press.modal(\'#youareusing\');">
-		<img src="images/home/glyphicons_195_circle_info.png" width=80>
+		<img src="images/home/dark_info@2x.png" width=80>
 		</a>
 		About 
 		<div id="youareusing" style="display:none;">
@@ -4381,46 +4398,53 @@ $(function() {
 
         echo '<div class="appicon">
         <a href="javascript:push2press.loading();">
-		<img src="images/home/glyphicons_201_upload.png" width=80>
-		</a><br>
+		<img src="images/home/dark_tray-up@2x.png" width=80>
+		</a>
 		UPDATE TO LATEST VERSION 
 		</div>';
 
         echo '<div class="appicon">
 		<a href="api.php?action=instruct">
-		<img src="images/MainImage.jpg" width=80>
-		</a><br>
+		<img src="images/home/dark_book@2x.png" width=80>
+		</a>
 		Instructions 
 		</div>';
 
         echo '<div class="appicon">
 		<a href="setup.php">
-		<img src="images/home/glyphicons_023_cogwheels.png" width=80>
-		</a><br>
+		<img src="images/home/dark_gears@2x.png" width=80>
+		</a>
 		Re enter setup 
 		</div>';
 
         echo '<div class="appicon">
 		<a href="javascript:kcnew();">
-		<img src="images/home/glyphicons_159_picture.png" height=80>
-		</a><br>
+		<img src="images/home/dark_pictures@2x.png" height=80>
+		</a>
 		Media 
 		</div>';
 
         echo '<div class="appicon">
 		<a href="api.php?action=list-templates">
-		<img src="images/home/glyphicons_036_file.png" height=80>
-		</a><br>
+		<img src="images/home/dark_doc@2x.png" height=80>
+		</a>
 		Templates 
 		</div>';
 
         echo '<div class="appicon">
 		<a href="api.php?action=list-dom">
-		<img src="images/home/glyphicons_019_cogwheel.png" height=80>
-		</a><br>
+		<img src="images/home/dark_wrench@2x.png" height=80>
+		</a>
 		Configuration 
 		</div>';
-		
+
+        echo '<div class="appicon">
+		<a href="api.php?action=logout">
+		<img src="images/home/dark_arrow-closed@2x.png" height=80>
+		</a>
+		Logout 
+		</div>';
+
 		
 		if ($emenu) echo $emenu;
 
