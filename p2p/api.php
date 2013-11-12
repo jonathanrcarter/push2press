@@ -187,6 +187,13 @@ if (!table_exists("log_phone")) {
 column_exists("cats", "collapse", "alter table cats add column collapse varchar(4) not null default 'n'");
 column_exists("cats", "Volgorde", "alter table pages add column Volgorde int(4) not null default 0");
 
+//$bootstrap = '	<link href="http://www.glimworm.com/_assets/moock/bootstrap/css/bootstrap.css" rel="stylesheet">';
+//$bootstrap = '	<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css" rel="stylesheet">';
+$bootstrap = '	<link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.0.4/css/bootstrap-combined.min.css" rel="stylesheet">';
+
+$angular = '	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>';
+$backbone = '	<script src="//cdnjs.cloudflare.com/ajax/libs/backbone.js/1.1.0/backbone-min.js"></script>';
+
 
 $htoppopup = "";
 $htoppopup = $htoppopup .'<!DOCTYPE html>';
@@ -198,15 +205,17 @@ $htoppopup = $htoppopup .'    <meta name="viewport" content="width=device-width,
 $htoppopup = $htoppopup .'    <meta name="description" content="">';
 $htoppopup = $htoppopup .'    <meta name="author" content="">';
 $htoppopup = $htoppopup .'    <!-- Le styles -->';
-$htoppopup = $htoppopup .'    <link href="http://www.glimworm.com/_assets/moock/bootstrap/css/bootstrap.css" rel="stylesheet">';
-$htoppopup = $htoppopup .'	<link rel="stylesheet" type="text/css" href="lib/css/prettify.css">';
+$htoppopup .= $bootstrap;
+$htoppopup .= $angular;
+$htoppopup .= $backbone;
+$htoppopup = $htoppopup .'	<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.css">';
 $htoppopup = $htoppopup .'    <link href="http://www.glimworm.com/_assets/moock/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">';
 $htoppopup = $htoppopup . "\n";
 $htoppopup = $htoppopup .'    <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.0/themes/base/jquery-ui.css" />';
 $htoppopup = $htoppopup .'    <script src="http://code.jquery.com/jquery-1.8.3.js"></script>';
 $htoppopup = $htoppopup .'    <script src="http://code.jquery.com/ui/1.10.0/jquery-ui.js"></script>';
 $htoppopup = $htoppopup .'  </head>';
-$htoppopup = $htoppopup .'  <body>';
+$htoppopup = $htoppopup .'  <body onload="loaderfunction()">';
 
 $hbotpopup = "";
 $hbotpopup = $hbotpopup .'    <!-- Le javascript';
@@ -253,8 +262,11 @@ $htop = $htop . "<script type='text/javascript' src='ckeditor/ckeditor.js'></scr
 //$htop = $htop .'<script type="text/javascript" src="ckfinder/ckfinder.js"></script>';
 
 $htop = $htop .'    <!-- Le styles -->';
-$htop = $htop .'    <link href="http://www.glimworm.com/_assets/moock/bootstrap/css/bootstrap.css" rel="stylesheet">';
-$htop = $htop .'	<link rel="stylesheet" type="text/css" href="lib/css/prettify.css">';
+$htop .= $bootstrap;
+$htop .= $angular;
+$htop .= $backbone;
+
+$htop = $htop .'	<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.css">';
 $htop = $htop .'    <link href="http://www.glimworm.com/_assets/moock/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">';
 $htop = $htop . "\n";
 
@@ -324,6 +336,7 @@ $htop = $htop . "\n";
 
 $htop = $htop .'  </head>';
 $htop = $htop .'  <body>';
+/*
 $htop = $htop .'    <div id="xx-p2p-topnavbar" class="navbar navbar-fixed-top">';
 $htop = $htop .'      <div class="xnavbar-inner">';
 $htop = $htop .'        <div class="container">';
@@ -332,115 +345,28 @@ $htop = $htop .'            <span class="icon-bar"></span>';
 $htop = $htop .'            <span class="icon-bar"></span>';
 $htop = $htop .'            <span class="icon-bar"></span>';
 $htop = $htop .'          </a>';
+
 $htop = $htop .'          <div class="nav-collapse">';
 
 $htop = $htop .'            <ul class="nav nav-top-block" style="background-color : #fff;">';
 $htop = $htop .'          	<li class="dropdown" id="menu1"><a class="brand" href="api.php"><img src="images/application-logo.png"></a>';
-
-//$htop = $htop .'              	<ul class="dropdown-menu">';
-//$htop = $htop .'              		<li><a href="api.php?action=list-group"><i class="icon-list-alt"></i> '.L('Groups').'</a></li>';
-//$htop = $htop .'              		<li><a href="api.php?action=list-log"><i class="icon-signal"></i> '.L('Devices').'</a></li>';
-
-//$htop = $htop .'              		<li class="p2p-youareusing"> <img src="http://m.push2press.com/jc30/images/application-logo.png"><br><b>By Glimworm IT BV</b><br>Version : ' . $push2version["major"] . ' ' . $push2version["type"]. ' <br> Build : ' . $push2version["build"] . '</li>';
-
-//$htop = $htop .'              		<li><a href="javascript:\$push2press.loading();"><i class="icon-list-alt"></i> UPDATE TO LATEST VERSION</a></li>';
-//$htop = $htop .'        		      <li><a href="api.php?action=instruct"><i class="icon-question-sign"></i> '.L('Instructions').'</a></li>';
-//$htop = $htop .'        		      <li><a href="setup.php"><i class="icon-question-sign"></i> Re enter setup</a></li>';
-
-
-
-//$htop = $htop .'              <li><a href="api.php?action=logout">'.L("Logout").'</a></li>';
-
-//$htop = $htop .'              	</ul>';
 $htop = $htop .'              </li>';
-
-/*
-$htop = $htop .'            <ul class="nav">';
-$htop = $htop .'              <li class="dropdown" id="menu1"><a class="xdropdown-toggle" data-toggle="xdropdown" href="#menu3">'.L('Push_Marketing').'</a>';// <b class="caret"></b></a>';
-$htop = $htop .'              	<ul class="dropdown-menu">';
-$htop = $htop .'              		<li><a href="api.php?action=list-group"><i class="icon-list-alt"></i> '.L('Groups').'</a></li>';
-$htop = $htop .'              		<li><a href="api.php?action=list-log"><i class="icon-signal"></i> '.L('Devices').'</a></li>';
-$htop = $htop .'              	</ul>';
-$htop = $htop .'              </li>';
-*/
-
-/*
-$htop = $htop .'              <li class="dropdown" id="menu1"><a class="xdropdown-toggle" data-toggle="xdropdown" href="#menu2">'.L('CMS').'</a>';// <b class="caret"></b></a>';
-$htop = $htop .'              	<ul class="dropdown-menu">';
-//$htop = $htop .'              		<li><a href="api.php?action=list-cats"><i class="icon-list-alt"></i> '.L('catz').'</a></li>';
-//$htop = $htop .'              		<li><a href="api.php?action=list-pages"><i class="icon-file"></i> '.L('pagz').'</a></li>';
-$htop = $htop .'              		<li><a href="api.php?action=list-templates"><i class="icon-file"></i> '.L('templates').'</a></li>';
-$htop = $htop .'    		          <li><a href="javascript:kcnew();"><i class="icon-picture"></i> '.L('Media').'</a></li>';
-$htop = $htop .'    		          <li><a href="api.php?action=list-dom"><i class="icon-wrench"></i> '.L('Config').'</a></li>';
-$htop = $htop .'              	</ul>';
-$htop = $htop .'              </li>';
-*/
 
 require_once './local_menu.php';
-
-/* stats */
-/*
-$htop = $htop .'              <li <li class="dropdown" id="menu4"><a class="xdropdown-toggle" data-toggle="xdropdown" href="#menu4">'.L('Stats').'</a>';// <b class="caret"></b></a>';
-$htop = $htop .'              	<ul class="dropdown-menu">';
-$htop = $htop .'              		<li><a href="api.php?action=list-stats-srch"><i class="icon-list-alt"></i> '.L('Search').'</a></li>';
-$htop = $htop .'              		<li><a href="api.php?action=list-stats-graph"><i class="icon-list-alt"></i> '.L('Graph').'</a></li>';
-$htop = $htop .'              	</ul>';
-$htop = $htop .'              </li>';
-*/
-
-
-
-/* the app */
-/*
-$htop = $htop .'              <li <li class="dropdown" id="menu4"><a class="xdropdown-toggle" data-toggle="xdropdown" href="#menu5">Get The App!</a>';// <b class="caret"></b></a>';
-$htop = $htop .'              	<ul class="dropdown-menu">';
-
-$htop = $htop .'              		<li class="p2p-youareusing">
-<table width="350">
-<tr><td colspan="2"><img src="http://m.push2press.com/jc30/images/application-logo.png"></td></tr>
-<tr><td><img src="images/MainImage.jpg" width=150>
-The preview App is available in the App Store
-<a href="push2press://?url='.getConfiguration("url","").'"><img src="http://blog.eventphant.com/wp-content/uploads/2012/07/Apple-App-Store.jpg" height="50"></a></td><td valign="top">
-In order to perform a quick setup click the QR code link below and follow the on screen instructions:
-<span id="qrcodesmall"><a href="javascript:push2press.qrcode();"><img src="http://api.qrserver.com/v1/create-qr-code/?data='.urlencode("push2press://?url=".getConfiguration("url","")).'&size=250x250"></a></span>
-</td></tr>
-<tr><td colspan="2">&nbsp;</td></tr>
-</table>
-</li>';
-
-$htop = $htop .'              	</ul>';
-$htop = $htop .'              </li>';
-*/
-
-/* about */
-
-$htop = $htop . "\n";
-$htop = $htop .' <script type="text/javascript">'."\n";
-$htop = $htop .'	var mq = window.matchMedia("(min-width: 500px)");'."\n";
-$htop = $htop . "\n";
-
-$htop = $htop .'	function WidthChange(mq) {'."\n";
-$htop = $htop .'		if (mq.matches) {'."\n";
-$htop = $htop .'			/* window width is at least 500px */'."\n";
-$htop = $htop .'		}else {'."\n";
-$htop = $htop .'			/* window width is less than 500px */'."\n";
-$htop = $htop .'			$'.'("i").addClass("icon-white");'."\n";
-$htop = $htop .'		}'."\n";
-$htop = $htop .'	}'."\n";
-$htop = $htop . "\n";
-$htop = $htop .'	$'.'(window).bind("resize", WidthChange(mq));'."\n";
-$htop = $htop .' </script>'."\n";
-$htop = $htop . "\n";
 
 $htop = $htop .'            </ul>';
 $htop = $htop .'          </div><!--/.nav-collapse -->';
 $htop = $htop .'        </div>';
 $htop = $htop .'      </div>';
 $htop = $htop .'    </div>';
+*/
+
 $htop = $htop .'    <div class="container">';
+$htop .= '<div id="xx-p2p-topnavbar"><a class="brand" href="api.php"><img src="images/back-to-dashboard.png"></a></div>';
+
 
 $hbot = "";
-$hbot = $hbot .'      <footer>';
+$hbot .= '      <footer>';
 $hbot .= '        <p>&copy; Glimworm IT BV 2013 -  Version : ' . $push2version["major"] . ' ' . $push2version["type"]. ' , Build : ' . $push2version["build"] . '</p>';
 
 
@@ -480,31 +406,31 @@ function B($TYPE, $LINK) {
 
 	switch ($TYPE) {
 	    case "send":
-	    	return 	"<a class='btn btn-mini btn-xsuccess' href='" . $LINK . "'><i class='icon-edit icon-black'></i> ".L("SEND")."</a>";
+	    	return 	"<a class='btn btn-small btn-info' href='" . $LINK . "'><i class='icon-edit icon-black'></i> ".L("SEND")."</a>";
 	        break;
 	    case "edit":
-	    	return 	"<a class='btn btn-mini xbtn-info' href='" . $LINK . "'><i class='icon-edit icon-black'></i> ".L("EDIT")."</a>";
+	    	return 	"<a class='btn btn-small btn-info' href='" . $LINK . "'><i class='icon-edit icon-black'></i> ".L("EDIT")."</a>";
 	        break;
 	    case "edit-txt":
-	    	return 	"<a href='" . $LINK . "'>".L("EDIT")."</a>";
+	    	return 	"<span class='x-phone-btn-grey'><a href='" . $LINK . "'>".L("EDIT")."</a></span>";
 	        break;
 	    case "preview":
-	    	return 	"<a class='btn btn-mini btn-xinfo' href='" . $LINK . "'><i class='icon-share icon-black'></i> ".L("PREVIEW")."</a>";
+	    	return 	"<a class='btn btn-small btn-info' href='" . $LINK . "'><i class='icon-share icon-black'></i> ".L("PREVIEW")."</a>";
 	        break;
 	    case "preview-txt":
-	    	return 	"<a href='" . $LINK . "'> ".L("PREVIEW")."</a>";
+	    	return 	"<span class='x-phone-btn-grey'><a href='" . $LINK . "'> ".L("PREVIEW")."</a></span>";
 	        break;
 	    case "compose":
-	    	return 	"<a class='btn btn-mini btn-xwarning' href='" . $LINK . "'><i class='icon-comment icon-black'></i> ".L("COMPOSE")."</a>";
+	    	return 	"<a class='btn btn-small btn-info' href='" . $LINK . "'><i class='icon-comment icon-white'></i> ".L("COMPOSE")."</a>";
 	        break;
 	    case "S&S";
-	    	return "<a class='btn btn-mini btn-xwarning' href='" . $LINK . "'><i class='icon-comment icon-black'></i> ".L("SS")."</a>";
+	    	return "<a class='btn btn-small btn-info' href='" . $LINK . "'><i class='icon-comment icon-black'></i> ".L("SS")."</a>";
 	    	break;    
 	    case "delete_submit":
-	    	return 	"<input type='submit' class='btn btn-mini btn-danger' value='delete'>";
+	    	return 	"<input type='submit' class='btn btn-small btn-danger' value='delete'>";
 	        break;
 	    case "delete":
-	    	return 	"<a class='btn btn-mini xbtn-danger' href='" . $LINK . "'><i class='icon-trash icon-black'></i> ".L("DELETE")."</a>";
+	    	return 	"<a class='btn btn-small btn-info' href='" . $LINK . "'><i class='icon-trash icon-black'></i> ".L("DELETE")."</a>";
 //	    	return 	"<a class='btn btn-mini btn-danger' href='" . $LINK . "'><i class='icon-trash icon-white'></i> ".L("DELETE")."</a>";
 	        break;
 	        	    	
@@ -1164,6 +1090,138 @@ if ( $action == "ping" ) {
 else if ( $action == "list-log" ) {
 		
 		$h = "";
+		
+		$h = $h . '<link href="api-menu.css" rel="stylesheet">';   
+		
+		$db = mysql_connect($dbhost,$username,$password);
+        mysql_select_db($database) or die("Unable to select database");
+        mysql_query("SET NAMES utf8", $db);
+        mysql_query( "SET CHARACTER SET utf8", $db );
+
+		$msgpusht = $_POST["msgpusht"];
+		$osn = $_POST["osn"];
+
+		$action2 = $_POST["action2"];
+		$PAGE = $_POST['p'];
+		
+		if ($PAGE == "" || $PAGE == "0"){
+			$PAGE = "1";
+		}
+		
+		$PAGER = $PAGE-1;
+		$LIM1= $PAGER*20;
+		$query="select * from log_phone where uid != '' order by id desc limit ".$LIM1.",20";
+		$result=mysql_query($query);
+		
+        $query1="select * from log_phone where uid != '' order by id";
+        $result1=mysql_query($query1);
+		
+		
+		$h = $h . "<div class='plain-hero-unit'>";
+		
+		$h = $h . "<div class='span12'><legend class='x-dash-h2'>".L('send-push-title')."</div>";//<span style='float:right;'><a href='/' class='btn btn-info'>Back to dashboard</a></legend></span></div>";
+		$h = $h . "<div class='span5'>";
+			
+			//list
+			//$h =$h . "<p>Below you will see a list of users, you can send them a push notification by clicking on the 'send' button.</p>";
+			$h = $h . "<h2 class='x-dash-h2-small'>Devices</h2>";
+			
+			$h = $h . "<table class='' style='width:100%;'>";
+       	 	$h = $h . "<tr>";
+       	 	$h = $h . "<th style='border-bottom:#ccc 1px solid;padding-right:16px;text-transform:capitalize;text-align:left;'>Type</th>";
+        	$h = $h . "<th style='border-bottom:#ccc 1px solid;padding-right:16px;text-transform:capitalize;text-align:left;'>".L('username')."</th>";
+        	$h = $h . "<th style='border-bottom:#ccc 1px solid;padding-right:16px;text-align:left;'>".L('group-id')."</th>";
+        	$h = $h . "<th style='border-bottom:#ccc 1px solid;'></th>";//.L('options')."</th>";
+        	$h = $h . "</tr>";
+
+        	for ($r=0; $r < mysql_numrows($result); $r++) {
+                $h = $h . "<tr>";
+                //$h = $h . "<td>" . mysql_result($result,$r,"ts") . "</td>";
+                $h = $h . "<td style='border-bottom:#eee 1px solid;padding-right:16px;'><img alt='iPhone' title='iPhone' src='images/apple.png' height='15'></td><td style='border-bottom:#eee 1px solid;padding-right:16px;'>" . mysql_result($result,$r,"name") . "</td>";
+                
+                $gid123 = mysql_result($result,$r,"groups");
+                $query6="select * from groups where gid in(0,".$gid123.")";
+        		$result6=mysql_query($query6);
+				$h = $h . "<td style='border-bottom:#eee 1px solid;padding-right:16px;'>";
+				if ($result6) {
+	                for ($r6 = 0; $r6 < mysql_numrows($result6); $r6++) {
+		                $h = $h . mysql_result($result6,$r6,"gname") . "<br>";
+	                }
+	            }
+				$h = $h . "</td>";
+                $h = $h . "<td style='border-bottom:#eee 1px solid;'>";//<a class='btn btn-mini btn-success' href='api.php?action=show-log&id=" . mysql_result($result,$r,"id") . "'><i class='icon-edit icon-white'></i> ".L("EDIT")."</a>";
+                $h = $h . B("compose","javascript:\$push2press.push3(".mysql_result($result,$r,"id").", \"\", \"\", \"\");'");
+               	$h = $h . "</td>";
+                $h = $h . "</tr>";
+
+        	}
+        	//$h = $h . "</table>";
+        	$h = $h . "<tr>";
+        	$h = $h . "<td colspan='3'><br><h2 class='x-dash-h2-small'>Groups</h2></td>";
+        	$h = $h . "</tr>";
+        	$query9="select * from groups order by gid desc limit 50";
+        	$result9=mysql_query($query9);
+			
+			//$h = $h . "<table class=''>";
+       	 	$h = $h . "<tr>";
+        	//$h = $h . "<th style='border-bottom:#ccc 1px solid;padding-right:16px;text-transform:capitalize;'>".L('username')."</th>";
+        	$h = $h . "<th style='border-bottom:#ccc 1px solid;padding-right:16px;text-align:left;' colspan='2'>Name</th>";
+        	$h = $h . "<th style='border-bottom:#ccc 1px solid;'></th>";//.L('options')."</th>";
+        	$h = $h . "<th style='border-bottom:#ccc 1px solid;'></th>";
+        
+        	$h = $h . "</tr>";
+
+        	for ($r=0; $r < mysql_numrows($result9); $r++) {
+                $h = $h . "<tr>";
+                //$h = $h . "<td>" . mysql_result($result,$r,"ts") . "</td>";
+                //$h = $h . "<td style='border-bottom:#eee 1px solid;padding-right:16px;'>" . mysql_result($result9,$r,"gid") . "</td>";
+                $h = $h . "<td style='border-bottom:#eee 1px solid;padding-right:16px;' colspan='2'>";
+				$h = $h . mysql_result($result9,$r,"gname") . "<br>";
+	            $h = $h . "</td>";
+                $h = $h . "<td style='border-bottom:#eee 1px solid;text-align:right;' nowrap>";//<a class='btn btn-mini btn-success' href='api.php?action=show-log&id=" . mysql_result($result,$r,"id") . "'><i class='icon-edit icon-white'></i> ".L("EDIT")."</a>";
+                $h = $h . "<a href='api.php?action=show-group&id=" . mysql_result($result,$r,"gid") . "' class='btn btn-small'><i class='icon-edit icon-black'></i> CHANGE NAME</a>&nbsp;&nbsp;</td>";
+                $h = $h . "<td style='border-bottom:#eee 1px solid;'>";//<a class='btn btn-mini btn-success' href='api.php?action=show-log&id=" . mysql_result($result,$r,"id") . "'><i class='icon-edit icon-white'></i> ".L("EDIT")."</a>";
+                $h = $h . B("compose","javascript:\$push2press.push2(".mysql_result($result9,$r,"gid").", \"\", \"\", \"\");'");
+               	$h = $h . "</td>";
+               	$h = $h . "</tr>";
+
+        	}
+        	$h = $h . "</table>";
+				
+		$h = $h . "</div>";
+		
+		$h = $h . "<div class='span6'>";
+		
+			//messages and compose
+			
+			 $h = $h . '		<div class="x-dash-imp-grey-div">';
+   	 		// $h = $h . '			<img src="images/p2p-icons-black/send-pusher.png" class="x-dash-imp-grey-img">';
+     		 $h = $h . '			<div class="x-dash-imp-grey-txt-1" style="float:none !important;">';
+     		 $h = $h . '				<h3 class="x-dash-imp-grey-title" style="'.$color100.'">Instructions</h3>';
+     		 $h = $h . '				<p class="x-dash-imp-grey-text">To the left you will see a list of registered devices, you can send them a push notification by clicking on the "send" button. In the pop-up enter the text you want to send in the first field and click "send". Additionally you can add a note to yourself so you can describe your push notification for refference.</p>';
+     		 $h = $h . '				<p style="text-align:center;"><br><img src="images/push-instructions.png"></p>';
+     		  $h = $h . '			</div>';
+     		 /*$h = $h . '				<p class="x-dash-imp-grey-text">'.L('send-push-desc-group').'</p>';
+     		 $h = $h . '			</div>';
+     		 $h = $h . '			<div class="x-dash-imp-grey-buttons">';
+     		 $h = $h . '				<a class="x-dash-imp-grey-button-double" style="'.$bgcolor100.'" href="?action=list-log">TRY NOW!</a>';
+     		 $h = $h . '			</div>';*/
+     		 $h = $h . '		</div>';
+			
+		
+		$h = $h . "</div>";
+		
+		$h = $h . "</div>";
+		$h = $h . "</div>";
+		
+        echo $htop;
+        echo $h;
+        echo $hbot;
+        exit;
+}
+else if ( $action == "list-log-old" ) {
+		
+		$h = "";
         $h = $h . "<div class='plain-hero-unit'>";
 		$h = $h . "";
 		$db = mysql_connect($dbhost,$username,$password);
@@ -1236,12 +1294,14 @@ else if ( $action == "list-log" ) {
                 $h = $h . "<td>" . mysql_result($result,$r,"aid") . "</td>";
                 $h = $h . "<td>" . mysql_result($result,$r,"dtype") . "</td>";
                 $h = $h . "<td>" . mysql_result($result,$r,"un") . "</td>";
-                $h = $h . "<td><a class='btn btn-mini btn-success' href='api.php?action=show-log&id=" . mysql_result($result,$r,"id") . "'><i class='icon-edit icon-white'></i> ".L("EDIT")."</a>";
-                $h = $h . " ";
+                $h = $h . "<td>";
+                //$h = $h . "<td><a class='btn btn-mini btn-info' href='api.php?action=show-log&id=" . mysql_result($result,$r,"id") . "'><i class='icon-edit icon-white'></i> ".L("EDIT")."</a>";
+                //$h = $h . " ";
     			
                 $h = $h . B("compose","javascript:\$push2press.push3(".mysql_result($result,$r,"id").", \"\", \"\", \"\");'");
-                $h = $h . " ";
-                $h = $h . "" . B("delete","api.php?action=del-log&id=" . mysql_result($result,$r,"id")) . "</td>";
+                //$h = $h . " ";
+                //$h = $h . "" . B("delete","api.php?action=del-log&id=" . mysql_result($result,$r,"id")) . "</td>";
+                $h = $h . "</td>";
                 $h = $h . "</tr>";
 
         }
@@ -2255,6 +2315,24 @@ else if ( $action == "list-dom" ) {
         
         }
         $h = $h . "</table>";
+        
+        $h .= "<legend>Other functions</legend>";
+        $h .='
+        <div>
+        <a href="javascript:push2press.loading();">
+		<img src="images/home/dark_tray-up@2x.png" width=80>
+		</a>
+		UPDATE TO LATEST VERSION 
+		</div>';
+        
+        $h .= '<div>
+		<a href="api.php?action=list-templates">
+		<img src="images/home/dark_doc@2x.png" height=80>
+		</a>
+		Templates 
+		</div>';
+        
+        
 /*
         for ($r=0; $r < mysql_numrows($result); $r++) {
                 $h = $h . "<tr>";
@@ -2267,6 +2345,7 @@ else if ( $action == "list-dom" ) {
         
         $h = $h . "</table>";
 */        
+		
         echo $htop;
         echo '<div class="plain-hero-unit">';
         echo $h;
@@ -3771,14 +3850,14 @@ echo "<!--\n\n $query; \n\n-->";
         	$result=mysql_query($query);
 
         	$h = "";
-        	$h = $h . "<h2>Showing Page #".$id."</h2>";
-
+        	
         	if (mysql_numrows($result) > 0) {
                 $r=0;
 
+				/*
                 $query1="select * from cats";
                 $result1=mysql_query($query1);
-                $sel = "<select name='CatID'>";
+                $sel = "<select name='CatID2'>";
                 $sel = $sel . "<option value='0'>Geen</option>";
                 for ($r1=0; $r1 < mysql_numrows($result1); $r1++) {
                         $selected = "";
@@ -3789,97 +3868,43 @@ echo "<!--\n\n $query; \n\n-->";
                         $sel = $sel . "<option value='" .$IID."' ".$selected.">".$PGN."</option>";
                 }
                 $sel = $sel . "</select>";
+                */
+                
+				$catid = mysql_result($result,$r,"CatID");
+				$PAGETYPE = mysql_result($result,$r,"type");
+				$EXTRADATA = mysql_result($result,$r,"extraData");
+				if ($EXTRADATA == "") {
+					$EXTRADATA = '{ "navBar" : "y" }';
+				}
 
-                $h = $h . "<form action='api.php' method='POST'>";
+
+				// cloud9 code editor
+				$h .= "<script src='lib/cloud9/ace/src/ace.js' type='text/javascript' charset='utf-8'></script>";
+				$h .= "<script src='lib/cloud9/ace/src/mode-javascript.js' type='text/javascript' charset='utf-8'></script>";
+
+				// form
+                $h = $h . "<form action='api.php' onSubmit='push2press.preparePageEditSubmit(this);' method='POST'>";
                 $h = $h . "<input type='hidden' name='action' value='show-page'>";
                 $h = $h . "<input type='hidden' name='action2' value='update'>";
                 $h = $h . "<input type='hidden' name='id' value='".$id."'>";
-                $h = $h . "<table class='table xtable-striped table-bordered table-condensed'>";
+                $h = $h . "<input type='hidden' name='CatID' value='".$catid."'>";
+                $h = $h . "<input type='hidden' name='type' id='page_type' value='".$PAGETYPE."'>";
 
 
                 $img = mysql_result($result,$r,"img");
                 $img_size = ($img && $img != "") ? sprintf("timthumb.php?h=32&w=32&src=%s",$img) : "";
 				if (strpos($img_size,"client_images/images/icons/glyphicons")) $img_size = $img_size . "&zc=2&f=5,238,238,238,1";
 
-                $h = $h . "<tr><td>image</td><td id='test' class='previewimage'><input name='img' id='main_img_fld' type='hidden' value='" . $img . "'><img id='main_img' src='" . $img_size . "' height=32 width=32>&nbsp;&nbsp;&nbsp;<a class='btn' href='javascript:troller();'>".L("Browse")."</a> <input name='Pagename' type='text' value='" . htmlspecialchars(mysql_result($result,$r,"Pagename"),ENT_QUOTES) . "'> </td></tr>";
 
 
-               // $h = $h . "<tr><td>image</td><td><img src='images/" . mysql_result($result,$r,"img") . "' height=80 width=80></td></tr>";
-//                $h = $h . "<tr><td>".L("Pagename")."</td><td>X<input name='Pagename' type='text' value='" . htmlspecialchars(mysql_result($result,$r,"Pagename"),ENT_QUOTES) . "'></td></tr>";
-
-                //$h = $h . "<tr><td>Caption</td><td><input type='text' name='Caption' value='" . mysql_result($result,$r,"Caption") . "'></td></tr>";
-                //$h = $h . "<tr><td>Volgorde</td><td><input name='Volgorde' type='text' value='" . mysql_result($result,$r,"Volgorde") . "'></td></tr>";
-				$h = $h . "<tr><td>".L("template")."</td><td>";
-				
-				require ("templates/pages/_templates.php");
-				$h = $h . "<select name='template'>";
-				foreach ($_page_templates as $key=>$data) {
-					$selected = (mysql_result($result,$r,"template") == $key) ? "selected" : "";
-					$h = $h . sprintf("<option value='%s' %s>%s</option>",$key,$selected,$data);
-				}
-				$h = $h . "</select>";
-				$h = $h . "</td></tr>";
-				//"<input name='template' type='text' value='" . mysql_result($result,$r,"template") . "'></td></tr>";
-				
-				
-				
-				/*	working on page types
-
-				$pagetypes = array(
-					array("value"=>"","displayname"=>"normal","editor"=>"wysiwyg"),
-					array("value"=>"TI","displayname"=>"Titanium Development PAGE","editor"=>"code")
-				);
-				$pagetype_from_db = mysql_result($result,$r,"type");
-				$pagetype0 = "";
-				$pagetype1 = "";
-				
-				if ($pagetype_from_db != "") {
-					if (strpos($pagetype_from_db,":")) {
-						$pagetype_from_db_parts = explode(":",$pagetype_from_db,2);
-						$pagetype0 = $pagetype_from_db_parts[0].":";
-						if (count($pagetype_from_db_parts) > 1) {
-							$pagetype1 = $pagetype_from_db_parts[1];
-						}
-					} else {
-						$pagetype0 = $pagetype_from_db;
-					}
-				}
-				
-				$pagetypes_select = "<select onChange='change_page_type();' name='pagetype0' id='pagetype0'>";
-				foreach ($pagetypes as $pagetype) {
-					$selected = ($pagetype0 == $pagetype["value"]) ? "selected" : "";
-					$pagetypes_select = $pagetypes_select . sprintf("<option value='%s' %s>%s</option>",$pagetype["value"],$selected,$pagetype["displayname"]);
-				}
-				$pagetypes_select = $pagetypes_select . "</select>";
-				$pagetypes_select = $pagetypes_select . "<script>var pagenames=".json_encode($pagetypes).";</script>";
-				
-				$h = $h . "<tr><td>".L("type")."</td><td>".$pagetypes_select."</td></tr>";
-				*/				
-				
-				
-				$PAGETYPE = mysql_result($result,$r,"type");
-				
-				$h = $h . "<tr><td>".L("type")."</td><td><input id='page_type' name='type' type='text' value='" . $PAGETYPE . "'>";
-				
-				$h = $h ."<a class='button' href='javascript:push2press.choosePageType();'>select</a>";
-				$h = $h ."<a class='button' href='javascript:push2press.editwithace();'>ace</a>";
-
-				$h .= "<script src='lib/cloud9/ace/src/ace.js' type='text/javascript' charset='utf-8'></script>";
-				$h .= "<script src='lib/cloud9/ace/src/mode-javascript.js' type='text/javascript' charset='utf-8'></script>";
-				
-
-				$h = $h . " change to:";
-//				$h = $h . "<select name='wp-id' id='act' onChange=\"document.getElementById('page_type').value = this.value;\">";
-				$h = $h . "<select name='wp-id' id='act' onChange=\"push2press.changePageType.call(this);\">";
-				$h = $h . "<option value=''> -- page type -- </option>";
-				$h = $h . "<option value=''>WYSIWYG page</option>";
-				$h = $h . "<option value='TI'>Titanium programming page</option>";
+//	        	$h .= "</div>";
 
 
 				$dirs = array("plugins/connectors/","templates/messages/");
-		//  <a class='btn btn-mini btn-success' style='margin-left:40px;' href='api.php?action=list-templates&action2=add'> <i class='icon-plus icon-white'></i> ADD</a>
 
 				$pagetypes = "var _pagetypes = [];\n";
+				$pagetypes = $pagetypes . "_pagetypes.push({'p':'','i':'images/gwlogo.png','n':'WYSIWYG PAGE'});\n";
+				$pagetypes = $pagetypes . "_pagetypes.push({'p':'TI','i':'images/gwlogo.png','n':'Titanium Code PAGE'});\n";
 
 				$DIR = "plugins/connectors/";
 				$dirs = scandir($DIR);
@@ -3900,9 +3925,9 @@ echo "<!--\n\n $query; \n\n-->";
 								}
 							}
 							
-	        				$h = $h . "<option value='ti|".$meta->path."'>".$meta->name."</option>";
+//	        				$h = $h . "<option value='ti|".$meta->path."'>".$meta->name."</option>";
 	        				
-	        					$TEXT =  str_replace(">", "&gt;" , $TEXT);
+        					$TEXT =  str_replace(">", "&gt;" , $TEXT);
 
 	        				$pagetypes = $pagetypes . "_pagetypes.push({'p':'ti|".$meta->path."','i':'".str_replace(".js",".png",$meta->path)."','n':'".$meta->name."'});\n";
 						}
@@ -3915,44 +3940,153 @@ echo "<!--\n\n $query; \n\n-->";
 					$query1 = "select * from wp_posts where post_status='publish' and post_title!=''";
 					$result1 = mysql_query($query1);
     				for ($i=0; $i < mysql_numrows($result1); $i++){
-        				$h = $h . "<option value='wp:".mysql_result($result1,$i,"ID")."'>".mysql_result($result1,$i,"post_title")."</option>";
-        				$pagetypes = $pagetypes . "_pagetypes.push({'p':'wp:".mysql_result($result1,$i,"ID")."','n':'".mysql_result($result1,$i,"post_title")."'});\n";
+//        				$h = $h . "<option value='wp:".mysql_result($result1,$i,"ID")."'>".mysql_result($result1,$i,"post_title")."</option>";
+        				$pagetypes = $pagetypes . "_pagetypes.push({'p':'wp:".mysql_result($result1,$i,"ID")."','n':'wordpress link : ".mysql_result($result1,$i,"post_title")."'});\n";
 
     				}
 				}
-				$h = $h . "</select>";
+//				$h = $h . "</select>";
 				$h = $h . "<script>push2press.setInitialPage_type('".$PAGETYPE."');</script>";
 				$h = $h . "<script>".$pagetypes."</script>";
-				$h = $h . "</td></tr>";
 				
 
 
+				$h .= "<legend>Push2Press Page Editor</legend>";
 
-				$h = $h . "<tr><td>".L("extraData")."</td><td><textarea name='extraData'>" . mysql_result($result,$r,"extraData") . "</textarea></td></tr>";
-				$h = $h . "<tr><td>".L("bodytext")."</td><td>";
+	        	$h .= "<div class='row-fluid'>";
+
+	        	$h .= "<div class='span7 editbox' style='padding:0;'>"; // box
 				
-                $h = $h . "	<div id='topSpace-wrapper'>";
-                $h = $h . "	<div id='topSpace'></div>";
-                $h = $h . "	<div style='width:400px;' id='bottomSpace'>";
+				$h .= "<div id='wysiwygbox'>"; 
+                $h = $h . "<div id='topSpace-wrapper' style='background-color:#333333;'>"; // wrapper
+                $h = $h . "<div id='topSpace'></div>";
+                $h = $h . "<div style='width:300px;xfloat:left;' class='xeditbox' id='bottomSpace'>"; // bottomspace
 
-				$h = $h . "<textarea class='xckeditor' id='elm12' name='elm1' rows='15' cols='80' style='width: 80%' class='tinymce'>". textareaSafe(mysql_result($result,$r,'bodytext')) ."</textarea class='ckeditor'>";
+				$h = $h . "<textarea class='xckeditor' id='elm12' name='elm1' rows='15' cols='80' style='width: 90%' class='tinymce'>". textareaSafe(mysql_result($result,$r,'bodytext')) ."</textarea class='ckeditor'>";
 				
 
-				$h = $h . "</div>";
-				$h = $h . "</div>";
-				$h = $h . "</td></tr>";
+				$h = $h . "</div>";	// bottomSpace
+				$h = $h . "</div>"; // topspace-wrapper
+				$h = $h . "</div>"; // wysiwygbox
+
+				// editbox - code - start
+				$h .= '<div id="xx-p2p-ace-tr" style="display:none;">';
+				$h .= '<pre id="editor"></pre>';
+				$h .= '</div>';
+				// editbox - code - end
+
+
+
+				$h .= "</div>"; // box
+
+				//$h .= "<style>body { background-color : #eee; } </style>";
+
+
+				// editbox - info and tamplate start
+	        	$h .= "<div class='span5 editbox'>";
+               	$h .= "<label class='editbox_head'>Publish</label>";
+
+//	        	$h .= "<h2>Showing Page #".$id."</h2>";
+	        	$h .= "<div>This is a {{type}} page based on {{yy}}</div>";
+	        	
+				$h .= "<a class='button' href='javascript:push2press.choosePageType();'>select</a>";
+				$h .= "<a class='button' href='javascript:push2press.editwithace();'>ace</a>";
+				$h .= "<a class='button' href='javascript:push2press.backwithace();'>ace2</a>";
+				$h .= "<a class='button' href='javascript:push2press.toolbars();'>tools</a>";
+				$h .= "<a class='button' href='javascript:push2press.insertimage();'>II</a>";
+	        	
+	        	$h .= "<br>";
+				$h .= "<div class='editbox_foot'><input class='btn btn-info' type='submit' value='Publish'></div>";
+
+				$h .= "</div>"; // box
+				// editbox - template - end
+
+
+
+
+    			// editbox - image - start
+	        	$h .= "<div class='span5 editbox'>"; 
+                	$h .= "<label class='editbox_head'>How the page appears in the menu</label>";
+
+                	$h .= "<div class='instructions'>The page you are editing will also appear in the side menu of the app together with an icon similar to the example below.  You can edit the title by clicking on the text and change the icon using the button to open your media library</div>";
+                	
+                	$h .= "<div id='test' class='previewimage'>";
+                	$h .= "<input name='img' id='main_img_fld' type='hidden' value='" . $img . "'>";
+                	$h .= "<img id='main_img' src='" . $img_size . "' height=32 width=32>";
+
+
+                	$h .= " <input name='Pagename' class='reverse-input' type='text' value='" . htmlspecialchars(mysql_result($result,$r,"Pagename"),ENT_QUOTES) . "'> ";
+
+                	$h .= "&nbsp;&nbsp;&nbsp;";
+                	$h .= "<a class='btn pull-right' href='javascript:troller();'>".L("ChangeIcon")."</a>";
+                	$h .= "</div>";
+
+//                	$h .= " <input name='Pagename' type='text' value='" . htmlspecialchars(mysql_result($result,$r,"Pagename"),ENT_QUOTES) . "'> ";
+                
+                $h .= "</div>"; // box
+    			// editbox - image - end
+
+
+				// editbox - extra data - start
+	        	$h .= "<div class='span5 editbox'>";
+               	$h .= "<label class='editbox_head'>Page Options</label>";
+
+
+				$h = $h . "<label>".L("template")."<label>";
+				
+				require ("templates/pages/_templates.php");
+				$h = $h . "<select name='template'>";
+				foreach ($_page_templates as $key=>$data) {
+					$selected = (mysql_result($result,$r,"template") == $key) ? "selected" : "";
+					$h = $h . sprintf("<option value='%s' %s>%s</option>",$key,$selected,$data);
+				}
+				$h = $h . "</select>";
+
+
+				$h .= "<label>".L("extraData")."</label><textarea name='extraData'>" . $EXTRADATA . "</textarea>";
+$h .= '
+	<script src="api-editpage-ang.js"></script>
+    <link rel="stylesheet" href="api-editpage-ang.css">
+    <div ng-controller="TodoCtrl">
+      <span>{{remaining()}} of {{todos.length}} remaining</span>
+      [ <a href="" ng-click="archive()">archive</a> ]
+      <ul class="unstyled">
+        <li ng-repeat="todo in todos">
+          <input type="checkbox" ng-model="todo.done">
+          <span class="done-{{todo.done}}">{{todo.text}}</span>
+        </li>
+      </ul>
+      <form ng-submit="addTodo()">
+        <input type="text" ng-model="todoText"  size="30"
+               placeholder="add new todo here">
+        <input class="btn-primary" type="submit" value="add">
+      </form>
+    </div>';
+
+
+				$h .= "</div>";	// box
+				// editbox - extra data - end
+
+
+
+				// editbox - submit - start
+	        	//$h .= "<div class='span5 editbox'>";
+                //$h .= "<label>&nbsp;</label><input class='btn btn-success' type='submit'>";
+	        	//$h .= "</div>";
+				// editbox - submit - end
+
+
+
+				$h .= "</div>"; // row
+
 
 				
-				$h .= '<tr><td></td><td><pre id="editor">function foo(items) {
-    var i;
-    for (i = 0; i &lt; items.length; i++) {
-        alert("Ace Rocks " + items[i]);
-    }
-}</pre></td></tr>';
 								
-				$h = $h . "<tr><td></td><td><pre id='ace_editor'></pre></td></tr>";
 				
-                $h = $h . "<tr><td>".L("CatID")."</td><td>" . $sel . "</td></tr>";
+//	        	$h .= "<div class='row-fluid'>";
+//	        	$h .= "<div class='span6 editbox'>";
+//                $h = $h . "<label>".L("CatID")."</label>" . $sel . "";
+//	        	$h .= "</div>";
 
 
 				$h = $h .'<script type="text/javascript">';
@@ -3971,9 +4105,10 @@ echo "<!--\n\n $query; \n\n-->";
 				$h = $h ."push2press.edit_with_wysiwyg();";
 				$h = $h .'</script>';
 
-                $h = $h . "<tr><td>&nbsp;</td><td><input class='btn btn-success' type='submit'></td></tr>";
-                $h = $h . "</table>";
+                
                 $h = $h . "</form>";
+                $h .= "</div>";
+                
 
                 $h = $h . "<form action='api.php'>";
                 $h = $h . "<input type='hidden' name='action' value='show-page'>";
@@ -4017,13 +4152,16 @@ echo "<!--\n\n $query; \n\n-->";
         	}
 
 	        echo $htop;
-	        echo '<div class="plain-hero-unit content-border">';
+	        echo '<div class="plain-hero-unit" ng-app>';
+	        echo "<div class='container-fluid'>";
 	        echo $h;
+	        echo "</div>";
 	        echo "</div>";
 	        echo $hbot;
         }
 
 } else if( $action == "wp" ){
+
 /*
 	require_once('ripcord-1.1/ripcord.php');
     $client = ripcord::client( 'http://www.parkshark.eu/xmlrpc.php' );
@@ -4045,425 +4183,323 @@ echo "<!--\n\n $query; \n\n-->";
 }
 if ($action == "homepage") {
 
-//		require_once './local_functions.php';
+	$h = "";
+	$emaillinkto = $_GET["emaillinkto"];
+	$emailadminlinkto = $_GET["emailadminlinkto"];
 		
-
-		$h = "";
-		$emaillinkto = $_GET["emaillinkto"];
-		$emailadminlinkto = $_GET["emailadminlinkto"];
-		
-		if ($emaillinkto != "") {
-			$message = sprintf("Link to push2press page is <a href=\"push2press://?url=%s\">%s</a> ",getConfiguration("url",""),getConfiguration("sitename",""));
-			$messageplain = sprintf("Link to push2press page is &lt;a href=\"push2press://?url=%s\"&gt;%s&lt;/a&gt; ",getConfiguration("url",""),getConfiguration("sitename",""));
-//			$messageplain = sprintf("Link to push2press page is push2press://?url=%s ",getConfiguration("url",""),getConfiguration("sitename",""));
-			$msuccess = mail($emaillinkto, 'Push2press Email Link', $message,$headers);
-			$h = sprintf("<div> Email sent to %s %s </div>",$emaillinkto,$msuccess);
-			if ($msuccess === false) {
-				$h = sprintf("<div> There was a sending error to %s - send yourself this link <pre>%s</pre></div>",$emaillinkto,$messageplain);
-			}
+	if ($emaillinkto != "") {
+		$message = sprintf("Link to push2press page is <a href=\"push2press://?url=%s\">%s</a> ",getConfiguration("url",""),getConfiguration("sitename",""));
+		$messageplain = sprintf("Link to push2press page is &lt;a href=\"push2press://?url=%s\"&gt;%s&lt;/a&gt; ",getConfiguration("url",""),getConfiguration("sitename",""));
+		$msuccess = mail($emaillinkto, 'Push2press Email Link', $message,$headers);
+		$h = sprintf("<div> Email sent to %s %s </div>",$emaillinkto,$msuccess);
+		if ($msuccess === false) {
+			$h = sprintf("<div> There was a sending error to %s - send yourself this link <pre>%s</pre></div>",$emaillinkto,$messageplain);
 		}
-		if ($emailadminlinkto != "") {
-			$message = sprintf("Link to you new site is %s/api.php. <br> Link to push2press page is <a href=\"push2press://?url=%s\">%s</a> ",getConfiguration("url",""),getConfiguration("url",""),getConfiguration("sitename",""));
-			$messageplain = sprintf("Link to you new site is %s/api.php. Link to push2press page is &lt;a href=\"push2press://?url=%s\"&gt;%s&lt;/a&gt; ",getConfiguration("url",""),getConfiguration("url",""),getConfiguration("sitename",""));
-//			$messageplain = sprintf("Link to push2press page is push2press://?url=%s ",getConfiguration("url",""),getConfiguration("sitename",""));
-			$msuccess = mail($emailadminlinkto, 'Push2press Email Link', $message,$headers);
-			$h = sprintf("<div> Email sent to %s %s </div>",$emailadminlinkto,$msuccess);
-			if ($msuccess === false) {
-				$h = sprintf("<div> There was a sending error to %s - send yourself this link <pre>%s</pre></div>",$emailadminlinkto,$messageplain);
-			}
-			
-		}
-		
-		
-		$c1 = sqlcount("select count(*) as c from message");
-
-        $c2 = sqlcount("select count(*) as c from log_phone where uid != ''");
- 
-
-        echo $htop;
-        echo '<link href="github/ribbons.css" rel="stylesheet" type="text/css" />';
-        echo "<br>";
-        echo "<br>";
-        echo "<br>";
-        echo "<br>";
-        echo '<div class="container">';
-        echo '      <div class="row-fluid">';
-        echo '			<div class="span6">';
-		echo $h;
-		
-		
-		/* make a list of the cats and the pages */
-		
-		
-        $db = mysql_connect($dbhost,$username,$password);
-        mysql_select_db($database) or die("Unable to select database");
-        mysql_query("SET NAMES utf8", $db);
-        mysql_query( "SET CHARACTER SET utf8", $db );
-
-        $query="select *,c.Pagename as CatName, c.img as CatImage, c.Caption as CatCaption from pages p left join cats c on (p.CatID = c.id) order by c.Volgorde,p.Volgorde";
-        $result=mysql_query($query);
-        $h = "";
-        
-		$h .= '<link href="api-menu.css" rel="stylesheet">';
-        
-		$h = $h . "<div class='content-tree'>\n";
-		
-		$welcome = "";
-		if ($c2 > -1) {
-	        $welcome = $welcome . "<h3> Welcome back to push2press</h3>";
-	        $welcome = $welcome . $MSG;
-	    } else {
-	        $welcome = $welcome . "<h3> Welcome to your push2press site</h3>";
-	        $welcome = $welcome . $MSG;
-	    }
-		
-		
-$h = $h . '		
-<div class="xcontainer navbar" style="margin-left:25px;margin-right:25px;">
-<br>
-<br>
-<div class="mic"></div>
-<br>
-<br>
-<img src="images/app-logo-reverse.png">
-<ul class="nav pull-right">
-<!--li>'.$welcome.'</li-->
-  <li class="dropdown">
-    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-    	Edit
-    	<b class="caret"></b>
-    </a>
-    <ul class="dropdown-menu">
-	'."<li><a class='btn btn-success' href='api.php?action=show-cat&action2=add'> <i class='icon-plus icon-white'></i> ADD CATEGORY</a></li>".'
-<!--
-<li><a href="api.php?action=list-templates"><i class="icon-file"></i> '.L('templates').'</a></li>
-<li><a href="javascript:kcnew();"><i class="icon-picture"></i> '.L('Media').'</a></li>
-<li><a href="api.php?action=list-dom"><i class="icon-wrench"></i> '.L('Config').'</a></li>
--->
-    </ul>
-  </li>
-</ul>
-</div>
-<br>
-';
-		
-		
-/*
-        $h = $h . "<div class='btn-group'>";
-        $h = $h . "<div class='btn-group pull-right'>";
-        $h = $h . "<a class='btn btn-success' href='api.php?action=show-cat&action2=add'> <i class='icon-plus icon-white'></i> ADD</a>";
-        $h = $h . "</div>";		// end buttongroup
-        $h = $h . "</div>";		// end buttongroup
-*/
-        
-		$h = $h . "<ol class='nested_with_switch vertical x-root' style='margin-right:25px;'>";
-        $CurrentCatID = -1;
-        $CurrentCatEndBlock = "";
-        for ($r=0; $r < mysql_numrows($result); $r++) {
-        		if ($CurrentCatID != mysql_result($result,$r,"CatID")) {
-        			$nodrag = "";
-        			if ( mysql_result($result,$r,"CatID") == "") {
-        				$nodrag = " x-nodrag";
-        			}
-        			$h = $h . $CurrentCatEndBlock;
-        			$h = $h . "<li id='push2press-tree-cat-".mysql_result($result,$r,"CatID")."' class='x-category sort-item".$nodrag."'>\n";
-        			$h = $h . "<div class='x-div' style='height:30px;'>\n";
-    				if ($nodrag == "") {
-    					$h = $h . "<i class='icon-move icon-white' style='font-size:18px;'></i>";
-	                }
-	                
-					$h = $h . "<span>&nbsp;</span>";
-	                $h = $h . "<span>" . mysql_result($result,$r,"CatName") . "</span>\n";
-
-					$h = $h . "<span class='xx-edit-over'>";
-			        $h = $h . "<div class='btn-group pull-right'>\n";
-	                $h = $h . "<span><a class='btn btn-mini xbtn-success' href='api.php?action=show-cat&id=" . mysql_result($result,$r,"CatID") . "'><i class='icon-edit icon-black'></i> ".L("EDIT")."</a></span>\n";
-
-
-        			$h = $h . "<span><a class='btn btn-mini btn-success' href='api.php?action=show-page&action2=add&action3=wizard&CatId=".mysql_result($result,$r,"CatID")."'> <i class='icon-plus icon-white'></i> ADD</a></span>";
-
-
-
-	                $h = $h . "</div>\n";
-					$h = $h . "<span/>";
-
-	                $h = $h . "</div>\n";
-	                $h = $h . "<ol id='push2press-tree-cat-ol-".mysql_result($result,$r,"CatID")."' class='x-category'>\n";
-	                $CurrentCatID = mysql_result($result,$r,"CatID");
-	                $CurrentCatEndBlock = "</ol>\n</li>\n";
-	            }
-                
-                
-				$h = $h . "<li id='push2press-tree-page-".mysql_result($result,$r,"id")."' class='x-page ui-state-default sort-item'>\n";
-       			$h = $h . "<div style='height:40px;'>\n";
-       			$h = $h . "<div class='pull-left'><i class='icon-move icon-white' style='font-size:18px;'></i></div>";
-
-                $img = mysql_result($result,$r,"img");
-                $img_size = ($img && $img != "") ? sprintf("timthumb.php?h=32&w=32&src=%s",$img) : "";
-				if (strpos($img_size,"client_images/images/icons/glyphicons")) $img_size = $img_size . "&zc=2&f=5,238,238,238,1";
-
-
-                $h = $h . "<div class='pull-left page-icon'  ><img height='32' width='32' src='" . $img_size . "'></div>\n";
-
-				$h = $h . "<span class='page-title'>\n";
-                $h = $h . "<span>" . mysql_result($result,$r,"Pagename") . "</span>\n";
-                $h = $h . "<span>" . mysql_result($result,$r,"Caption") . "</span>\n";
-                $h = $h . "</span>\n";
-
-		        $h = $h . "<div class='btn-group pull-right' style='display:none'>\n";
-                $h = $h . "<span class='xx-edit-butts'>" .B("edit-txt","api.php?action=show-page&id=" . mysql_result($result,$r,"id") . ""). "";
-                $h = $h . " ";
-                $h = $h . "" .B("preview-txt","javascript:\$push2press.previewpage(\"api.php?action=get-page&id=" . mysql_result($result,$r,"id")."\");"). "</span>\n";
-       			$h = $h . "</div>\n";
-       			
-       			$h = $h . "</div>\n";
-       			$h = $h . "<div class='x-divider'></div>";
-
-				$h = $h . "</li>\n";
-                
-                
-
-        }
-		$h = $h . $CurrentCatEndBlock;
-		$h = $h . "</ol>\n";
-		$h = $h . "<div class='x-div x-div-cat' style='height:30px;'>\n";
-		$h = $h . "<img src='images/10x10.gif' width=20 height=8>\n";
-		$h = $h . "<span class='page-title'>\n";
-		$h = $h . "Messages and settings";
-		$h = $h . "</span>\n";
-		$h = $h . "</div>\n";
-
-		$h = $h . "<div class='x-div x-div-page' style='height:30px;'>\n";
-		$h = $h . "<img src='images/10x10.gif' width=20 height=8>\n";
-		$h = $h . "<span class='page-title'>\n";
-		$h = $h . "messages";
-		$h = $h . "</span>\n";
-		$h = $h . "<div class='btn-group pull-right'>\n";
-		$h = $h . "<span>" .B("edit","api.php?action=list-draft-mes"). "";
-		$h = $h . "</div>\n";
-
-
-		$h = $h . "</div>\n";
-
-		$h = $h . "<div class='x-div x-div-page' style='height:30px;'>\n";
-		$h = $h . "<img src='images/10x10.gif' width=20 height=8>\n";
-		$h = $h . "<span class='page-title'>\n";
-		$h = $h . "settings";
-		$h = $h . "</span>\n";
-		$h = $h . "<div class='btn-group pull-right'>\n";
-		$h = $h . "<span>" .B("edit","api.php?action=list-group"). "";
-		$h = $h . "</div>\n";
-		$h = $h . "</div>\n";
-		
-		$h .= "<br>\n";
-		$h .= "<div class='button'><div class='buttonbox'></div></div>\n";
-		$h .= "<br>\n";
-		
-
-		$h = $h . "</div>\n";
-
-?>
-<script>
-$(function() {
-
-	var lines = $(".x-page");
-	for (var i=0; i < lines.length; i++) {
-		$(lines[i]).bind("mouseenter", function() {
-			$(this).find(".btn-group").css("display","block");
-		})
-		$(lines[i]).bind("mouseleave", function() {
-			$(this).find(".btn-group").css("display","none");
-		})
 	}
-})
-</script>
+	if ($emailadminlinkto != "") {
+		$message = sprintf("Link to you new site is %s/api.php. <br> Link to push2press page is <a href=\"push2press://?url=%s\">%s</a> ",getConfiguration("url",""),getConfiguration("url",""),getConfiguration("sitename",""));
+		$messageplain = sprintf("Link to you new site is %s/api.php. Link to push2press page is &lt;a href=\"push2press://?url=%s\"&gt;%s&lt;/a&gt; ",getConfiguration("url",""),getConfiguration("url",""),getConfiguration("sitename",""));
+		$msuccess = mail($emailadminlinkto, 'Push2press Email Link', $message,$headers);
+		$h = sprintf("<div> Email sent to %s %s </div>",$emailadminlinkto,$msuccess);
+		if ($msuccess === false) {
+				$h = sprintf("<div> There was a sending error to %s - send yourself this link <pre>%s</pre></div>",$emailadminlinkto,$messageplain);
+		}			
+	}
+	
+	$c1 = sqlcount("select count(*) as c from message");
+    $c2 = sqlcount("select count(*) as c from log_phone where uid != ''");
+    
+    $h = $h . '<link href="github/ribbons.css" rel="stylesheet" type="text/css" />';
+    $h = $h . "<br>";
+    $h = $h . "<br>";
+    $h = $h . '<div class="container">';
+    $h = $h . '      <div class="row-fluid">';
+    $h = $h . '			<div class="span5">';
+    
+    $db = mysql_connect($dbhost,$username,$password);
+	mysql_select_db($database) or die("Unable to select database");
+    mysql_query("SET NAMES utf8", $db);
+    mysql_query( "SET CHARACTER SET utf8", $db );
 
+    $query="select *,c.Pagename as CatName, c.img as CatImage, c.Caption as CatCaption from pages p left join cats c on (p.CatID = c.id) order by c.Volgorde,p.Volgorde";
+    $result=mysql_query($query);
+        
+	$h = $h . '<link href="api-menu.css" rel="stylesheet">';   
+	$h = $h . '<link href="api-deniz.css" rel="stylesheet">';    
+	$h = $h . "<div class='content-tree'>";
+	
+	$welcome = "";
+	if ($c2 > -1) {
+		$welcome = $welcome . "<h3> Welcome back to push2press</h3>";
+	    $welcome = $welcome . $MSG;
+	} else {
+	    $welcome = $welcome . "<h3> Welcome to your push2press site</h3>";
+	    $welcome = $welcome . $MSG;
+	}
+    
+    $h = $h . '	<div class="xcontainer navbar" style="margin-left:25px;margin-right:25px;">';
+	$h = $h . '		<br>';
+	$h = $h . '		<br>';
+	$h = $h . '		<div class="mic"></div>';
+	$h = $h . '		<br>';
+	$h = $h . '		<br>';
+	$h = $h . '		<img src="images/app-logo-reverse.png">';
+	$h = $h . '		<ul class="nav pull-right" style="margin:14px 0 0 0;">';
+	$h = $h . '			  <li class="dropdown">';
+	$h = $h . '	    		<a href="api.php?action=show-cat&action2=add" class="dropdown-toggle" data-toggle="dropdown">';
+	$h = $h . '	    			ADD CATEGORY';
+	$h = $h . '	    		</a>';
+	$h = $h . '	  		  </li>';
+	$h = $h . '		</ul>';
+	$h = $h . '	</div>';
+	
+	$h = $h . '	<div style="min-height:480px;margin:0 25px;background-color:#15171a;">';
+	
+    $h = $h . "<ol class='nested_with_switch vertical x-root' style='margin:0px;'>";
+    $CurrentCatID = -1;
+    $CurrentCatEndBlock = "";
+    for ($r=0; $r < mysql_numrows($result); $r++) {
+    	if ($CurrentCatID != mysql_result($result,$r,"CatID")) {
+        $nodrag = "";
+        	if ( mysql_result($result,$r,"CatID") == "") {
+        		$nodrag = " x-nodrag";
+        	}
+        	$h = $h . $CurrentCatEndBlock;
+        	$h = $h . "<li id='push2press-tree-cat-".mysql_result($result,$r,"CatID")."' class='x-category sort-item".$nodrag."'>";
+        	$h = $h . "<div class='x-div' id='x-normal-page' style='height:50px;'>";
+    		if ($nodrag == "") {
+    			//$h = $h . "<i class='icon-move icon-white' style='font-size:18px;'></i>";
+	        }
+	                
+			$h = $h . "<span>" . mysql_result($result,$r,"CatName") . "</span>";
+			$h = $h . "<span class='xx-edit-over' style='display:none;'>";
+			$h = $h . "<div class='btn-group pull-right'>";
+			$h = $h . "<img src='images/p2p-icons/arrow_two_head_icon&48-ccw.png' width='16'>";
+	   		$h = $h . "&nbsp;&nbsp;";
+	        //$h = $h . "<span><a class='btn btn-mini xbtn-success' href='api.php?action=show-cat&id=" . mysql_result($result,$r,"CatID") . "'><img src='images/p2p-icons-black/doc_edit_icon&48.png' width='12'> CHANGE NAME</a></span>";
+	        $h = $h . "<span><a class='x-phone-btn-grey' href='api.php?action=show-cat&id=" . mysql_result($result,$r,"CatID") . "'>CHANGE NAME</a></span>";
+			$h = $h . "&nbsp;&nbsp;";
+			//$h = $h . "<span><a class='btn btn-mini btn-success' href='api.php?action=show-page&action2=add&action3=wizard&CatId=".mysql_result($result,$r,"CatID")."'> <i class='icon-plus icon-white'></i> ADD PAGE</a></span>";
+			$h = $h . "<span><a class='x-phone-btn-grey' href='api.php?action=show-page&action2=add&action3=wizard&CatId=".mysql_result($result,$r,"CatID")."'>ADD PAGE</a></span>";
+	        $h = $h . "</div>";
+			$h = $h . "<span/>";
+			$h = $h . "</div>";
+	        $h = $h . "<ol id='push2press-tree-cat-ol-".mysql_result($result,$r,"CatID")."' class='x-category'>";
+	        $CurrentCatID = mysql_result($result,$r,"CatID");
+	        $CurrentCatEndBlock = "</ol></li>";
+		}
+                
+        $h = $h . "<li id='push2press-tree-page-".mysql_result($result,$r,"id")."' class='x-page ui-state-default sort-item'>";
+       	$h = $h . "<div style='height:50px;'>";
+       	//$h = $h . "<div class='pull-left'><i class='icon-move icon-white' style='font-size:18px;'></i></div>";
 
+        $img = mysql_result($result,$r,"img");
+        $img_size = ($img && $img != "") ? sprintf("timthumb.php?h=32&w=32&src=%s",$img) : "";
+		if (strpos($img_size,"client_images/images/icons/glyphicons")) $img_size = $img_size . "&zc=2&f=5,238,238,238,1";
+
+		$h = $h . "<div class='pull-left page-icon'  ><img height='32' width='32' src='" . $img_size . "' style='margin-top:9px;'></div>";
+
+		$h = $h . "<span class='page-title'>";
+        $h = $h . "<span>" . mysql_result($result,$r,"Pagename") . "</span>";
+        //$h = $h . "<span>" . mysql_result($result,$r,"Caption") . "</span>";
+        $h = $h . "</span>";
+
+		/*$h = $h . "<div class='btn-group pull-right' style=''>";
+        $h = $h . "<span class='xx-edit-butts'>" .B("edit-txt","api.php?action=show-page&id=" . mysql_result($result,$r,"id") . ""). "";
+        $h = $h . "" .B("preview-txt","javascript:\$push2press.previewpage(\"api.php?action=get-page&id=" . mysql_result($result,$r,"id")."\");"). "</span>";
+       	$h = $h . "</div>";*/
+       	$h = $h . "<span class='xx-edit-over-pages' style='display:none;'>";
+		$h = $h . "<div class='btn-group pull-right'>";
+		$h = $h . "<img src='images/p2p-icons/arrow_two_head_icon&48-ccw.png' width='16'>";
+	   	$h = $h . "&nbsp;&nbsp;";
+	    //$h = $h . "<span><a class='btn btn-mini xbtn-success' href='api.php?action=show-page&id=" . mysql_result($result,$r,"id") . "'><img src='images/p2p-icons-black/doc_edit_icon&48.png' width='12'> EDIT PAGE</a></span>";
+	    $h = $h . "<span><a class='x-phone-btn-grey' href='api.php?action=show-page&id=" . mysql_result($result,$r,"id") . "'>EDIT PAGE</a></span>";
+		$h = $h . "&nbsp;&nbsp;";
+		//$h = $h . "<span><a class='btn btn-mini xbtn-success' href='javascript:\$push2press.previewpage(\"api.php?action=get-page&id=" . mysql_result($result,$r,"id")."\");'>PREVIEW</a></span>";
+		$h = $h . "<span><a class='x-phone-btn-grey' href='javascript:\$push2press.previewpage(\"api.php?action=get-page&id=" . mysql_result($result,$r,"id")."\");'>PREVIEW</a></span>";
+	    $h = $h . "</div>";
+		$h = $h . "<span/>";
+       			
+       	$h = $h . "</div>";
+       	//$h = $h . "<div class='x-divider'></div>";
+
+		$h = $h . "</li>";
+                
+    }
+		
+	$h = $h . $CurrentCatEndBlock;
+	$h = $h . "</ol>";
+	$h = $h . "<div class='x-div x-div-cat' style='height:50px;'>";
+	$h = $h . "<span class='page-titlex'>";
+	$h = $h . "Messages and settings";
+	$h = $h . "</span>";
+	$h = $h . "</div>";
+
+	$h = $h . "<a href='api.php?action=list-draft-mes'><div class='x-div x-div-page' style='height:50px;'>";
+	$h = $h . "<img src='images/p2p-icons/mail_2_icon&48.png' width='26' class='x-edit-icon'>";
+	$h = $h . "<span class='page-title'>";
+	$h = $h . "Messages";
+	$h = $h . "</span>";
+	/*$h = $h . "<div class='btn-group pull-right'>";
+	$h = $h . "<span>" .B("edit","api.php?action=list-draft-mes"). "";
+	$h = $h . "</div>";*/
+	$h = $h . "</div></a>";
+
+	$h = $h . "<a href='api.php?action=list-group'><div class='x-div x-div-page' style='height:50px;'>";
+	$h = $h . "<img src='images/p2p-icons/wrench_plus_2_icon&48.png' width='26' class='x-edit-icon'>";
+	$h = $h . "<span class='page-title'>";
+	$h = $h . "Settings";
+	$h = $h . "</span>";
+	/*$h = $h . "<div class='btn-group pull-right'>";
+	$h = $h . "<span>" .B("edit","api.php?action=list-group"). "";
+	$h = $h . "</div>";*/
+	$h = $h . "</div></a>";
+	$h = $h . "</div>";//this is the actual end of the placeholding min-height thing	
+	$h .= "<br>";
+	$h .= "<div class='button'><div class='buttonbox'></div></div>";
+	$h .= "<br>";
+	$h = $h . "</div>";
+	$h = $h . "</div>";
+    
+?>
+	<script>
+	
+	function loaderfunction(){
+		
+		var lines = $(".x-page");
+		for (var i=0; i < lines.length; i++) {
+			$(lines[i]).bind("mouseenter", function() {
+				$(this).find(".xx-edit-over-pages").css("display","block");
+				$(this).find(".xx-edit-over-pages").css("margin-top","-50px");
+			})
+			$(lines[i]).bind("mouseleave", function() {
+				$(this).find(".xx-edit-over-pages").css("display","none");
+			})
+		}
+		
+		var linesx = $("#x-normal-page");
+		for (var r=0; r < linesx.length; r++) {
+			$(linesx[r]).bind("mouseenter", function() {
+				$(this).find(".xx-edit-over").css("display","block");
+				$(this).find(".xx-edit-over").css("margin-top","-50px");
+			})
+			$(linesx[r]).bind("mouseleave", function() {
+				$(this).find(".xx-edit-over").css("display","none");
+			})
+		}
+		
+	}	
+	
+	</script>
+	<style>
+		#xx-p2p-topnavbar {
+			display : none;
+		}
+	</style>
+	
 <?php
 
+
+	$query99="select * from log_phone";
+	$result99=mysql_query($query99);
 	
-		
-		
-		
-
-//		if ($c2 > 0) {
-		if ($c2 > -1) {
-//	        echo "<h3> Welcome back to push2press</h3>";
-//	        echo $MSG;
-//			echo sprintf("		<p>Number of registered phones : %s </p>",$c2);
-//	        echo sprintf("		<p><a href='api.php?action=list-draft-mes'>Edit push messages</a>(%s)</p>",$c1);
-//	        echo sprintf("		<p><a href='api.php?action=show-page&id=1'>Edit homepage</a></p>");
-	        
-	        
-	        echo $h;
-	        
-	        
-
-		} else {
-//	        echo "<h3> Welcome to your push2press site</h3>";
-//	        echo $MSG;
-//	        echo sprintf("		<p><a href='api.php?action=list-draft-mes'>Edit push messages</a>(%s)</p>",$c1);
-//        echo sprintf("		<p><a href='api.php?action=wp'>Edit push messages wp</a>(%s)</p>",$c1);
-//        echo sprintf("		<p><a href='api.php?action=wp2'>Edit push messages wp2</a>(%s)</p>",$c1);
-//        echo sprintf("		<p><a class='btn' href='setup.php'>Re enter setup</a></p>",$c1);
-		
-			echo "				<br>";
-			echo sprintf("		<p>Number of registered phones : %s </p>",$c2);
-//			echo "				<br>";
-//			echo "				Send yourself the link by email <form action='api.php'><input type='text' name='emaillinkto'><input class='btn' type='submit'></form><br>";
-//			echo "				<br>";
-	        echo $h;
-
-
-		}
-
-        echo "			</div>";
-
-        echo '			<div class="span6">';
-        echo "			<div class='ribbon right red'><a href='#'>Fork me on GitHub</a></div>";
-//        echo "			<img src='images/MainImage.jpg'>";
-//		echo '			<a href="https://itunes.apple.com/us/app/push2press/id603889484?mt=8"><img src="http://blog.eventphant.com/wp-content/uploads/2012/07/Apple-App-Store.jpg" height="50"></a>';
-//		echo '			<a href="push2press://?url='.getConfiguration("url","").'"><img src="http://blog.eventphant.com/wp-content/uploads/2012/07/Apple-App-Store.jpg" height="50"></a>';
-        
-//		echo "			<span id='qrcodesmall'><a href='javascript:push2press.qrcode();'><img src='http://api.qrserver.com/v1/create-qr-code/?data=".urlencode("push2press://?url=".getConfiguration("url",""))."&size=250x250'></a></span>";
-		
-		echo "<legend>Dashboard</legend>";
-
-		echo "<div id='p2p-dashboard'>";	// start p2p-dashboard
-
-        echo '<div class="appicon">
-		<a href="javascript:push2press.modal(\'#gettheapp\');">
-		<img src="images/MainImage.jpg" width=80>
-		</a>
-		Get The App! 
-
-
-		<div id="gettheapp" style="display:none;">
-			<div class="p2p-youareusing">
-				<table width="350">
-				<tr><td colspan="2"><img src="http://m.push2press.com/jc30/images/application-logo.png"></td></tr>
-				<tr><td>
-				<img src="images/MainImage.jpg" width=150>
-				The preview App is available in the App Store
-				<a href="push2press://?url='.getConfiguration("url","").'">
-					<img src="http://blog.eventphant.com/wp-content/uploads/2012/07/Apple-App-Store.jpg" height="50">
-				</a>
-				</td><td valign="top">
-				In order to perform a quick setup click the QR code link below and follow the on screen instructions:
-				<span id="qrcodesmall">
-				<a href="javascript:push2press.qrcode();">
-				<img src="http://api.qrserver.com/v1/create-qr-code/?data='.urlencode("push2press://?url=".getConfiguration("url","")).'&size=250x250">
-				</a>
-				</span>
-				</td>
-				</tr>
-				<tr><td colspan="2">&nbsp;</td></tr>
-				</table>
-			</div>
-			</div>
-		</div>';
-
-
-        echo '<div class="appicon">
-		<a href="api.php?action=list-group">
-		<img src="images/home/dark_chat@2x.png" width=80>
-		</a>
-		Push2Group 
-		</div>';
-
-        echo '<div class="appicon">
-		<a href="api.php?action=list-log">
-		<img src="images/home/dark_comment@2x.png" height=80>
-		</a>
-		Push2Phone 
-		</div>';
-		
-        echo '<div class="appicon">
-		<a href="javascript:push2press.modal(\'#youareusing\');">
-		<img src="images/home/dark_info@2x.png" width=80>
-		</a>
-		About 
-		<div id="youareusing" style="display:none;">
-			<li class="p2p-youareusing"> 
-				<img src="http://m.push2press.com/jc30/images/application-logo.png">
-				<br>
-				<b>By Glimworm IT BV</b>
-				<br>
-				Version : ' . $push2version["major"] . ' ' . $push2version["type"]. ' 
-				<br> 
-				Build : ' . $push2version["build"] . '
-			</li>
-		</div>
-		</div>';
-		
-		
-
-        echo '<div class="appicon">
-        <a href="javascript:push2press.loading();">
-		<img src="images/home/dark_tray-up@2x.png" width=80>
-		</a>
-		UPDATE TO LATEST VERSION 
-		</div>';
-
-        echo '<div class="appicon">
-		<a href="api.php?action=instruct">
-		<img src="images/home/dark_book@2x.png" width=80>
-		</a>
-		Instructions 
-		</div>';
-
-        echo '<div class="appicon">
-		<a href="setup.php">
-		<img src="images/home/dark_gears@2x.png" width=80>
-		</a>
-		Re enter setup 
-		</div>';
-
-        echo '<div class="appicon">
-		<a href="javascript:kcnew();">
-		<img src="images/home/dark_pictures@2x.png" height=80>
-		</a>
-		Media 
-		</div>';
-
-        echo '<div class="appicon">
-		<a href="api.php?action=list-templates">
-		<img src="images/home/dark_doc@2x.png" height=80>
-		</a>
-		Templates 
-		</div>';
-
-        echo '<div class="appicon">
-		<a href="api.php?action=list-dom">
-		<img src="images/home/dark_wrench@2x.png" height=80>
-		</a>
-		Configuration 
-		</div>';
-
-        echo '<div class="appicon">
-		<a href="api.php?action=logout">
-		<img src="images/home/dark_arrow-closed@2x.png" height=80>
-		</a>
-		Logout 
-		</div>';
-
-		
-		if ($emenu) echo $emenu;
-
-
-		echo "</div>";	// end of p2p-dashboard
-
-
-
-        echo "			</div>";
-        
-        
-
-
-
-        echo "		</div>";
-        echo "</div>";
-        echo $hbot;
+	$query100="select * from pages";
+	$result100=mysql_query($query100);
+	
+	$count99 = mysql_numrows($result99);
+	$count100 = mysql_numrows($result100);
+	
+    $h = $h . '<div class="span6">';
+    $h = $h . '		<h2 class="x-dash-h2">Your personal dashboard</h2>';
+    
+    $bgcolor99 = "";
+    $color99 = "";
+    $bgcolor100 = "";
+    $color100 = "";
+    
+    if ($count99 < 2){
+    	$bgcolor99 = "background-color: #217cb5;";
+    	$color99 = "color: #217cb5;";
+    } else if ( $count99 > 1 && $count100 > 1){
+    	$bgcolor100 = "background-color: #217cb5;";
+    	$color100 = "color: #217cb5;";
+    }
+    
+    $h = $h . '		<div class="x-dash-imp-grey-div">';
+    $h = $h . '			<img src="images/p2p-icons-black/get-started.png" class="x-dash-imp-grey-img">';
+    $h = $h . '			<div class="x-dash-imp-grey-txt">';
+    $h = $h . '				<h3 class="x-dash-imp-grey-title" style="'.$color99.'">Download the app to GET STARTED</h3>';
+    $h = $h . '				<p class="x-dash-imp-grey-text">To be able to view your app you will have to download the previewer app for your device here</p>';
+    $h = $h . '			</div>';
+    $h = $h . '			<div class="x-dash-imp-grey-buttons">';
+    $h = $h . '				<a class="x-dash-imp-grey-button" href="javascript:push2press.modal(\'#gettheapp\');"  style="'.$bgcolor99.'">IPHONE</a>';
+    $h = $h . '				'; 
+    $h = $h . '				<a class="x-dash-imp-grey-button" href="javascript:push2press.modal(\'#gettheapp\');"  style="'.$bgcolor99.'">ANDROID</a>';
+    $h = $h . '			</div>';
+    $h = $h . '		</div>';
+    
+    $h = $h .'<div id="gettheapp" style="display:none;">';
+	$h = $h .'			<div class="p2p-youareusing">';
+	$h = $h .'				<table width="350">';
+	$h = $h .'				<tr><td colspan="2"><img src="http://m.push2press.com/jc30/images/application-logo.png"></td></tr>';
+	$h = $h .'				<tr><td>';
+	$h = $h .'				<img src="images/MainImage.jpg" width=150>';
+	$h = $h .'				The preview App is available in the App Store';
+	$h = $h .'				<a href="push2press://?url='.getConfiguration("url","").'">';
+	$h = $h .'					<img src="http://blog.eventphant.com/wp-content/uploads/2012/07/Apple-App-Store.jpg" height="50">';
+	$h = $h .'				</a>';
+	$h = $h .'				</td><td valign="top">';
+	$h = $h .'				In order to perform a quick setup click the QR code link below and follow the on screen instructions:';
+	$h = $h .'				<span id="qrcodesmall">';
+	$h = $h .'				<a href="javascript:push2press.qrcode();">';	
+	$h = $h .'				<img src="http://api.qrserver.com/v1/create-qr-code/?data='.urlencode("push2press://?url=".getConfiguration("url","")).'&size=250x250">';
+	$h = $h .'				</a>';
+	$h = $h .'				</span>';
+	$h = $h .'				</td>';
+	$h = $h .'			</tr>';
+	$h = $h .'			<tr><td colspan="2">&nbsp;</td></tr>';
+	$h = $h .'		</table>';
+	$h = $h .'	</div>';
+	$h = $h .'</div>';
+    
+    $h = $h . '		<div class="x-dash-imp-grey-div">';
+    $h = $h . '			<img src="images/p2p-icons-black/send-pusher.png" class="x-dash-imp-grey-img">';
+    $h = $h . '			<div class="x-dash-imp-grey-txt">';
+    $h = $h . '				<h3 class="x-dash-imp-grey-title" style="'.$color100.'">send a push notification</h3>';
+    $h = $h . '				<p class="x-dash-imp-grey-text">Here you can create user groups, view your members and, of course, <strong>send push notificatons</strong></p>';
+    $h = $h . '			</div>';
+    $h = $h . '			<div class="x-dash-imp-grey-buttons">';
+    $h = $h . '				<a class="x-dash-imp-grey-button-double" href="http://m.push2press.com/jc30/api.php?action=list-log"  style="'.$bgcolor100.'" href="?action=list-log">TRY NOW!</a>';
+    $h = $h . '			</div>';
+    $h = $h . '		</div>';
+    
+    $h = $h . '		<legend class="x-dash-h2">Widgets</legend>';
+    
+    $h = $h . '		<div class="x-dash-widgets-outer">';
+    $h = $h . '			<div class="x-dash-widgets-inner"><a href="javascript:kcnew();"><img src="images/p2p-icons-black/media.png" height="40" class="x-dash-imp-widgets-inner-img"></a><p>MEDIA LIBRARY</p></div>';
+    $h = $h . '			<div class="x-dash-widgets-inner"><a href="javascript:push2press.modal(\'#youareusing\');"><img src="images/p2p-icons-black/about.png" height="40" class="x-dash-imp-widgets-inner-img"></a><p>ABOUT</p><div id="youareusing" style="display:none;"><li class="p2p-youareusing"> <img src="http://m.push2press.com/jc30/images/application-logo.png"><br><b>By Glimworm IT BV</b><br>Version : ' . $push2version["major"] . ' ' . $push2version["type"]. ' <br> Build : ' . $push2version["build"] . '</li></div></div>';
+    $h = $h . '			<div class="x-dash-widgets-inner"><a href="api.php?action=list-dom"><img src="images/p2p-icons-black/settings.png" height="40" class="x-dash-imp-widgets-inner-img"></a><p>SETTINGS</p></div>';
+    $h = $h . '			<div class="x-dash-widgets-inner x-dash-widgets-inner-last"><a href="http://push2press.uservoice.com/knowledgebase" target="new"><img src="images/p2p-icons-black/help.png" height="40" class="x-dash-imp-widgets-inner-img"></a><p>HELP</p></div>';
+    
+    /*custom things*/
+    
+    	if ($emenu != ""){
+    		$h = $h . $emenu;
+    	}
+    
+    /*end of custom things*/
+    
+    $h = $h . '			<div class="x-dash-widgets-inner x-dash-widgets-inner-last"><a href="api.php?action=logout" target="new"><img src="images/p2p-icons-black/help.png" height="40" class="x-dash-imp-widgets-inner-img"></a><p>LOGOUT</p></div>';
+    
+    $h = $h . '		</div>';
+    
+    $h = $h . '</div>';
+    $h = $h . '</div>';
+    
+    echo $htoppopup;
+    echo $htop;
+    echo $h;
+    echo $hbot;  
         
 }
 /* thans to

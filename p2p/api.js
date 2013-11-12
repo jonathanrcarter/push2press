@@ -396,21 +396,15 @@ push2press.getEditorToolbar = function() {
 
 	var retval  =
 	[
-		{ name: 'document', items : [ 'Source','-','Preview','-','Templates' ] },
-		{ name: 'clipboard', items : [ 'Cut','Copy','Paste','PasteText','PasteFromWord','-','Undo','Redo' ] },
-		{ name: 'editing', items : [ 'SelectAll','-', 'Scayt' ] },
+		{ name: 'document', items : [ 'Bold','Italic','Underline','-','RemoveFormat', '-', 'Source','-','Preview','-','Templates','TextColor','BGColor' ] },
+		{ name: 'clipboard', items : [ 'Cut','Copy','Paste','PasteText','PasteFromWord','-','Undo','Redo', '-', 'SelectAll','-', 'Scayt' ] },
 		{ name: 'forms', items : [ 'Form', 'Checkbox', 'Radio', 'TextField', 'Textarea', 'Select', 'Button', 'ImageButton', 
 	        'HiddenField' ] },
-//		'/',
-		{ name: 'basicstyles', items : [ 'Bold','Italic','Underline','-','RemoveFormat' ] },
 		{ name: 'paragraph', items : [ 'NumberedList','BulletedList','-','Blockquote','CreateDiv',
 		'-','JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock' ] },
-		{ name: 'links', items : [ 'Link','Unlink','Anchor' ] },
-		{ name: 'insert', items : [ 'Image','Table','HorizontalRule','SpecialChar' ] },
-//		'/',
+		{ name: 'links', items : [ 'Link','Unlink','Anchor' , '-' , 'Image','-','Table','HorizontalRule','SpecialChar' ] },
 		{ name: 'styles', items : [ 'Styles','Format','Font','FontSize' ] },
-		{ name: 'colors', items : [ 'TextColor','BGColor' ] },
-		{ name: 'tools', items : [ 'ShowBlocks','-','About' ] }	
+		{ name: 'tools', items : [ 'ShowBlocks','-','About'] }	
 	];
 	
 	return retval;
@@ -514,22 +508,28 @@ push2press.edit_with_code = function(NEW_CONTENT) {
 	var elm12 = document.getElementById("elm12");
 	if (elm12) elm12.style.width = "99%";
 	if (NEW_CONTENT) elm12.value = NEW_CONTENT;
+	
 
 }
 push2press.edit_with_wysiwyg = function() {
 	if (CKEDITOR.instances.elm12) return;
+
+	$("#wysiwygbox").css("display","");
 	
 	var bottomSpace = document.getElementById("bottomSpace");
 	if (bottomSpace) bottomSpace.style.width = "400px";
+	if (bottomSpace) bottomSpace.style.marginLeft = "50px";
+//	if (bottomSpace) bottomSpace.style.backgroundColor = "#000000";
+	if (bottomSpace) bottomSpace.style.textAlign = "center";
 
 	var elm12 = document.getElementById("elm12");
-	if (elm12) elm12.style.width = "80%";
+	if (elm12) elm12.style.width = "90%";
 	
 	CKEDITOR.replace( 'elm12', {
 		skin : 'BootstrapCK-Skin',
 		sharedSpaces : {top : 'topSpace',bottom : 'bottomSpace'},
 		toolbar : 'mytoolbar',
-		emovePlugins : 'maximize,resize',
+		removePlugins : 'maximize,resize',
 		width : 300,
 		height : 360,
 		toolbar_mytoolbar : push2press.getEditorToolbar(),
@@ -540,6 +540,46 @@ push2press.edit_with_wysiwyg = function() {
 		filebrowserImageUploadUrl : 'kcfinder/upload.php?type=images',
 		filebrowserFlashUploadUrl : 'kcfinder/upload.php?type=flash'
 	});
+}
+push2press.toolbars_a = [];
+push2press.showtoolbar = function(n) {
+	for (var i=0; i < push2press.toolbars_a.length; i++) {
+		$(push2press.toolbars_a[i].obj).css("display","none");
+		$("#toolbar-li-"+i).removeClass("active");
+	}
+	$(push2press.toolbars_a[n].obj).css("display","");
+	$("#toolbar-li-"+n).addClass("active");
+}
+push2press.toolbars = function() {
+	var toolboxmenu = $("#toolboxmenu");
+	if (!toolboxmenu || toolboxmenu.length == 0) {
+
+		var toolbox = $(".cke_toolbox");
+		toolbox.prepend("<div id='toolboxmenu'>MENU</div>");
+		var toolboxmenu = $("#toolboxmenu");
+		
+		
+		var toolbars = toolbox.find(".cke_toolbar");
+
+		var handles = "";
+		push2press.toolbars_a = [];
+		
+		for (var i=0; i < toolbars.length; i++) {
+			var name = $(toolbars[i]).find(".cke_voice_label").text();
+			
+			handles += "<li id='toolbar-li-"+i+"'><a href='javascript:push2press.showtoolbar("+i+");'>"+name+"</a></li>";
+			$(toolbars[i]).css("display","none");
+			push2press.toolbars_a.push({
+				i : i,
+				obj : toolbars[i]
+			});
+
+			
+		}
+		
+		toolboxmenu.html("<div id='p2p-custom-navbar'><ul class='nav nav-tabs'>"+handles+"</ul></div>");
+
+	}
 }
 push2press.selectAppropriateEditor = function(TYPE) {
 
@@ -553,25 +593,40 @@ push2press.selectAppropriateEditor = function(TYPE) {
 push2press.editwithace = function() {
 	var txt = $("#elm12").val();
 	
-
-    var editor = ace.edit("editor");
-    editor.setTheme("ace/theme/twilight");
-    editor.getSession().setMode("ace/mode/javascript");
-    return;
-
-
-    var editor2 = ace.edit("ace_editor");
-    editor2.setTheme("ace/theme/twilight");
-    editor2.getSession().setMode("ace/mode/javascript");
-
-    return;
-
-
-	var txt = $("#elm12").val();
-	console.log(txt)
-	$("#ace_editor").html(txt);
-	var editor = ace.edit("ace_editor");
+	txt = $.trim(txt);		// trim whitespace
+	
+	if (txt.indexOf("<!--|") === 0) {
+		txt = txt.split("|",2)[1];
+		// look for --> at the end of the textarea
+		if (txt[txt.length-1] === ">" && txt[txt.length-2] === "-" && txt[txt.length-3] === "-") {
+			txt = txt.substring(0,txt.length - 3);
+		}
+	}
+		
+    push2press.editor = ace.edit("editor");
+    push2press.editor.setTheme("ace/theme/twilight");
+    push2press.editor.getSession().setMode("ace/mode/javascript");
+    push2press.editor.setValue(txt);
+    
+    $("#xx-p2p-ace-tr").css("display","");
+	$("#wysiwygbox").css("display","none");
 }
+push2press.backwithace = function() {
+	var txt = push2press.editor.getValue(txt);
+
+	txt = $.trim(txt);		// trim whitespace
+	
+	if (txt.indexOf("<!--|") !== 0) {
+		txt = "<!--|" + txt + "-->"; 
+	}
+	$("#elm12").val(txt);
+
+}
+push2press.preparePageEditSubmit = function(form) {
+	console.log(form);
+	return false;
+}
+
 push2press.choosePageType = function() {
 	var h = "";
 	push2press.gotopage = function(n) {
@@ -589,33 +644,43 @@ push2press.choosePageType = function() {
 	h += "<div> &nbsp;</div>"
 	h += "</div>";
 	h += "<div class='modal-body'>";
-	h += "<form>";
+//	h += "<form>";
 	h += "<input style='position:absolute; top:32px;' type='text' id='filter'>";
-	h += "<ul>";
+	h += "<ul class='plainlist' style='max-height:330px;'>";
 	for (var i=0; i < _pagetypes.length; i++) {
-		h += "<li>";
+		h += "<li class='plainlist'>";
 		h += "<table class='table table-condensed' width='95%'>";
-		h += "<tr><td valign='top'>";
-		h += "<div><img height='40' src='"+_pagetypes[i].i+"'></div>";
+		h += "<tr><td valign='top' width='30%'>";
+		h += "<div class='overflowhidden'><img height='40' src='"+_pagetypes[i].i+"'></div>";
 		h += "<div>&nbsp;</div>";
-		h += "</td><td valign='top'>";
+		h += "</td><td valign='top' width='5%'>";
 		h += "&nbsp;";
-		h += "</td><td>";
-		h += "<div><h2>"+_pagetypes[i].n+"</h2></div>";
-		h += "</td><td>";
+		h += "</td><td width='55%'>";
+		h += "<div class='overflowhidden'><h2>"+_pagetypes[i].n+"</h2></div>";
+		h += "</td><td width='10%'>";
 		h += "<div><a class='btn' href='javascript:push2press.gotopage("+i+");'>Add</a></div>";
 		h += "</td></tr>";
 		h += "</table>";
 		h += "</li>";
 	}
 	h += "</ul>";
-	h += "</form>";
+//	h += "</form>";
+	h += "</div>";
+	h += "<div class='modal-footer'>";
+	h += "footer";
 	h += "</div>";
 	$("#modal-window2").html(h);
 	$("#modal-window2").modal('show').css("width","800px").css("margin-left","-400px").css("left","50%");
 	$('#filter').filterList();
 
 }
+
+push2press.insertimage = function() {
+	console.log(CKEDITOR);
+	CKEDITOR.tools.callFunction(1,{});
+}
+
+
 
 push2press.popupWinFinderClose = function() {
 
@@ -641,9 +706,6 @@ push2press.popupWinFinder = function(URL,NAME) {
  	h += "<button type='button' class='close' data-dismiss='modal' aria-hidden='true'>&times;</button>";
 	h += "</div>";
 	h += "<div class='modal-body'>";
-//	h += "<a href='javascript:push2press.popupWinFinderClose();'>close</a>";
-//	h += "<a href='javascript:push2press.popupWinFinderOpen();'>open</a>";
-//	h += "<div id='kcfinder_div'></div>"
 	h += "<div id='kcfinder_div_iframe'>"
 //    h += "<iframe id='kcfinder_iframe' frameborder='0' width='90%' height='90%' src='"+URL+push2press.rnd()+"' marginwidth='0' marginheight='0' scrolling='no' />";
 	h += "</div>";
@@ -665,6 +727,16 @@ push2press.popupWinFinder = function(URL,NAME) {
 		// do something…
 	});
 	
+    window.KCFinder = {
+        callBack: function(url) {
+            window.KCFinder = null;
+            $("#modal-window").modal("hide");
+//            field.value = url;
+//            div.style.display = 'none';
+//            div.innerHTML = '';
+
+        }
+    };
 	
 	
 	$("#modal-window").modal({
@@ -702,5 +774,23 @@ push2press.popupWinFinder = function(URL,NAME) {
 function kcnew() {
 	push2press.popupWinFinder();	// 'kcfinder/browse.php?type=images');
 }
+
+
+/* taken from the home menu */
+var mq = window.matchMedia("(min-width: 500px)");
+
+function WidthChange(mq) {
+
+	if (mq.matches) {
+		/* window width is at least 500px */
+	} else {
+		/* window width is less than 500px */
+		$("i").addClass("icon-white");
+	}
+}
+$(window).bind("resize", WidthChange(mq));
+
+
+
 
 

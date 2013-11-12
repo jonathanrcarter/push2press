@@ -31,6 +31,13 @@
 	
 }
 
+.overflowhidden {
+	overflow:hidden;
+}
+.plainlist, .plainlist ul, .plainlist li {
+	list-style: none;
+}
+
 /* added by jc */
 
 #sortable { list-style-type: none; margin: 0; padding: 0; width: 60%; }
@@ -61,8 +68,36 @@ html>body #sortable li { height: 1.5em; line-height: 1.2em; }
           box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);
 }
 
-
 .navbar .nav > li > a {
+  float: none;
+  padding: 9px 10px 11px;
+  line-height: 19px;
+  color: #fff;
+  font-size:12px !important;
+  text-decoration: underline;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0);
+}
+/* increase font size */
+.navbar .nav > li > a, .dropdown-menu a {
+  font-size : 1.2em;
+}
+
+
+.navbar .nav > li > a:hover {
+  color: #ffffff;
+  color: #ffffff;
+  text-decoration: none;
+  background-color: transparent;
+}
+
+.navbar .nav .active > a,
+.navbar .nav .active > a:hover {
+  color: #ffffff;
+  text-decoration: none;
+  background-color: #222222;
+}
+
+/*.navbar .nav > li > a {
   float: none;
   padding: 9px 10px 11px;
   line-height: 19px;
@@ -71,7 +106,7 @@ html>body #sortable li { height: 1.5em; line-height: 1.2em; }
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0);
 }
 /* increase font size */
-.navbar .nav > li > a, .dropdown-menu a {
+/*.navbar .nav > li > a, .dropdown-menu a {
   font-size : 1.2em;
 }
 
@@ -88,7 +123,7 @@ html>body #sortable li { height: 1.5em; line-height: 1.2em; }
   color: #ffffff;
   text-decoration: none;
   background-color: #222222;
-}
+}*/
 
 .table th {
 	text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
@@ -105,6 +140,9 @@ h3 {
 	text-shadow: 0 1px 1px #666666;
 }
 
+#xx-p2p-topnavbar {
+	margin-top:16px;
+}
 .modalpreview {
   right: 50%;
   left: 30%;
@@ -114,6 +152,10 @@ h3 {
 
 .modal {
   height:500px;
+  border-radius: 12px;
+  -webkit-border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+
 }
 
 .modalpreview600 {
@@ -133,6 +175,10 @@ h3 {
   height:500px;
 	
 }
+.modal-backdrop.fade.in {
+	opacity: 0.6;
+}
+
 .qrcode-instructions{
 	background:url(images/qrcode-push2press-diagram.jpg) 0 0 no-repeat transparent;
 	width : 235px;
@@ -265,15 +311,203 @@ body {
 
 
 
-#ace_editor {
+#editor { 
+	margin: 0;
 	position: relative;
-	width: 500px;
 	height: 400px;
+	width: 98%;
 }
-    #editor { 
-        margin: 0;
-        position: relative;
-	height: 400px;
-	width: 500px;
-    }
 
+.wysiwyg-edit-block {
+    box-shadow: 0 0px 10px 5px rgba(0, 0, 0, 0.1);
+	border: 1px solid #bbbbbb;
+	border-radius: 20px;
+	background: #ffffff;
+	padding:10px;
+	background: #000000; /* Old browsers */
+	background: -moz-linear-gradient(top, #ffffff 0%, #cccccc 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(100%,#cccccc)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top, #ffffff 0%,#cccccc 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top, #ffffff 0%,#cccccc 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top, #ffffff 0%,#cccccc 100%); /* IE10+ */
+	background: linear-gradient(to bottom, #ffffff 0%,#cccccc 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#cccccc',GradientType=0 ); /* IE6-9 */	
+
+}
+
+
+
+.editbox {
+	xborder: 1px solid #dedede;
+	-webkit-box-shadow: 0px 1px 1px -1px rgba(0,0,0,0.1);
+	box-shadow: 0px 1px 1px -1px rgba(0,0,0,0.1);
+    xbox-shadow: 0 0px 10px 5px rgba(0, 0, 0, 0.1);
+	border: 1px solid #dddddd;
+	xborder-radius: 3px;
+	overflow: auto;
+	background: #fff;
+	margin-top : 10px;
+	margin-bottom : 10px;
+	padding : 10px;
+	background-color : #eeeeee;
+
+}
+.editbox_head {
+	xborder-bottom: 1px solid #cdc6c6;
+	margin-left : -10px;
+	padding-left : 10px;
+	margin-right : -10px;
+	padding-right : 10px;
+	margin-top : -10px;
+	padding-top : 10px;
+	padding-bottom : 10px;
+	text-transform:uppercase;
+	font-weight: bold;
+	xbackground-color : #fcfcfc;
+	xbackground-color : #eeeeee;
+}
+
+.editbox_foot {
+	border-top: 1px solid #cdc6c6;
+	margin-left : -10px;
+	padding-left : 10px;
+	margin-right : -10px;
+	padding-right : 10px;
+	margin-bottom : -15px;
+	padding-bottom : 15px;
+	padding-top : 10px;
+	text-align: right;
+	background-color : #dddddd;
+}
+
+#p2p-custom-navbar li {
+	padding: 4px;
+	border: 0;
+	border-bottom: 1px solid black;
+}
+#p2p-custom-navbar .active {
+	background-color: yellow;
+	padding: 4px;
+	border: 1px solid black;
+	border-bottom: 0;
+}
+#p2p-custom-navbar li>a {
+	border: 0;
+}
+
+/* sizes */
+@media (min-width: 1200px) {
+
+}
+@media (min-width: 980px) and (max-width: 1199px) {
+
+}
+@media (min-width: 768px) and (max-width: 979px) {
+
+}
+@media (min-width: 481px) and (max-width: 767px) {
+
+}
+@media (max-width: 480px) {
+
+}
+
+
+/* wp buttons */
+.wp-core-ui .button-primary {
+    background: #2ea2cc;
+    border-color: #0074a2;
+    -webkit-box-shadow: inset 0 1px 0 rgba(120, 200, 230, 0.5), 0 1px 0 rgba(0, 0, 0, .15);
+    box-shadow: inset 0 1px 0 rgba(120, 200, 230, 0.5), 0 1px 0 rgba(0, 0, 0, .15);
+    color: #fff;
+    text-decoration: none;
+}
+
+.wp-core-ui .button-primary.hover,
+.wp-core-ui .button-primary:hover,
+.wp-core-ui .button-primary.focus,
+.wp-core-ui .button-primary:focus {
+    background: #1e8cbe;
+    border-color: #0074a2;
+    -webkit-box-shadow: inset 0 1px 0 rgba(120, 200, 230, 0.6);
+    box-shadow: inset 0 1px 0 rgba(120, 200, 230, 0.6);
+    color: #fff;
+}
+
+.wp-core-ui .button-primary.focus,
+.wp-core-ui .button-primary:focus {
+    border-color: #0e3950;
+    -webkit-box-shadow: inset 0 1px 0 rgba(120, 200, 230, 0.6), 1px 1px 2px rgba(0, 0, 0, 0.4);
+    box-shadow: inset 0 1px 0 rgba(120, 200, 230, 0.6), 1px 1px 2px rgba(0, 0, 0, 0.4);
+}
+
+.wp-core-ui .button-primary.active,
+.wp-core-ui .button-primary.active:hover,
+.wp-core-ui .button-primary.active:focus,
+.wp-core-ui .button-primary:active {
+    background: #1e8cbe;
+    border-color: #005684;
+    color: rgba(255, 255, 255, 0.95);
+    -webkit-box-shadow: inset 0 1px 0 rgba(0, 0, 0, 0.1);
+    box-shadow: inset 0 1px 0 rgba(0, 0, 0, 0.1);
+    vertical-align: top;
+}
+
+/* this creates an inset effect on the text */
+.wp-core-ui .button-primary:active {
+    padding-top: 1px;
+}
+
+.wp-core-ui .button-primary[disabled],
+.wp-core-ui .button-primary:disabled,
+.wp-core-ui .button-primary-disabled {
+    color: #94cde7 !important;
+    background: #298cba !important;
+    border-color: #1b607f !important;
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.1) !important;
+    cursor: default;
+}
+
+
+/* bootstrap changes */
+.btn {
+	background-image: -ms-linear-gradient(top, #eee, #ddd);
+	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#eee), to(#ddd));
+	background-image: -webkit-linear-gradient(top, #eee, #ddd);
+	background-image: -o-linear-gradient(top, #eee, #ddd);
+	background-image: linear-gradient(top, #eee, #ddd);
+	background-image: -moz-linear-gradient(top, #eee, #ddd);
+	white-space: nowrap !important;
+}
+.btn-info {
+  background-image: -ms-linear-gradient(top, #398fc5, #217cb5);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#398fc5), to(#217cb5));
+  background-image: -webkit-linear-gradient(top, #398fc5, #217cb5);
+  background-image: -o-linear-gradient(top, #398fc5, #217cb5);
+  background-image: -moz-linear-gradient(top, #398fc5, #217cb5);
+  background-image: linear-gradient(top, #398fc5, #217cb5);
+	white-space: nowrap !important;
+}
+
+.reverse-input {
+	background-color: transparent !important;
+	border : 0 !important;
+	margin-top : 10px;
+	font-size: : 20px !important;
+	height : 24px !important;
+	color : #ffffff !important;
+}
+.previewimage .btn {
+	margin-top : 10px;
+}
+.previewimage {
+	height : 50px;
+	padding-left: 8px;
+	padding-right: 8px;
+}
+.instructions {
+	font-size: 12px;
+	color: #333;
+}
