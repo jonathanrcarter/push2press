@@ -4441,7 +4441,7 @@ if ($action == "homepage") {
     $h = $h .'<div id="gettheapp" style="display:none;">';
 	$h = $h .'			<div class="p2p-youareusing">';
 	$h = $h .'				<table width="350">';
-	$h = $h .'				<tr><td colspan="2"><img src="http://m.push2press.com/jc30/images/application-logo.png"></td></tr>';
+	$h = $h .'				<tr><td colspan="2"><img src="images/application-logo.png"></td></tr>';
 	$h = $h .'				<tr><td>';
 	$h = $h .'				<img src="images/MainImage.jpg" width=150>';
 	$h = $h .'				The preview App is available in the App Store';
@@ -4469,7 +4469,7 @@ if ($action == "homepage") {
     $h = $h . '				<p class="x-dash-imp-grey-text">Here you can create user groups, view your members and, of course, <strong>send push notificatons</strong></p>';
     $h = $h . '			</div>';
     $h = $h . '			<div class="x-dash-imp-grey-buttons">';
-    $h = $h . '				<a class="x-dash-imp-grey-button-double" href="http://m.push2press.com/jc30/api.php?action=list-log"  style="'.$bgcolor100.'" href="?action=list-log">TRY NOW!</a>';
+    $h = $h . '				<a class="x-dash-imp-grey-button-double" href="api.php?action=list-log"  style="'.$bgcolor100.'" href="?action=list-log">TRY NOW!</a>';
     $h = $h . '			</div>';
     $h = $h . '		</div>';
     
@@ -4477,7 +4477,7 @@ if ($action == "homepage") {
     
     $h = $h . '		<div class="x-dash-widgets-outer">';
     $h = $h . '			<div class="x-dash-widgets-inner"><a href="javascript:kcnew();"><img src="images/p2p-icons-black/media.png" height="40" class="x-dash-imp-widgets-inner-img"></a><p>MEDIA LIBRARY</p></div>';
-    $h = $h . '			<div class="x-dash-widgets-inner"><a href="javascript:push2press.modal(\'#youareusing\');"><img src="images/p2p-icons-black/about.png" height="40" class="x-dash-imp-widgets-inner-img"></a><p>ABOUT</p><div id="youareusing" style="display:none;"><li class="p2p-youareusing"> <img src="http://m.push2press.com/jc30/images/application-logo.png"><br><b>By Glimworm IT BV</b><br>Version : ' . $push2version["major"] . ' ' . $push2version["type"]. ' <br> Build : ' . $push2version["build"] . '</li></div></div>';
+    $h = $h . '			<div class="x-dash-widgets-inner"><a href="javascript:push2press.modal(\'#youareusing\');"><img src="images/p2p-icons-black/about.png" height="40" class="x-dash-imp-widgets-inner-img"></a><p>ABOUT</p><div id="youareusing" style="display:none;"><li class="p2p-youareusing"> <img src="images/application-logo.png"><br><b>By Glimworm IT BV</b><br>Version : ' . $push2version["major"] . ' ' . $push2version["type"]. ' <br> Build : ' . $push2version["build"] . '</li></div></div>';
     $h = $h . '			<div class="x-dash-widgets-inner"><a href="api.php?action=list-dom"><img src="images/p2p-icons-black/settings.png" height="40" class="x-dash-imp-widgets-inner-img"></a><p>SETTINGS</p></div>';
     $h = $h . '			<div class="x-dash-widgets-inner x-dash-widgets-inner-last"><a href="http://push2press.uservoice.com/knowledgebase" target="new"><img src="images/p2p-icons-black/help.png" height="40" class="x-dash-imp-widgets-inner-img"></a><p>HELP</p></div>';
     
