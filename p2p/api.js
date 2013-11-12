@@ -508,7 +508,6 @@ push2press.edit_with_code = function(NEW_CONTENT) {
 	var elm12 = document.getElementById("elm12");
 	if (elm12) elm12.style.width = "99%";
 	if (NEW_CONTENT) elm12.value = NEW_CONTENT;
-	
 
 }
 push2press.edit_with_wysiwyg = function() {
@@ -585,6 +584,8 @@ push2press.selectAppropriateEditor = function(TYPE) {
 
 	if (TYPE == "TI") {
 		push2press.edit_with_code();
+		setTimeout(push2press.editwithace,2000);
+			
 	} else {
 		push2press.edit_with_wysiwyg();
 	}

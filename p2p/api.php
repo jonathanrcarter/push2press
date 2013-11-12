@@ -4089,7 +4089,9 @@ $h .= '
 //	        	$h .= "</div>";
 
 
+				$h = $h . "\n";
 				$h = $h .'<script type="text/javascript">';
+				$h = $h . "\n";
 /*
 				$h = $h . "function change_page_type() {";
 				$h = $h . "	var opt = jq('#pagetype0').val();";
@@ -4101,9 +4103,14 @@ $h .= '
 				$h = $h . "	console.log(opt);";
 				$h = $h . "}";
 */				
-				//$h = $h . "$"."(function() { push2press.selectAppropriateEditor('".$PAGETYPE."'); });";
-				$h = $h ."push2press.edit_with_wysiwyg();";
+				$h = $h . "\n";
+//				$h = $h . "push2press.selectAppropriateEditorOnReady('".$PAGETYPE."');";
+				$h = $h . "push2press.selectAppropriateEditor('".$PAGETYPE."');";
+				$h = $h . "\n";
+				//$h = $h . "push2press.edit_with_wysiwyg();";
+				//$h = $h . "push2press.selectAppropriateEditor('".$PAGETYPE."');";
 				$h = $h .'</script>';
+				$h = $h . "\n";
 
                 
                 $h = $h . "</form>";
@@ -4118,11 +4125,18 @@ $h .= '
                 $h = $h . "</form>";
 
 				$h = $h .'<script type="text/javascript" src="http://www.google.com/jsapi"></script>';
+				$h = $h . "\n";
 				$h = $h .'<script type="text/javascript">';
+				$h = $h . "\n";
 				$h = $h .'	google.load("jquery", "1");';
+				$h = $h . "\n";
 				$h = $h .'</script>';
+				$h = $h . "\n";
 				$h = $h .'<script type="text/javascript" src="jscripts/tiny_mce/jquery.tinymce.js"></script>';
+				$h = $h . "\n";
+				/*
 				$h = $h .'<script type="text/javascript">';
+				$h = $h . "\n";
 				$h = $h .'	$().ready(function() {';
 				$h = $h ."		$('textarea class='ckeditor'.tinymce').tinymce({";
 				$h = $h .'			// Location of TinyMCE script';
@@ -4144,6 +4158,7 @@ $h .= '
 				$h = $h .'		});';
 				$h = $h .'	});';
 				$h = $h .'</script>';
+				*/
 				
 				if ($action3 && $action3 == "wizard") {
 				$h = $h . "<script>$"."(function() { push2press.choosePageType();});</script>";
@@ -4201,6 +4216,11 @@ if ($action == "homepage") {
 		$messageplain = sprintf("Link to you new site is %s/api.php. Link to push2press page is &lt;a href=\"push2press://?url=%s\"&gt;%s&lt;/a&gt; ",getConfiguration("url",""),getConfiguration("url",""),getConfiguration("sitename",""));
 		$msuccess = mail($emailadminlinkto, 'Push2press Email Link', $message,$headers);
 		$h = sprintf("<div> Email sent to %s %s </div>",$emailadminlinkto,$msuccess);
+		
+		
+		require_once("api-newsite.php");
+		
+		
 		if ($msuccess === false) {
 				$h = sprintf("<div> There was a sending error to %s - send yourself this link <pre>%s</pre></div>",$emailadminlinkto,$messageplain);
 		}			
