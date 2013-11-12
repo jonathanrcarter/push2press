@@ -166,7 +166,7 @@ input[type='checkbox'] {
 	position: relative;
 }
 #main {
-	margin-top: 100px;
+	margin-top: 10px;
     box-shadow: 0 0px 10px 5px rgba(0, 0, 0, 0.1);
 	border: 1px solid #cdc6c6;
 	border-radius: 3px;
