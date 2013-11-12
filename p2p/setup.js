@@ -50,30 +50,56 @@ p2psetup.spinnerInit = function(obj) {
 }
 
 $(function() {
+	var ready = [0,0,0,0,0];
+
+	var isready = function() {
+		console.log(ready);
+		if (ready[0] == 1 && ready[1] == 1 && ready[2] == 1) {
+			console.log($("#toStep3"));
+			$("#toStep3").removeClass('disabled');
+			try { $("#toStep3").removeProp('disabled'); } catch(E) {console.log(E);}
+		} else {
+			console.log($("#toStep3"));
+			$("#toStep3").addClass('disabled');
+			try { $("#toStep3").prop('disabled'); } catch(E) {console.log(E);}
+		}
+	}
+	
+	/*
 	var title = p2psetup.prepareinput("#step2-title", function(evt) {
 		var val = $("#step2-title input").val();
-		if (val == "") return;
+		if (val == "") return isready();
 		p2psetup.spinnerInit("#step2-title .spinner");
-		$('#step2-title #submit-button').addClass('disabled').prop('disabled',true);
+		isready();
 	});
-	$(title).on('change',function(){
+	*/
+	var title = p2psetup.prepareinput("#step2-title");
+	var title_fn = function(){
+		ready[0] = 0;
 		var val = $("#step2-title input").val();
 		if (val == "") {
 			$("#step2-title").removeClass("success");
+			isready();
 			return;
 		}
+		ready[0] = 1;
 		$("#step2-title").addClass("success");
-	});
+		isready();
+	};
+	
+	$(title).on('change',title_fn);
+	title_fn.call(this,{});
 
 	/* ADMIN EMAIL */	
 	var adminemail = p2psetup.prepareinput("#step2-adminemail");
-	$(adminemail).on('change',function(){
+	var adminemail_fn = function(){
+		ready[1] = 0;
 		var val = $("#step2-adminemail input").val();
-		if (val == "") return;
+		if (val == "") return isready();
 		p2psetup.spinnerInit("#step2-adminemail .spinner");
 		if (val == "") {
 			$("#step2-adminemail").removeClass("success");
-			return;
+			return isready();
 		}
 		
 		$.ajax({
@@ -89,6 +115,7 @@ $(function() {
 							$("#step2-twitter input").val(data.autodetect.twitterusername);
 						}
 					}
+					/*
 					if (data.autodetect.facebookusername) {
 						if ($("#step2-facebook input").val() == "") {
 							$("#step2-facebook input").val(data.autodetect.facebookusername);
@@ -99,29 +126,55 @@ $(function() {
 							$("#step2-linkedin input").val(data.autodetect.linkedinurl);
 						}
 					}
+					*/
+					ready[1] = 1;
+					isready();
 					
 				} else {
 					$("#step2-adminemail").removeClass("success");
 					$('#step2-adminemail .help-block').html(data.statusMsg);
 					$('#step2-adminemail').addClass('error');
+					isready();
 				}
 			},
 			cache: false
 		});
 				
 		
-	});
+	}
+	$(adminemail).on('change',adminemail_fn);
+	adminemail_fn.call(this,{});
+	
+	
+	/* PASSWORD */
+	var password = $("#step2-password input");
+	var password_fn = function(){
+		ready[2] = 0;
+		var val = $("#step2-password password").val();
+		if (val == "") {
+			$("#step2-password").removeClass("success");
+			isready();
+			return;
+		}
+		ready[2] = 1;
+		$("#step2-password").addClass("success");
+		isready();
+	};
+	
+	$(password).on('change',password_fn);
+	password_fn.call(this,{});
 
 	/* WEBSITE URL */
 
-	var adminemail = p2psetup.prepareinput("#step2-website");
-	$(adminemail).on('change',function(){
+	var website = p2psetup.prepareinput("#step2-website");
+	var website_fn = function(){
+		ready[3] = 0;
 		var val = $("#step2-website input").val();
-		if (val == "") return;
+		if (val == "") return isready();
 		p2psetup.spinnerInit("#step2-website .spinner");
 		if (val == "") {
 			$("#step2-website").removeClass("success");
-			return;
+			return isready();
 		}
 		
 		$.ajax({
@@ -132,18 +185,24 @@ $(function() {
 				if (data.status == 0) {
 					$("#step2-website").addClass("success");
 					$('#step2-website .help-block').html(data.tags);
+					ready[3] = 1;
+					isready();
 				} else {
 					$("#step2-website").removeClass("success");
 					$('#step2-website .help-block').html(data.statusMsg);
 					$('#step2-website').addClass('error');
+					isready();
 				}
 			},
 			cache: false
 		});
-				
-		
-	});
+	};
+	$(website).on('change',website_fn);
+	website_fn.call(this,{});
 
+
+
+/*
 
 	var facebook = p2psetup.prepareinput("#step2-facebook");
 	$(facebook).on('change',function(){
@@ -187,7 +246,19 @@ $(function() {
 //	        window.location.reload();
 	    }, 100);
 	})
+*/
 
+	$("#toStep3").bind('click', function(e){
+		title_fn.call(this,{});
+		//adminemail_fn.call(this,{});
+		password_fn.call(this,{});
+		//website_fn.call(this,{});
+		console.log("ready",ready);
+		console.log("isready",isready());
+		$("#setup-form").submit();
+	});
+	
+	isready();
 
 	
 });

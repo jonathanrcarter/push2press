@@ -51,6 +51,7 @@ $htop = $htop .'<link href="setup.css" rel="stylesheet">';
 $htop = $htop .'<script src="setup.js"></script>';
 $htop = $htop .'  </head>';
 $htop = $htop .'  <body>';
+/*
 $htop = $htop .'    <div class="navbar navbar-fixed-top">';
 $htop = $htop .'      <div class="navbar-inner">';
 $htop = $htop .'        <div class="container">';
@@ -68,6 +69,7 @@ $htop = $htop .'          </div>';
 $htop = $htop .'        </div>';
 $htop = $htop .'      </div>';
 $htop = $htop .'    </div>';
+*/
 $htop = $htop .'    <div class="container">';
 
 $hbot = "";
@@ -583,16 +585,16 @@ $adminemail = getConfiguration("adminemail",($_POST["adminemail"] != "") ? ($_PO
 	echo "<div id='main' class='span8 offset2'>";
 
 	echo "<div class='modal-header'>
-				<img src='../img/iam60.png'>
 				<!--
+				<img src='../img/iam60.png'>
+				-->
 				<img src='images/application-logo.png'>
 				<h6>The FREE Open Source Native App CMS</h6>
-				-->
 			</div>";
 	
 	echo "<div class='modal-body' id='step2'>";
 	echo "<div>$setuperror</div>";
-	echo "<form action='setup2.php' method='POST'>";
+	echo "<form id='setup-form' action='setup2.php' method='POST'>";
 	echo "<input type='hidden' name='action' value='setup'>";
 	echo "<input type='hidden' name='step' value='2'>";
 //	echo "<tr><td width='40%'>Site Title</td><td width='60%'><input name='sitename' value='$sitename'></td></tr>";
@@ -608,7 +610,7 @@ $adminemail = getConfiguration("adminemail",($_POST["adminemail"] != "") ? ($_PO
 
 
 	echo "<div id='step2-title' class='control-group rel'>
-			<label class='control-label'>Site title</label>
+			<label class='control-label'>Tagline</label>
 			<span class='spinner'></span>
 			<input class='input-block-level' name='sitename' placeholder='Enter your app name' type='text' value='$sitename'/>
 			<div class='help-block'></div>
@@ -652,26 +654,28 @@ $adminemail = getConfiguration("adminemail",($_POST["adminemail"] != "") ? ($_PO
 				<label class='control-label'>Password</label>
 						
 				<div class='input-prepend'>
-					<span class='add-on'>show <input type='checkbox' id='password-toggle'></span>
-					<input id='password' name='MASTER_PASSWORD class='span6' placeholder='Be creative!' type='password' value='$MASTER_PASSWORD'>
+					<!--span class='add-on'>show <input type='checkbox' id='password-toggle'></span-->
+					<input id='password' name='MASTER_PASSWORD class='span6' placeholder='Be creative!' type='text' value='$MASTER_PASSWORD'>
 					<div class='help-block'><!--You will need to use at least 5 characters--></div>
 				</div>
 			</div>";
 			
 		echo "	<h2>Fill in at least one of the fields below so we can already put content in your app!</h2>
-					
+
 					<div id='step2-website' class='control-group'>
 						<label class='control-label'>(Personal) website or blog</label>
 						<div class='input-prepend input append'>
 							<span clas='add-on'>w:</span>
 							<input id='website' class='span5' value='www.glimworm.com' placeholder='Enter your website or blog address' type='text' />
+							<span class='spinner'></span>
+
 							<span clas='add-on'>
 								<button id='submit-button' class='btn disabled' type='button' disabled>Connect </button>
 							</spen>
 							<div class='help-block'></div>
 						</div>
 					</div>
-					
+
 					<div id='step2-twitter' class='control-group'>
 						<label class='control-label'>Twitter</label>
 						<div class='input-prepend input append'>
@@ -683,7 +687,7 @@ $adminemail = getConfiguration("adminemail",($_POST["adminemail"] != "") ? ($_PO
 							<div class='help-block'></div>
 						</div>
 					</div>
-					
+					<!--
 					<div id='step2-facebook' class='control-group'>
 						<label class='control-label'>Facebook</label>
 						<div class='input-prepend input-append'>
@@ -707,7 +711,7 @@ $adminemail = getConfiguration("adminemail",($_POST["adminemail"] != "") ? ($_PO
 							<div class='help-block'></div>
 						</div>
 					</div>
-										
+					-->					
 					<button class='btn disabled' disabled id='toStep3' type='button'>Next step: Download the viewer app <i class='icon-play'></i></button>
 ";			
 			
@@ -761,8 +765,8 @@ $adminemail = getConfiguration("adminemail",($_POST["adminemail"] != "") ? ($_PO
 	if ($hosted == "y") {
 		echo " <ul class='steps'>
 					<label>step</label>
-					<li class='step current'>1</li>
-					<li class='step'>2</li>
+					<li class='step'>1</li>
+					<li class='step current'>2</li>
 					<li class='step'>3</li>
 				</ul>";
 	}
