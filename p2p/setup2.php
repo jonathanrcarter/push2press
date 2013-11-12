@@ -491,7 +491,7 @@ var twitterUser = '@jonathanrcarter';
 	}
 	
 	if (!$err) {
-        $_SESSION['password'] = $MASTER_PASSWORD;
+        $_SESSION['p2p_password'] = $MASTER_PASSWORD;
 		$setupstep = 2;
 	}
 }
