@@ -100,8 +100,10 @@ function L($phrase) {
 		"Password" => "Password",
 		"Graph" => "Graph",
 		"Groups" => "Groups",
+		"send-push-title" => "Send Push Notifications",
+		"send-push-desc-group" => "You can send a push notification to multiple users by using the group function.",
 		"templates" => "templates"
 				);
-	return $lang[$phrase];
+	return ($lang[$phrase]) ? $lang[$phrase] : $phrase;
 }
 ?>

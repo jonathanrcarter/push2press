@@ -1,3 +1,4 @@
+wiz:#name:Arts Holland Database
 wiz:LocalStorageVariable:LocalStorageVariable:artsholland_search
 wiz:DefaultSearchString:DefaultSearchString:amsterdam
 wiz:backgroundColor:_backgroundColor:#000000

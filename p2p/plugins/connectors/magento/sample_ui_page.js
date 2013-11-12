@@ -1,4 +1,5 @@
-<!--|
+wiz:#name:Magento Catalogue
+
 
 var fn = function(win,view) {
 	win.backgroundColor = "#000";
@@ -76,4 +77,3 @@ var fn = function(win,view) {
 
 
 
-|-->

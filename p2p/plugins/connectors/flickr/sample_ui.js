@@ -1,4 +1,4 @@
-<!--|
+wiz:#name:Flickr Stream
 
 var fn = function(win,view) {
 	win.backgroundColor = "#000";
@@ -121,4 +121,3 @@ var fn = function(win,view) {
 
 
 
-|-->
