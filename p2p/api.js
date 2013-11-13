@@ -624,6 +624,10 @@ push2press.backwithace = function() {
 
 }
 push2press.preparePageEditSubmit = function(form) {
+    if ($("#xx-p2p-ace-tr").css("display") != "none") {
+    	push2press.backwithace();
+    } else {
+    }
 	console.log(form);
 	return false;
 }

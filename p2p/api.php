@@ -72,6 +72,21 @@ function getConfiguration($VAL,$DEFAULT_VAL) {
 	} else {
 		return $DEFAULT_VAL;
 	}
+} 
+function setConfiguration($VAL,$DEFAULT_VAL) {
+	global $username,$password,$database,$dbhost;
+	$db = mysql_connect($dbhost,$username,$password);
+	mysql_select_db($database) or die("Unable to select database");
+	mysql_query("SET NAMES utf8", $db);
+	mysql_query( "SET CHARACTER SET utf8", $db );
+
+	$val = getConfiguration($VAL,null);
+	
+	if ($val == null) {
+		mysql_query("insert into domain (Pagename,Caption) values('".$VAL."','".$DEFAULT_VAL."')");
+	} else {
+		mysql_query("update domain set Caption = '".$DEFAULT_VAL."' where Pagename = '".$VAL."'");
+	}
 }
 
 function esc($S) {
@@ -1116,6 +1131,9 @@ else if ( $action == "list-log" ) {
         $query1="select * from log_phone where uid != '' order by id";
         $result1=mysql_query($query1);
 		
+		$device_count = 0;
+		
+
 		
 		$h = $h . "<div class='plain-hero-unit'>";
 		
@@ -1133,6 +1151,8 @@ else if ( $action == "list-log" ) {
         	$h = $h . "<th style='border-bottom:#ccc 1px solid;padding-right:16px;text-align:left;'>".L('group-id')."</th>";
         	$h = $h . "<th style='border-bottom:#ccc 1px solid;'></th>";//.L('options')."</th>";
         	$h = $h . "</tr>";
+
+			$device_count = mysql_numrows($result);
 
         	for ($r=0; $r < mysql_numrows($result); $r++) {
                 $h = $h . "<tr>";
@@ -1179,7 +1199,7 @@ else if ( $action == "list-log" ) {
 				$h = $h . mysql_result($result9,$r,"gname") . "<br>";
 	            $h = $h . "</td>";
                 $h = $h . "<td style='border-bottom:#eee 1px solid;text-align:right;' nowrap>";//<a class='btn btn-mini btn-success' href='api.php?action=show-log&id=" . mysql_result($result,$r,"id") . "'><i class='icon-edit icon-white'></i> ".L("EDIT")."</a>";
-                $h = $h . "<a href='api.php?action=show-group&id=" . mysql_result($result,$r,"gid") . "' class='btn btn-small'><i class='icon-edit icon-black'></i> CHANGE NAME</a>&nbsp;&nbsp;</td>";
+                $h = $h . "<a href='api.php?action=show-group&id=" . mysql_result($result9,$r,"gid") . "' class='btn btn-small'><i class='icon-edit icon-black'></i> CHANGE NAME</a>&nbsp;&nbsp;</td>";
                 $h = $h . "<td style='border-bottom:#eee 1px solid;'>";//<a class='btn btn-mini btn-success' href='api.php?action=show-log&id=" . mysql_result($result,$r,"id") . "'><i class='icon-edit icon-white'></i> ".L("EDIT")."</a>";
                 $h = $h . B("compose","javascript:\$push2press.push2(".mysql_result($result9,$r,"gid").", \"\", \"\", \"\");'");
                	$h = $h . "</td>";
@@ -1214,7 +1234,12 @@ else if ( $action == "list-log" ) {
 		$h = $h . "</div>";
 		$h = $h . "</div>";
 		
+		
         echo $htop;
+        if ($device_count == 0) {
+			require_once("api-newsite.php");
+	        echo $hh;
+        }
         echo $h;
         echo $hbot;
         exit;
@@ -1325,7 +1350,7 @@ else if ( $action == "list-log-old" ) {
  		 $h = $h . '</div>';
         
 		$h = $h . "</div>";
-		
+
         echo $htop;
         echo $h;
         echo $hbot;
@@ -3770,6 +3795,7 @@ else if ( $action == "pushwindow") {
                 $id = $newid;
 		}
 		
+		
         if ($action2 == "upload") {
 
         		$target = $images_folder;
@@ -3787,6 +3813,8 @@ else if ( $action == "pushwindow") {
                         $query="update ignore pages set img='".$img."' where id=" . $id;
                         $result=mysql_query($query);
                 }
+                
+                
         }
 
         if ($action2 == "delete") {
@@ -3809,10 +3837,35 @@ else if ( $action == "pushwindow") {
 				$img = $_POST["img"];
 				$type = $_POST["type"];
 				$eData = $_POST["extraData"];
+				$eData_navbar = $_POST["extraData_navbar"];
+				if ($eData_navbar == "") $eData_navbar = "n";
+				
+				$ed = json_decode($eData);
+				$ed->navBar = $eData_navbar;
+				/*
+				echo "<br>";
+				echo "<br>";
+				echo "<br>";
+				echo "<p>";
+				echo "<pre>";
+				print_r($ed);
+				echo "</pre>";
+				echo "<pre>";
+				echo json_encode($ed);
+				echo "</pre>";
+				echo "</p>";
+				echo "<br>";
+				echo "<br>";
+				echo "<br>";
+				*/
+				$eData = json_encode($ed);
 
                 $query="update ignore pages set Caption='".esc($Caption)."', Pagename='".esc($Pagename)."', Volgorde='".$Volgorde."', CatID='".$CatID."', bodytext='".esc($bodytext)."', template='".$temp."', img='".$img."', type='".$type."', extraData='".esc($eData)."' where id=" . $id;
-                
-echo "<!--\n\n $query; \n\n-->";
+                /*
+				echo "<pre>";
+				echo $query;
+				echo "</pre>";
+                */
                 
                 $result=mysql_query($query);
                 $h = "UPDATED";
@@ -3825,6 +3878,8 @@ echo "<!--\n\n $query; \n\n-->";
                 
                 $MSG = "<div class='alert alert-dismissable'><button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button><h2>In order to update your app 'pull to refresh' the side menu down</h2><img src='images/reload-push2press-diagram.jpg' width='600'></div>";
 				$action = "homepage";
+                
+				setConfiguration("isthismyfirsttime_ihaveeditednow","y");
                 
                 
         } else if ($action2 == "update"){
@@ -3989,14 +4044,14 @@ echo "<!--\n\n $query; \n\n-->";
 //	        	$h .= "<h2>Showing Page #".$id."</h2>";
 	        	$h .= "<div>This is a {{type}} page based on {{yy}}</div>";
 	        	
-				$h .= "<a class='button' href='javascript:push2press.choosePageType();'>select</a>";
-				$h .= "<a class='button' href='javascript:push2press.editwithace();'>ace</a>";
-				$h .= "<a class='button' href='javascript:push2press.backwithace();'>ace2</a>";
-				$h .= "<a class='button' href='javascript:push2press.toolbars();'>tools</a>";
-				$h .= "<a class='button' href='javascript:push2press.insertimage();'>II</a>";
+				$h .= "<a class='btn' href='javascript:push2press.choosePageType();'>Content Using Wizzard</a>";
+//				$h .= "<a class='button' href='javascript:push2press.editwithace();'>ace</a>";
+//				$h .= "<a class='button' href='javascript:push2press.backwithace();'>ace2</a>";
+//				$h .= "<a class='button' href='javascript:push2press.toolbars();'>tools</a>";
+//				$h .= "<a class='button' href='javascript:push2press.insertimage();'>II</a>";
 	        	
 	        	$h .= "<br>";
-				$h .= "<div class='editbox_foot'><input class='btn btn-info' type='submit' value='Publish'></div>";
+				$h .= "<div class='editbox_foot'><input class='btn btn-info' type='submit' value='Update'></div>";
 
 				$h .= "</div>"; // box
 				// editbox - template - end
@@ -4042,8 +4097,11 @@ echo "<!--\n\n $query; \n\n-->";
 				}
 				$h = $h . "</select>";
 
+				$ed = json_decode($EXTRADATA);
 
-				$h .= "<label>".L("extraData")."</label><textarea name='extraData'>" . $EXTRADATA . "</textarea>";
+				$h .= "<div style='display:none'><label>".L("extraData")."</label><textarea name='extraData'>" . $EXTRADATA . "</textarea></div>";
+				$h .= "<label>&nbsp;</label><input type='checkbox' value='y' name='extraData_navbar' ".(($ed->navBar == "y") ? "checked" : "")."><span> Display Nav Bar</span>";
+/*
 $h .= '
 	<script src="api-editpage-ang.js"></script>
     <link rel="stylesheet" href="api-editpage-ang.css">
@@ -4062,7 +4120,7 @@ $h .= '
         <input class="btn-primary" type="submit" value="add">
       </form>
     </div>';
-
+*/
 
 				$h .= "</div>";	// box
 				// editbox - extra data - end
@@ -4218,13 +4276,31 @@ if ($action == "homepage") {
 		$h = sprintf("<div> Email sent to %s %s </div>",$emailadminlinkto,$msuccess);
 		
 		
+		$h = "";
 		require_once("api-newsite.php");
-		
+		$h .= $hh;
 		
 		if ($msuccess === false) {
 				$h = sprintf("<div> There was a sending error to %s - send yourself this link <pre>%s</pre></div>",$emailadminlinkto,$messageplain);
 		}			
 	}
+	
+                
+	if (getConfiguration("isthismyfirsttime_ihaveeditednow","n") == "y") {
+		if (getConfiguration("isthismyfirsttime","") != "n") {
+			require("api-newedit.php");
+			$h .= $hh;
+			setConfiguration("isthismyfirsttime","n");
+		}
+	}
+	
+	
+	
+
+//	require("api-newedit.php");
+//	require("api-newsite.php");
+	$h .= $hh;
+	
 	
 	$c1 = sqlcount("select count(*) as c from message");
     $c2 = sqlcount("select count(*) as c from log_phone where uid != ''");
@@ -4243,6 +4319,9 @@ if ($action == "homepage") {
 
     $query="select *,c.Pagename as CatName, c.img as CatImage, c.Caption as CatCaption from pages p left join cats c on (p.CatID = c.id) order by c.Volgorde,p.Volgorde";
     $result=mysql_query($query);
+
+
+
         
 	$h = $h . '<link href="api-menu.css" rel="stylesheet">';   
 	$h = $h . '<link href="api-deniz.css" rel="stylesheet">';    
@@ -4460,16 +4539,22 @@ if ($action == "homepage") {
     
     $h = $h .'<div id="gettheapp" style="display:none;">';
 	$h = $h .'			<div class="p2p-youareusing">';
-	$h = $h .'				<table width="350">';
+	$h = $h .'				<table width="80%">';
 	$h = $h .'				<tr><td colspan="2"><img src="images/application-logo.png"></td></tr>';
-	$h = $h .'				<tr><td>';
+	$h = $h .'				<tr><td width="50%" valign="top">';
 	$h = $h .'				<img src="images/MainImage.jpg" width=150>';
-	$h = $h .'				The preview App is available in the App Store';
+	$h = $h .'				<p>The preview App is available in the App Store</p>';
 	$h = $h .'				<a href="push2press://?url='.getConfiguration("url","").'">';
 	$h = $h .'					<img src="http://blog.eventphant.com/wp-content/uploads/2012/07/Apple-App-Store.jpg" height="50">';
 	$h = $h .'				</a>';
-	$h = $h .'				</td><td valign="top">';
-	$h = $h .'				In order to perform a quick setup click the QR code link below and follow the on screen instructions:';
+	$h = $h .'				<br>';
+	$h = $h .'				<p>The Android version is not working with thie version of Push2Press but will be available in the coming days/p>';
+	$h = $h .'				<br>';
+
+	$h = $h .'				</td><td width="50%" valign="top">';
+	$h = $h .'				<p>In order to perform a quick setup click the QR code link below and follow the on screen instructions:</p>';
+	$h = $h .'				<br>';
+	$h = $h .'				<br>';
 	$h = $h .'				<span id="qrcodesmall">';
 	$h = $h .'				<a href="javascript:push2press.qrcode();">';	
 	$h = $h .'				<img src="http://api.qrserver.com/v1/create-qr-code/?data='.urlencode("push2press://?url=".getConfiguration("url","")).'&size=250x250">';
@@ -4477,7 +4562,6 @@ if ($action == "homepage") {
 	$h = $h .'				</span>';
 	$h = $h .'				</td>';
 	$h = $h .'			</tr>';
-	$h = $h .'			<tr><td colspan="2">&nbsp;</td></tr>';
 	$h = $h .'		</table>';
 	$h = $h .'	</div>';
 	$h = $h .'</div>';
