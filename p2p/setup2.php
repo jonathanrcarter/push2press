@@ -474,8 +474,14 @@ if ($step == "2") {
 					$content = $content . $line . "\n";
 				}
 			}
+			
+			$twittername = ($_POST["twittername"] != "") ? $_POST["twittername"] : "@push2press";
+			if (substr($twittername,0,1) != "@") {
+				$twittername = "@".$twittername;
+			}
+			
 			$content = "<!--|
-var twitterUser = '@push2press';
+var twitterUser = '@".$twittername."';
 " . $content . "
 |-->";
 			
@@ -680,7 +686,7 @@ $adminemail = getConfiguration("adminemail",($_POST["adminemail"] != "") ? ($_PO
 						<label class='control-label'>Twitter</label>
 						<div class='input-prepend input append'>
 							<span class='add-on'>twitter.com/</span>
-							<input id='twitter' class='span5' placeholder='Enter your Twitter account name' type='text' />
+							<input id='twitter' name='twittername' class='span5' placeholder='Enter your Twitter account name' type='text' />
 							<span clas='add-on'>
 								<button id='submit-button' class='btn disabled' type='button' disabled>Connect</button>
 							</spen>
