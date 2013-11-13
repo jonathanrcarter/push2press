@@ -464,7 +464,7 @@ if ($step == "2") {
 
 		if (getConfiguration("setup",null) == null) {
 			mysql_query("insert ignore into cats (ID,Pagename,Caption,img,Volgorde) values (1,'Home','Home','',0)");
-			mysql_query("insert ignore into pages (ID,Pagename,Caption,img,bodytext,CatID,template,Volgorde,type,extraData) values (1,'Homey','Homey','','<p>Welcome to your push2press app</p>',1,'',0,'','{ \"navBar\" : \"y\" }')");
+			mysql_query("insert ignore into pages (ID,Pagename,Caption,img,bodytext,CatID,template,Volgorde,type,extraData) values (1,'Home','Home','','<p>Welcome to your push2press app</p>',1,'',0,'','{ \"navBar\" : \"y\" }')");
 			
 			$content_load = file_get_contents("plugins/connectors/twitter/sample_ui.js");
 			$contentbits = explode("\n",$content_load);
@@ -475,7 +475,7 @@ if ($step == "2") {
 				}
 			}
 			$content = "<!--|
-var twitterUser = '@jonathanrcarter';
+var twitterUser = '@push2press';
 " . $content . "
 |-->";
 			
@@ -491,7 +491,7 @@ var twitterUser = '@jonathanrcarter';
 	}
 	
 	if (!$err) {
-        $_SESSION['p2p_password'] = $MASTER_PASSWORD;
+        $_SESSION['password'] = $MASTER_PASSWORD;
 		$setupstep = 2;
 	}
 }
