@@ -3942,7 +3942,7 @@ else if ( $action == "pushwindow") {
                 $h = $h . "<input type='hidden' name='action' value='show-page'>";
                 $h = $h . "<input type='hidden' name='action2' value='update'>";
                 $h = $h . "<input type='hidden' name='id' value='".$id."'>";
-                $h = $h . "<input type='hidden' name='CatID' value='".$catid."'>";
+//                $h = $h . "<input type='hidden' name='CatID' value='".$catid."'>";
                 $h = $h . "<input type='hidden' name='type' id='page_type' value='".$PAGETYPE."'>";
 
 
@@ -4042,9 +4042,9 @@ else if ( $action == "pushwindow") {
                	$h .= "<label class='editbox_head'>Publish</label>";
 
 //	        	$h .= "<h2>Showing Page #".$id."</h2>";
-	        	$h .= "<div>This is a {{type}} page based on {{yy}}</div>";
+//	        	$h .= "<div>This is a {{type}} page based on {{yy}}</div>";
 	        	
-				$h .= "<a class='btn' href='javascript:push2press.choosePageType();'>Content Using Wizzard</a>";
+				$h .= "<a class='btn' href='javascript:push2press.choosePageType();'>Replace Content Using Wizzard</a>";
 //				$h .= "<a class='button' href='javascript:push2press.editwithace();'>ace</a>";
 //				$h .= "<a class='button' href='javascript:push2press.backwithace();'>ace2</a>";
 //				$h .= "<a class='button' href='javascript:push2press.toolbars();'>tools</a>";
@@ -4099,7 +4099,7 @@ else if ( $action == "pushwindow") {
 
 				$ed = json_decode($EXTRADATA);
 
-				$h .= "<div style='display:none'><label>".L("extraData")."</label><textarea name='extraData'>" . $EXTRADATA . "</textarea></div>";
+//				$h .= "<div style='display:none'><label>".L("extraData")."</label><textarea name='extraData'>" . $EXTRADATA . "</textarea></div>";
 				$h .= "<label>&nbsp;</label><input type='checkbox' value='y' name='extraData_navbar' ".(($ed->navBar == "y") ? "checked" : "")."><span> Display Nav Bar</span>";
 /*
 $h .= '
@@ -4121,6 +4121,29 @@ $h .= '
       </form>
     </div>';
 */
+
+
+
+               $query111="select * from cats";
+                $result111=mysql_query($query111);
+                $sel111 = "<select name='CatID'>";
+                $sel111 = $sel111 . "<option value='0'>Geen</option>";
+                for ($r111=0; $r111 < mysql_numrows($result111); $r111++) {
+                        $selected = "";
+                        $IID111 = mysql_result($result111,$r111,"ID");
+                        $PGN111 = mysql_result($result111,$r111,"Pagename");
+
+                        if ($IID111 == $catid) $selected111 = "selected"; else $selected111 = "";
+                        $sel111 .=  "<option value='" .$IID111."' ".$selected111.">".$PGN111."</option>";
+                }
+                $sel111 .= "</select>";
+
+
+
+				$h .= "<label>Category</label>".$sel111;	
+
+				$h .= "<div><label>ADVANCED SETUP</label><textarea name='extraData'>" . $EXTRADATA . "</textarea></div>";
+
 
 				$h .= "</div>";	// box
 				// editbox - extra data - end
@@ -4299,7 +4322,7 @@ if ($action == "homepage") {
 
 //	require("api-newedit.php");
 //	require("api-newsite.php");
-	$h .= $hh;
+//	$h .= $hh;
 	
 	
 	$c1 = sqlcount("select count(*) as c from message");
