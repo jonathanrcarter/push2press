@@ -476,9 +476,9 @@ if ($step == "2") {
 			}
 			
 			$twittername = ($_POST["twittername"] != "") ? $_POST["twittername"] : "@push2press";
-			if (substr($twittername,0,1) != "@") {
-				$twittername = "@".$twittername;
-			}
+			//if (substr($twittername,0,1) != "@") {
+			//	$twittername = "@".$twittername;
+			//}
 			
 			$content = "<!--|
 var twitterUser = '@".$twittername."';
