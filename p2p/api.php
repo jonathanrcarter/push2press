@@ -2342,21 +2342,29 @@ else if ( $action == "list-dom" ) {
         $h = $h . "</table>";
         
         $h .= "<legend>Other functions</legend>";
+
+
+        $h .= "<legend>Other functions</legend>";
         $h .='
         <div>
-        <a href="javascript:push2press.loading();">
-		<img src="images/home/dark_tray-up@2x.png" width=80>
-		</a>
+        <a class="btn" href="javascript:push2press.loading();">
+		<img src="images/home/dark_tray-up@2x.png" width=16>
+		&nbsp;
 		UPDATE TO LATEST VERSION 
+		</a>
 		</div>';
+		
+		$h .= "<br>";
         
         $h .= '<div>
-		<a href="api.php?action=list-templates">
-		<img src="images/home/dark_doc@2x.png" height=80>
+		<a class="btn" href="api.php?action=list-templates">
+		<img src="images/home/dark_doc@2x.png" width=16>
+		&nbsp;
+		Manage Page Layout Templates 
 		</a>
-		Templates 
 		</div>';
-        
+
+		$h .= "<br>";
         
 /*
         for ($r=0; $r < mysql_numrows($result); $r++) {
