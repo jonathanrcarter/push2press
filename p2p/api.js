@@ -621,7 +621,7 @@ push2press.backwithace = function() {
 	txt = $.trim(txt);		// trim whitespace
 	
 	if (txt.indexOf("<!--|") !== 0) {
-		txt = "<!--|" + txt + "-->"; 
+		txt = "<!--|" + txt + "|-->"; 
 	}
 	$("#elm12").val(txt);
 
