@@ -413,7 +413,7 @@ push2press.getEditorToolbar = function() {
 
 push2press.wizard_add_titanium_tags = function(TXT) {
 	if (TXT.indexOf("<!--|") < 0) {
-		return "<!--|\n"+ TXT + "\n-->"
+		return "<!--|\n"+ TXT + "\n|-->"
 	}
 	return TXT
 }
@@ -599,6 +599,9 @@ push2press.editwithace = function() {
 	if (txt.indexOf("<!--|") === 0) {
 		txt = txt.split("|",2)[1];
 		// look for --> at the end of the textarea
+		if (txt[txt.length-1] === ">" && txt[txt.length-2] === "-" && txt[txt.length-3] === "-" && txt[txt.length-4] === "|") {
+			txt = txt.substring(0,txt.length - 4);
+		}
 		if (txt[txt.length-1] === ">" && txt[txt.length-2] === "-" && txt[txt.length-3] === "-") {
 			txt = txt.substring(0,txt.length - 3);
 		}
