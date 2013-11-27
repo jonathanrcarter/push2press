@@ -4004,7 +4004,10 @@ else if ( $action == "pushwindow") {
 					$result1 = mysql_query($query1);
     				for ($i=0; $i < mysql_numrows($result1); $i++){
 //        				$h = $h . "<option value='wp:".mysql_result($result1,$i,"ID")."'>".mysql_result($result1,$i,"post_title")."</option>";
-        				$pagetypes = $pagetypes . "_pagetypes.push({'p':'wp:".mysql_result($result1,$i,"ID")."','n':'wordpress link : ".mysql_result($result1,$i,"post_title")."'});\n";
+//        				$pagetypes = $pagetypes . "_pagetypes.push({'p':'wp:".mysql_result($result1,$i,"ID")."','n':'wordpress link : ".mysql_result($result1,$i,"post_title")."'});\n";
+
+						$wp_page_title = htmlspecialchars(mysql_result($result1,$i,"post_title"),ENT_QUOTES);
+        				$pagetypes = $pagetypes . "_pagetypes.push({'p':'wp:".mysql_result($result1,$i,"ID")."','n':'wordpress link : ".$wp_page_title."'});\n";
 
     				}
 				}
