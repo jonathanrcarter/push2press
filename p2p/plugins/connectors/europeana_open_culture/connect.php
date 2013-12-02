@@ -6,11 +6,11 @@ if ( !class_exists('europeana_connect') ) {
 	if (session_id() == "") {
 		@session_start();
 	}
-	class vistory_connect {
+	class europeana_connect {
 		var $api_key;
 		var $secret;
 		
-		var $rest_endpoint = "http://site1504.glimworm.com/ext_chunk.jsp";		
+		var $rest_endpoint = "http://jon632.glimworm.com/europeana/euv2.php";		
 		
 		var $req;
 		var $response;
@@ -29,7 +29,7 @@ if ( !class_exists('europeana_connect') ) {
 			$this->api_key = $api_key;
 			$this->secret = $secret;
 			$this->die_on_error = $die_on_error;
-			$this->service = "vistory";
+			$this->service = "europeana";
 
 			//Find the PHP version and store it for future reference
 			$this->php_version = explode("-", phpversion());
@@ -44,7 +44,7 @@ if ( !class_exists('europeana_connect') ) {
 
 			//Process arguments, including method and login data.
 			
-			$flds = "?chunk=stproc:apps4nl:".$action;
+			$flds = "?action=".$action."&lang=en&query=&mls=n&page=0";
 			
 			foreach ($args as $key => $value) {
 				$flds = $flds . "&".$key."=".$value;
@@ -72,16 +72,80 @@ if ( !class_exists('europeana_connect') ) {
 			return $this->response;
 		}
 
-		function search ($text = "") {
-			// http://site1504.glimworm.com/ext_chunk.jsp?chunk=stproc:apps4nl:script&action=search&srch=amsterdam
+		function makesimpleitems() {
+		
+			$timthumb = str_replace("/plugins/connectors/vistory/","/timthumb.php",urlpath());
+			$p2parray = array();
+			
+			if ($this->parsed_response) {
+				for ($i=0; $i < count($this->parsed_response->data->items); $i++) {
+					$rec = $this->parsed_response->data->items[$i];
+
+					$obj = new obj();
+					$obj->title = $rec->title;
+					$obj->subtitle = $rec->description;
+					$obj->description = $rec->description;
+					$obj->identifier = $rec->id;
+
+					$obj->image = $rec->image;
+					$obj->dataProvider = $rec->dataProvider;
+					$obj->rights = $rec->rights;
+					$obj->dcCreator = $rec->dcCreator;
+//					$obj->image = $rec->enclosure;
+					$obj->summary = new obj();
+					$obj->summary->lines = array(
+						"p:  ",
+						"img:".$obj->image
+//						"h1:".$obj->title,
+//						"p:".$obj->subtitle,
+//						"p:  "
+					);
+					$obj->details = new obj();
+					$obj->details->lines = array(
+						"p:  ",
+						"p:  ",
+						"img:".$rec->enclosure,
+						"h1:".$obj->title,
+						"p:".$obj->description,
+						"p:".$obj->dataProvider,
+						"p:".$obj->dcCreator,
+						"p:".$obj->rights,
+						"p:  "
+//						"xmovie:".$obj->image320 .",".$rec->mp4small,
+					);
+					
+					array_push($p2parray, $obj);
+				
+				}
+				$this->parsed_response = array(
+					"raw" => $this->parsed_response,
+					"p2p" => $p2parray
+				);
+			
+			}
+		
+		
+		}
+
+
+
+
+		function search ($text = "",$theme = "") {
+			// http://jon632.glimworm.com/europeana/euv2.php?action=json-srch&lang=en&query=&mls=n&page=0&srch=vermeer&type=
 			$this->request();
-			$this->request("search", array("srch" => $text));
+			if ($theme === "art") {
+				$theme = "1";
+			} else {
+				$theme = "";
+			}
+			$this->request("json-srch", array("srch" => $text, "query" => $theme));
+			$this->makesimpleitems();
 			return $this->parsed_response ? $this->parsed_response : false;
 		}
 		
 		function getclip ($id = "oai:openimages.eu:1703") {
-			// http://site1504.glimworm.com/ext_chunk.jsp?chunk=stproc:apps4nl:script&action=getclip&identifier=oai:openimages.eu:1703
-			$this->request("getclip", array("identifier" => $id));
+			// http://jon632.glimworm.com/europeana/euv2.php?action=json-get&lang=en&identifier=/2021608/dispatcher_aspx_action_search_database_ChoiceCollect_search_priref_2205
+			$this->request("json-get", array("identifier" => $id));
 			return $this->parsed_response ? $this->parsed_response : false;
 		}
 		

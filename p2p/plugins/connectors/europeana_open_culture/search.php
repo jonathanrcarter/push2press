@@ -1,4 +1,5 @@
 <?php
+error_reporting(0);
 
 include_once("../include.php");
 require_once("connect.php");
@@ -6,7 +7,8 @@ require_once("connect.php");
 $f = new europeana_connect("");
 
 $srch = $_GET['srch'];
-$res = $f->search($srch);
+$theme = $_GET['theme'];
+$res = $f->search($srch,$theme);
 
 $retval = new obj();
 $retval->status = 0;
