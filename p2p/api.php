@@ -4054,16 +4054,26 @@ else if ( $action == "pushwindow") {
 
 //	        	$h .= "<h2>Showing Page #".$id."</h2>";
 //	        	$h .= "<div>This is a {{type}} page based on {{yy}}</div>";
-	        	
-				$h .= "<a class='btn' href='javascript:push2press.choosePageType();'>Replace Content Using Wizzard</a>";
-//				$h .= "<a class='button' href='javascript:push2press.editwithace();'>ace</a>";
-//				$h .= "<a class='button' href='javascript:push2press.backwithace();'>ace2</a>";
-//				$h .= "<a class='button' href='javascript:push2press.toolbars();'>tools</a>";
-//				$h .= "<a class='button' href='javascript:push2press.insertimage();'>II</a>";
+	        	$h .= "<div class='instructions'>The page you are editing will also appear in the side menu of the app together with an icon similar to the example below.  You can edit the title by clicking on the text and change the icon using the button to open your media library</div>";
+                	
+                	$h .= "<div id='test' class='previewimage'>";
+                	$h .= "<input name='img' id='main_img_fld' type='hidden' value='" . $img . "'>";
+                	$h .= "<img id='main_img' src='" . $img_size . "' height=32 width=32>";
+
+
+                	$h .= " <input name='Pagename' class='reverse-input' type='text' value='" . htmlspecialchars(mysql_result($result,$r,"Pagename"),ENT_QUOTES) . "'> ";
+
+                	$h .= "&nbsp;&nbsp;&nbsp;";
+                	$h .= "<a class='btn pull-right' href='javascript:troller();'>".L("ChangeIcon")."</a>";
+                	$h .= "</div>";
+				/*$h .= "<a class='btn' href='javascript:push2press.choosePageType();'>Replace Content Using Wizzard</a>";
+				  $h .= "<a class='button' href='javascript:push2press.editwithace();'>ace</a>";
+				  $h .= "<a class='button' href='javascript:push2press.backwithace();'>ace2</a>";
+				  $h .= "<a class='button' href='javascript:push2press.toolbars();'>tools</a>";
+				  $h .= "<a class='button' href='javascript:push2press.insertimage();'>II</a>";*/
 	        	
 	        	$h .= "<br>";
-				$h .= "<div class='editbox_foot'><input class='btn btn-info' type='submit' value='Update'></div>";
-
+				$h .= "<div class='editbox_foot'><a class='btn' href='javascript:push2press.choosePageType();'>Replace Content Using Wizzard</a>&nbsp;<a href='api.php?action=show-page&action2=delete&id=".$id."' class='btn btn-danger'>delete</a>&nbsp;<input class='btn btn-info' type='submit' value='Update'></div>";
 				$h .= "</div>"; // box
 				// editbox - template - end
 
@@ -4071,7 +4081,7 @@ else if ( $action == "pushwindow") {
 
 
     			// editbox - image - start
-	        	$h .= "<div class='span5 editbox'>"; 
+	        	/*$h .= "<div class='span5 editbox'>"; 
                 	$h .= "<label class='editbox_head'>How the page appears in the menu</label>";
 
                 	$h .= "<div class='instructions'>The page you are editing will also appear in the side menu of the app together with an icon similar to the example below.  You can edit the title by clicking on the text and change the icon using the button to open your media library</div>";
@@ -4089,7 +4099,7 @@ else if ( $action == "pushwindow") {
 
 //                	$h .= " <input name='Pagename' type='text' value='" . htmlspecialchars(mysql_result($result,$r,"Pagename"),ENT_QUOTES) . "'> ";
                 
-                $h .= "</div>"; // box
+                $h .= "</div>"; */// box
     			// editbox - image - end
 
 
@@ -4098,7 +4108,7 @@ else if ( $action == "pushwindow") {
                	$h .= "<label class='editbox_head'>Page Options</label>";
 
 
-				$h = $h . "<label>".L("template")."<label>";
+				$h = $h . "<label><strong>".L("template")."</strong><label>";
 				
 				require ("templates/pages/_templates.php");
 				$h = $h . "<select name='template'>";
@@ -4111,7 +4121,7 @@ else if ( $action == "pushwindow") {
 				$ed = json_decode($EXTRADATA);
 
 //				$h .= "<div style='display:none'><label>".L("extraData")."</label><textarea name='extraData'>" . $EXTRADATA . "</textarea></div>";
-				$h .= "<label>&nbsp;</label><input type='checkbox' value='y' name='extraData_navbar' ".(($ed->navBar == "y") ? "checked" : "")."><span> Display Nav Bar</span>";
+				$h .= "<br><br><label><strong>Display nav bar</strong></label><input type='checkbox' value='y' name='extraData_navbar' ".(($ed->navBar == "y") ? "checked" : "")."><span> Display Nav Bar</span>";
 /*
 $h .= '
 	<script src="api-editpage-ang.js"></script>
@@ -4132,9 +4142,6 @@ $h .= '
       </form>
     </div>';
 */
-
-
-
                $query111="select * from cats";
                 $result111=mysql_query($query111);
                 $sel111 = "<select name='CatID'>";
@@ -4148,12 +4155,11 @@ $h .= '
                         $sel111 .=  "<option value='" .$IID111."' ".$selected111.">".$PGN111."</option>";
                 }
                 $sel111 .= "</select>";
+				
+				$h .= "<br><br>";
+				$h .= "<label><strong>Category</strong></label>".$sel111;	
 
-
-
-				$h .= "<label>Category</label>".$sel111;	
-
-				$h .= "<div><label>ADVANCED SETUP</label><textarea name='extraData'>" . $EXTRADATA . "</textarea></div>";
+				$h .= "<div><label style='display:none;'>ADVANCED SETUP</label><textarea name='extraData' style='display:none;'>" . $EXTRADATA . "</textarea></div>";
 
 
 				$h .= "</div>";	// box
@@ -4209,12 +4215,7 @@ $h .= '
                 $h .= "</div>";
                 
 
-                $h = $h . "<form action='api.php'>";
-                $h = $h . "<input type='hidden' name='action' value='show-page'>";
-                $h = $h . "<input type='hidden' name='action2' value='delete'>";
-                $h = $h . "<input type='hidden' name='id' value='".$id."'>";
-                $h = $h . "<input class='btn btn-danger btn-large' type='submit' value='delete'>";
-                $h = $h . "</form>";
+                //$h = $h . "<form action='api.php'><input type='hidden' name='action' value='show-page'><input type='hidden' name='action2' value='delete'><input type='hidden' name='id' value='".$id."'><input class='btn btn-danger btn-large' type='submit' value='delete'></form>";
 
 				$h = $h .'<script type="text/javascript" src="http://www.google.com/jsapi"></script>';
 				$h = $h . "\n";
@@ -4447,9 +4448,14 @@ if ($action == "homepage") {
 	   	$h = $h . "&nbsp;&nbsp;";
 	    //$h = $h . "<span><a class='btn btn-mini xbtn-success' href='api.php?action=show-page&id=" . mysql_result($result,$r,"id") . "'><img src='images/p2p-icons-black/doc_edit_icon&48.png' width='12'> EDIT PAGE</a></span>";
 	    $h = $h . "<span><a class='x-phone-btn-grey' href='api.php?action=show-page&id=" . mysql_result($result,$r,"id") . "'>EDIT PAGE</a></span>";
-		$h = $h . "&nbsp;&nbsp;";
 		//$h = $h . "<span><a class='btn btn-mini xbtn-success' href='javascript:\$push2press.previewpage(\"api.php?action=get-page&id=" . mysql_result($result,$r,"id")."\");'>PREVIEW</a></span>";
-		$h = $h . "<span><a class='x-phone-btn-grey' href='javascript:\$push2press.previewpage(\"api.php?action=get-page&id=" . mysql_result($result,$r,"id")."\");'>PREVIEW</a></span>";
+		
+		if (mysql_result($result,$r,"type") == ""){
+		
+			$h = $h . "&nbsp;&nbsp;<span><a class='x-phone-btn-grey' href='javascript:\$push2press.previewpage(\"api.php?action=get-page&id=" . mysql_result($result,$r,"id")."\");'>PREVIEW</a></span>";
+	    
+	    }
+	    
 	    $h = $h . "</div>";
 		$h = $h . "<span/>";
        			
